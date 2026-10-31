@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f4ef"><title>پیام جدول | جدول‌های فارسی</title><style>
+:root{font-family:Tahoma,Arial,sans-serif;color:#1b2533;background:#f5f4ef}*{box-sizing:border-box}body{margin:0}header{border-bottom:1px solid #deddd8;background:#fff}nav,main,footer{max-width:1000px;margin:auto;padding:24px}nav{display:flex;align-items:center;justify-content:space-between;gap:18px}a{color:#184e75;text-decoration:none}h1{font-size:clamp(27px,5vw,46px);margin:0}p{line-height:1.9}small,.muted{color:#656e78}.brand{font-weight:800;font-size:24px;color:#1b2533}.intro{padding:42px 0 28px}.pill{background:#fff;border-radius:100px;padding:7px 16px;font-size:13px;color:#546170;border:1px solid #e4e2db}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}.card{background:#fff;padding:22px;border-radius:18px;border:1px solid #e5e3de}.empty{padding:50px 24px;border:1px dashed #c9c8c0;border-radius:22px;text-align:center;background:#fff}.hidden{display:none}footer{font-size:13px;color:#737b84;margin-top:45px}.link{display:inline-block;margin-top:10px;font-weight:700}button{font:inherit;background:#1f5978;color:white;border:0;border-radius:8px;padding:10px 15px;cursor:pointer}.board{margin:20px auto;display:grid;justify-content:center;gap:1px;direction:ltr}.cell{height:100%;aspect-ratio:1;display:grid;place-items:center;border:1px solid #bec4c8;background:#fff;font:inherit;min-width:0;font-weight:700}.block{background:#253240;border-color:#253240}.cell input{width:100%;height:100%;background:none;border:0;text-align:center;font:inherit;font-weight:bold;color:#172f43}.clues{display:grid;grid-template-columns:1fr 1fr;gap:24px}ul{padding-right:20px;line-height:2.1}@media(max-width:600px){.clues{grid-template-columns:1fr}nav,main,footer{padding:18px}}
+</style></head>
+<body><header><nav><a class="brand" href="./">پیام جدول</a><span class="pill">جدول کلمات متقاطع فارسی</span></nav></header>
+<main><section class="intro"><h1 id="title">جدول‌های تازه، هر بار چالشی نو</h1><p id="subtitle" class="muted">مجموعهٔ جدول‌های طراحی‌شده و تأییدشده</p></section><section id="catalog" class="grid"></section><section id="empty" class="empty hidden"><h2>هنوز جدولی منتشر نشده است</h2><p class="muted">بعد از تأیید نخستین جدول در کارگاه طراحی، این صفحه به‌صورت خودکار آن را نمایش می‌دهد.</p></section><section id="player" class="hidden"></section></main>
+<footer>پیام جدول — محل انتشار جدول‌های نهایی</footer>
+<script>
+const $=id=>document.getElementById(id);
+const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+function showCatalog(items){
+ const id=new URLSearchParams(location.search).get('id');
+ const item=items.find(x=>x.id===id);
+ if(item){showPuzzle(item);return}
+ $('empty').classList.toggle('hidden',items.length>0);
+ $('catalog').innerHTML=items.map(x=>'<article class="card"><h2>'+escapeHTML(x.title)+'</h2><p class="muted">'+escapeHTML(x.publishedAt||'')+'</p><a class="link" href="?id='+encodeURIComponent(x.id)+'">حل جدول</a></article>').join('');
+}
+function showPuzzle(item){
+ const p=item.puzzle,grid=p?.grid;
+ if(!Array.isArray(grid)||!grid.length||!Array.isArray(grid[0]))return;
+ $('catalog').classList.add('hidden');$('empty').classList.add('hidden');$('player').classList.remove('hidden');
+ $('title').textContent=item.title;$('subtitle').textContent='جدول منتشرشده در پیام جدول';
+ const w=grid[0].length;
+ const board=document.createElement('div');board.className='board';board.style.gridTemplateColumns='repeat('+w+',minmax(0, min(7vw, 40px)))';board.setAttribute('aria-label','صفحهٔ جدول');
+ grid.forEach((row,r)=>row.forEach((v,c)=>{const cell=document.createElement('div');cell.className='cell'+(v===''?' block':'');if(v!==''){const input=document.createElement('input');input.maxLength=1;input.autocomplete='off';input.setAttribute('aria-label','ردیف '+(r+1)+' ستون '+(c+1));cell.append(input)}board.append(cell)}));
+ const hints=document.createElement('div');hints.className='clues';
+ for(const [key,label] of [['horizontal','افقی'],['vertical','عمودی']]){
+  const section=document.createElement('section'),h=document.createElement('h2'),ul=document.createElement('ul');h.textContent=label;
+  for(const [num,arr] of Object.entries(p.clues?.[key]||{})) for(const clue of arr){const li=document.createElement('li');li.textContent=num+' — '+clue;ul.append(li)}
+  section.append(h,ul);hints.append(section);
+ }
+ const button=document.createElement('button');button.textContent='نمایش پاسخ‌ها';let revealed=false;button.addEventListener('click',()=>{revealed=!revealed;let i=0;board.querySelectorAll('.cell').forEach((cell)=>{const r=Math.floor(i/w),c=i%w;i++;const input=cell.querySelector('input');if(input){input.value=revealed?grid[r][c]:'';input.disabled=revealed}});button.textContent=revealed?'پنهان‌کردن پاسخ‌ها':'نمایش پاسخ‌ها'});
+ $('player').append(board,button,hints);
+}
+fetch('./data/published.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('unavailable');return r.json()}).then(d=>showCatalog(Array.isArray(d.puzzles)?d.puzzles:[])).catch(()=>{$('empty').classList.remove('hidden');$('empty').querySelector('p').textContent='آرشیو فعلاً در دسترس نیست.'});
+</script></body></html>
