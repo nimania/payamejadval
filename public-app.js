@@ -11,7 +11,7 @@ const requestedId=new URLSearchParams(location.search).get('id');
 function text(tag,content,className){
  const node=document.createElement(tag);
  if(className)node.className=className;
- node.textContent=content;
+ if(content!==undefined)node.textContent=content;
  return node;
 }
 function dateLabel(value){
