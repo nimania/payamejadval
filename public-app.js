@@ -27,6 +27,13 @@ async function fetchStatic(){
  const result=await response.json();
  return Array.isArray(result.puzzles)?result.puzzles:[];
 }
+function publishedDoc(doc){
+ const raw=doc.data();
+ try{
+  const puzzle=JSON.parse(raw.puzzleJson);
+  return {id:raw.id||doc.id,title:raw.title,publishedAt:raw.publishedAt,puzzle};
+ }catch(_){return null}
+}
 async function fetchApproved(){
  if(!['apiKey','authDomain','projectId','appId'].every(k=>typeof config[k]==='string'&&config[k]))throw Error('Cloud not configured');
  const [{initializeApp,getApps},fs]=await Promise.all([
@@ -35,10 +42,10 @@ async function fetchApproved(){
  const db=fs.getFirestore(app);
  const collection=fs.collection(db,'publishedPuzzles');
  const q=fs.query(collection,fs.orderBy('publishedAt','desc'),fs.limit(100));
- const snapshot=await fs.getDocs(q),items=snapshot.docs.map(d=>d.data());
+ const snapshot=await fs.getDocs(q),items=snapshot.docs.map(publishedDoc).filter(Boolean);
  if(requestedId&&!items.some(x=>x.id===requestedId)){
   const one=await fs.getDoc(fs.doc(db,'publishedPuzzles',requestedId));
-  if(one.exists())items.push(one.data());
+  if(one.exists()){const parsed=publishedDoc(one);if(parsed)items.push(parsed)}
  }
  return items;
 }
