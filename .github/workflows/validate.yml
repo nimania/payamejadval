@@ -1,0 +1,41 @@
+name: Validate Payame Jadval
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - public-app.js
+      - player.js
+      - firebase-config.js
+      - data/published.json
+      - tests/**
+      - .github/workflows/validate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check public scripts and crossword reading order
+        run: |
+          node --check player.js
+          node --check public-app.js
+          node --check firebase-config.js
+          node tests/test_player.cjs
+      - name: Ensure public archive never includes private database
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),assert=require('node:assert/strict');
+          const d=JSON.parse(fs.readFileSync('data/published.json','utf8'));
+          assert(Array.isArray(d.puzzles),'Static archive has a puzzles array');
+          for(const p of d.puzzles){
+            assert(p.id&&p.title&&p.puzzle?.version===3);
+            assert(!Object.hasOwn(p,'bank')&&!Object.hasOwn(p,'entries'));
+          }
+          console.log('Static archive uses public puzzle records only.');
+          NODE
