@@ -117,5 +117,6 @@ async function start(){
   $('empty').querySelector('p').textContent='آرشیو در دسترس نیست. لطفاً بعداً دوباره امتحان کن.';
  }
 }
+window.PayamePublic={eligiblePublicPuzzle};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
