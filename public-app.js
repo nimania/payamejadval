@@ -49,6 +49,12 @@ async function fetchApproved(){
  }
  return items;
 }
+function eligiblePublicPuzzle(item){
+ if(!player?.validateItem(item))return false;
+ if(item?.puzzle?.meta?.status!=='published'||item?.puzzle?.meta?.method!=='editor-approved')return false;
+ const audit=window.JadvalQuality?.audit(item.puzzle);
+ return !!audit?.technicalPassed&&!audit.errors.length;
+}
 function renderCatalog(items){
  const catalog=$('catalog');catalog.replaceChildren();
  $('player').classList.add('hidden');catalog.classList.remove('hidden');
@@ -89,8 +95,8 @@ async function start(){
  status.textContent='در حال دریافت جدول‌های منتشرشده…';
  const [staticResult,cloudResult]=await Promise.allSettled([fetchStatic(),fetchApproved()]);
  const merged=new Map();
- if(staticResult.status==='fulfilled')for(const item of staticResult.value)if(player.validateItem(item))merged.set(item.id,item);
- if(cloudResult.status==='fulfilled')for(const item of cloudResult.value)if(player.validateItem(item))merged.set(item.id,item);
+ if(staticResult.status==='fulfilled')for(const item of staticResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
+ if(cloudResult.status==='fulfilled')for(const item of cloudResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  const items=[...merged.values()].sort((a,b)=>{
   const as=a.publishedAt?.seconds? a.publishedAt.seconds*1000 :Date.parse(a.publishedAt||0)||0;
   const bs=b.publishedAt?.seconds? b.publishedAt.seconds*1000 :Date.parse(b.publishedAt||0)||0;
