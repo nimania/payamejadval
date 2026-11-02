@@ -17,7 +17,9 @@ const rows=[
 '..............#','.........#....#','.........#....#'
 ];
 let counter=0;const alphabet=[...'آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی'];
-const grid=rows.map((s,r)=>[...s].map((ch,c)=>ch==='#'?'':alphabet[(r*37+c*23+r*c*7)%alphabet.length]));
+let seed=49267;
+const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
+const grid=rows.map(s=>[...s].map(ch=>ch==='#'?'':alphabet[Math.floor(random()*alphabet.length)]));
 const slots=quality.audit({grid,clues:{horizontal:{},vertical:{}}}).slots;
 const clues={horizontal:{},vertical:{}};
 for(const [i,slot] of slots.entries())(clues[slot.dir][String(slot.group)]??=[]).push('سرنخ آزمایشی '+i);
