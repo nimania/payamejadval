@@ -27,5 +27,6 @@ const audit=quality.audit(p);
 assert.deepEqual(audit.errors,[],JSON.stringify(audit.errors.slice(0,6)));
 assert.equal(allowed(item),true,'Reviewed, structurally valid publication can appear');
 assert.equal(allowed({...item,puzzle:{...p,meta:{status:'draft',method:'editor-approved'}}}),false);
-assert.equal(allowed({...item,puzzle:{...p,grid:p.grid.map(row=>row.slice()).reverse()}}),false,'Unsymmetrical invalid grid blocked');
+const brokenGrid=p.grid.map(row=>row.slice());brokenGrid[0][0]='ا';
+assert.equal(allowed({...item,puzzle:{...p,grid:brokenGrid}}),false,'Unsymmetrical invalid grid blocked');
 console.log('Public catalogue rejects pilot, drafts and structural violations; structurally valid approved grids remain playable.');
