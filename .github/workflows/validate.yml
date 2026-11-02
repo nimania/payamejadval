@@ -5,6 +5,7 @@ on:
     paths:
       - index.html
       - public-app.js
+      - quality-gate.js
       - player.js
       - firebase-config.js
       - data/published.json
@@ -25,8 +26,10 @@ jobs:
         run: |
           node --check player.js
           node --check public-app.js
+          node --check quality-gate.js
           node --check firebase-config.js
           node tests/test_player.cjs
+          node tests/test_public_quality.cjs
       - name: Ensure public archive never includes private database
         run: |
           node - <<'NODE'
