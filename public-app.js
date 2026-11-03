@@ -89,6 +89,10 @@ function renderPuzzle(item){
  row.append(back,share);section.append(row);
  const game=text('div',undefined,'game-frame');section.append(game);
  player.createPlayer(game,item);
+ const dictionary=text('section',undefined,'dictionary-wrap');
+ dictionary.setAttribute('aria-label','فرهنگ سؤال‌ها و جواب‌های این جدول');
+ window.PayameGlossary?.render(dictionary,item,player);
+ section.append(dictionary);
 }
 async function start(){
  const status=$('archiveStatus');
