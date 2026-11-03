@@ -131,6 +131,9 @@ function newspaperHeader(ctx,item,mode,page,logo,continuation=false){
 function newspaperBoard(ctx,item,mode){
  const grid=item.puzzle.grid,n=grid.length,cell=Math.floor(690/n);
  const left=70,top=286,right=left+cell*n;
+ // One puzzle per issue for now; future special crossword can be a second panel.
+ ctx.fillStyle='#333333';ctx.fillRect(left,222,cell*n,36);
+ text(ctx,mode==='answers'?'حل جدول عادی':'جدول عادی',right-12,240,21,true,'#ffffff');
  ctx.strokeStyle='#333';ctx.lineWidth=1.8;
  for(let c=0;c<n;c++){
   ctx.fillStyle='#2e2e2e';ctx.font='bold 18px '+font;
