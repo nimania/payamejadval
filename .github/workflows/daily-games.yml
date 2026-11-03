@@ -8,6 +8,9 @@ on:
     branches: [main]
     paths:
       - .github/workflows/daily-games.yml
+      - sudoku.js
+      - scripts/generate-daily-games.cjs
+      - scripts/verify-daily-games.cjs
 permissions:
   contents: write
 concurrency:
