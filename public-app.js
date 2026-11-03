@@ -7,6 +7,7 @@ const player=window.PayamePlayer;
 const base='./data/published.json';
 const daily='./data/daily-games.json';
 const mini='./data/mini-puzzles.json';
+const clueInCell='./data/clue-in-cell-puzzles.json';
 const config=window.PAYAMEJADVAL_FIREBASE_CONFIG||{};
 const SDK='https://www.gstatic.com/firebasejs/12.19.0/';
 const params=new URLSearchParams(location.search);
@@ -31,6 +32,12 @@ async function fetchStatic(){
  if(!response.ok)throw Error('Static archive unavailable');
  const result=await response.json();
  return Array.isArray(result.puzzles)?result.puzzles:[];
+}
+async function fetchClueInCell(){
+ const res=await fetch(clueInCell,{cache:'no-store'});
+ if(!res.ok)throw Error('Clue-in-cell archive unavailable');
+ const payload=await res.json();
+ return payload.schema===1&&Array.isArray(payload.puzzles)?payload.puzzles:[];
 }
 async function fetchMini(){
  const r=await fetch(mini,{cache:'no-store'});
@@ -67,6 +74,7 @@ async function fetchApproved(){
  return items;
 }
 function eligiblePublicPuzzle(item){
+ if(item?.type==='clue-in-cell')return !!window.PayameClueInCell?.validate(item);
  if(item?.type==='sudoku')return !!window.PayameSudoku?.validate(item);
  if(item?.type&&!['crossword','mini'].includes(item.type))return false;
  if(!player?.validateItem(item))return false;
@@ -82,8 +90,13 @@ const archiveTypes=Object.freeze([
  {id:'clue-horizontal',name:'شرح در متن افقی ۳۰×۲۰',description:'جدول با سؤال‌های تعبیه‌شده در خانه‌ها، طرح افقی',active:false},
  {id:'clue-vertical',name:'شرح در متن عمودی ۲۰×۱۴',description:'جدول با سؤال‌های تعبیه‌شده در خانه‌ها، طرح عمودی',active:false}
 ]);
-function typeOf(item){return item?.type==='sudoku'?'sudoku':item?.type==='mini'?'mini':'crossword';}
-function displayType(item){return typeOf(item)==='sudoku'?
+function typeOf(item){
+ if(item?.type==='clue-in-cell')return 'clue-'+item.variant;
+ return item?.type==='sudoku'?'sudoku':item?.type==='mini'?'mini':'crossword';
+}
+function displayType(item){
+ if(item?.type==='clue-in-cell')return window.PayameClueInCell?.sizes[item.variant]?.label||'شرح در متن';
+ return typeOf(item)==='sudoku'?
  'سودوکو '+({easy:'آسان',medium:'متوسط',hard:'سخت'}[item.puzzle.difficulty]||''):
  typeOf(item)==='mini'?'جدول مینی ۵×۵':'جدول کلمات متقاطع کلاسیک';}
 
@@ -98,8 +111,9 @@ function renderTypeCatalog(items){
   const card=text('article',undefined,'category-card'+(entry.active?'':' category-pending'));
   card.append(text('h3',entry.name),text('p',entry.description,'muted small'));
   const total=items.filter(x=>typeOf(x)===entry.id).length;
-  card.append(text('p',entry.active?'آرشیو منتشرشده: '+new Intl.NumberFormat('fa-IR').format(total):'در حال آماده‌سازی','category-count'));
-  if(entry.active){
+  const live=entry.active||total>0;
+  card.append(text('p',live?'آرشیو منتشرشده: '+new Intl.NumberFormat('fa-IR').format(total):'در حال آماده‌سازی','category-count'));
+  if(live){
    const link=text('a','مشاهدهٔ آرشیو','link');link.href='./?type='+entry.id;
    card.append(link);
   }
@@ -140,7 +154,9 @@ function renderCatalog(items){
  for(const item of visible){
   const card=text('article',undefined,'card');
   const heading=text('h2',item.title),label=text('span',displayType(item),'content-type');
-  const dimensions=typeOf(item)==='sudoku'?'۹ × ۹':item.puzzle.grid.length+' × '+item.puzzle.grid.length;
+  const dimensions=item?.type==='clue-in-cell'?
+   (window.PayameClueInCell?.sizes[item.variant]?.label||'شرح در متن'):
+   typeOf(item)==='sudoku'?'۹ × ۹':item.puzzle.grid.length+' × '+item.puzzle.grid.length;
   const metadata=text('p',dimensions+(item.publishedAt?'  •  '+dateLabel(item.publishedAt):''),'muted');
   const link=text('a','بازی آنلاین','link');link.href='./?id='+encodeURIComponent(item.id);
   card.append(label,heading,metadata,link);catalog.append(card);
@@ -166,7 +182,23 @@ function renderSudokuPuzzle(item){
  const game=text('div',undefined,'game-frame');section.append(game);
  window.PayameSudokuPlayer.createPlayer(game,item);
 }
+function renderClueInCellPuzzle(item){
+ document.body.classList.remove('is-solving-crossword','is-playing-sudoku');
+ document.body.classList.add('is-solving-clue-in-cell');
+ $('catalog').classList.add('hidden');$('empty').classList.add('hidden');
+ $('categories')?.classList.add('hidden');$('player').classList.remove('hidden');
+ $('title').textContent=item.title;
+ $('subtitle').textContent=window.PayameClueInCell.sizes[item.variant].label+'؛ سؤال‌ها در خانه‌های شبکه';
+ const section=$('player');section.replaceChildren();
+ const nav=text('div',undefined,'play-nav');
+ const back=text('a','بازگشت به آرشیو','link compact-link');
+ back.href='./?type=clue-'+item.variant;nav.append(back);
+ section.append(nav);
+ const game=text('div',undefined,'game-frame');section.append(game);
+ window.PayameCluePlayer.createPlayer(game,item);
+}
 function renderPuzzle(item,archive=[]){
+ if(item?.type==='clue-in-cell')return renderClueInCellPuzzle(item);
  if(item?.type==='sudoku')return renderSudokuPuzzle(item);
  document.body.classList.remove('is-playing-sudoku');
  document.body.classList.add('is-solving-crossword');
@@ -263,18 +295,19 @@ function renderPuzzle(item,archive=[]){
 async function start(){
  const status=$('archiveStatus');
  status.textContent='در حال دریافت جدول‌های منتشرشده…';
- const [staticResult,cloudResult,dailyResult,miniResult]=await Promise.allSettled([fetchStatic(),fetchApproved(),fetchDaily(),fetchMini()]);
+ const [staticResult,cloudResult,dailyResult,miniResult,clueResult]=await Promise.allSettled([fetchStatic(),fetchApproved(),fetchDaily(),fetchMini(),fetchClueInCell()]);
  const merged=new Map();
  if(staticResult.status==='fulfilled')for(const item of staticResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  if(cloudResult.status==='fulfilled')for(const item of cloudResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  if(dailyResult.status==='fulfilled')for(const item of dailyResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  if(miniResult.status==='fulfilled')for(const item of miniResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
+ if(clueResult.status==='fulfilled')for(const item of clueResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  const items=[...merged.values()].sort((a,b)=>{
   const as=a.publishedAt?.seconds? a.publishedAt.seconds*1000 :Date.parse(a.publishedAt||0)||0;
   const bs=b.publishedAt?.seconds? b.publishedAt.seconds*1000 :Date.parse(b.publishedAt||0)||0;
   return bs-as;
  });
- if(cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'){
+ if(cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'&&clueResult.status==='rejected'){
   status.textContent='بخشی از آرشیو در دسترس نیست؛ بازی‌های ذخیره‌شدهٔ عمومی نمایش داده می‌شوند.';
  }else status.textContent=items.length?'تعداد بازی‌های منتشرشده: '+new Intl.NumberFormat('fa-IR').format(items.length):'';
  if(requestedId){
@@ -284,7 +317,7 @@ async function start(){
   $('title').textContent='این جدول در آرشیو عمومی پیدا نشد';
   $('subtitle').textContent='ممکن است انتشار هنوز تکمیل نشده باشد یا لینک نادرست باشد.';
  }else renderCatalog(items);
- if(staticResult.status==='rejected'&&cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'){
+ if(staticResult.status==='rejected'&&cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'&&clueResult.status==='rejected'&&clueResult.status==='rejected'){
   $('empty').classList.remove('hidden');
   $('empty').querySelector('p').textContent='آرشیو در دسترس نیست. لطفاً بعداً دوباره امتحان کن.';
  }
