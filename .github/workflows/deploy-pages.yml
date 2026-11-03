@@ -33,6 +33,10 @@ jobs:
           cp index.html public/index.html
           cp public-app.js public/public-app.js
           cp player.js public/player.js
+          cp metrics.js public/metrics.js
+          cp stats-page.js public/stats-page.js
+          cp stats.html public/stats.html
+          cp data/bank-stats.json public/data/bank-stats.json
           cp glossary.js public/glossary.js
           cp print-pdf.js public/print-pdf.js
           cp quality-gate.js public/quality-gate.js
