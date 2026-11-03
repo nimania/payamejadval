@@ -4,7 +4,7 @@
 (function(root){
 'use strict';
 const R=[0,1,2,3,4,5,6,7,8];
-const levels={easy:{target:43,min:39,max:50},medium:{target:34,min:31,max:38},hard:{target:29,min:25,max:33}};
+const levels={easy:{target:43,min:39,max:50},medium:{target:32,min:30,max:38},hard:{target:29,min:25,max:33}};
 function rand(seed){let state=seed>>>0;return ()=>((state=(Math.imul(state,1664525)+1013904223)>>>0)/4294967296);}
 function shuffle(items,rng){const a=items.slice();for(let i=a.length-1;i>0;i--){let j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function pattern(r,c){return (r*3+Math.floor(r/3)+c)%9;}
@@ -111,11 +111,12 @@ function create(date,difficulty,salt=0){
   if(remaining>level.max)continue;
   const unsolved=singlesRemaining(puzzle);
   const score=level.target-Math.abs(level.target-remaining)*3+
-   (difficulty==='easy'? -unsolved*2 : difficulty==='hard'?Math.min(unsolved,20):0);
+   (difficulty==='easy'? -unsolved*2 : difficulty==='hard'?Math.min(unsolved,20):
+    (unsolved>=1&&unsolved<=18?16-Math.abs(unsolved-8):unsolved===0?-20:-10));
   if(!winner||score>winner.score)winner={puzzle,solved,remaining,unsolved,score};
   if(difficulty==='easy'&&unsolved===0&&remaining<=level.target)break;
   if(difficulty==='hard'&&unsolved>=6&&remaining<=level.target+1)break;
-  if(difficulty==='medium'&&remaining<=level.target&&unsolved<=12)break;
+  if(difficulty==='medium'&&remaining<=level.target&&unsolved>=1&&unsolved<=18)break;
  }
  if(!winner)throw Error('No uniquely solvable Sudoku produced at requested difficulty');
  return {id:'sudoku-'+date+'-'+difficulty,type:'sudoku',
