@@ -121,6 +121,10 @@ function renderPuzzle(item){
  row.append(back,share);section.append(row);
  const game=text('div',undefined,'game-frame');section.append(game);
  player.createPlayer(game,item);
+ const printArea=text('section',undefined,'print-download-wrap');
+ printArea.setAttribute('aria-label','دانلود فایل‌های چاپی جدول و پاسخنامه');
+ window.PayamePrintPDF?.render(printArea,item,player);
+ section.append(printArea);
  const dictionary=text('section',undefined,'dictionary-wrap');
  dictionary.setAttribute('aria-label','فرهنگ سؤال‌ها و جواب‌های این جدول');
  window.PayameGlossary?.render(dictionary,item,player);
