@@ -3,13 +3,13 @@ const form=require('../clue-in-cell.js');
 function sample(variant){
  const {width,height}=form.sizes[variant];
  const grid=Array.from({length:height},()=>Array.from({length:width},()=>({kind:'block'})));
- grid[0][4]={kind:'clue'};
+ grid[0][5]={kind:'clue'};
  const word='تداوم';
- for(let i=0;i<5;i++)grid[0][3-i]={kind:'letter',answer:word[i]};
+ for(let i=0;i<5;i++)grid[0][4-i]={kind:'letter',answer:word[i]};
  return {id:'test-'+variant,type:'clue-in-cell',variant,
   puzzle:{version:1,grid,entries:[{
-   id:'entry-1',clue:'ادامه یافتن',answer:word,clueCell:[0,4],
-   start:[0,3],direction:'across'}]}};
+   id:'entry-1',clue:'ادامه یافتن',answer:word,clueCell:[0,5],
+   start:[0,4],direction:'across'}]}};
 }
 for(const variant of ['horizontal','vertical']){
  const item=sample(variant);
