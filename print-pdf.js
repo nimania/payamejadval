@@ -117,7 +117,7 @@ function newspaperHeader(ctx,item,mode,page,logo,continuation=false){
  }else{
   text(ctx,'پیام جدول',WIDTH-EDGE,85,39,true,ink);
  }
- text(ctx,'جدول کلمات متقاطع',810,74,40,true,ink);
+ text(ctx,'جدول کلمات متقاطع کلاسیک',810,74,31,true,ink);
  text(ctx,item.title,810,128,25,true,ink);
  text(ctx,mode==='answers'?'پاسخنامهٔ جدول':'نسخهٔ روزنامه‌ای برای حل روی کاغذ',810,164,20,false,muted);
  ctx.strokeStyle=ink;ctx.lineWidth=3;ctx.beginPath();
@@ -133,7 +133,7 @@ function newspaperBoard(ctx,item,mode,layout){
  const grid=item.puzzle.grid,n=grid.length,cell=layout.cell;
  const left=layout.boardLeft,top=layout.boardTop,right=left+cell*n;
  ctx.fillStyle='#343434';ctx.fillRect(left,top-62,cell*n,30);
- text(ctx,mode==='answers'?'حل جدول عادی':'جدول عادی',right-10,top-47,19,true,'#ffffff');
+ text(ctx,mode==='answers'?'حل جدول کلاسیک':'جدول کلاسیک',right-10,top-47,19,true,'#ffffff');
  for(let c=0;c<n;c++){
   ctx.fillStyle='#292929';ctx.font='bold 17px '+font;
   ctx.direction='rtl';ctx.textAlign='center';ctx.textBaseline='middle';
