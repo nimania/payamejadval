@@ -33,6 +33,7 @@ jobs:
           cp index.html public/index.html
           cp public-app.js public/public-app.js
           cp player.js public/player.js
+          cp glossary.js public/glossary.js
           cp quality-gate.js public/quality-gate.js
           cp firebase-config.js public/firebase-config.js
           cp data/published.json public/data/published.json
