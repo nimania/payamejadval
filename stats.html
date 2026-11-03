@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>آمار فرهنگ‌نامه و تکرار جدول‌ها | پیام جدول</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
+:root{font-family:Vazirmatn,Tahoma,Arial,sans-serif;color:#20313f;background:#f5f6f7;font-size:15px}
+*{box-sizing:border-box}body{margin:0}header{background:#fff;border-bottom:1px solid #dce3e7}
+nav,main{max-width:1180px;margin:auto;padding:19px 25px}nav{display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+a{color:#195f83;text-decoration:none;font-weight:600}
+h1{font-size:clamp(23px,4vw,32px);margin:10px 0}h2{font-size:20px;margin:0 0 14px}p{line-height:1.95}
+.muted{color:#677986}.small{font-size:12px}
+.summary{border-right:4px solid #b99d55;padding:10px 16px;background:#fff9ed;border-radius:7px;margin-bottom:20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:13px;margin:20px 0}
+.kpi,.panel{background:white;border:1px solid #dae1e5;border-radius:14px;padding:19px;box-shadow:0 1px 8px #14304706}
+.kpi b{display:block;font-size:26px;direction:ltr;text-align:right;white-space:nowrap}.kpi span{color:#637484;font-size:12px}
+.panel{margin:20px 0;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:490px}
+th,td{text-align:right;padding:11px 12px;border-bottom:1px solid #e8edf0;vertical-align:top}
+th{background:#f1f5f7}
+.pill{padding:3px 8px;border-radius:9px;background:#ecf3f6;color:#3a596e;white-space:nowrap}
+.note{border-right:3px solid #9eabb5;padding:10px 13px;background:#f6f8f9;font-size:13px}
+.bar{display:inline-block;background:#23637e;height:8px;border-radius:6px;vertical-align:middle;min-width:2px}
+button{font:inherit;border:1px solid #c9d8e0;background:white;border-radius:9px;padding:7px 12px}
+footer{max-width:1180px;margin:40px auto;padding:14px 25px;color:#657784;border-top:1px solid #dce4e8;font-size:12px}
+@media(max-width:700px){nav,main{padding:14px}.panel{padding:14px}h1{font-size:23px}.kpi b{font-size:23px}}
+</style>
+</head>
+<body><header><nav><a href="./">پیام جدول</a><div><a href="./?type=crossword">آرشیو جدول‌های کلمات متقاطع</a></div></nav></header>
+<main>
+<h1>آمار فرهنگ‌نامه و تازگی جدول‌ها</h1>
+<p class="muted">شمار مدخل‌ها، جواب‌های یکتا، سؤال‌های یکتا و میزان تکرار جدول‌های منتشرشده در دوره‌های ۱۰، ۳۰ و ۱۰۰تایی.</p>
+<div class="summary" id="snapshotStatus" role="status">در حال دریافت آخرین نسخهٔ آمار موجود…</div>
+<section class="kpis" id="bankKpis"></section>
+<section class="panel">
+<h2>رشد و پالایش بانک</h2><p class="muted small" id="bankLineage"></p>
+<p class="note">تعریف تکرار مدخل: یکسان‌بودن <strong>هم‌زمان سؤال و جواب</strong> پس از نرمال‌سازی حروف و فاصله‌ها. یک جواب با سؤال متفاوت حذف نمی‌شود. این آمار صرفاً تجمیعی است و متن بانک خصوصی در این صفحه نمایش داده نمی‌شود.</p>
+</section>
+<section class="panel"><h2>توزیع طول جواب‌ها</h2><div id="lengths"></div></section>
+<section class="panel"><h2>تکراری‌بودن جدول‌های منتشرشده</h2>
+<p class="muted small">«تکرار دقیق» یعنی سؤال و جواب هر دو تکراری باشند؛ «جواب تکراری» یعنی پاسخ قبلاً آمده باشد، حتی اگر سؤال تازه باشد. درصدها نسبت به پاسخ‌های همان جدول محاسبه می‌شوند. جدولِ تازه فقط با جدول‌های قدیمی‌تر از خودش مقایسه می‌شود.</p>
+<p id="archiveStatus" class="muted small"></p>
+<div id="recentComparisons"></div>
+</section>
+</main>
+<footer>پیام جدول · آمار عمومی بدون انتشار محتوای بانک خصوصی</footer>
+<script src="./firebase-config.js"></script><script src="./player.js"></script><script src="./metrics.js"></script><script src="./stats-page.js"></script>
+</body></html>
