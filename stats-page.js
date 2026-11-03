@@ -61,10 +61,10 @@ async function getPuzzles(){
  if(b.status==='fulfilled')for(const x of b.value)if(valid(x))merged.set(x.id,x);
  const ms=v=>v?.publishedAt?.toMillis?v.publishedAt.toMillis():Date.parse(v?.publishedAt||'')||0;
  const list=[...merged.values()].sort((x,y)=>ms(y)-ms(x));
- return {list,live:b.status==='fulfilled',static:a.status==='fulfilled'};
+ return {list,live:b.status==='fulfilled',hasStatic:a.status==='fulfilled'};
 }
 function formatPercent(percent){return fmt.format(percent)+'٪';}
-function renderPublished({list,live,static}){
+function renderPublished({list,live,hasStatic}){
  $('archiveStatus').textContent='جدول‌های قابل بررسی در آرشیو: '+fmt.format(list.length)+
   (live?' (شامل دادهٔ منتشرشدهٔ آنلاین)':' (فقط آرشیو ثابت؛ ارتباط آنلاین در دسترس نیست)')+
   '. با کمتر از ۱۰، ۳۰ یا ۱۰۰ جدول قدیمی‌تر، تعداد واقعی مقایسه ذکر می‌شود.';
