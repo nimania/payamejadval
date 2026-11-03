@@ -20,7 +20,7 @@ function sourceQualified(row,maxLength){
   !!row.category&&!['عمومی','دسته‌بندی‌نشده','سایر'].includes(row.category);
 }
 
-const supported=new Set([7,10,15,20]);
+const supported=new Set([5,7,10,15,20]);
 function audit(puzzle,bank,options={}){
  const trustedCorpus=options?.trustedCorpus===true;
  const errors=[],warnings=[],n=puzzle?.grid?.length;
@@ -32,6 +32,7 @@ function audit(puzzle,bank,options={}){
   fail('grid','شبکه باید مربعی و دارای اندازهٔ پشتیبانی‌شده باشد.');return report;
  }
  const magazine=puzzle?.meta?.profile==='iran-magazine';
+ const mini=n===5&&puzzle?.meta?.profile==='mini-full';
  const grid=puzzle.grid,mask=grid.map(row=>row.map(cell=>cell===''));
  for(let r=0;r<n;r++)for(let c=0;c<n;c++){
   const ch=grid[r][c];
@@ -49,7 +50,7 @@ function audit(puzzle,bank,options={}){
  }
  const total=n*n,white=total-black,ratio=black/total;
  Object.assign(report.stats,{blackCount:black,blackRatio:ratio,whiteCount:white});
- const minDensity=magazine?.10:.12,maxDensity=magazine?.22:.167;
+ const minDensity=mini?0:magazine?.10:.12,maxDensity=mini?0:magazine?.22:.167;
  if(ratio<minDensity-1e-9||ratio>maxDensity+1e-9)
   fail('black-density','چگالی '+(100*ratio).toFixed(1)+'٪ بیرون محدودهٔ '+(100*minDensity)+' تا '+(100*maxDensity)+' درصد است.');
  if(!white){fail('no-white','جدول هیچ خانهٔ سفیدی ندارد.');return report;}
@@ -66,7 +67,7 @@ function audit(puzzle,bank,options={}){
  const slots=[],coverage=new Map();
  function addSlot(dir,group,cells){
   if(!cells.length)return;
-  if(!magazine&&cells.length<3)fail('short-answer','پاسخ '+(dir==='horizontal'?'افقی ':'عمودی ')+group+' تنها '+cells.length+' حرف دارد (حداقل ۳ در حالت سخت‌گیرانه).');
+  if(!magazine&&!mini&&cells.length<3)fail('short-answer','پاسخ '+(dir==='horizontal'?'افقی ':'عمودی ')+group+' تنها '+cells.length+' حرف دارد (حداقل ۳ در حالت سخت‌گیرانه).');
   const answer=cells.map(([r,c])=>grid[r][c]).join('');
   const slot={dir,group,cells,answer};slots.push(slot);
   for(const [r,c] of cells){
