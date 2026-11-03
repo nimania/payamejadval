@@ -32,5 +32,11 @@ async function check(url){
  if(many.code===200)console.log('document count:',many.data.documents?.length||0,
   'public IDs:',(many.data.documents||[]).map(x=>x.name?.split('/').pop()));
  else console.log('collection listing error:',many.data?.error?.message||many.error||'unknown');
+ const published=await check('https://nimania.github.io/payamejadval/data/published.json?recheck='+Date.now());
+ console.log('GitHub Pages public snapshot HTTP status:',published.code);
+ const expected=(published.data?.puzzles||[]).some(x=>x.id===id);
+ console.log('Published puzzle found in live Pages JSON:',expected,
+  'public count:',published.data?.puzzles?.length||0);
+ if(!expected)process.exitCode=1;
  if(one.code!==200&&many.code!==200)process.exitCode=1;
 })();
