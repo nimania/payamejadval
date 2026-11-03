@@ -36,6 +36,8 @@ jobs:
           cp player.js public/player.js
           cp sudoku.js public/sudoku.js
           cp sudoku-player.js public/sudoku-player.js
+          cp clue-in-cell.js public/clue-in-cell.js
+          cp clue-in-cell-player.js public/clue-in-cell-player.js
           cp metrics.js public/metrics.js
           cp stats-page.js public/stats-page.js
           cp stats.html public/stats.html
@@ -48,6 +50,7 @@ jobs:
           cp data/published.json public/data/published.json
           cp data/daily-games.json public/data/daily-games.json
           cp data/mini-puzzles.json public/data/mini-puzzles.json
+          cp data/clue-in-cell-puzzles.json public/data/clue-in-cell-puzzles.json
       - name: Refresh public crossword snapshot from Firestore (read only)
         run: |
           node scripts/snapshot-public-firestore.cjs public/data/published.json
@@ -56,6 +59,9 @@ jobs:
           node scripts/verify-daily-games.cjs
           node tests/test_mini.cjs
           node tests/test_mini_image.cjs
+          node tests/test_clue_in_cell_model.cjs
+          node tests/test_clue_in_cell.cjs
+          node scripts/verify-clue-in-cell-archive.cjs
       - name: Check single-page A4 printable layouts using live approved puzzles
         run: |
           node scripts/verify-onepage-pdf.cjs public/data/published.json
