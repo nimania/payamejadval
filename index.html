@@ -38,6 +38,33 @@ p{line-height:1.9}.muted{color:#627282}.small{font-size:13px}
 .hidden{display:none!important}
 #archiveStatus{font-size:13px;min-height:20px}
 .play-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:14px 0}
+/* Dense puzzle-only header: put the playable grid above the fold. */
+.is-solving-crossword nav{padding-top:7px;padding-bottom:7px}
+.is-solving-crossword .brand img{width:130px;max-width:33vw}
+.is-solving-crossword .tag{display:none}
+.is-solving-crossword .site-nav{font-size:12px;gap:10px}
+.is-solving-crossword main{padding-top:8px}
+.is-solving-crossword .intro{padding:8px 0 10px;display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap}
+.is-solving-crossword #title{font-size:clamp(17px,2.2vw,23px);line-height:1.45;margin:0;font-weight:800}
+.is-solving-crossword #subtitle,.is-solving-crossword #archiveStatus{display:none}
+.is-solving-crossword .intro .play-nav{margin:0;display:flex;align-items:center;justify-content:flex-start;gap:6px;flex-wrap:wrap}
+.is-solving-crossword .intro .play-nav .link,.is-solving-crossword .intro .play-nav .action-button{font-size:12px;padding:6px 10px;line-height:1.45;border-radius:7px;white-space:nowrap}
+.is-solving-crossword .intro .play-nav .compact-link{border:1px solid #d3dee5;color:#28516a;background:#fff;text-decoration:none}
+.is-solving-crossword .compact-export-status{font-size:11px;color:#915024}
+.is-solving-crossword .game-frame{padding:12px 14px}
+.is-solving-crossword .magazine-crossword .magazine-play-area{margin-top:8px}
+.is-solving-crossword .play-toolbar{margin:7px 0}
+.is-solving-crossword .play-progress{margin:5px 0}
+@media(max-width:700px){
+ .is-solving-crossword nav{padding-top:6px;padding-bottom:6px}
+ .is-solving-crossword .brand img{width:108px}
+ .is-solving-crossword .intro{gap:5px 10px;padding:4px 0 7px}
+ .is-solving-crossword #title{font-size:16px}
+ .is-solving-crossword .intro .play-nav{width:100%;gap:5px}
+ .is-solving-crossword .intro .play-nav .link,.is-solving-crossword .intro .play-nav .action-button{font-size:11px;padding:6px 8px}
+ .is-solving-crossword .game-frame{padding:8px}
+}
+
 .link{font-weight:700}
 .game-frame{padding:20px}
 .play-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
