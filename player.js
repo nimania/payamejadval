@@ -15,7 +15,7 @@ function slotsFor(grid){
     while(c>=0){
      if(!grid[r][c]){c--;continue}
      const cells=[];while(c>=0&&grid[r][c])cells.push([r,c--]);
-     if(cells.length<2)return null;
+     if(!cells.length)return null;
      slots.push({dir,group:r+1,cells,answer:cells.map(([y,x])=>grid[y][x]).join('')});
     }
    }
@@ -25,7 +25,7 @@ function slotsFor(grid){
     while(r<n){
      if(!grid[r][c]){r++;continue}
      const cells=[];while(r<n&&grid[r][c])cells.push([r++,c]);
-     if(cells.length<2)return null;
+     if(!cells.length)return null;
      slots.push({dir,group:n-c,cells,answer:cells.map(([y,x])=>grid[y][x]).join('')});
     }
    }
