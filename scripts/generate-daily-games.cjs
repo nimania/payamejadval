@@ -17,10 +17,17 @@ for(const item of old.items){
  if(games.has(item.id))throw Error('Duplicate game ID '+item.id);
  games.set(item.id,item);
 }
+const days=[];
+const today=new Date(date+'T12:00:00Z');
+if(Number.isNaN(today.getTime()))throw Error('Invalid calendar day');
+for(let delta=6;delta>=0;delta--){
+ const day=new Date(today.getTime()-delta*86400000).toISOString().slice(0,10);
+ if(day>='2026-11-03')days.push(day);
+}
 let appended=0;
-for(const diff of ['easy','medium','hard']){
- const item=sdk.create(date,diff);
- if(!sdk.validate(item))throw Error('Failed quality gate for '+diff);
+for(const day of days)for(const diff of ['easy','medium','hard']){
+ const item=sdk.create(day,diff);
+ if(!sdk.validate(item))throw Error('Failed quality gate for '+day+' '+diff);
  if(games.has(item.id)){
   const oldItem=games.get(item.id);
   if(JSON.stringify(oldItem.puzzle)!==JSON.stringify(item.puzzle))
@@ -33,4 +40,4 @@ const items=[...games.values()].sort((a,b)=>b.publishedAt.localeCompare(a.publis
 fs.mkdirSync(path.dirname(out),{recursive:true});
 const result={schema:1,updatedAt:new Date().toISOString().slice(0,10),items};
 fs.writeFileSync(out,JSON.stringify(result,null,2)+'\n');
-console.log('Daily published Sudoku:',date,'new',appended,'total',items.length);
+console.log('Daily published Sudoku through:',date,'new',appended,'total',items.length,'checked days',days.length);
