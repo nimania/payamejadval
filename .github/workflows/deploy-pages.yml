@@ -34,6 +34,8 @@ jobs:
           cp index.html public/index.html
           cp public-app.js public/public-app.js
           cp player.js public/player.js
+          cp sudoku.js public/sudoku.js
+          cp sudoku-player.js public/sudoku-player.js
           cp metrics.js public/metrics.js
           cp stats-page.js public/stats-page.js
           cp stats.html public/stats.html
@@ -43,9 +45,13 @@ jobs:
           cp quality-gate.js public/quality-gate.js
           cp firebase-config.js public/firebase-config.js
           cp data/published.json public/data/published.json
+          cp data/daily-games.json public/data/daily-games.json
       - name: Refresh public crossword snapshot from Firestore (read only)
         run: |
           node scripts/snapshot-public-firestore.cjs public/data/published.json
+      - name: Verify all published daily Sudoku games
+        run: |
+          node scripts/verify-daily-games.cjs
       - name: Check single-page A4 printable layouts using live approved puzzles
         run: |
           node scripts/verify-onepage-pdf.cjs public/data/published.json
