@@ -1,0 +1,17 @@
+'use strict';
+const assert=require('node:assert/strict');
+const model=require('../clue-in-cell.js');
+const game=require('../clue-in-cell-player.js');
+let item=model.blank('vertical');
+item=model.addEntry(item,{id:'a',clue:'ادامه یافتن',answer:'تداوم',direction:'across',clueCell:[4,5]});
+item=model.addEntry(item,{id:'b',clue:'آرزوی دل',answer:'امید',direction:'down',clueCell:[3,2]});
+const p=game.progress(item,{});
+assert.equal(p.filled,0);assert.equal(p.correct,0);assert.equal(p.total,8);
+const start={'4,4':'ت','4,3':'د','4,2':'ا','4,1':'و','4,0':'م','5,2':'م','6,2':'ی','7,2':'د'};
+const all=game.progress(item,start);
+assert.equal(all.correct,8);assert.equal(all.filled,8);assert.equal(all.solved,true);
+const wrong={...start,'4,2':'ب'};
+const other=game.progress(item,wrong);
+assert.equal(other.correct,7);assert.equal(other.solved,false);
+assert.throws(()=>game.createPlayer(null,item),/کامل یا تأییدشده/);
+console.log('Clue-in-cell game: shared intersection counted once, correct/incorrect answer checks and incomplete public game refusal passed.');
