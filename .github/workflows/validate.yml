@@ -17,6 +17,7 @@ on:
       - sudoku.js
       - clue-in-cell.js
       - clue-in-cell-player.js
+      - scripts/verify-clue-in-cell-archive.cjs
       - data/clue-in-cell-puzzles.json
       - sudoku-player.js
       - data/daily-games.json
@@ -59,6 +60,7 @@ jobs:
           node tests/test_mini.cjs
           node tests/test_clue_in_cell.cjs
           node tests/test_clue_in_cell_model.cjs
+          node tests/test_clue_in_cell_player.cjs
           node scripts/verify-clue-in-cell-archive.cjs
           node tests/test_public_quality.cjs
       - name: Ensure public archive never includes private database
