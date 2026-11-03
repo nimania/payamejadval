@@ -11,7 +11,7 @@ for(const [i,slot] of slots.entries()){
 }
 const item={id:'pub_test_1234567890',title:'جدول آزمایشی',puzzle:{version:3,grid,clues}};
 assert(player.validateItem(item));
-const result=glossary.entries(item);
+const result=glossary.entries(item,player);
 const across=result.horizontal.filter(e=>e.number===1);
 assert.equal(across.length,2);
 assert.equal(across[0].answer,'جثتپ','Rightmost across entry must be first');
@@ -55,6 +55,6 @@ assert(fullText.includes('واژهٔ نخست، با خط تیره - در متن
 assert(fullText.includes('پاسخ: با'));
 const bad=JSON.parse(JSON.stringify(item));
 bad.puzzle.clues.horizontal['1'].pop();
-assert.throws(()=>glossary.entries(bad),/معتبر/,'Mismatched clue lists must never generate false pairs');
+assert.throws(()=>glossary.entries(bad,player),/معتبر/,'Mismatched clue lists must never generate false pairs');
 assert(!fullText.includes('admin')&&!fullText.includes('bank-private'));
 console.log('Glossary tested: direct public puzzle, multi-answer RTL clue pairing, spoiler disclosure, plain-text copy and no private data.');
