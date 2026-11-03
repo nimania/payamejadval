@@ -1,5 +1,60 @@
 {
   "schema": 1,
   "updatedAt": "2026-11-03",
-  "items": []
+  "items": [
+    {
+      "id": "sudoku-2026-11-03-easy",
+      "type": "sudoku",
+      "title": "سودوکو آسان ـ 2026-11-03",
+      "publishedAt": "2026-11-03T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "easy",
+        "givens": "316057004049003000000048061100700080560004139408301006030472000081530240200189053",
+        "solution": "316257894849613725752948361193765482567824139428391576635472918981536247274189653",
+        "quality": {
+          "unique": true,
+          "givens": 43,
+          "singlesUnsolved": 0,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
+    {
+      "id": "sudoku-2026-11-03-hard",
+      "type": "sudoku",
+      "title": "سودوکو سخت ـ 2026-11-03",
+      "publishedAt": "2026-11-03T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "hard",
+        "givens": "085007060030800002029006004200600408000090306060000270000003040600458000040070000",
+        "solution": "485927163136845792729316584297631458854792316361584279972163845613458927548279631",
+        "quality": {
+          "unique": true,
+          "givens": 29,
+          "singlesUnsolved": 40,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
+    {
+      "id": "sudoku-2026-11-03-medium",
+      "type": "sudoku",
+      "title": "سودوکو متوسط ـ 2026-11-03",
+      "publishedAt": "2026-11-03T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "medium",
+        "givens": "807920650900563804300000000030047290080090036000006000500084900010630007008000000",
+        "solution": "847921653921563874356478129635847291784192536192356748563784912219635487478219365",
+        "quality": {
+          "unique": true,
+          "givens": 32,
+          "singlesUnsolved": 31,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    }
+  ]
 }
