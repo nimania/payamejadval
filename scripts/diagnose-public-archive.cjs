@@ -12,6 +12,7 @@ async function check(url){
 (async()=>{
  const one=await check(base+'/'+id+'?key='+apiKey);
  console.log('known-document HTTP status:',one.code);
+ if(one.code===200)console.log('public field types:',Object.fromEntries(Object.entries(one.data.fields||{}).map(([k,v])=>[k,Object.keys(v)[0]])));
  if(one.code===200){
   const f=one.data.fields||{},val=k=>f[k]?.stringValue||f[k]?.integerValue||null;
   const raw=val('puzzleJson');
