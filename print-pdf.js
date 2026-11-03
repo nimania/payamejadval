@@ -163,7 +163,7 @@ function compactNewspaperGroups(grouped,mode){
   const byNumber=new Map();
   for(const row of grouped[dir]){
    const a=byNumber.get(row.number)||[];
-   a.push(mode==='answers'?row.clue+' : '+row.answer:row.clue);
+   a.push(mode==='answers'?row.clue+' (پاسخ: '+row.answer+')':row.clue);
    byNumber.set(row.number,a);
   }
   for(const [number,clues] of byNumber)
