@@ -13,6 +13,7 @@ on:
       - scripts/verify-daily-games.cjs
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: verified-daily-games-main
   cancel-in-progress: false
@@ -46,3 +47,9 @@ jobs:
           git add data/daily-games.json
           git commit -m 'Publish verified daily Sudoku puzzles'
           git push origin HEAD:main
+      - name: Trigger live GitHub Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run deploy-pages.yml --ref main
+
