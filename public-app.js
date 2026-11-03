@@ -129,7 +129,7 @@ function compactPuzzleTitle(item){
  return (number?'جدول '+number[1]:title)+(date?' | '+date[0]:'')+(size?' | '+size+'×'+size:'');
 }
 function renderCatalog(items){
- document.body.classList.remove('is-solving-crossword','is-playing-sudoku');
+ document.body.classList.remove('is-solving-crossword','is-playing-sudoku','is-solving-clue-in-cell');
  document.querySelector('.intro .play-nav')?.remove();
  const catalog=$('catalog');catalog.replaceChildren();
  const selected=archiveTypes.find(x=>x.id===requestedType);
@@ -163,7 +163,7 @@ function renderCatalog(items){
  }
 }
 function renderSudokuPuzzle(item){
- document.body.classList.remove('is-solving-crossword');
+ document.body.classList.remove('is-solving-crossword','is-solving-clue-in-cell');
  document.body.classList.add('is-playing-sudoku');
  $('catalog').classList.add('hidden');$('empty').classList.add('hidden');
  $('categories')?.classList.add('hidden');$('player').classList.remove('hidden');
@@ -200,7 +200,7 @@ function renderClueInCellPuzzle(item){
 function renderPuzzle(item,archive=[]){
  if(item?.type==='clue-in-cell')return renderClueInCellPuzzle(item);
  if(item?.type==='sudoku')return renderSudokuPuzzle(item);
- document.body.classList.remove('is-playing-sudoku');
+ document.body.classList.remove('is-playing-sudoku','is-solving-clue-in-cell');
  document.body.classList.add('is-solving-crossword');
  $('catalog').classList.add('hidden');$('empty').classList.add('hidden');
  $('categories')?.classList.add('hidden');
@@ -317,7 +317,7 @@ async function start(){
   $('title').textContent='این جدول در آرشیو عمومی پیدا نشد';
   $('subtitle').textContent='ممکن است انتشار هنوز تکمیل نشده باشد یا لینک نادرست باشد.';
  }else renderCatalog(items);
- if(staticResult.status==='rejected'&&cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'&&clueResult.status==='rejected'&&clueResult.status==='rejected'){
+ if(staticResult.status==='rejected'&&cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'&&clueResult.status==='rejected'){
   $('empty').classList.remove('hidden');
   $('empty').querySelector('p').textContent='آرشیو در دسترس نیست. لطفاً بعداً دوباره امتحان کن.';
  }
