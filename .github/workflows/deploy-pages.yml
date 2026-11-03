@@ -46,12 +46,14 @@ jobs:
           cp firebase-config.js public/firebase-config.js
           cp data/published.json public/data/published.json
           cp data/daily-games.json public/data/daily-games.json
+          cp data/mini-puzzles.json public/data/mini-puzzles.json
       - name: Refresh public crossword snapshot from Firestore (read only)
         run: |
           node scripts/snapshot-public-firestore.cjs public/data/published.json
       - name: Verify all published daily Sudoku games
         run: |
           node scripts/verify-daily-games.cjs
+          node tests/test_mini.cjs
       - name: Check single-page A4 printable layouts using live approved puzzles
         run: |
           node scripts/verify-onepage-pdf.cjs public/data/published.json
