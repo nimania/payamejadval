@@ -16,6 +16,7 @@ on:
       - sudoku.js
       - sudoku-player.js
       - data/daily-games.json
+      - data/mini-puzzles.json
       - firebase-config.js
       - data/published.json
       - tests/**
@@ -47,6 +48,7 @@ jobs:
           node tests/test_metrics.cjs
           node tests/test_print_pdf.cjs
           node tests/test_sudoku.cjs
+          node tests/test_mini.cjs
           node tests/test_public_quality.cjs
       - name: Ensure public archive never includes private database
         run: |
