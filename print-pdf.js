@@ -104,8 +104,144 @@ function addGroupPages(item,mode,groupsByDir,pages,pageNumber){
  }
  if(y)pages.push(pg.canvas);
 }
-function createPages(item,mode,player){
+/* Newspaper / magazine layout for a single 15x15 crossword.
+   Other sizes retain their previously established print layout.
+   Geometry is in A4 raster coordinates, 1240 x 1754 px (approx. 150 dpi). */
+function newspaperHeader(ctx,item,mode,page,logo,continuation=false){
+ const ink='#222222',muted='#555555';
+ // A real brand image, shipped on the same origin as this script.
+ if(logo&&typeof ctx.drawImage==='function'){
+  const scale=Math.min(310/(logo.naturalWidth||logo.width||310),112/(logo.naturalHeight||logo.height||112));
+  const w=(logo.naturalWidth||logo.width||310)*scale,h=(logo.naturalHeight||logo.height||112)*scale;
+  ctx.drawImage(logo,WIDTH-EDGE-w,38,w,h);
+ }else{
+  text(ctx,'پیام جدول',WIDTH-EDGE,85,39,true,ink);
+ }
+ text(ctx,'جدول کلمات متقاطع',810,74,40,true,ink);
+ text(ctx,item.title,810,128,25,true,ink);
+ text(ctx,mode==='answers'?'پاسخنامهٔ جدول':'نسخهٔ روزنامه‌ای برای حل روی کاغذ',810,164,20,false,muted);
+ ctx.strokeStyle=ink;ctx.lineWidth=3;ctx.beginPath();
+ ctx.moveTo(EDGE,198);ctx.lineTo(WIDTH-EDGE,198);ctx.stroke();
+ if(continuation)text(ctx,'ادامهٔ سؤال‌ها',WIDTH-EDGE,236,22,true,ink);
+ ctx.strokeStyle='#929292';ctx.lineWidth=1;ctx.beginPath();
+ ctx.moveTo(EDGE,HEIGHT-78);ctx.lineTo(WIDTH-EDGE,HEIGHT-78);ctx.stroke();
+ text(ctx,'پیام جدول • جدول کلمات متقاطع',WIDTH-EDGE,HEIGHT-52,18,false,muted);
+ text(ctx,'صفحهٔ '+fmt.format(page),EDGE+155,HEIGHT-52,18,false,muted);
+}
+function newspaperBoard(ctx,item,mode){
+ const grid=item.puzzle.grid,n=grid.length,cell=Math.floor(690/n);
+ const left=70,top=286,right=left+cell*n;
+ ctx.strokeStyle='#333';ctx.lineWidth=1.8;
+ for(let c=0;c<n;c++){
+  ctx.fillStyle='#2e2e2e';ctx.font='bold 18px '+font;
+  ctx.direction='rtl';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(fmt.format(c+1),right-(c+.5)*cell,top-24);
+ }
+ for(let r=0;r<n;r++){
+  ctx.fillStyle='#2e2e2e';ctx.font='bold 18px '+font;
+  ctx.direction='rtl';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(fmt.format(r+1),right+30,top+(r+.5)*cell);
+  for(let c=0;c<n;c++){
+   const x=right-(c+1)*cell,y=top+r*cell,ch=grid[r][n-1-c];
+   ctx.fillStyle=ch?'#fff':'#171717';ctx.fillRect(x,y,cell,cell);
+   ctx.strokeStyle='#838383';ctx.lineWidth=1.1;ctx.strokeRect(x,y,cell,cell);
+   if(mode==='answers'&&ch){
+    ctx.fillStyle='#191919';ctx.font='bold '+Math.min(30,Math.floor(cell*.62))+'px '+font;
+    ctx.direction='rtl';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(ch,x+cell/2,y+cell/2+1);
+   }
+  }
+ }
+ ctx.strokeStyle='#111';ctx.lineWidth=2.5;ctx.strokeRect(left,top,cell*n,cell*n);
+ text(ctx,mode==='answers'?'شبکهٔ حل‌شده':'شبکهٔ خالی برای حل',right,top+cell*n+27,17,true,'#505050');
+ return top+cell*n;
+}
+function newspaperColumns(continued){
+ if(continued){
+  return [
+   {left:815,right:WIDTH-EDGE,top:266,bottom:HEIGHT-105},
+   {left:444,right:795,top:266,bottom:HEIGHT-105},
+   {left:EDGE,right:424,top:266,bottom:HEIGHT-105}
+  ];
+ }
+ return [
+  {left:817,right:WIDTH-EDGE,top:261,bottom:HEIGHT-105},
+  {left:443,right:771,top:1050,bottom:HEIGHT-105},
+  {left:EDGE,right:423,top:1050,bottom:HEIGHT-105}
+ ];
+}
+function newspaperPages(item,mode,grouped,logo){
+ const pages=[];
+ let pg=canvasPage(),pageNumber=1;
+ newspaperHeader(pg.ctx,item,mode,pageNumber,logo);
+ newspaperBoard(pg.ctx,item,mode);
+ pages.push(pg.canvas);
+ let cols=newspaperColumns(false),colIndex=0,y=cols[0].top;
+ const lineHeight=29,clueSize=19;
+ function nextColumn(){
+  colIndex++;
+  if(colIndex>=cols.length){
+   pg=canvasPage();pages.push(pg.canvas);pageNumber++;
+   newspaperHeader(pg.ctx,item,mode,pageNumber,logo,true);
+   cols=newspaperColumns(true);colIndex=0;
+  }
+  y=cols[colIndex].top;
+ }
+ function section(label){
+  let col=cols[colIndex];
+  if(y+78>col.bottom){nextColumn();col=cols[colIndex];}
+  pg.ctx.fillStyle='#333333';
+  pg.ctx.fillRect(col.left,y,col.right-col.left,36);
+  text(pg.ctx,label,col.right-12,y+18,21,true,'#ffffff');
+  y+=48;
+ }
+ for(const [dir,label] of [['horizontal','افقی'],['vertical','عمودی']]){
+  section(label);
+  for(const itemRow of grouped[dir]){
+   let placed=false;
+   const number=fmt.format(itemRow.number)+(itemRow.part>1?' / '+fmt.format(itemRow.part):'');
+   const body=number+' - '+itemRow.clue+
+    (mode==='answers'?'  |  پاسخ: '+itemRow.answer:'');
+   while(!placed){
+    const col=cols[colIndex],width=col.right-col.left-14;
+    const wrapped=lines(pg.ctx,body,width,clueSize);
+    const required=wrapped.length*lineHeight+12;
+    if(y+required>col.bottom){
+     nextColumn();
+     continue;
+    }
+    for(let i=0;i<wrapped.length;i++)
+     text(pg.ctx,wrapped[i],col.right-7,y+13+i*lineHeight,clueSize,
+      mode==='answers'&&i===wrapped.length-1,'#262626');
+    y+=required;placed=true;
+   }
+  }
+  y+=14;
+ }
+ return pages;
+}
+async function loadNewspaperLogo(){
+ if(typeof Image==='undefined'||typeof document==='undefined')
+  throw Error('بارگذاری لوگو در این مرورگر ممکن نیست.');
+ const logo=new Image();
+ const asset=new URL('./assets/payamejadval-logo.webp',document.baseURI).href;
+ if(typeof logo.decode==='function'){
+  logo.src=asset;
+  await logo.decode();
+ }else{
+  await new Promise((resolve,reject)=>{
+   logo.onload=resolve;
+   logo.onerror=()=>reject(Error('فایل لوگو در دسترس نیست.'));
+   logo.src=asset;
+  });
+ }
+ if(!(logo.naturalWidth||logo.width)||!(logo.naturalHeight||logo.height))
+  throw Error('فایل لوگو بارگذاری نشد.');
+ return logo;
+}
+function createPages(item,mode,player,logo){
  const grouped=groups(item,player),pages=[];
+ if(item.puzzle.grid.length===15)return newspaperPages(item,mode,grouped,logo);
  const page=canvasPage();header(page.ctx,item,mode,1);
  const bottom=board(page.ctx,item,mode==='answers',278);
  text(page.ctx,mode==='answers'?'پاسخ کامل جدول':'پاسخ‌ها در این نسخه چاپ نشده‌اند.',WIDTH-EDGE,bottom+50,24,false,'#536b77');
@@ -164,19 +300,21 @@ function filename(item,mode){
 async function download(item,mode,player=root?.PayamePlayer){
  if(!['blank','answers'].includes(mode))throw new Error('نوع فایل چاپی ناشناخته است.');
  validate(item,player);
- const bytes=encodePDF(createPages(item,mode,player));
+ const logo=item.puzzle.grid.length===15?await loadNewspaperLogo():null;
+ const pages=createPages(item,mode,player,logo);
+ const bytes=encodePDF(pages);
  const blob=new Blob([bytes],{type:'application/pdf'}),url=URL.createObjectURL(blob);
  const link=document.createElement('a');link.href=url;link.download=filename(item,mode);
  document.body.appendChild(link);link.click();link.remove();
  setTimeout(()=>URL.revokeObjectURL(url),60000);
- return {filename:filename(item,mode),pages:bytes.length};
+ return {filename:filename(item,mode),pages:pages.length,bytes:bytes.length};
 }
 function render(container,item,player=root?.PayamePlayer){
  validate(item,player);container.replaceChildren();
  const doc=container.ownerDocument||document;
  const heading=doc.createElement('h2');heading.textContent='دانلود و چاپ جدول کلمات متقاطع';
  const desc=doc.createElement('p');desc.className='muted small';
- desc.textContent='دو فایل PDF در اندازهٔ A4: یکی بدون پاسخ برای حل روی کاغذ و دیگری پاسخنامهٔ کامل. هر فایل شامل شبکه و سؤال‌های افقی و عمودی است.';
+ desc.textContent='دو نسخهٔ روزنامه‌ای A4 با لوگوی پیام جدول: شبکهٔ بزرگ، سؤال‌ها در ستون‌های مجله‌ای، و پاسخنامهٔ کامل برای چاپ. اگر سؤال‌ها در یک صفحه جا نشوند، صفحهٔ ادامه به فایل اضافه می‌شود.';
  const bar=doc.createElement('div');bar.className='print-download-actions';
  const status=doc.createElement('p');status.className='muted small';status.setAttribute('role','status');
  for(const [mode,label] of [['blank','دانلود PDF جدول بدون جواب'],['answers','دانلود PDF پاسخنامه']]){
