@@ -80,7 +80,16 @@ function renderTypeCatalog(items){
  future.append(text('span','در حال توسعه','category-count'));
  categories.append(future);section.append(categories);
 }
+function compactPuzzleTitle(item){
+ const title=String(item?.title||'جدول کلمات متقاطع').trim();
+ const number=title.match(/جدول\s*(?:شماره(?:ٔ|ه)?\s*)?([۰-۹٠-٩0-9]+)/);
+ const date=title.match(/([۰-۹٠-٩0-9]{1,2})\s+(?:فروردین|اردیبهشت|خرداد|تیر|مرداد|شهریور|مهر|آبان|آذر|دی|بهمن|اسفند)\s+[۰-۹٠-٩0-9]{4}/);
+ const size=item?.puzzle?.grid?.length;
+ return (number?'جدول '+number[1]:title)+(date?' | '+date[0]:'')+(size?' | '+size+'×'+size:'');
+}
 function renderCatalog(items){
+ document.body.classList.remove('is-solving-crossword');
+ document.querySelector('.intro .play-nav')?.remove();
  const catalog=$('catalog');catalog.replaceChildren();
  const visible=requestedType&&requestedType!=='crossword'?[]:items;
  $('player').classList.add('hidden');catalog.classList.remove('hidden');
@@ -104,21 +113,44 @@ function renderCatalog(items){
  }
 }
 function renderPuzzle(item,archive=[]){
+ document.body.classList.add('is-solving-crossword');
  $('catalog').classList.add('hidden');$('empty').classList.add('hidden');
  $('categories')?.classList.add('hidden');
  $('player').classList.remove('hidden');
- $('title').textContent=item.title;
- $('subtitle').textContent='جدول کلمات متقاطع فارسی — افقی از راست به چپ، عمودی از بالا به پایین';
+ $('title').textContent=compactPuzzleTitle(item);
+ $('title').title=item.title;
+ $('subtitle').textContent='جدول کلمات متقاطع فارسی — افقی: راست به چپ | عمودی: بالا به پایین';
  const section=$('player');section.replaceChildren();
- const back=text('a','بازگشت به آرشیو جدول‌های کلمات متقاطع','link');
- back.href='./?type=crossword';back.style.marginBottom='14px';
- const share=text('button','کپی لینک این جدول','action-button');
+ const back=text('a','آرشیو','link compact-link');
+ back.href='./?type=crossword';back.setAttribute('aria-label','بازگشت به آرشیو جدول‌های کلمات متقاطع');
+ const share=text('button','کپی لینک','action-button');
  share.addEventListener('click',async()=>{
-  try{await navigator.clipboard.writeText(location.href);share.textContent='لینک کپی شد';}
-  catch(_){share.textContent='آدرس این صفحه را از مرورگر کپی کن';}
+  try{await navigator.clipboard.writeText(location.href);share.textContent='کپی شد';}
+  catch(_){share.textContent='کپی نشد';}
  });
  const row=text('div',undefined,'play-nav');
- row.append(back,share);section.append(row);
+ row.setAttribute('aria-label','ابزارهای سریع جدول');
+ row.append(back,share);
+ if(window.PayamePrintPDF){
+  for(const [mode,label] of [['blank','PDF جدول'],['answers','PDF پاسخنامه']]){
+   const button=text('button',label,'action-button secondary');
+   button.type='button';
+   button.setAttribute('aria-label',mode==='blank'?'دانلود PDF جدول بدون پاسخ':'دانلود PDF پاسخنامه');
+   button.addEventListener('click',async()=>{
+    button.disabled=true;
+    const previous=button.textContent;
+    button.textContent='در حال آماده‌سازی…';
+    try{await window.PayamePrintPDF.download(item,mode,player);}
+    catch(err){quickStatus.textContent='دانلود PDF ناموفق بود: '+err.message;}
+    finally{button.textContent=previous;button.disabled=false;}
+   });
+   row.append(button);
+  }
+ }
+ const quickStatus=text('span',undefined,'compact-export-status');
+ quickStatus.setAttribute('role','status');row.append(quickStatus);
+ document.querySelector('.intro .play-nav')?.remove();
+ document.querySelector('.intro').append(row);
  const game=text('div',undefined,'game-frame');section.append(game);
  player.createPlayer(game,item);
  const printArea=text('section',undefined,'print-download-wrap');
