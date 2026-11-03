@@ -17,8 +17,11 @@ function renderStats(stats){
  for(const [title,val] of [['مدخل غیرتکراری',stats.totalEntries],
   ['جواب یکتا',stats.uniqueAnswers],['سؤال یکتا',stats.uniqueClues],
   ['ترکیب سؤال+جواب یکتا',stats.uniquePairs]])writeKpi(kpi,title,val);
- $('bankLineage').textContent='فایل اصلی: '+fmt.format(stats.originalEntries)+
-  ' مدخل؛ '+fmt.format(stats.originalDuplicatesRemoved)+
+ $('bankLineage').textContent=stats.dataStatus==='live-aggregate'?
+  'بانک مرکزی: '+fmt.format(stats.rawEntries)+' رکورد ثبت‌شده، '+fmt.format(stats.duplicateEntries)+
+  ' تکراری کامل، '+fmt.format(stats.totalEntries)+' مدخل یکتا. '+
+  'جدول توزیع طول‌ها از نسخهٔ آفلاینِ '+(stats.lengthsSnapshotAt||'قبلی')+' است و ممکن است هنوز با بانک زنده منطبق نباشد.':
+  'فایل اصلی: '+fmt.format(stats.originalEntries)+' مدخل؛ '+fmt.format(stats.originalDuplicatesRemoved)+
   ' مورد تکراری کامل کنار گذاشته شد. از '+fmt.format(stats.intakeRows)+
   ' مدخل تصویری، '+fmt.format(stats.intakeDuplicatesSkipped)+
   ' تکراری بودند و '+fmt.format(stats.intakeAdded)+' مدخل تازه در نسخهٔ پالایش‌شده منظور شده‌اند.';
@@ -63,6 +66,25 @@ async function getPuzzles(){
  const list=[...merged.values()].sort((x,y)=>ms(y)-ms(x));
  return {list,live:b.status==='fulfilled',hasStatic:a.status==='fulfilled'};
 }
+async function getAggregate(){
+ const response=await fetch('./data/bank-stats.json',{cache:'no-store'});
+ if(!response.ok)throw Error('فایل آمار بانک در دسترس نیست.');
+ const offline=await response.json();
+ if(!['apiKey','authDomain','projectId','appId'].every(k=>config[k]))return offline;
+ try{
+  const [app,fs]=await Promise.all([import(SDK+'firebase-app.js'),import(SDK+'firebase-firestore.js')]);
+  const application=app.getApps().find(x=>x.name==='payamejadval-stats')||
+   app.initializeApp(config,'payamejadval-stats');
+  const bank=await fs.getDoc(fs.doc(fs.getFirestore(application),'publicStats','bank'));
+  if(!bank.exists())return offline;
+  const v=bank.data();
+  if(v.schema!==1||v.source!=='jadval-studio'||!Number.isInteger(v.rawEntries)||
+     v.totalEntries!==v.uniquePairs||v.rawEntries-v.duplicateEntries!==v.totalEntries)return offline;
+  return {...offline,...v, snapshotAt:v.snapshotAt?.toDate?.()?.toISOString()||offline.snapshotAt,
+   dataStatus:'live-aggregate',lengthsSnapshotAt:offline.snapshotAt,
+   dataStatusLabel:'آمار زندهٔ تجمیعی از بانک خصوصی توسط مدیر منتشر شده است؛ جزئیات واژگان خصوصی‌اند.'};
+ }catch(_){return offline}
+}
 function formatPercent(percent){return fmt.format(percent)+'٪';}
 function renderPublished({list,live,hasStatic}){
  $('archiveStatus').textContent='جدول‌های قابل بررسی در آرشیو: '+fmt.format(list.length)+
@@ -91,9 +113,7 @@ function renderPublished({list,live,hasStatic}){
 }
 (async()=>{
  try{
-  const r=await fetch('./data/bank-stats.json',{cache:'no-store'});
-  if(!r.ok)throw Error('فایل آمار بانک در دسترس نیست.');
-  renderStats(await r.json());
+  renderStats(await getAggregate());
  }catch(err){$('snapshotStatus').textContent='آمار تجمیعی فعلاً در دسترس نیست: '+err.message;}
  try{renderPublished(await getPuzzles());}
  catch(err){$('archiveStatus').textContent='بازیابی جدول‌ها برای گزارش تکرار ممکن نشد: '+err.message;}
