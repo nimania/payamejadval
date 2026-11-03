@@ -204,6 +204,21 @@ function renderPuzzle(item,archive=[]){
    row.append(button);
   }
  }
+ if(item.type==='mini'&&window.PayameMiniImage){
+  for(const [mode,label] of [['blank','عکس جدول'],['answers','عکس پاسخنامه']]){
+   const button=text('button',label,'action-button secondary');
+   button.type='button';
+   button.addEventListener('click',async()=>{
+    button.disabled=true;quickStatus.textContent='در حال آماده‌سازی تصویر اینستاگرام…';
+    try{
+     await window.PayameMiniImage.download(item,mode,player);
+     quickStatus.textContent='عکس ۱۰۸۰×۱۳۵۰ آماده شد.';
+    }catch(err){quickStatus.textContent='دانلود عکس ناموفق بود: '+err.message;}
+    finally{button.disabled=false;}
+   });
+   row.append(button);
+  }
+ }
  const quickStatus=text('span',undefined,'compact-export-status');
  quickStatus.setAttribute('role','status');row.append(quickStatus);
  document.querySelector('.intro .play-nav')?.remove();
@@ -213,6 +228,11 @@ function renderPuzzle(item,archive=[]){
  const printArea=text('section',undefined,'print-download-wrap');
  printArea.setAttribute('aria-label','دانلود فایل‌های چاپی جدول و پاسخنامه');
  window.PayamePrintPDF?.render(printArea,item,player);
+ if(item.type==='mini'&&window.PayameMiniImage){
+  const imageArea=text('section',undefined,'mini-image-export');
+  window.PayameMiniImage.render(imageArea,item,player);
+  printArea.append(imageArea);
+ }
  section.append(printArea);
  const dictionary=text('section',undefined,'dictionary-wrap');
  dictionary.setAttribute('aria-label','فرهنگ سؤال‌ها و جواب‌های این جدول');
