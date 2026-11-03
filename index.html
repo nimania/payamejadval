@@ -48,6 +48,48 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ff9b
 .axis{background:#ecf0f4;color:#31516b}
 .cell{background:#fff;border:1px solid #dce2e7}
 .cell.block{background:#292929;border-color:#292929}
+
+/* Paper-inspired 15×15 crossword page, without changing gameplay semantics. */
+.magazine-crossword{background:#fffdf9;border-color:#d6d3ca;padding:22px 24px 25px}
+.magazine-crossword .magazine-play-area{display:grid;grid-template-columns:minmax(0,1.27fr) minmax(310px,.88fr);align-items:start;gap:23px;margin-top:16px}
+.magazine-crossword .magazine-board-pane{min-width:0;position:sticky;top:14px}
+.magazine-crossword .board{width:100%;max-width:660px;margin:13px auto 6px;background:#fff;padding:0;gap:0;border:2px solid #292929;border-radius:1px;box-shadow:0 3px 12px #251c100c;aspect-ratio:1}
+.magazine-crossword .axis{background:#f4f1ea;border:1px solid #cec9be;color:#282b2c;font-weight:800;font-size:clamp(10px,1vw,14px)}
+.magazine-crossword .cell{border:1px solid #95918a;background:#fff}
+.magazine-crossword .cell.block{background:#272727;border-color:#272727}
+.magazine-crossword .cell.selected{background:#f4e5bb;border-color:#8b7338}
+.magazine-crossword .cell.correct{background:#e4f2e2;border-color:#83a482}
+.magazine-crossword .cell.incorrect{background:#ffe7df;border-color:#cf8978}
+.magazine-crossword .entry{font-size:clamp(12px,1.65vw,20px);font-weight:800;color:#272727;caret-color:#8e2222}
+.magazine-crossword .selected-hint{border-right:3px solid #a38143;background:#fdf4e1;color:#3c3630;margin:4px 0 8px;line-height:2.1}
+.magazine-crossword .magazine-clue-pane{background:#faf9f5;border:1px solid #e5e0d6;border-radius:10px;padding:15px 15px 8px;min-width:0}
+.magazine-crossword .clues{display:block;margin:0}
+.magazine-crossword .clue-section{margin-bottom:22px}
+.magazine-crossword .clue-section h2{font-size:17px;background:#efeae0;border-right:4px solid #362f27;color:#252525;border-radius:4px;padding:7px 11px;margin-bottom:8px}
+.magazine-crossword .clue-list{margin:0;padding:0;list-style:none}
+.magazine-crossword .clue-line{margin:0;border-bottom:1px solid #ece6db}
+.magazine-crossword .clue-select{font-size:13px;color:#292e2f;line-height:2;padding:7px 5px 8px;text-align:right;direction:rtl;white-space:normal}
+.magazine-crossword .clue-line.selected .clue-select{background:#f8eed7;border-color:#cfb377;color:#352c20}
+.magazine-crossword .play-toolbar{background:#f7f5f0;padding:10px;border-radius:9px;border:1px solid #e5e0d6}
+.magazine-crossword .play-progress{font-weight:700;color:#5b4930}
+@media(max-width:980px){
+ .magazine-crossword .magazine-play-area{grid-template-columns:1fr}
+ .magazine-crossword .magazine-board-pane{position:static}
+ .magazine-crossword .magazine-clue-pane{padding:16px}
+ .magazine-crossword .clues{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+}
+@media(max-width:640px){
+ .magazine-crossword{padding:12px 8px}
+ .magazine-crossword .magazine-play-area{gap:12px}
+ .magazine-crossword .board{margin:8px auto 4px}
+ .magazine-crossword .axis{font-size:clamp(8px,2.15vw,12px)}
+ .magazine-crossword .cell{border-width:.65px}
+ .magazine-crossword .entry{font-size:clamp(9px,2.5vw,16px)}
+ .magazine-crossword .clues{grid-template-columns:1fr}
+ .magazine-crossword .magazine-clue-pane{padding:12px}
+ .magazine-crossword .selected-hint{font-size:12px}
+}
+
 .cell.selected{background:#e2f2fb;border-color:#70a1bd}
 .cell.correct{background:#dff5e7;border-color:#74b28a}
 .cell.incorrect{background:#ffe0df;border-color:#e68683}
