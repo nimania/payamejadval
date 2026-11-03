@@ -1,0 +1,19 @@
+name: Diagnose public crossword archive (read only)
+on:
+  push:
+    paths:
+      - scripts/diagnose-public-archive.cjs
+      - .github/workflows/diagnose-archive.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/diagnose-public-archive.cjs
