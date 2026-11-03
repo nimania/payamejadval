@@ -13,6 +13,9 @@ on:
       - stats.html
       - data/bank-stats.json
       - print-pdf.js
+      - sudoku.js
+      - sudoku-player.js
+      - data/daily-games.json
       - firebase-config.js
       - data/published.json
       - tests/**
@@ -35,6 +38,7 @@ jobs:
           node --check metrics.js
           node --check stats-page.js
           node --check print-pdf.js
+          node --check sudoku.js
           node --check public-app.js
           node --check quality-gate.js
           node --check firebase-config.js
@@ -42,6 +46,7 @@ jobs:
           node tests/test_glossary.cjs
           node tests/test_metrics.cjs
           node tests/test_print_pdf.cjs
+          node tests/test_sudoku.cjs
           node tests/test_public_quality.cjs
       - name: Ensure public archive never includes private database
         run: |
