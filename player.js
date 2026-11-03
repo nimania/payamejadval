@@ -39,7 +39,7 @@ function slotsFor(grid){
 function validateItem(item){
  const p=item?.puzzle,n=p?.grid?.length;
  if(typeof item?.id!=='string'||!item.id||typeof item.title!=='string'||!item.title.trim()||
-    ![7,10,15,20].includes(n)||p?.version!==3)return false;
+    ![5,7,10,15,20].includes(n)||p?.version!==3)return false;
  const grid=p.grid;
  if(!grid.every(row=>Array.isArray(row)&&row.length===n&&row.every(ch=>
     typeof ch==='string'&&(ch===''||([...ch].length===1&&letterPattern.test(ch))))))return false;
@@ -123,6 +123,7 @@ function createPlayer(container,item){
  }
  const magazineMode=n===15;
  container.classList.toggle('magazine-crossword',magazineMode);
+ container.classList.toggle('mini-crossword',n===5);
  const playArea=el('div',magazineMode?'magazine-play-area':'standard-play-area');
  const boardPane=el('div','magazine-board-pane');
  const cluePane=el('div','magazine-clue-pane');
