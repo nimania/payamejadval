@@ -52,9 +52,34 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ff9b
 .clue-select{display:block;text-align:right;direction:rtl;width:100%;border:1px solid transparent;border-radius:8px;padding:8px 10px;line-height:1.9;background:transparent;color:#304557;font-size:13px}
 .clue-select:hover{background:#f0f5f8}
 .clue-line.selected .clue-select{border-color:#b4d4e4;background:#ecf6fb;color:#153e60;font-weight:700}
+.dictionary-wrap{margin-top:24px}
+.dictionary-details{background:#fff;border:1px solid #dce3e8;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px #0b1f3608}
+.dictionary-summary{list-style:none;cursor:pointer;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:17px;font-weight:800;color:#243746}
+.dictionary-summary::-webkit-details-marker{display:none}
+.dictionary-summary::before{content:'+';display:inline-grid;place-items:center;width:27px;height:27px;flex:0 0 auto;border-radius:50%;background:#eff4f6;color:#31566c;font-size:20px}
+.dictionary-details[open] .dictionary-summary::before{content:'−'}
+.dictionary-summary:hover{background:#f6f9fb}
+.dictionary-count{font-size:12px;font-weight:500;color:#627282}
+.dictionary-inner{padding:0 22px 22px;border-top:1px solid #e7edf1}
+.dictionary-toolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.dictionary-message{font-size:12px;color:#315f6f}
+.dictionary-columns{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.dictionary-column{min-width:0}
+.dictionary-heading{font-size:16px;margin:9px 0 13px;padding-bottom:9px;border-bottom:2px solid #d6e4ec}
+.dictionary-list{padding:0;list-style:none;margin:0}
+.dictionary-item{padding:11px 0;border-bottom:1px solid #edf0f3;break-inside:avoid;line-height:1.9}
+.dictionary-question{display:flex;align-items:flex-start;gap:10px}
+.dictionary-number{background:#edf3f7;color:#315a70;padding:2px 8px;border-radius:7px;white-space:nowrap;font-weight:800;font-size:12px}
+.dictionary-clue{font-size:13px;color:#344b5b;overflow-wrap:anywhere}
+.dictionary-answer{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:6px 0 0 0;padding-right:9px}
+.dictionary-answer-label{font-size:12px;color:#71818c}
+.dictionary-answer-word{font-size:14px;color:#173e59}
+.dictionary-answer-length{font-size:11px;color:#87949e}
 footer{margin-top:40px;border-top:1px solid #e1e5e7;color:#77838d;font-size:12px}
 @media(max-width:700px){
- nav,main,footer{padding:15px}.clues{grid-template-columns:1fr}
+ nav,main,footer{padding:15px}.clues,.dictionary-columns{grid-template-columns:1fr}
+ .dictionary-summary{padding:14px 16px;font-size:15px}
+ .dictionary-inner{padding:0 16px 16px}
  .game-frame{padding:10px}.play-toolbar{gap:6px}.action-button,.direction-button{padding:8px 10px;font-size:12px}
  .axis,.cell{font-size:clamp(8px,2.5vw,12px)}
 }
@@ -73,5 +98,6 @@ footer{margin-top:40px;border-top:1px solid #e1e5e7;color:#77838d;font-size:12px
 <script src="./firebase-config.js"></script>
 <script src="./player.js"></script>
 <script src="./quality-gate.js"></script>
+<script src="./glossary.js"></script>
 <script src="./public-app.js"></script>
 </body></html>
