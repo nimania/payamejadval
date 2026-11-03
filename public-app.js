@@ -12,6 +12,7 @@ const SDK='https://www.gstatic.com/firebasejs/12.19.0/';
 const params=new URLSearchParams(location.search);
 const requestedId=params.get('id');
 const requestedType=params.get('type');
+const requestedLevel=params.get('level');
 function text(tag,content,className){
  const node=document.createElement(tag);
  if(className)node.className=className;
@@ -118,10 +119,21 @@ function renderCatalog(items){
  document.querySelector('.intro .play-nav')?.remove();
  const catalog=$('catalog');catalog.replaceChildren();
  const selected=archiveTypes.find(x=>x.id===requestedType);
- const visible=items.filter(x=>!requestedType||typeOf(x)===requestedType);
+ const visible=items.filter(x=>(!requestedType||typeOf(x)===requestedType)&&
+  (requestedType!=='sudoku'||!['easy','medium','hard'].includes(requestedLevel)||x.puzzle?.difficulty===requestedLevel));
  $('player').classList.add('hidden');catalog.classList.remove('hidden');
  $('empty').classList.toggle('hidden',visible.length>0);
  renderTypeCatalog(items);
+ if(requestedType==='sudoku'){
+  const bar=text('nav',undefined,'sudoku-level-links');
+  bar.setAttribute('aria-label','انتخاب سطح سودوکو');
+  for(const [key,label] of [['','همه'],['easy','آسان'],['medium','متوسط'],['hard','سخت']]){
+   const a=text('a',label,'action-button secondary'+(requestedLevel===key?' active':''));
+   a.href='./?type=sudoku'+(key?'&level='+key:'');
+   bar.append(a);
+  }
+  catalog.append(bar);
+ }
  $('title').textContent=selected? 'آرشیو '+selected.name :
   requestedType?'این دسته هنوز فعال نیست':'پیام جدول؛ سرگرمی‌ها و بازی‌های فکری';
  $('subtitle').textContent=selected?.description||'انواع جدول‌ها و بازی‌های فکری فارسی؛ آرشیو هر نوع سرگرمی مستقل است.';
@@ -166,7 +178,8 @@ function renderPuzzle(item,archive=[]){
  $('subtitle').textContent=(item.type==='mini'?'جدول مینی ۵×۵':'جدول کلمات متقاطع کلاسیک ۱۵×۱۵')+' — افقی: راست به چپ | عمودی: بالا به پایین';
  const section=$('player');section.replaceChildren();
  const back=text('a','آرشیو','link compact-link');
- back.href='./?type=crossword';back.setAttribute('aria-label','بازگشت به آرشیو جدول‌های کلمات متقاطع');
+ back.href=item.type==='mini'?'./?type=mini':'./?type=crossword';
+ back.setAttribute('aria-label',item.type==='mini'?'بازگشت به آرشیو جدول مینی':'بازگشت به آرشیو جدول‌های کلمات متقاطع');
  const share=text('button','کپی لینک','action-button');
  share.addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText(location.href);share.textContent='کپی شد';}
@@ -206,7 +219,7 @@ function renderPuzzle(item,archive=[]){
  window.PayameGlossary?.render(dictionary,item,player);
  section.append(dictionary);
  if(window.PayameMetrics){
-  const overlap=window.PayameMetrics.windows(item,archive.filter(x=>x?.puzzle?.grid),player);
+  const overlap=window.PayameMetrics.windows(item,archive.filter(x=>typeOf(x)===typeOf(item)&&x?.puzzle?.grid),player);
   const panel=text('section',undefined,'novelty-panel');
   panel.append(text('h2','تازگی و میزان تکرار این جدول'));
   panel.append(text('p','تکرار دقیق یعنی همان سؤال و همان جواب؛ تکرار جواب به‌تنهایی جداگانه شمرده می‌شود. مقایسه با جدول‌های قدیمی‌تر است.','muted small'));
@@ -241,7 +254,7 @@ async function start(){
   const bs=b.publishedAt?.seconds? b.publishedAt.seconds*1000 :Date.parse(b.publishedAt||0)||0;
   return bs-as;
  });
- if(cloudResult.status==='rejected'&&dailyResult.status==='rejected'){
+ if(cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'){
   status.textContent='بخشی از آرشیو در دسترس نیست؛ بازی‌های ذخیره‌شدهٔ عمومی نمایش داده می‌شوند.';
  }else status.textContent=items.length?'تعداد بازی‌های منتشرشده: '+new Intl.NumberFormat('fa-IR').format(items.length):'';
  if(requestedId){
