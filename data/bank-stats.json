@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "snapshotAt": "2026-11-03",
+  "source": "پشتیبان خصوصی بانک مورخ ۱۰ آبان ۱۴۰۵ + ۱۲ مدخل جدید پالایش‌شده از صف ورود",
+  "dataStatus": "offline-snapshot-not-synced",
+  "dataStatusLabel": "نسخهٔ پالایش‌شده؛ همگام‌سازی با بانک زنده هنوز تأیید نشده است",
+  "totalEntries": 19387,
+  "uniqueAnswers": 11425,
+  "uniqueClues": 17370,
+  "uniquePairs": 19387,
+  "originalEntries": 19804,
+  "originalDuplicatesRemoved": 429,
+  "intakeRows": 29,
+  "intakeDuplicatesSkipped": 17,
+  "intakeAdded": 12,
+  "lengths": [
+    {
+      "length": 2,
+      "entries": 1655,
+      "uniqueAnswers": 438
+    },
+    {
+      "length": 3,
+      "entries": 3277,
+      "uniqueAnswers": 1555
+    },
+    {
+      "length": 4,
+      "entries": 6441,
+      "uniqueAnswers": 3433
+    },
+    {
+      "length": 5,
+      "entries": 4615,
+      "uniqueAnswers": 2967
+    },
+    {
+      "length": 6,
+      "entries": 1663,
+      "uniqueAnswers": 1403
+    },
+    {
+      "length": 7,
+      "entries": 689,
+      "uniqueAnswers": 625
+    },
+    {
+      "length": 8,
+      "entries": 304,
+      "uniqueAnswers": 289
+    },
+    {
+      "length": 9,
+      "entries": 265,
+      "uniqueAnswers": 255
+    },
+    {
+      "length": 10,
+      "entries": 227,
+      "uniqueAnswers": 215
+    },
+    {
+      "length": 11,
+      "entries": 129,
+      "uniqueAnswers": 125
+    },
+    {
+      "length": 12,
+      "entries": 56,
+      "uniqueAnswers": 56
+    },
+    {
+      "length": 13,
+      "entries": 6,
+      "uniqueAnswers": 6
+    },
+    {
+      "length": 14,
+      "entries": 9,
+      "uniqueAnswers": 9
+    },
+    {
+      "length": 15,
+      "entries": 51,
+      "uniqueAnswers": 49
+    }
+  ],
+  "note": "این آمار فقط جمع‌بندی عددی است. هیچ سؤال، جواب یا دادهٔ خصوصی بانک در فایل عمومی منتشر نشده است."
+}
