@@ -60,7 +60,7 @@ async function fetchApproved(){
 }
 function eligiblePublicPuzzle(item){
  if(item?.type==='sudoku')return !!window.PayameSudoku?.validate(item);
- if(item?.type&&item.type!=='crossword')return false;
+ if(item?.type&&!['crossword','mini'].includes(item.type))return false;
  if(!player?.validateItem(item))return false;
  if(item?.puzzle?.meta?.status!=='published'||item?.puzzle?.meta?.method!=='editor-approved')return false;
  const audit=window.JadvalQuality?.audit(item.puzzle);
@@ -68,7 +68,7 @@ function eligiblePublicPuzzle(item){
 }
 const archiveTypes=Object.freeze([
  {id:'crossword',name:'جدول کلمات متقاطع کلاسیک',description:'جدول فارسی کلاسیک ۱۵×۱۵ با سؤال‌های افقی و عمودی',active:true},
- {id:'mini',name:'جدول مینی ۵×۵',description:'جدول کلمات متقاطع کوتاه و متنوع پنج‌درپنج',active:false},
+ {id:'mini',name:'جدول مینی ۵×۵',description:'جدول کلمات متقاطع کوتاه و متنوع پنج‌درپنج',active:true},
  {id:'sudoku',name:'سودوکو',description:'سودوکو ۹×۹ در سه سطح آسان، متوسط و سخت؛ انتشار روزانه',active:true},
  {id:'sudoku-special',name:'سودوکوی ویژه',description:'گونهٔ ویژه بر اساس نمونهٔ تأییدشدهٔ نشریه',active:false},
  {id:'clue-horizontal',name:'شرح در متن افقی ۳۰×۲۰',description:'جدول با سؤال‌های تعبیه‌شده در خانه‌ها، طرح افقی',active:false},
@@ -156,7 +156,7 @@ function renderPuzzle(item,archive=[]){
  $('player').classList.remove('hidden');
  $('title').textContent=compactPuzzleTitle(item);
  $('title').title=item.title;
- $('subtitle').textContent='جدول کلمات متقاطع فارسی — افقی: راست به چپ | عمودی: بالا به پایین';
+ $('subtitle').textContent=(item.type==='mini'?'جدول مینی ۵×۵':'جدول کلمات متقاطع کلاسیک ۱۵×۱۵')+' — افقی: راست به چپ | عمودی: بالا به پایین';
  const section=$('player');section.replaceChildren();
  const back=text('a','آرشیو','link compact-link');
  back.href='./?type=crossword';back.setAttribute('aria-label','بازگشت به آرشیو جدول‌های کلمات متقاطع');
@@ -199,7 +199,7 @@ function renderPuzzle(item,archive=[]){
  window.PayameGlossary?.render(dictionary,item,player);
  section.append(dictionary);
  if(window.PayameMetrics){
-  const overlap=window.PayameMetrics.windows(item,archive,player);
+  const overlap=window.PayameMetrics.windows(item,archive.filter(x=>x?.puzzle?.grid),player);
   const panel=text('section',undefined,'novelty-panel');
   panel.append(text('h2','تازگی و میزان تکرار این جدول'));
   panel.append(text('p','تکرار دقیق یعنی همان سؤال و همان جواب؛ تکرار جواب به‌تنهایی جداگانه شمرده می‌شود. مقایسه با جدول‌های قدیمی‌تر است.','muted small'));
