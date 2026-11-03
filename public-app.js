@@ -7,7 +7,9 @@ const player=window.PayamePlayer;
 const base='./data/published.json';
 const config=window.PAYAMEJADVAL_FIREBASE_CONFIG||{};
 const SDK='https://www.gstatic.com/firebasejs/12.19.0/';
-const requestedId=new URLSearchParams(location.search).get('id');
+const params=new URLSearchParams(location.search);
+const requestedId=params.get('id');
+const requestedType=params.get('type');
 function text(tag,content,className){
  const node=document.createElement(tag);
  if(className)node.className=className;
@@ -31,7 +33,7 @@ function publishedDoc(doc){
  const raw=doc.data();
  try{
   const puzzle=JSON.parse(raw.puzzleJson);
-  return {id:raw.id||doc.id,title:raw.title,publishedAt:raw.publishedAt,puzzle};
+  return {id:raw.id||doc.id,type:'crossword',title:raw.title,publishedAt:raw.publishedAt,puzzle};
  }catch(_){return null}
 }
 async function fetchApproved(){
@@ -50,36 +52,66 @@ async function fetchApproved(){
  return items;
 }
 function eligiblePublicPuzzle(item){
+ if(item?.type&&item.type!=='crossword')return false;
  if(!player?.validateItem(item))return false;
  if(item?.puzzle?.meta?.status!=='published'||item?.puzzle?.meta?.method!=='editor-approved')return false;
  const audit=window.JadvalQuality?.audit(item.puzzle);
  return !!audit?.technicalPassed&&!audit.errors.length;
 }
+const archiveTypes=Object.freeze([{id:'crossword',name:'جدول کلمات متقاطع',description:'جدول‌های کلاسیک فارسی با سؤال‌های افقی و عمودی',active:true}]);
+function renderTypeCatalog(items){
+ const section=$('categories');if(!section)return;
+ section.replaceChildren();section.classList.toggle('hidden',!!requestedType);
+ if(requestedType)return;
+ const heading=text('h2','دسته‌بندی سرگرمی‌ها');section.append(heading);
+ const intro=text('p','پیام جدول خانهٔ انواع جدول‌ها، معماها و سرگرمی‌های فکری است. نخستین دستهٔ فعال، جدول کلمات متقاطع است.','muted small');section.append(intro);
+ const categories=text('div',undefined,'category-grid');
+ for(const entry of archiveTypes){
+  const card=text('article',undefined,'category-card');
+  card.append(text('h3',entry.name));
+  card.append(text('p',entry.description,'muted small'));
+  card.append(text('p','آرشیو منتشرشده: '+new Intl.NumberFormat('fa-IR').format(items.length)+' جدول','category-count'));
+  const link=text('a','مشاهدهٔ آرشیو جدول کلمات متقاطع','link');
+  link.href='./?type=crossword';card.append(link);categories.append(card);
+ }
+ const future=text('article',undefined,'category-card category-pending');
+ future.append(text('h3','جدول‌ها و سرگرمی‌های دیگر'));
+ future.append(text('p','بخش‌های تازه به‌تدریج اضافه می‌شوند؛ دستهٔ بدون بازی، به‌عنوان آرشیو فعال نمایش داده نمی‌شود.','muted small'));
+ future.append(text('span','در حال توسعه','category-count'));
+ categories.append(future);section.append(categories);
+}
 function renderCatalog(items){
  const catalog=$('catalog');catalog.replaceChildren();
+ const visible=requestedType&&requestedType!=='crossword'?[]:items;
  $('player').classList.add('hidden');catalog.classList.remove('hidden');
- $('empty').classList.toggle('hidden',items.length>0);
+ $('empty').classList.toggle('hidden',visible.length>0);
+ renderTypeCatalog(items);
  const headline=$('title'),subtitle=$('subtitle');
- headline.textContent='جدول‌های تازه، هر بار چالشی نو';
- subtitle.textContent='جدول‌های فارسی منتشرشده و تأییدشده — قابل حل آنلاین';
- for(const item of items){
+ headline.textContent=requestedType==='crossword'?'آرشیو جدول‌های کلمات متقاطع':
+  requestedType?'این دسته هنوز راه‌اندازی نشده است':'پیام جدول؛ سرگرمی‌ها و بازی‌های فکری';
+ subtitle.textContent=requestedType==='crossword'?
+  'تمام جدول‌های کلمات متقاطع فارسیِ منتشرشده، با امکان حل آنلاین و مشاهدهٔ فرهنگ سؤال و جواب':
+  requestedType?'هنوز سرگرمی منتشرشده‌ای در این دسته نداریم.':'انواع جدول، معما و سرگرمی‌های فکری — آغاز با جدول کلمات متقاطع';
+ for(const item of visible){
   const card=text('article',undefined,'card');
   const heading=text('h2',item.title);
+  const label=text('span','جدول کلمات متقاطع','content-type');
   const metadata=text('p',(item.puzzle.grid.length+' × '+item.puzzle.grid.length)+
    (item.publishedAt?'  •  '+dateLabel(item.publishedAt):''),'muted');
-  const link=text('a','حل آنلاین جدول','link');
+  const link=text('a','حل آنلاین جدول کلمات متقاطع','link');
   link.href='./?id='+encodeURIComponent(item.id);
-  card.append(heading,metadata,link);catalog.append(card);
+  card.append(label,heading,metadata,link);catalog.append(card);
  }
 }
 function renderPuzzle(item){
  $('catalog').classList.add('hidden');$('empty').classList.add('hidden');
+ $('categories')?.classList.add('hidden');
  $('player').classList.remove('hidden');
  $('title').textContent=item.title;
- $('subtitle').textContent='حل جدول فارسی — افقی از راست به چپ، عمودی از بالا به پایین';
+ $('subtitle').textContent='جدول کلمات متقاطع فارسی — افقی از راست به چپ، عمودی از بالا به پایین';
  const section=$('player');section.replaceChildren();
- const back=text('a','بازگشت به فهرست جدول‌ها','link');
- back.href='./';back.style.marginBottom='14px';
+ const back=text('a','بازگشت به آرشیو جدول‌های کلمات متقاطع','link');
+ back.href='./?type=crossword';back.style.marginBottom='14px';
  const share=text('button','کپی لینک این جدول','action-button');
  share.addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText(location.href);share.textContent='لینک کپی شد';}
@@ -121,6 +153,6 @@ async function start(){
   $('empty').querySelector('p').textContent='آرشیو در دسترس نیست. لطفاً بعداً دوباره امتحان کن.';
  }
 }
-window.PayamePublic={eligiblePublicPuzzle};
+window.PayamePublic={eligiblePublicPuzzle,archiveTypes};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
