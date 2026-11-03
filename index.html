@@ -174,6 +174,9 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ff9b
 .mini-crossword .clues{grid-template-columns:1fr 1fr;margin-top:14px}
 .mini-crossword .clue-select{font-size:14px;padding:6px}
 @media(max-width:620px){.mini-crossword .clues{grid-template-columns:1fr}.mini-crossword .board{max-width:100%}}
+.sudoku-level-links{grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:2px 0 5px}
+.sudoku-level-links .action-button{display:inline-flex;align-items:center}
+.sudoku-level-links .action-button.active{background:#204e67;color:#fff;border-color:#204e67}
 .sudoku-game{max-width:800px;margin:auto}
 .sudoku-board{direction:ltr;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));width:min(100%,630px);aspect-ratio:1;margin:16px auto;border:3px solid #263846;background:#fff}
 .sudoku-cell{width:100%;height:100%;min-width:0;min-height:0;aspect-ratio:1;border:1px solid #c6d2da;border-radius:0;padding:0;text-align:center;font-size:clamp(16px,3.1vw,28px);font-weight:700;background:#fff;color:#195d81}
