@@ -121,7 +121,15 @@ function createPlayer(container,item){
   }
   sec.append(heading,list);clueWrap.append(sec);
  }
- container.append(banner,toolbar,progress,board,selectedHint,message,clueWrap);
+ const magazineMode=n===15;
+ container.classList.toggle('magazine-crossword',magazineMode);
+ const playArea=el('div',magazineMode?'magazine-play-area':'standard-play-area');
+ const boardPane=el('div','magazine-board-pane');
+ const cluePane=el('div','magazine-clue-pane');
+ boardPane.append(selectedHint,board,message);
+ cluePane.append(clueWrap);
+ playArea.append(boardPane,cluePane);
+ container.append(banner,toolbar,progress,playArea);
  try{
   const saved=JSON.parse(localStorage.getItem(persistedKey)||'{}');
   if(saved&&typeof saved==='object')for(const [key,v] of Object.entries(saved)){
