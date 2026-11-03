@@ -88,6 +88,10 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ff9b
 .dictionary-answer-label{font-size:12px;color:#71818c}
 .dictionary-answer-word{font-size:14px;color:#173e59}
 .dictionary-answer-length{font-size:11px;color:#87949e}
+.novelty-panel{margin-top:23px;border:1px solid #dce3e8;border-radius:14px;background:#fff;padding:20px}
+.novelty-table{border-collapse:collapse;width:100%;font-size:13px;max-width:680px;margin:12px 0}
+.novelty-table th,.novelty-table td{text-align:right;padding:10px;border-bottom:1px solid #e5eaf0}
+.novelty-table th{background:#f5f8fa}
 footer{margin-top:40px;border-top:1px solid #e1e5e7;color:#77838d;font-size:12px}
 @media(max-width:700px){
  nav,main,footer{padding:15px}.clues,.dictionary-columns{grid-template-columns:1fr}
@@ -98,7 +102,7 @@ footer{margin-top:40px;border-top:1px solid #e1e5e7;color:#77838d;font-size:12px
 }
 </style></head>
 <body>
-<header><nav><a class="brand" href="./">پیام جدول</a><div class="site-nav"><a href="./">خانه</a><a href="./?type=crossword">آرشیو جدول‌های کلمات متقاطع</a></div><span class="tag">سرگرمی‌های فکری فارسی</span></nav></header>
+<header><nav><a class="brand" href="./">پیام جدول</a><div class="site-nav"><a href="./">خانه</a><a href="./?type=crossword">آرشیو جدول‌های کلمات متقاطع</a><a href="./stats.html">آمار فرهنگ‌نامه و جدول‌ها</a></div><span class="tag">سرگرمی‌های فکری فارسی</span></nav></header>
 <main>
 <section class="intro"><h1 id="title">پیام جدول؛ سرگرمی‌ها و بازی‌های فکری</h1>
 <p id="subtitle" class="muted">انواع جدول، معما و بازی‌های فکری فارسی</p>
@@ -112,6 +116,7 @@ footer{margin-top:40px;border-top:1px solid #e1e5e7;color:#77838d;font-size:12px
 <script src="./firebase-config.js"></script>
 <script src="./player.js"></script>
 <script src="./quality-gate.js"></script>
+<script src="./metrics.js"></script>
 <script src="./glossary.js"></script>
 <script src="./print-pdf.js"></script>
 <script src="./public-app.js"></script>
