@@ -16,6 +16,8 @@ on:
       - mini-image.js
       - sudoku.js
       - clue-in-cell.js
+      - clue-in-cell-player.js
+      - data/clue-in-cell-puzzles.json
       - sudoku-player.js
       - data/daily-games.json
       - data/mini-puzzles.json
@@ -44,6 +46,7 @@ jobs:
           node --check mini-image.js
           node --check sudoku.js
           node --check clue-in-cell.js
+          node --check clue-in-cell-player.js
           node --check public-app.js
           node --check quality-gate.js
           node --check firebase-config.js
@@ -55,6 +58,8 @@ jobs:
           node tests/test_sudoku.cjs
           node tests/test_mini.cjs
           node tests/test_clue_in_cell.cjs
+          node tests/test_clue_in_cell_model.cjs
+          node scripts/verify-clue-in-cell-archive.cjs
           node tests/test_public_quality.cjs
       - name: Ensure public archive never includes private database
         run: |
