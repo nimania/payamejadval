@@ -1,0 +1,45 @@
+name: Publish verified daily puzzles
+on:
+  schedule:
+    - cron: '15 3 * * *'
+    - cron: '15 15 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/daily-games.yml
+permissions:
+  contents: write
+concurrency:
+  group: verified-daily-games-main
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate immutable uniquely solvable Sudokus
+        run: |
+          node tests/test_sudoku.cjs
+          node scripts/generate-daily-games.cjs
+      - name: Validate all public daily game records before publication
+        run: |
+          node scripts/verify-daily-games.cjs
+      - name: Commit only verified daily-games archive
+        run: |
+          if git diff --quiet -- data/daily-games.json; then
+            echo 'No new verified games today'
+            exit 0
+          fi
+          git config user.name 'payamejadval-daily-bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/daily-games.json
+          git commit -m 'Publish verified daily Sudoku puzzles'
+          git push origin HEAD:main
