@@ -43,6 +43,9 @@ jobs:
           cp quality-gate.js public/quality-gate.js
           cp firebase-config.js public/firebase-config.js
           cp data/published.json public/data/published.json
+      - name: Refresh public crossword snapshot from Firestore (read only)
+        run: |
+          node scripts/snapshot-public-firestore.cjs public/data/published.json
       - name: Upload static website
         uses: actions/upload-pages-artifact@v3
         with:
