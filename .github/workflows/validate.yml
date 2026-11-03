@@ -8,6 +8,10 @@ on:
       - quality-gate.js
       - player.js
       - glossary.js
+      - metrics.js
+      - stats-page.js
+      - stats.html
+      - data/bank-stats.json
       - print-pdf.js
       - firebase-config.js
       - data/published.json
@@ -28,12 +32,15 @@ jobs:
         run: |
           node --check player.js
           node --check glossary.js
+          node --check metrics.js
+          node --check stats-page.js
           node --check print-pdf.js
           node --check public-app.js
           node --check quality-gate.js
           node --check firebase-config.js
           node tests/test_player.cjs
           node tests/test_glossary.cjs
+          node tests/test_metrics.cjs
           node tests/test_print_pdf.cjs
           node tests/test_public_quality.cjs
       - name: Ensure public archive never includes private database
