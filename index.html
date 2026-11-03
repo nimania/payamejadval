@@ -169,6 +169,21 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ff9b
 .novelty-table th,.novelty-table td{text-align:right;padding:10px;border-bottom:1px solid #e5eaf0}
 .novelty-table th{background:#f5f8fa}
 
+/* «شرح در متن» reader: fixed rectangular magazine grid, scrollable on phones. */
+.clue-in-cell-game{max-width:100%}
+.clue-game-scroll{overflow:auto;max-height:78vh;margin-top:14px;border:1px solid #d1d7db;background:#ebeff1;border-radius:8px;padding:12px}
+.clue-game-board{display:grid;width:max-content;direction:ltr;background:#fff;border:2px solid #2d363a}
+.clue-game-cell{width:34px;height:34px;min-width:0;min-height:0;box-sizing:border-box;border:1px solid #b3c2c7;border-radius:0;display:flex;align-items:center;justify-content:center;padding:0;background:#fff}
+.clue-game-cell.clue-letter{color:#153f57;font-size:17px;font-weight:800;text-align:center;direction:rtl}
+.clue-game-cell.clue-active{background:#fff1cd;border-color:#ba892a}
+.clue-game-cell.clue-block{background:#292929;border-color:#292929}
+.clue-game-cell.clue-question{background:#e8e2d1;flex-direction:column;overflow:hidden;gap:0}
+.clue-question-part{font:600 8px/1.1 Vazirmatn,Tahoma,sans-serif;direction:rtl;text-align:center;padding:2px 1px;overflow:hidden;word-break:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;border:0;background:transparent;min-width:0;width:100%;color:#352e26}
+.clue-question-part:hover{background:#faefd0}
+.clue-game-instruction{border-right:4px solid #b58037;background:#fff8e7;padding:10px 14px;color:#4b4032;line-height:1.8;font-size:14px}
+.is-solving-clue-in-cell .intro{padding:10px 0 5px}
+.is-solving-clue-in-cell .intro h1{font-size:clamp(19px,2.2vw,26px)}
+@media(max-width:660px){.clue-game-scroll{padding:5px}.clue-game-cell{width:31px;height:31px}.clue-game-instruction{font-size:12px}}
 /* Sudoku: independent responsive 9×9 numeric grid. */
 /* Simple 5x5 mini crossword fits above the fold on mobile. */
 .mini-crossword .board{max-width:410px;margin:15px auto}
@@ -216,6 +231,7 @@ footer{margin-top:40px;border-top:1px solid #e1e5e7;color:#77838d;font-size:12px
 <footer>پیام جدول — محل بازی آنلاین جدول‌های تأییدشده</footer>
 <script src="./firebase-config.js"></script>
 <script src="./player.js"></script><script src="./sudoku.js"></script><script src="./sudoku-player.js"></script>
+<script src="./clue-in-cell.js"></script><script src="./clue-in-cell-player.js"></script>
 <script src="./quality-gate.js"></script>
 <script src="./metrics.js"></script>
 <script src="./glossary.js"></script>
