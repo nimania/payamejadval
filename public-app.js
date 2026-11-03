@@ -103,7 +103,7 @@ function renderCatalog(items){
   card.append(label,heading,metadata,link);catalog.append(card);
  }
 }
-function renderPuzzle(item){
+function renderPuzzle(item,archive=[]){
  $('catalog').classList.add('hidden');$('empty').classList.add('hidden');
  $('categories')?.classList.add('hidden');
  $('player').classList.remove('hidden');
@@ -129,6 +129,27 @@ function renderPuzzle(item){
  dictionary.setAttribute('aria-label','فرهنگ سؤال‌ها و جواب‌های این جدول');
  window.PayameGlossary?.render(dictionary,item,player);
  section.append(dictionary);
+ if(window.PayameMetrics){
+  const overlap=window.PayameMetrics.windows(item,archive,player);
+  const panel=text('section',undefined,'novelty-panel');
+  panel.append(text('h2','تازگی و میزان تکرار این جدول'));
+  panel.append(text('p','تکرار دقیق یعنی همان سؤال و همان جواب؛ تکرار جواب به‌تنهایی جداگانه شمرده می‌شود. مقایسه با جدول‌های قدیمی‌تر است.','muted small'));
+  const table=text('table',undefined,'novelty-table');
+  const head=text('tr');
+  for(const name of ['دوره','جدول‌های قابل مقایسه','تکرار دقیق','جواب تکراری'])head.append(text('th',name));
+  table.append(head);
+  for(const x of overlap){
+   const line=text('tr');
+   for(const value of ['آخرین '+new Intl.NumberFormat('fa-IR').format(x.requested),
+    new Intl.NumberFormat('fa-IR').format(x.actual),
+    new Intl.NumberFormat('fa-IR').format(x.exactPct)+'٪',
+    new Intl.NumberFormat('fa-IR').format(x.answerPct)+'٪'])line.append(text('td',value));
+   table.append(line);
+  }
+  panel.append(table);
+  const link=text('a','دیدن آمار کامل بانک و جدول‌ها','link');link.href='./stats.html';panel.append(link);
+  section.append(panel);
+ }
 }
 async function start(){
  const status=$('archiveStatus');
@@ -147,7 +168,7 @@ async function start(){
  }else status.textContent=items.length?'تعداد جدول‌های منتشرشده: '+new Intl.NumberFormat('fa-IR').format(items.length):'';
  if(requestedId){
   const item=items.find(x=>x.id===requestedId);
-  if(item){renderPuzzle(item);return}
+  if(item){renderPuzzle(item,items);return}
   renderCatalog(items);
   $('title').textContent='این جدول در آرشیو عمومی پیدا نشد';
   $('subtitle').textContent='ممکن است انتشار هنوز تکمیل نشده باشد یا لینک نادرست باشد.';
