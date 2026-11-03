@@ -29,7 +29,8 @@ jobs:
 
       - name: Stage only the approved public website
         run: |
-          mkdir -p public/data
+          mkdir -p public/data public/assets
+          cp assets/payamejadval-logo.webp assets/favicon.svg public/assets/
           cp index.html public/index.html
           cp public-app.js public/public-app.js
           cp player.js public/player.js
