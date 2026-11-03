@@ -42,6 +42,7 @@ jobs:
           cp data/bank-stats.json public/data/bank-stats.json
           cp glossary.js public/glossary.js
           cp print-pdf.js public/print-pdf.js
+          cp mini-image.js public/mini-image.js
           cp quality-gate.js public/quality-gate.js
           cp firebase-config.js public/firebase-config.js
           cp data/published.json public/data/published.json
@@ -54,6 +55,7 @@ jobs:
         run: |
           node scripts/verify-daily-games.cjs
           node tests/test_mini.cjs
+          node tests/test_mini_image.cjs
       - name: Check single-page A4 printable layouts using live approved puzzles
         run: |
           node scripts/verify-onepage-pdf.cjs public/data/published.json
