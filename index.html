@@ -2,8 +2,8 @@
 <html lang="fa" dir="rtl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f5f5f3">
-<meta name="description" content="جدول‌های کلمات متقاطع فارسی؛ حل آنلاین، بررسی پاسخ‌ها و ذخیرهٔ پیشرفت">
-<title>پیام جدول | بازی آنلاین جدول کلمات متقاطع فارسی</title>
+<meta name="description" content="پیام جدول؛ دنیای جدول کلمات متقاطع، معما و سرگرمی‌های فکری فارسی، با بازی آنلاین و آرشیو اختصاصی هر نوع سرگرمی">
+<title>پیام جدول | جدول، معما و سرگرمی‌های فکری</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
 :root{font-family:Vazirmatn,Tahoma,Arial,sans-serif;color:#1e2c38;background:#f5f5f3}
@@ -15,6 +15,15 @@ nav,main,footer{max-width:1140px;margin:auto;padding:18px 24px}
 nav{display:flex;justify-content:space-between;align-items:center;gap:14px}
 .brand{font-size:23px;font-weight:800;color:#223444}
 .tag{background:#f0f4f7;border-radius:50px;padding:6px 15px;color:#567083;font-size:12px}
+.site-nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:13px}
+.site-nav a{color:#34566c;font-weight:700}
+.content-type{display:inline-block;border:1px solid #d9e3e8;border-radius:8px;padding:3px 9px;color:#425c6c;font-size:11px;font-weight:700}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px;margin:15px 0 30px}
+.category-card{background:#fff;border:1px solid #e1e6ea;border-radius:15px;padding:20px}
+.category-card h3{font-size:16px;margin:0}
+.category-count{font-size:12px;color:#5a6e7e}
+.category-pending{border-style:dashed;background:#fafbfc}
+#categories{margin:18px 0 25px}
 .intro{padding:24px 0 10px}h1{font-size:clamp(24px,4vw,36px);margin:0 0 10px}h2{font-size:19px;margin:0 0 10px}
 p{line-height:1.9}.muted{color:#627282}.small{font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:18px;margin-top:20px}
@@ -85,13 +94,14 @@ footer{margin-top:40px;border-top:1px solid #e1e5e7;color:#77838d;font-size:12px
 }
 </style></head>
 <body>
-<header><nav><a class="brand" href="./">پیام جدول</a><span class="tag">جدول کلمات متقاطع فارسی</span></nav></header>
+<header><nav><a class="brand" href="./">پیام جدول</a><div class="site-nav"><a href="./">خانه</a><a href="./?type=crossword">آرشیو جدول‌های کلمات متقاطع</a></div><span class="tag">سرگرمی‌های فکری فارسی</span></nav></header>
 <main>
-<section class="intro"><h1 id="title">جدول‌های تازه، هر بار چالشی نو</h1>
-<p id="subtitle" class="muted">مجموعهٔ جدول‌های طراحی‌شده و تأییدشده</p>
+<section class="intro"><h1 id="title">پیام جدول؛ سرگرمی‌ها و بازی‌های فکری</h1>
+<p id="subtitle" class="muted">انواع جدول، معما و بازی‌های فکری فارسی</p>
 <p id="archiveStatus" class="muted" role="status"></p></section>
-<section id="catalog" class="grid"></section>
-<section id="empty" class="empty hidden"><h2>هنوز جدولی منتشر نشده است</h2><p class="muted">پس از تأیید و انتشار نخستین جدول در کارگاه طراحی، اینجا نمایش داده می‌شود.</p></section>
+<section id="categories" aria-label="دسته‌بندی انواع سرگرمی‌ها"></section>
+<section id="catalog" class="grid" aria-label="جدول‌های کلمات متقاطع منتشرشده"></section>
+<section id="empty" class="empty hidden"><h2>هنوز سرگرمی‌ای در این آرشیو منتشر نشده است</h2><p class="muted">پس از تأیید و انتشار، بازی‌های جدید در آرشیو مربوط به خودشان نمایش داده می‌شوند.</p></section>
 <section id="player" class="hidden"></section>
 </main>
 <footer>پیام جدول — محل بازی آنلاین جدول‌های تأییدشده</footer>
