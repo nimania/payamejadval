@@ -46,6 +46,9 @@ jobs:
       - name: Refresh public crossword snapshot from Firestore (read only)
         run: |
           node scripts/snapshot-public-firestore.cjs public/data/published.json
+      - name: Check single-page A4 printable layouts using live approved puzzles
+        run: |
+          node scripts/verify-onepage-pdf.cjs public/data/published.json
       - name: Upload static website
         uses: actions/upload-pages-artifact@v3
         with:
