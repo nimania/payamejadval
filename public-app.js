@@ -6,6 +6,7 @@ const $=id=>document.getElementById(id);
 const player=window.PayamePlayer;
 const base='./data/published.json';
 const daily='./data/daily-games.json';
+const mini='./data/mini-puzzles.json';
 const config=window.PAYAMEJADVAL_FIREBASE_CONFIG||{};
 const SDK='https://www.gstatic.com/firebasejs/12.19.0/';
 const params=new URLSearchParams(location.search);
@@ -29,6 +30,12 @@ async function fetchStatic(){
  if(!response.ok)throw Error('Static archive unavailable');
  const result=await response.json();
  return Array.isArray(result.puzzles)?result.puzzles:[];
+}
+async function fetchMini(){
+ const r=await fetch(mini,{cache:'no-store'});
+ if(!r.ok)throw Error('Mini puzzle archive unavailable');
+ const x=await r.json();
+ return x.schema===1&&Array.isArray(x.puzzles)?x.puzzles:[];
 }
 async function fetchDaily(){
  const response=await fetch(daily,{cache:'no-store'});
@@ -223,11 +230,12 @@ function renderPuzzle(item,archive=[]){
 async function start(){
  const status=$('archiveStatus');
  status.textContent='در حال دریافت جدول‌های منتشرشده…';
- const [staticResult,cloudResult,dailyResult]=await Promise.allSettled([fetchStatic(),fetchApproved(),fetchDaily()]);
+ const [staticResult,cloudResult,dailyResult,miniResult]=await Promise.allSettled([fetchStatic(),fetchApproved(),fetchDaily(),fetchMini()]);
  const merged=new Map();
  if(staticResult.status==='fulfilled')for(const item of staticResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  if(cloudResult.status==='fulfilled')for(const item of cloudResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  if(dailyResult.status==='fulfilled')for(const item of dailyResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
+ if(miniResult.status==='fulfilled')for(const item of miniResult.value)if(eligiblePublicPuzzle(item))merged.set(item.id,item);
  const items=[...merged.values()].sort((a,b)=>{
   const as=a.publishedAt?.seconds? a.publishedAt.seconds*1000 :Date.parse(a.publishedAt||0)||0;
   const bs=b.publishedAt?.seconds? b.publishedAt.seconds*1000 :Date.parse(b.publishedAt||0)||0;
@@ -243,7 +251,7 @@ async function start(){
   $('title').textContent='این جدول در آرشیو عمومی پیدا نشد';
   $('subtitle').textContent='ممکن است انتشار هنوز تکمیل نشده باشد یا لینک نادرست باشد.';
  }else renderCatalog(items);
- if(staticResult.status==='rejected'&&cloudResult.status==='rejected'&&dailyResult.status==='rejected'){
+ if(staticResult.status==='rejected'&&cloudResult.status==='rejected'&&dailyResult.status==='rejected'&&miniResult.status==='rejected'){
   $('empty').classList.remove('hidden');
   $('empty').querySelector('p').textContent='آرشیو در دسترس نیست. لطفاً بعداً دوباره امتحان کن.';
  }
