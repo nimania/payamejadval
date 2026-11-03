@@ -21,7 +21,7 @@ global.document={createElement(tag){
  return {width:0,height:0,getContext(){
   return {direction:'rtl',textAlign:'right',textBaseline:'middle',fillStyle:'#fff',strokeStyle:'#fff',
    lineWidth:1,fillRect(){},strokeRect(){},drawImage(){logosDrawn++},beginPath(){},moveTo(){},lineTo(){},stroke(){},
-   measureText(t){return {width:String(t).length*13}},
+   measureText(t){const fontSize=Number(this.font?.match(/(\d+)px/)?.[1]||18);return {width:[...String(t)].length*fontSize*.49}},
    fillText(t){texts.push(String(t))}};
  },toDataURL(){
   imageCount++;
@@ -57,14 +57,14 @@ assert(player.validateItem(issue15));
 const logo={naturalWidth:1000,naturalHeight:350};
 const textStart=texts.length;
 const newspaperBlank=pdf.createPages(issue15,'blank',player,logo);
-assert(newspaperBlank.length>=1);
+assert.equal(newspaperBlank.length,1,'One-page A4 worksheet is mandatory');
 const blankText=texts.slice(textStart);
 assert(blankText.some(x=>x.includes('جدول کلمات متقاطع')),'Newspaper masthead is printed');
 assert(blankText.some(x=>x.includes('سؤال')),'Questions share the main newspaper page');
 assert(!blankText.some(x=>x.includes('پاسخ:')),'Unsolved PDF must not reveal word answers');
 const answerStart=texts.length;
 const newspaperAnswers=pdf.createPages(issue15,'answers',player,logo);
-assert(newspaperAnswers.length>=1);
+assert.equal(newspaperAnswers.length,1,'One-page A4 answer key is mandatory');
 const answerText=texts.slice(answerStart);
 assert(answerText.some(x=>x.includes('پاسخ:')),'Answer edition includes textual answers');
 assert(logosDrawn>=2,'The publication logo should be drawn on both PDF editions');
@@ -75,7 +75,7 @@ for(const dir of ['horizontal','vertical'])
  for(const row of Object.values(longIssue.puzzle.clues[dir]))
   for(let i=0;i<row.length;i++)row[i]+=' شرح طولانی چاپی'.repeat(22);
 assert(player.validateItem(longIssue));
-assert(pdf.createPages(longIssue,'blank',player,logo).length>1,
- 'Long newspaper clue lists should automatically continue onto more A4 pages');
-console.log('15x15 newspaper PDF tested: large paper grid, image logo, RTL compact clues, spoiler-free blank, filled key, continuation.');
+assert.throws(()=>pdf.createPages(longIssue,'blank',player,logo),
+ /حجم سؤال‌ها/,'Never crop text or silently spill a 15x15 PDF to a second page');
+console.log('15x15 newspaper PDF tested: single A4 sheet, logo, 100% RTL grouped clues, answers, no clipping or overflow.');
 console.log('Direct A4 PDF generator tests passed: grid, RTL clue order, filled answers, correct PDF structure and print layouts.');
