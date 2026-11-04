@@ -36,7 +36,7 @@ function createPlayer(container,item){
  for(const b of [check,reset,reveal])b.type='button';
  toolbar.append(check,reset,reveal);
  const meter=create('p','play-progress','');
- const cells=new Map(),values={},given=new Map(),savedKey='payamejadval:clue-progress:'+item.id;
+ const cells=new Map(),values={},given=new Map(),savedKey='payamejadval:clue-progress:'+item.id+':'+(item.puzzle.meta?.revision||'original');
  let active=null,revealed=false;
  try{
   const saved=JSON.parse(localStorage.getItem(savedKey)||'{}');
@@ -95,14 +95,22 @@ function createPlayer(container,item){
    });
    cells.set(key,input);given.set(key,cell.answer);board.append(input);
   }else if(cell.kind==='block'){
-   const box=create('div','clue-game-cell clue-block');box.setAttribute('aria-hidden','true');board.append(box);
+   const reserved=item.puzzle.meta?.photoSlot?.[0]===r&&item.puzzle.meta?.photoSlot?.[1]===c;
+   const box=create('div','clue-game-cell clue-block'+(reserved?' clue-photo-slot':''));
+   box.setAttribute('aria-hidden','true');
+   if(reserved)box.title='خانهٔ رزروشده برای تصویر فرهنگی آینده';
+   board.append(box);
   }else if(cell.kind==='clue'){
    const box=create('div','clue-game-cell clue-question'+(cell.clueIds.length===2?' double-clue':''));
    for(const id of cell.clueIds){
     const e=item.puzzle.entries.find(x=>x.id===id);
     if(!e)continue;
-    const btn=create('button','clue-question-part',(e.shortClue||e.clue)+' '+(e.direction==='across'?'←':'↓'));
+    const brief=String(e.shortClue||e.clue);
+    const btn=create('button','clue-question-part',brief+' '+(e.direction==='across'?'←':'↓'));
     btn.type='button';btn.title=e.clue;
+    btn.style.fontSize=cell.clueIds.length===2?
+     (brief.length>13?'5.25px':brief.length>9?'5.75px':'6.5px'):
+     (brief.length>16?'6.25px':'7.3px');
     btn.setAttribute('aria-label',e.clue+'، '+(e.direction==='across'?'افقی':'عمودی'));
     btn.addEventListener('click',()=>highlight(e));
     box.append(btn);
