@@ -180,6 +180,19 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ff9b
 .clue-game-cell.clue-question{background:#e8e2d1;flex-direction:column;overflow:hidden;gap:0}
 .clue-question-part{font:600 8px/1.1 Vazirmatn,Tahoma,sans-serif;direction:rtl;text-align:center;padding:2px 1px;overflow:hidden;word-break:break-word;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;border:0;background:transparent;min-width:0;width:100%;color:#352e26}
 .clue-question-part:hover{background:#faefd0}
+.clue-game-cell.clue-question{align-items:stretch}
+.clue-game-cell.clue-question.double-clue .clue-question-part{
+ flex:0 0 50%;height:50%;max-height:50%;font-weight:500;
+ line-height:1.1;padding:1px 1px;letter-spacing:-.08px;
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+ white-space:normal;overflow:hidden;overflow-wrap:anywhere
+}
+.clue-game-cell.clue-question.double-clue .clue-question-part:first-child{border-bottom:1px solid #bcae8e}
+.clue-game-cell.clue-question:not(.double-clue) .clue-question-part{
+ flex:1;max-height:100%;line-height:1.2;display:flex;align-items:center;justify-content:center;
+ padding:1px;white-space:normal;overflow-wrap:anywhere
+}
+.clue-game-cell.clue-photo-slot{background:#191919;border:1px solid #333}
 .clue-game-instruction{border-right:4px solid #b58037;background:#fff8e7;padding:10px 14px;color:#4b4032;line-height:1.8;font-size:14px}
 .is-solving-clue-in-cell .intro{padding:10px 0 5px}
 .is-solving-clue-in-cell .intro h1{font-size:clamp(19px,2.2vw,26px)}
