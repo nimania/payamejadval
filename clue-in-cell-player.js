@@ -101,7 +101,7 @@ function createPlayer(container,item){
    for(const id of cell.clueIds){
     const e=item.puzzle.entries.find(x=>x.id===id);
     if(!e)continue;
-    const btn=create('button','clue-question-part',e.clue+' '+(e.direction==='across'?'←':'↓'));
+    const btn=create('button','clue-question-part',(e.shortClue||e.clue)+' '+(e.direction==='across'?'←':'↓'));
     btn.type='button';btn.title=e.clue;
     btn.setAttribute('aria-label',e.clue+'، '+(e.direction==='across'?'افقی':'عمودی'));
     btn.addEventListener('click',()=>highlight(e));
