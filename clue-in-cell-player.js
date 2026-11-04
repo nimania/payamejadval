@@ -97,7 +97,7 @@ function createPlayer(container,item){
   }else if(cell.kind==='block'){
    const box=create('div','clue-game-cell clue-block');box.setAttribute('aria-hidden','true');board.append(box);
   }else if(cell.kind==='clue'){
-   const box=create('div','clue-game-cell clue-question');
+   const box=create('div','clue-game-cell clue-question'+(cell.clueIds.length===2?' double-clue':''));
    for(const id of cell.clueIds){
     const e=item.puzzle.entries.find(x=>x.id===id);
     if(!e)continue;
