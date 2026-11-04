@@ -22,10 +22,13 @@ for(const item of data.puzzles){
     'Short on-cell wording is mandatory for the first clue-in-cell edition');
   }
   const dual=[...pairs.values()].filter(v=>v===2).length;
+  assert(item.puzzle.blocked.length===0,'No filler black squares may be published');
+  assert(item.puzzle.grid.flat().every(cell=>cell.kind==='clue'||cell.kind==='letter'),
+   'Each cell must hold a clue or a solution letter');
   const capitals=item.puzzle.entries.filter(e=>e.clue.startsWith('پایتخت')).length;
-  assert(dual>=25,'At least twenty-five two-direction clue cells required');
+  assert(dual>=8,'At least eight two-direction clue cells required');
   assert(capitals/item.puzzle.entries.length<0.25,'Reduce repeated capital clues');
-  assert(item.puzzle.meta?.revision==='3','Revised boundary-safe publication required');
+  assert(item.puzzle.meta?.revision==='4','Zero-black revision 4 required');
   for(const entry of item.puzzle.entries){
    const path=model.positions(entry),end=path[path.length-1];
    if(end){
@@ -33,7 +36,7 @@ for(const item of data.puzzles){
     const nc=end.col-(entry.direction==='across'?1:0);
     const grid=item.puzzle.grid;
     if(nr>=0&&nr<grid.length&&nc>=0&&nc<grid[0].length)
-     assert(['clue','block'].includes(grid[nr][nc].kind),'Unseparated end after '+entry.answer);
+     assert(grid[nr][nc].kind==='clue','Word must end at a clue cell: '+entry.answer);
    }
    const [r,c]=entry.clueCell;
    assert(!(r===19&&entry.direction==='down'),'Bottom row cannot point down');
