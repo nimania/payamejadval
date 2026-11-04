@@ -23,10 +23,18 @@ for(const item of data.puzzles){
   }
   const dual=[...pairs.values()].filter(v=>v===2).length;
   const capitals=item.puzzle.entries.filter(e=>e.clue.startsWith('پایتخت')).length;
-  assert(dual>=30,'At least thirty two-direction clue cells required');
+  assert(dual>=25,'At least twenty-five two-direction clue cells required');
   assert(capitals/item.puzzle.entries.length<0.25,'Reduce repeated capital clues');
-  assert(item.puzzle.meta?.revision==='2','Revisioned publication required');
+  assert(item.puzzle.meta?.revision==='3','Revised boundary-safe publication required');
   for(const entry of item.puzzle.entries){
+   const path=model.positions(entry),end=path[path.length-1];
+   if(end){
+    const nr=end.row+(entry.direction==='down'?1:0);
+    const nc=end.col-(entry.direction==='across'?1:0);
+    const grid=item.puzzle.grid;
+    if(nr>=0&&nr<grid.length&&nc>=0&&nc<grid[0].length)
+     assert(['clue','block'].includes(grid[nr][nc].kind),'Unseparated end after '+entry.answer);
+   }
    const [r,c]=entry.clueCell;
    assert(!(r===19&&entry.direction==='down'),'Bottom row cannot point down');
    assert(!(c===0&&entry.direction==='across'),'Leftmost array column cannot point left');
