@@ -6,885 +6,900 @@
       "id": "clue-horizontal-001",
       "type": "clue-in-cell",
       "variant": "horizontal",
-      "title": "شرح در متن افقی ۳۰×۲۰ ـ شمارهٔ ۱",
+      "title": "جدول شرح در متن ۳۰×۲۰ ـ شمارهٔ ۱",
       "publishedAt": "2026-11-04T04:30:41.926Z",
       "puzzle": {
         "version": 1,
         "entries": [
           {
             "id": "auto-001",
+            "answer": "زیستشناسی",
+            "clue": "دانش مطالعهٔ موجودات زنده",
+            "clueCell": [
+              9,
+              11
+            ],
+            "start": [
+              9,
+              10
+            ],
+            "direction": "across",
+            "shortClue": "دانش جانداران"
+          },
+          {
+            "id": "auto-002",
+            "answer": "زایندهرود",
+            "clue": "رود شناخته‌شدهٔ اصفهان",
+            "clueCell": [
+              9,
+              11
+            ],
+            "start": [
+              10,
+              11
+            ],
+            "direction": "down",
+            "shortClue": "رود اصفهان"
+          },
+          {
+            "id": "auto-003",
             "answer": "دنبالهدار",
             "clue": "جرم یخی منظومهٔ شمسی که ممکن است دُم تشکیل دهد",
             "clueCell": [
-              1,
+              11,
               15
             ],
             "start": [
-              1,
+              11,
               14
             ],
             "direction": "across",
             "shortClue": "جرم دُم‌دار"
           },
           {
-            "id": "auto-002",
-            "answer": "نیکوزیایشمالی",
-            "clue": "پایتخت جمهوری ترک قبرس شمالی",
-            "clueCell": [
-              1,
-              15
-            ],
-            "start": [
-              2,
-              15
-            ],
-            "direction": "down",
-            "shortClue": "قبرس شمالی"
-          },
-          {
-            "id": "auto-003",
-            "answer": "آنتاناناریوو",
-            "clue": "پایتخت ماداگاسکار",
-            "clueCell": [
-              8,
-              23
-            ],
-            "start": [
-              8,
-              22
-            ],
-            "direction": "across",
-            "shortClue": "ماداگاسکار"
-          },
-          {
             "id": "auto-004",
-            "answer": "میکروسکوپ",
-            "clue": "ابزار بزرگ‌نمایی اجسام بسیار کوچک",
+            "answer": "کرمانشاه",
+            "clue": "مرکز استانی هم‌نام در غرب ایران",
             "clueCell": [
-              8,
-              23
+              11,
+              15
             ],
             "start": [
-              9,
-              23
+              12,
+              15
             ],
             "direction": "down",
-            "shortClue": "ریزنگر"
+            "shortClue": "شهر غرب ایران"
           },
           {
             "id": "auto-005",
-            "answer": "کوالالامپور",
-            "clue": "پایتخت مالزی",
+            "answer": "خرمآباد",
+            "clue": "مرکز استان لرستان",
             "clueCell": [
-              4,
-              16
+              14,
+              18
             ],
             "start": [
-              4,
-              15
+              14,
+              17
             ],
             "direction": "across",
-            "shortClue": "مالزی"
+            "shortClue": "مرکز لرستان"
           },
           {
             "id": "auto-006",
-            "answer": "زایندهرود",
-            "clue": "رود شناخته‌شدهٔ اصفهان",
+            "answer": "شیراز",
+            "clue": "مرکز استان فارس",
             "clueCell": [
-              4,
-              16
+              14,
+              18
             ],
             "start": [
-              5,
-              16
+              15,
+              18
             ],
             "direction": "down",
-            "shortClue": "رود اصفهان"
+            "shortClue": "مرکز فارس"
           },
           {
             "id": "auto-007",
-            "answer": "بندرسریبگاوان",
-            "clue": "پایتخت برونئی",
+            "answer": "آتشفشان",
+            "clue": "کوهی که ممکن است مواد مذاب از دهانهٔ آن بیرون بیاید",
             "clueCell": [
-              2,
-              17
+              15,
+              21
             ],
             "start": [
-              2,
-              16
+              15,
+              20
             ],
             "direction": "across",
-            "shortClue": "برونئی"
+            "shortClue": "کوه گدازه‌زا"
           },
           {
             "id": "auto-008",
-            "answer": "خلیجفارس",
-            "clue": "پهنهٔ آبی میان فلات ایران و شبه‌جزیرهٔ عربستان",
+            "answer": "ساری",
+            "clue": "مرکز استان مازندران",
             "clueCell": [
-              2,
-              17
+              15,
+              21
             ],
             "start": [
-              3,
-              17
+              16,
+              21
             ],
             "direction": "down",
-            "shortClue": "آبراه جنوب ایران"
+            "shortClue": "مرکز مازندران"
           },
           {
             "id": "auto-009",
-            "answer": "ماهتاب",
-            "clue": "روشنایی حاصل از بازتاب نور خورشید از ماه",
+            "answer": "پیکرتراشی",
+            "clue": "هنر ساختن پیکره‌های سه‌بعدی",
             "clueCell": [
-              0,
+              1,
               6
             ],
             "start": [
-              0,
-              5
+              2,
+              6
             ],
-            "direction": "across",
-            "shortClue": "نور ماه"
+            "direction": "down",
+            "shortClue": "هنر تندیس"
           },
           {
             "id": "auto-010",
-            "answer": "روسو",
-            "clue": "پایتخت دومینیکا",
+            "answer": "اصفهان",
+            "clue": "شهری تاریخی در مرکز ایران، مشهور به میدان نقش جهان",
             "clueCell": [
-              0,
+              1,
               6
             ],
             "start": [
               1,
-              6
+              5
             ],
-            "direction": "down",
-            "shortClue": "دومینیکا"
+            "direction": "across",
+            "shortClue": "نقش جهان"
           },
           {
             "id": "auto-011",
-            "answer": "آبوجا",
-            "clue": "پایتخت نیجریه",
+            "answer": "میکروسکوپ",
+            "clue": "ابزار بزرگ‌نمایی اجسام بسیار کوچک",
             "clueCell": [
-              6,
-              21
+              4,
+              13
             ],
             "start": [
-              6,
-              20
+              4,
+              12
             ],
             "direction": "across",
-            "shortClue": "نیجریه"
+            "shortClue": "ریز‌بین"
           },
           {
             "id": "auto-012",
-            "answer": "بندرعباس",
-            "clue": "مرکز استان هرمزگان",
-            "clueCell": [
-              6,
-              21
-            ],
-            "start": [
-              7,
-              21
-            ],
-            "direction": "down",
-            "shortClue": "هرمزگان"
-          },
-          {
-            "id": "auto-013",
-            "answer": "براتیسلاوا",
-            "clue": "پایتخت اسلواکی",
-            "clueCell": [
-              3,
-              12
-            ],
-            "start": [
-              3,
-              11
-            ],
-            "direction": "across",
-            "shortClue": "اسلواکی"
-          },
-          {
-            "id": "auto-014",
-            "answer": "لیبرویل",
-            "clue": "پایتخت گابن",
-            "clueCell": [
-              3,
-              12
-            ],
-            "start": [
-              4,
-              12
-            ],
-            "direction": "down",
-            "shortClue": "گابن"
-          },
-          {
-            "id": "auto-015",
-            "answer": "یخچال",
-            "clue": "تودهٔ بزرگ یخ با حرکت آهسته روی خشکی",
+            "answer": "کتابخانه",
+            "clue": "مکانی برای نگهداری و استفاده از کتاب‌ها",
             "clueCell": [
               4,
-              22
-            ],
-            "start": [
-              4,
-              21
-            ],
-            "direction": "across",
-            "shortClue": "توده یخِ روان"
-          },
-          {
-            "id": "auto-016",
-            "answer": "پرتآواسپاین",
-            "clue": "پایتخت ترینیداد و توباگو",
-            "clueCell": [
-              4,
-              22
-            ],
-            "start": [
-              5,
-              22
-            ],
-            "direction": "down",
-            "shortClue": "ترینیداد"
-          },
-          {
-            "id": "auto-017",
-            "answer": "یاموسوکرو",
-            "clue": "پایتخت ساحل عاج",
-            "clueCell": [
-              5,
               13
             ],
             "start": [
               5,
-              12
+              13
             ],
-            "direction": "across",
-            "shortClue": "ساحل عاج"
+            "direction": "down",
+            "shortClue": "خانهٔ کتاب"
           },
           {
-            "id": "auto-018",
+            "id": "auto-013",
+            "answer": "اورانوس",
+            "clue": "هفتمین سیارهٔ منظومهٔ شمسی",
+            "clueCell": [
+              18,
+              19
+            ],
+            "start": [
+              18,
+              18
+            ],
+            "direction": "across",
+            "shortClue": "سیارهٔ هفتم"
+          },
+          {
+            "id": "auto-014",
+            "answer": "فادوتس",
+            "clue": "پایتخت لیختناشتاین",
+            "clueCell": [
+              12,
+              12
+            ],
+            "start": [
+              13,
+              12
+            ],
+            "direction": "down",
+            "shortClue": "لیختناشتاین"
+          },
+          {
+            "id": "auto-015",
+            "answer": "یاسوج",
+            "clue": "مرکز استان کهگیلویه و بویراحمد",
+            "clueCell": [
+              12,
+              12
+            ],
+            "start": [
+              12,
+              11
+            ],
+            "direction": "across",
+            "shortClue": "مرکز کهگیلویه"
+          },
+          {
+            "id": "auto-016",
             "answer": "نویسنده",
             "clue": "کسی که متن ادبی یا غیرداستانی می‌نویسد",
             "clueCell": [
               5,
-              13
+              14
             ],
             "start": [
               6,
-              13
+              14
             ],
             "direction": "down",
-            "shortClue": "آفریننده متن"
+            "shortClue": "آفرینندهٔ متن"
+          },
+          {
+            "id": "auto-017",
+            "answer": "کاسپین",
+            "clue": "نام دیگر دریای خزر",
+            "clueCell": [
+              5,
+              14
+            ],
+            "start": [
+              5,
+              13
+            ],
+            "direction": "across",
+            "shortClue": "دریای شمال"
+          },
+          {
+            "id": "auto-018",
+            "answer": "ماجورو",
+            "clue": "پایتخت جزایر مارشال",
+            "clueCell": [
+              3,
+              12
+            ],
+            "start": [
+              4,
+              12
+            ],
+            "direction": "down",
+            "shortClue": "مارشال"
           },
           {
             "id": "auto-019",
-            "answer": "ایروان",
-            "clue": "پایتخت ارمنستان",
+            "answer": "شبهجزیره",
+            "clue": "خشکی‌ای که از سه سو به آب محدود است",
             "clueCell": [
-              12,
-              20
+              3,
+              12
             ],
             "start": [
-              12,
-              19
+              3,
+              11
             ],
             "direction": "across",
-            "shortClue": "ارمنستان"
+            "shortClue": "خشکی سه‌سوی آب"
           },
           {
             "id": "auto-020",
-            "answer": "هیدروژن",
-            "clue": "نخستین عنصر جدول تناوبی",
+            "answer": "دودوما",
+            "clue": "پایتخت تانزانیا",
             "clueCell": [
-              12,
-              20
+              10,
+              8
             ],
             "start": [
-              13,
-              20
+              11,
+              8
             ],
             "direction": "down",
-            "shortClue": "عنصر نخست"
+            "shortClue": "تانزانیا"
           },
           {
             "id": "auto-021",
-            "answer": "بوئنوسآیرس",
-            "clue": "پایتخت آرژانتین",
+            "answer": "هیدروژن",
+            "clue": "نخستین عنصر جدول تناوبی",
             "clueCell": [
-              0,
-              18
+              10,
+              8
             ],
             "start": [
-              0,
-              17
+              10,
+              7
             ],
             "direction": "across",
-            "shortClue": "آرژانتین"
+            "shortClue": "عنصر نخست"
           },
           {
             "id": "auto-022",
-            "answer": "اورانوس",
-            "clue": "هفتمین سیارهٔ منظومهٔ شمسی",
+            "answer": "بانجول",
+            "clue": "پایتخت گامبیا",
             "clueCell": [
-              0,
-              18
+              13,
+              13
             ],
             "start": [
-              1,
-              18
+              14,
+              13
             ],
             "direction": "down",
-            "shortClue": "سیاره هفتم"
+            "shortClue": "گامبیا"
           },
           {
             "id": "auto-023",
-            "answer": "سیوداددلاپاز",
-            "clue": "پایتخت گینه استوایی",
-            "clueCell": [
-              9,
-              14
-            ],
-            "start": [
-              9,
-              13
-            ],
-            "direction": "across",
-            "shortClue": "گینه استوایی"
-          },
-          {
-            "id": "auto-024",
-            "answer": "سنندج",
-            "clue": "مرکز استان کردستان",
-            "clueCell": [
-              9,
-              14
-            ],
-            "start": [
-              10,
-              14
-            ],
-            "direction": "down",
-            "shortClue": "کردستان"
-          },
-          {
-            "id": "auto-025",
-            "answer": "پیکرتراشی",
-            "clue": "هنر ساختن پیکره‌های سه‌بعدی",
-            "clueCell": [
-              8,
-              9
-            ],
-            "start": [
-              8,
-              8
-            ],
-            "direction": "across",
-            "shortClue": "ساخت مجسمه"
-          },
-          {
-            "id": "auto-026",
-            "answer": "اقیانوس",
-            "clue": "پهنهٔ بسیار گستردهٔ آب شور روی زمین",
-            "clueCell": [
-              8,
-              9
-            ],
-            "start": [
-              9,
-              9
-            ],
-            "direction": "down",
-            "shortClue": "دریای بسیار بزرگ"
-          },
-          {
-            "id": "auto-027",
-            "answer": "زیستشناسی",
-            "clue": "دانش مطالعهٔ موجودات زنده",
-            "clueCell": [
-              11,
-              11
-            ],
-            "start": [
-              11,
-              10
-            ],
-            "direction": "across",
-            "shortClue": "دانش حیات"
-          },
-          {
-            "id": "auto-028",
-            "answer": "آتشفشان",
-            "clue": "کوهی که ممکن است مواد مذاب از دهانهٔ آن بیرون بیاید",
-            "clueCell": [
-              11,
-              11
-            ],
-            "start": [
-              12,
-              11
-            ],
-            "direction": "down",
-            "shortClue": "کوه گدازه‌زا"
-          },
-          {
-            "id": "auto-029",
-            "answer": "سیارک",
-            "clue": "جسم کوچک سنگی که به دور خورشید می‌گردد",
-            "clueCell": [
-              10,
-              25
-            ],
-            "start": [
-              10,
-              24
-            ],
-            "direction": "across",
-            "shortClue": "سنگ آسمانی"
-          },
-          {
-            "id": "auto-030",
-            "answer": "کتابخانه",
-            "clue": "مکانی برای نگهداری و استفاده از کتاب‌ها",
-            "clueCell": [
-              10,
-              25
-            ],
-            "start": [
-              11,
-              25
-            ],
-            "direction": "down",
-            "shortClue": "مخزن کتاب"
-          },
-          {
-            "id": "auto-031",
-            "answer": "نپتون",
-            "clue": "هشتمین سیارهٔ منظومهٔ شمسی",
-            "clueCell": [
-              5,
-              24
-            ],
-            "start": [
-              5,
-              23
-            ],
-            "direction": "across",
-            "shortClue": "سیاره هشتم"
-          },
-          {
-            "id": "auto-032",
             "answer": "فشارسنج",
             "clue": "ابزار اندازه‌گیری فشار",
             "clueCell": [
-              5,
-              24
+              6,
+              4
             ],
             "start": [
-              6,
-              24
+              7,
+              4
             ],
             "direction": "down",
             "shortClue": "سنجش فشار"
           },
           {
-            "id": "auto-033",
-            "answer": "قطبنما",
-            "clue": "ابزاری برای یافتن جهت‌های جغرافیایی",
+            "id": "auto-024",
+            "answer": "مشهد",
+            "clue": "مرکز استان خراسان رضوی",
             "clueCell": [
-              10,
-              10
+              6,
+              4
             ],
             "start": [
-              10,
-              9
+              6,
+              3
             ],
             "direction": "across",
-            "shortClue": "جهت‌یاب"
+            "shortClue": "مرکز خراسان"
           },
           {
-            "id": "auto-034",
-            "answer": "زاگرس",
-            "clue": "رشته‌کوهی در غرب ایران",
+            "id": "auto-025",
+            "answer": "سیمان",
+            "clue": "مادهٔ اتصال‌دهندهٔ پرکاربرد در ساختمان",
             "clueCell": [
-              10,
-              10
+              16,
+              20
             ],
             "start": [
-              11,
-              10
-            ],
-            "direction": "down",
-            "shortClue": "کوه‌های غرب"
-          },
-          {
-            "id": "auto-035",
-            "answer": "رودخانه",
-            "clue": "جریان طبیعی آب در بستری مشخص",
-            "clueCell": [
-              1,
-              23
-            ],
-            "start": [
-              1,
-              22
+              16,
+              19
             ],
             "direction": "across",
-            "shortClue": "آب روان"
+            "shortClue": "چسب ساختمان"
           },
           {
-            "id": "auto-036",
-            "answer": "کربن",
-            "clue": "عنصری شیمیایی با نماد C",
+            "id": "auto-026",
+            "answer": "رشت",
+            "clue": "مرکز استان گیلان",
             "clueCell": [
-              1,
-              23
+              16,
+              20
             ],
             "start": [
-              2,
-              23
+              17,
+              20
             ],
             "direction": "down",
-            "shortClue": "عنصر C"
+            "shortClue": "مرکز گیلان"
           },
           {
-            "id": "auto-037",
-            "answer": "آجر",
-            "clue": "مصالح ساختمانی معمولاً ساخته‌شده از خاک رس",
+            "id": "auto-027",
+            "answer": "ارومیه",
+            "clue": "مرکز استان آذربایجان غربی",
             "clueCell": [
-              11,
+              0,
+              1
+            ],
+            "start": [
+              1,
+              1
+            ],
+            "direction": "down",
+            "shortClue": "مرکز آذربایجان غ"
+          },
+          {
+            "id": "auto-028",
+            "answer": "تیرانا",
+            "clue": "پایتخت آلبانی",
+            "clueCell": [
+              10,
               19
             ],
             "start": [
-              11,
+              10,
               18
             ],
             "direction": "across",
-            "shortClue": "خشت پخته"
+            "shortClue": "آلبانی"
           },
           {
-            "id": "auto-038",
-            "answer": "اردبیل",
-            "clue": "مرکز استانی هم‌نام در شمال غرب ایران",
+            "id": "auto-029",
+            "answer": "بیروت",
+            "clue": "پایتخت لبنان",
             "clueCell": [
-              11,
+              10,
               19
             ],
             "start": [
-              12,
+              11,
               19
             ],
             "direction": "down",
-            "shortClue": "استان شمال غرب"
+            "shortClue": "لبنان"
+          },
+          {
+            "id": "auto-030",
+            "answer": "بندرعباس",
+            "clue": "مرکز استان هرمزگان",
+            "clueCell": [
+              9,
+              22
+            ],
+            "start": [
+              9,
+              21
+            ],
+            "direction": "across",
+            "shortClue": "مرکز هرمزگان"
+          },
+          {
+            "id": "auto-031",
+            "answer": "نمایشنامه",
+            "clue": "متنی که برای اجرای نمایشی نوشته می‌شود",
+            "clueCell": [
+              9,
+              22
+            ],
+            "start": [
+              10,
+              22
+            ],
+            "direction": "down",
+            "shortClue": "متن صحنه"
+          },
+          {
+            "id": "auto-032",
+            "answer": "هانوی",
+            "clue": "پایتخت ویتنام",
+            "clueCell": [
+              12,
+              24
+            ],
+            "start": [
+              12,
+              23
+            ],
+            "direction": "across",
+            "shortClue": "ویتنام"
+          },
+          {
+            "id": "auto-033",
+            "answer": "اقیانوس",
+            "clue": "پهنهٔ بسیار گستردهٔ آب شور روی زمین",
+            "clueCell": [
+              12,
+              24
+            ],
+            "start": [
+              13,
+              24
+            ],
+            "direction": "down",
+            "shortClue": "آب پهناور"
+          },
+          {
+            "id": "auto-034",
+            "answer": "تلسکوپ",
+            "clue": "ابزار رصد اجرام دوردست",
+            "clueCell": [
+              2,
+              12
+            ],
+            "start": [
+              2,
+              11
+            ],
+            "direction": "across",
+            "shortClue": "دوربین نجومی"
+          },
+          {
+            "id": "auto-035",
+            "answer": "لندن",
+            "clue": "پایتخت بریتانیا",
+            "clueCell": [
+              7,
+              5
+            ],
+            "start": [
+              8,
+              5
+            ],
+            "direction": "down",
+            "shortClue": "بریتانیا"
+          },
+          {
+            "id": "auto-036",
+            "answer": "فیزیک",
+            "clue": "دانش ماده، انرژی و برهم‌کنش آن‌ها",
+            "clueCell": [
+              7,
+              5
+            ],
+            "start": [
+              7,
+              4
+            ],
+            "direction": "across",
+            "shortClue": "دانش ماده"
+          },
+          {
+            "id": "auto-037",
+            "answer": "اکسیژن",
+            "clue": "عنصری شیمیایی با نماد O",
+            "clueCell": [
+              15,
+              28
+            ],
+            "start": [
+              15,
+              27
+            ],
+            "direction": "across",
+            "shortClue": "عنصر O"
+          },
+          {
+            "id": "auto-038",
+            "answer": "اراک",
+            "clue": "مرکز استان مرکزی",
+            "clueCell": [
+              15,
+              28
+            ],
+            "start": [
+              16,
+              28
+            ],
+            "direction": "down",
+            "shortClue": "مرکز استان مرکزی"
           },
           {
             "id": "auto-039",
             "answer": "نقاشی",
             "clue": "هنر آفرینش تصویر بر سطح",
             "clueCell": [
-              7,
-              28
+              14,
+              26
             ],
             "start": [
-              7,
-              27
+              14,
+              25
             ],
             "direction": "across",
             "shortClue": "هنر تصویر"
           },
           {
             "id": "auto-040",
-            "answer": "نمایشنامه",
-            "clue": "متنی که برای اجرای نمایشی نوشته می‌شود",
+            "answer": "کرمان",
+            "clue": "مرکز استانی هم‌نام در جنوب شرق ایران",
             "clueCell": [
-              7,
-              28
+              14,
+              26
             ],
             "start": [
-              8,
-              28
+              15,
+              26
             ],
             "direction": "down",
-            "shortClue": "متن نمایش"
+            "shortClue": "شهر کویری"
           },
           {
             "id": "auto-041",
-            "answer": "برف",
-            "clue": "بارش بلورهای یخی از ابر",
+            "answer": "ایروان",
+            "clue": "پایتخت ارمنستان",
             "clueCell": [
-              6,
-              27
+              0,
+              5
             ],
             "start": [
-              6,
-              26
+              1,
+              5
             ],
-            "direction": "across",
-            "shortClue": "بلور یخ"
+            "direction": "down",
+            "shortClue": "ارمنستان"
           },
           {
             "id": "auto-042",
-            "answer": "نیتروژن",
-            "clue": "عنصری شیمیایی با نماد N",
+            "answer": "یزد",
+            "clue": "مرکز استانی در کویر مرکزی ایران",
             "clueCell": [
-              6,
-              27
+              0,
+              5
+            ],
+            "start": [
+              0,
+              4
+            ],
+            "direction": "across",
+            "shortClue": "شهر بادگیرها"
+          },
+          {
+            "id": "auto-043",
+            "answer": "سووا",
+            "clue": "پایتخت فیجی",
+            "clueCell": [
+              8,
+              3
+            ],
+            "start": [
+              9,
+              3
+            ],
+            "direction": "down",
+            "shortClue": "فیجی"
+          },
+          {
+            "id": "auto-044",
+            "answer": "برف",
+            "clue": "بارش بلورهای یخی از ابر",
+            "clueCell": [
+              8,
+              3
+            ],
+            "start": [
+              8,
+              2
+            ],
+            "direction": "across",
+            "shortClue": "بلور یخی"
+          },
+          {
+            "id": "auto-045",
+            "answer": "اتاوا",
+            "clue": "پایتخت کانادا",
+            "clueCell": [
+              7,
+              18
             ],
             "start": [
               7,
-              27
+              17
+            ],
+            "direction": "across",
+            "shortClue": "کانادا"
+          },
+          {
+            "id": "auto-046",
+            "answer": "نیتروژن",
+            "clue": "عنصری شیمیایی با نماد N",
+            "clueCell": [
+              7,
+              25
+            ],
+            "start": [
+              8,
+              25
             ],
             "direction": "down",
             "shortClue": "عنصر N"
           },
           {
-            "id": "auto-043",
-            "answer": "ارومیه",
-            "clue": "مرکز استان آذربایجان غربی",
-            "clueCell": [
-              3,
-              25
-            ],
-            "start": [
-              3,
-              24
-            ],
-            "direction": "across",
-            "shortClue": "آذربایجان غربی"
-          },
-          {
-            "id": "auto-044",
-            "answer": "باران",
-            "clue": "بارش قطره‌های آب از ابر",
-            "clueCell": [
-              3,
-              25
-            ],
-            "start": [
-              4,
-              25
-            ],
-            "direction": "down",
-            "shortClue": "قطره ابر"
-          },
-          {
-            "id": "auto-045",
-            "answer": "پلکان",
-            "clue": "مجموعهٔ پله‌ها برای رفت‌وآمد میان ارتفاع‌ها",
-            "clueCell": [
-              2,
-              26
-            ],
-            "start": [
-              2,
-              25
-            ],
-            "direction": "across",
-            "shortClue": "راه‌پله"
-          },
-          {
-            "id": "auto-046",
-            "answer": "کتاب",
-            "clue": "مجموعه‌ای از نوشته‌ها یا تصاویر در قالب صفحات",
-            "clueCell": [
-              2,
-              26
-            ],
-            "start": [
-              3,
-              26
-            ],
-            "direction": "down",
-            "shortClue": "صفحات نوشته"
-          },
-          {
             "id": "auto-047",
-            "answer": "طلا",
-            "clue": "عنصری شیمیایی با نماد Au",
+            "answer": "اردبیل",
+            "clue": "مرکز استانی هم‌نام در شمال غرب ایران",
             "clueCell": [
-              6,
-              3
-            ],
-            "start": [
-              6,
-              2
-            ],
-            "direction": "across",
-            "shortClue": "عنصر Au"
-          },
-          {
-            "id": "auto-048",
-            "answer": "چراغ",
-            "clue": "وسیله‌ای برای روشنایی",
-            "clueCell": [
-              6,
-              3
+              7,
+              25
             ],
             "start": [
               7,
-              3
+              24
+            ],
+            "direction": "across",
+            "shortClue": "مرکز شمال‌غرب"
+          },
+          {
+            "id": "auto-048",
+            "answer": "کیگالی",
+            "clue": "پایتخت رواندا",
+            "clueCell": [
+              2,
+              19
+            ],
+            "start": [
+              3,
+              19
             ],
             "direction": "down",
-            "shortClue": "روشنایی‌بخش"
+            "shortClue": "رواندا"
           },
           {
             "id": "auto-049",
-            "answer": "ریاضی",
-            "clue": "دانش ساختارها، کمیت‌ها و روابط انتزاعی",
+            "answer": "بیرجند",
+            "clue": "مرکز استان خراسان جنوبی",
             "clueCell": [
-              16,
-              21
+              2,
+              19
             ],
             "start": [
-              16,
-              20
+              2,
+              18
             ],
             "direction": "across",
-            "shortClue": "دانش اعداد"
+            "shortClue": "مرکز خراسان ج"
           },
           {
             "id": "auto-050",
-            "answer": "یزد",
-            "clue": "مرکز استانی در کویر مرکزی ایران",
+            "answer": "ابوظبی",
+            "clue": "پایتخت امارات متحده عربی",
             "clueCell": [
-              16,
-              21
+              1,
+              20
             ],
             "start": [
-              17,
-              21
+              2,
+              20
             ],
             "direction": "down",
-            "shortClue": "مرکز کویری"
+            "shortClue": "امارات"
           },
           {
             "id": "auto-051",
-            "answer": "خورشید",
-            "clue": "ستارهٔ مرکزی منظومهٔ شمسی",
+            "answer": "خلیجفارس",
+            "clue": "پهنهٔ آبی میان فلات ایران و شبه‌جزیرهٔ عربستان",
             "clueCell": [
-              16,
-              15
-            ],
-            "start": [
-              16,
-              14
-            ],
-            "direction": "across",
-            "shortClue": "ستاره ما"
-          },
-          {
-            "id": "auto-052",
-            "answer": "رشت",
-            "clue": "مرکز استان گیلان",
-            "clueCell": [
-              16,
-              15
-            ],
-            "start": [
-              17,
-              15
-            ],
-            "direction": "down",
-            "shortClue": "گیلان"
-          },
-          {
-            "id": "auto-053",
-            "answer": "جغرافیا",
-            "clue": "دانش مطالعهٔ مکان‌ها و ویژگی‌های سطح زمین",
-            "clueCell": [
-              12,
-              7
-            ],
-            "start": [
-              12,
-              6
-            ],
-            "direction": "across",
-            "shortClue": "دانش مکان"
-          },
-          {
-            "id": "auto-054",
-            "answer": "موسیقی",
-            "clue": "هنر سامان‌دهی صداها در زمان",
-            "clueCell": [
-              12,
-              7
-            ],
-            "start": [
-              13,
-              7
-            ],
-            "direction": "down",
-            "shortClue": "هنر صداها"
-          },
-          {
-            "id": "auto-055",
-            "answer": "شبهجزیره",
-            "clue": "خشکی‌ای که از سه سو به آب محدود است",
-            "clueCell": [
-              0,
-              28
-            ],
-            "start": [
-              0,
-              27
-            ],
-            "direction": "across",
-            "shortClue": "خشکی سه‌سو آب"
-          },
-          {
-            "id": "auto-056",
-            "answer": "بیابان",
-            "clue": "سرزمینی با بارش اندک و پوشش گیاهی کم",
-            "clueCell": [
-              0,
-              28
+              1,
+              20
             ],
             "start": [
               1,
-              28
+              19
             ],
-            "direction": "down",
-            "shortClue": "سرزمین خشک"
+            "direction": "across",
+            "shortClue": "آبراه جنوب ایران"
           },
           {
-            "id": "auto-057",
+            "id": "auto-052",
             "answer": "مشتری",
             "clue": "بزرگ‌ترین سیارهٔ منظومهٔ شمسی",
             "clueCell": [
-              13,
-              8
+              3,
+              23
             ],
             "start": [
-              13,
-              7
+              4,
+              23
+            ],
+            "direction": "down",
+            "shortClue": "بزرگ‌ترین سیاره"
+          },
+          {
+            "id": "auto-053",
+            "answer": "نیامی",
+            "clue": "پایتخت نیجر",
+            "clueCell": [
+              2,
+              3
+            ],
+            "start": [
+              3,
+              3
+            ],
+            "direction": "down",
+            "shortClue": "نیجر"
+          },
+          {
+            "id": "auto-054",
+            "answer": "اره",
+            "clue": "ابزار دندانه‌دار برای بریدن چوب",
+            "clueCell": [
+              2,
+              3
+            ],
+            "start": [
+              2,
+              2
             ],
             "direction": "across",
-            "shortClue": "سیاره بزرگ"
+            "shortClue": "برش چوب"
+          },
+          {
+            "id": "auto-055",
+            "answer": "ماهتاب",
+            "clue": "روشنایی حاصل از بازتاب نور خورشید از ماه",
+            "clueCell": [
+              3,
+              16
+            ],
+            "start": [
+              4,
+              16
+            ],
+            "direction": "down",
+            "shortClue": "نور بازتاب ماه"
+          },
+          {
+            "id": "auto-056",
+            "answer": "زحل",
+            "clue": "سیاره‌ای با حلقه‌های چشمگیر",
+            "clueCell": [
+              3,
+              16
+            ],
+            "start": [
+              3,
+              15
+            ],
+            "direction": "across",
+            "shortClue": "سیارهٔ حلقه‌دار"
+          },
+          {
+            "id": "auto-057",
+            "answer": "سینما",
+            "clue": "هنر و صنعت تولید و نمایش فیلم",
+            "clueCell": [
+              8,
+              21
+            ],
+            "start": [
+              8,
+              20
+            ],
+            "direction": "across",
+            "shortClue": "هنر فیلم"
           },
           {
             "id": "auto-058",
-            "answer": "دماوند",
-            "clue": "نام بلندترین قلهٔ ایران",
+            "answer": "برن",
+            "clue": "پایتخت سوئیس",
             "clueCell": [
-              13,
-              8
+              8,
+              21
             ],
             "start": [
-              14,
-              8
+              9,
+              21
             ],
             "direction": "down",
-            "shortClue": "بلندترین قله"
+            "shortClue": "سوئیس"
           },
           {
             "id": "auto-059",
-            "answer": "یاسوج",
-            "clue": "مرکز استان کهگیلویه و بویراحمد",
+            "answer": "گرگان",
+            "clue": "مرکز استان گلستان",
+            "clueCell": [
+              13,
+              21
+            ],
+            "start": [
+              13,
+              20
+            ],
+            "direction": "across",
+            "shortClue": "مرکز گلستان"
+          },
+          {
+            "id": "auto-060",
+            "answer": "رمان",
+            "clue": "داستان بلند منثور",
             "clueCell": [
               16,
               27
@@ -894,12 +909,12 @@
               26
             ],
             "direction": "across",
-            "shortClue": "کهگیلویه"
+            "shortClue": "داستان بلند"
           },
           {
-            "id": "auto-060",
-            "answer": "فرش",
-            "clue": "زیرانداز بافته‌شده",
+            "id": "auto-061",
+            "answer": "چکش",
+            "clue": "ابزار کوبیدن میخ",
             "clueCell": [
               16,
               27
@@ -909,42 +924,237 @@
               27
             ],
             "direction": "down",
-            "shortClue": "زیرانداز"
-          },
-          {
-            "id": "auto-061",
-            "answer": "کاسپین",
-            "clue": "نام دیگر دریای خزر",
-            "clueCell": [
-              15,
-              6
-            ],
-            "start": [
-              15,
-              5
-            ],
-            "direction": "across",
-            "shortClue": "دریای خزر"
+            "shortClue": "کوبیدن میخ"
           },
           {
             "id": "auto-062",
+            "answer": "جغرافیا",
+            "clue": "دانش مطالعهٔ مکان‌ها و ویژگی‌های سطح زمین",
+            "clueCell": [
+              3,
+              29
+            ],
+            "start": [
+              4,
+              29
+            ],
+            "direction": "down",
+            "shortClue": "دانش مکان‌ها"
+          },
+          {
+            "id": "auto-063",
+            "answer": "تبریز",
+            "clue": "مرکز استان آذربایجان شرقی",
+            "clueCell": [
+              3,
+              29
+            ],
+            "start": [
+              3,
+              28
+            ],
+            "direction": "across",
+            "shortClue": "مرکز آذربایجان ش"
+          },
+          {
+            "id": "auto-064",
+            "answer": "جزیره",
+            "clue": "خشکی محصور در آب",
+            "clueCell": [
+              1,
+              24
+            ],
+            "start": [
+              2,
+              24
+            ],
+            "direction": "down",
+            "shortClue": "خشکی در آب"
+          },
+          {
+            "id": "auto-065",
+            "answer": "قفل",
+            "clue": "وسیله‌ای برای محدودکردن گشودن در یا صندوق",
+            "clueCell": [
+              1,
+              24
+            ],
+            "start": [
+              1,
+              23
+            ],
+            "direction": "across",
+            "shortClue": "ابزار بستن"
+          },
+          {
+            "id": "auto-066",
+            "answer": "تالاب",
+            "clue": "محیط آبی کم‌عمق با ویژگی‌های میان خشکی و آب",
+            "clueCell": [
+              2,
+              21
+            ],
+            "start": [
+              3,
+              21
+            ],
+            "direction": "down",
+            "shortClue": "آبگیر کم‌عمق"
+          },
+          {
+            "id": "auto-067",
             "answer": "نقره",
             "clue": "عنصری شیمیایی با نماد Ag",
             "clueCell": [
-              15,
-              6
+              0,
+              26
             ],
             "start": [
-              16,
-              6
+              1,
+              26
             ],
             "direction": "down",
             "shortClue": "عنصر Ag"
           },
           {
-            "id": "auto-063",
-            "answer": "هندسه",
-            "clue": "شاخه‌ای از ریاضیات دربارهٔ شکل و فضا",
+            "id": "auto-068",
+            "answer": "رودخانه",
+            "clue": "جریان طبیعی آب در بستری مشخص",
+            "clueCell": [
+              0,
+              26
+            ],
+            "start": [
+              0,
+              25
+            ],
+            "direction": "across",
+            "shortClue": "جریان طبیعی آب"
+          },
+          {
+            "id": "auto-069",
+            "answer": "زهره",
+            "clue": "دومین سیاره از خورشید",
+            "clueCell": [
+              19,
+              19
+            ],
+            "start": [
+              19,
+              18
+            ],
+            "direction": "across",
+            "shortClue": "سیارهٔ دوم"
+          },
+          {
+            "id": "auto-070",
+            "answer": "شبنم",
+            "clue": "قطره‌های آبی که از میعان روی سطح سرد تشکیل می‌شوند",
+            "clueCell": [
+              1,
+              27
+            ],
+            "start": [
+              2,
+              27
+            ],
+            "direction": "down",
+            "shortClue": "میعان روی برگ"
+          },
+          {
+            "id": "auto-071",
+            "answer": "آجر",
+            "clue": "مصالح ساختمانی معمولاً ساخته‌شده از خاک رس",
+            "clueCell": [
+              7,
+              9
+            ],
+            "start": [
+              7,
+              8
+            ],
+            "direction": "across",
+            "shortClue": "خاک رس پخته"
+          },
+          {
+            "id": "auto-072",
+            "answer": "آینه",
+            "clue": "سطح بازتابندهٔ تصویر",
+            "clueCell": [
+              7,
+              9
+            ],
+            "start": [
+              8,
+              9
+            ],
+            "direction": "down",
+            "shortClue": "بازتاب تصویر"
+          },
+          {
+            "id": "auto-073",
+            "answer": "مریخ",
+            "clue": "سیارهٔ معروف به سیارهٔ سرخ",
+            "clueCell": [
+              11,
+              27
+            ],
+            "start": [
+              11,
+              26
+            ],
+            "direction": "across",
+            "shortClue": "سیارهٔ سرخ"
+          },
+          {
+            "id": "auto-074",
+            "answer": "سقف",
+            "clue": "پوشش بالایی اتاق یا ساختمان",
+            "clueCell": [
+              11,
+              27
+            ],
+            "start": [
+              12,
+              27
+            ],
+            "direction": "down",
+            "shortClue": "پوشش بالای بنا"
+          },
+          {
+            "id": "auto-075",
+            "answer": "قیچی",
+            "clue": "ابزار بریدن با دو تیغهٔ مفصل‌دار",
+            "clueCell": [
+              9,
+              27
+            ],
+            "start": [
+              9,
+              26
+            ],
+            "direction": "across",
+            "shortClue": "دو تیغهٔ برش"
+          },
+          {
+            "id": "auto-076",
+            "answer": "دماسنج",
+            "clue": "ابزار سنجش دما",
+            "clueCell": [
+              13,
+              0
+            ],
+            "start": [
+              14,
+              0
+            ],
+            "direction": "down",
+            "shortClue": "سنجش دما"
+          },
+          {
+            "id": "auto-077",
+            "answer": "عطارد",
+            "clue": "نزدیک‌ترین سیاره به خورشید",
             "clueCell": [
               14,
               5
@@ -954,12 +1164,12 @@
               4
             ],
             "direction": "across",
-            "shortClue": "دانش شکل"
+            "shortClue": "سیارهٔ نخست"
           },
           {
-            "id": "auto-064",
-            "answer": "کرمان",
-            "clue": "مرکز استانی هم‌نام در جنوب شرق ایران",
+            "id": "auto-078",
+            "answer": "زنجان",
+            "clue": "مرکز استانی هم‌نام در شمال غرب ایران",
             "clueCell": [
               14,
               5
@@ -969,602 +1179,638 @@
               5
             ],
             "direction": "down",
-            "shortClue": "مرکز جنوب شرق"
+            "shortClue": "شهر شمال‌غرب"
           },
           {
-            "id": "auto-065",
-            "answer": "اره",
-            "clue": "ابزار دندانه‌دار برای بریدن چوب",
+            "id": "auto-079",
+            "answer": "پنجره",
+            "clue": "گشودگی دیوار برای نور و هوا",
             "clueCell": [
-              1,
-              3
+              17,
+              8
             ],
             "start": [
-              1,
+              17,
+              7
+            ],
+            "direction": "across",
+            "shortClue": "راه نور و هوا"
+          },
+          {
+            "id": "auto-080",
+            "answer": "ریاضی",
+            "clue": "دانش ساختارها، کمیت‌ها و روابط انتزاعی",
+            "clueCell": [
+              11,
               2
             ],
-            "direction": "across",
-            "shortClue": "بریدن چوب"
-          },
-          {
-            "id": "auto-066",
-            "answer": "سوزن",
-            "clue": "وسیله‌ای باریک و نوک‌تیز برای دوختن",
-            "clueCell": [
-              1,
-              3
-            ],
             "start": [
-              2,
-              3
+              12,
+              2
             ],
             "direction": "down",
-            "shortClue": "ابزار دوخت"
+            "shortClue": "دانش اعداد"
           },
           {
-            "id": "auto-067",
-            "answer": "تئاتر",
-            "clue": "هنر اجرای نمایش زنده",
+            "id": "auto-081",
+            "answer": "مهتاب",
+            "clue": "نور ماه در شب",
             "clueCell": [
-              19,
-              14
-            ],
-            "start": [
-              19,
-              13
-            ],
-            "direction": "across",
-            "shortClue": "نمایش زنده"
-          },
-          {
-            "id": "auto-068",
-            "answer": "ساری",
-            "clue": "مرکز استان مازندران",
-            "clueCell": [
-              4,
-              0
-            ],
-            "start": [
-              5,
-              0
-            ],
-            "direction": "down",
-            "shortClue": "مازندران"
-          },
-          {
-            "id": "auto-069",
-            "answer": "رمان",
-            "clue": "داستان بلند منثور",
-            "clueCell": [
-              9,
-              0
+              10,
+              28
             ],
             "start": [
               10,
-              0
+              27
             ],
-            "direction": "down",
-            "shortClue": "داستان بلند"
+            "direction": "across",
+            "shortClue": "نور ماه"
           },
           {
-            "id": "auto-070",
+            "id": "auto-082",
             "answer": "جنگل",
             "clue": "ناحیه‌ای با تراکم قابل‌توجه درختان",
             "clueCell": [
-              19,
-              26
+              10,
+              28
             ],
             "start": [
-              19,
-              25
+              11,
+              28
             ],
-            "direction": "across",
+            "direction": "down",
             "shortClue": "انبوه درخت"
           },
           {
-            "id": "auto-071",
-            "answer": "قفل",
-            "clue": "وسیله‌ای برای محدودکردن گشودن در یا صندوق",
+            "id": "auto-083",
+            "answer": "کارون",
+            "clue": "رودی که از شهر اهواز می‌گذرد",
+            "clueCell": [
+              11,
+              1
+            ],
+            "start": [
+              12,
+              1
+            ],
+            "direction": "down",
+            "shortClue": "رود اهواز"
+          },
+          {
+            "id": "auto-084",
+            "answer": "نپتون",
+            "clue": "هشتمین سیارهٔ منظومهٔ شمسی",
             "clueCell": [
               19,
-              4
+              10
             ],
             "start": [
               19,
-              3
+              9
             ],
             "direction": "across",
-            "shortClue": "بندِ در"
+            "shortClue": "سیارهٔ هشتم"
+          },
+          {
+            "id": "auto-085",
+            "answer": "انرژی",
+            "clue": "کمیتی فیزیکی مرتبط با توانایی ایجاد تغییر یا انجام کار",
+            "clueCell": [
+              16,
+              7
+            ],
+            "start": [
+              16,
+              6
+            ],
+            "direction": "across",
+            "shortClue": "توان ایجاد تغییر"
           }
         ],
         "blocked": [
           [
             0,
+            0
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
             7
           ],
           [
             0,
-            19
+            8
           ],
           [
             0,
-            29
-          ],
-          [
-            1,
-            4
-          ],
-          [
-            1,
-            5
-          ],
-          [
-            1,
-            24
-          ],
-          [
-            1,
-            25
-          ],
-          [
-            1,
-            26
-          ],
-          [
-            1,
-            27
-          ],
-          [
-            1,
-            29
-          ],
-          [
-            2,
-            0
-          ],
-          [
-            2,
-            1
-          ],
-          [
-            2,
-            2
-          ],
-          [
-            2,
-            19
-          ],
-          [
-            2,
-            20
-          ],
-          [
-            2,
-            27
-          ],
-          [
-            2,
-            29
-          ],
-          [
-            3,
-            0
-          ],
-          [
-            3,
-            1
-          ],
-          [
-            3,
-            13
-          ],
-          [
-            3,
-            14
-          ],
-          [
-            3,
-            16
-          ],
-          [
-            3,
-            27
-          ],
-          [
-            3,
-            29
-          ],
-          [
-            4,
-            1
-          ],
-          [
-            4,
-            2
-          ],
-          [
-            4,
-            4
-          ],
-          [
-            4,
-            24
-          ],
-          [
-            4,
-            27
-          ],
-          [
-            4,
-            29
-          ],
-          [
-            5,
-            1
-          ],
-          [
-            5,
-            2
-          ],
-          [
-            5,
-            14
-          ],
-          [
-            5,
-            27
-          ],
-          [
-            5,
-            29
-          ],
-          [
-            6,
-            4
-          ],
-          [
-            6,
-            5
-          ],
-          [
-            6,
-            6
-          ],
-          [
-            6,
-            7
-          ],
-          [
-            6,
-            8
-          ],
-          [
-            6,
             9
           ],
           [
-            6,
+            0,
             10
           ],
           [
-            6,
+            0,
             11
           ],
           [
-            6,
-            14
-          ],
-          [
-            6,
-            23
-          ],
-          [
-            6,
-            29
-          ],
-          [
-            7,
-            1
-          ],
-          [
-            7,
-            2
-          ],
-          [
-            7,
-            4
-          ],
-          [
-            7,
-            5
-          ],
-          [
-            7,
-            6
-          ],
-          [
-            7,
-            7
-          ],
-          [
-            7,
-            8
-          ],
-          [
-            7,
-            9
-          ],
-          [
-            7,
-            10
-          ],
-          [
-            7,
-            11
-          ],
-          [
-            7,
-            14
-          ],
-          [
-            7,
-            19
-          ],
-          [
-            7,
-            20
-          ],
-          [
-            7,
-            29
-          ],
-          [
-            8,
-            10
-          ],
-          [
-            8,
-            26
-          ],
-          [
-            8,
-            29
-          ],
-          [
-            9,
-            1
-          ],
-          [
-            9,
-            18
-          ],
-          [
-            9,
-            19
-          ],
-          [
-            9,
-            20
-          ],
-          [
-            9,
-            25
-          ],
-          [
-            9,
-            26
-          ],
-          [
-            9,
-            29
-          ],
-          [
-            10,
-            1
-          ],
-          [
-            10,
-            2
-          ],
-          [
-            10,
-            11
-          ],
-          [
-            10,
-            18
-          ],
-          [
-            10,
-            19
-          ],
-          [
-            10,
-            26
-          ],
-          [
-            10,
-            29
-          ],
-          [
-            11,
-            1
-          ],
-          [
-            11,
+            0,
             12
           ],
           [
-            11,
-            20
-          ],
-          [
-            11,
-            26
-          ],
-          [
-            11,
-            29
-          ],
-          [
-            12,
-            8
-          ],
-          [
-            12,
-            12
-          ],
-          [
-            12,
-            26
-          ],
-          [
-            12,
-            29
-          ],
-          [
-            13,
-            1
-          ],
-          [
-            13,
-            2
-          ],
-          [
-            13,
-            12
-          ],
-          [
-            13,
+            0,
             13
           ],
           [
-            13,
-            17
-          ],
-          [
-            13,
-            18
-          ],
-          [
-            13,
-            24
-          ],
-          [
-            13,
-            26
-          ],
-          [
-            13,
-            29
-          ],
-          [
-            14,
-            6
-          ],
-          [
-            14,
-            12
-          ],
-          [
-            14,
-            13
-          ],
-          [
-            14,
-            16
-          ],
-          [
-            14,
-            17
-          ],
-          [
-            14,
-            18
-          ],
-          [
-            14,
-            24
-          ],
-          [
-            14,
-            26
-          ],
-          [
-            14,
-            27
-          ],
-          [
-            14,
-            29
-          ],
-          [
-            15,
-            12
-          ],
-          [
-            15,
-            13
-          ],
-          [
-            15,
+            0,
             14
           ],
           [
-            15,
+            0,
             15
           ],
           [
-            15,
+            0,
             16
           ],
           [
-            15,
+            0,
             17
           ],
           [
-            15,
+            0,
             18
           ],
           [
-            15,
-            21
-          ],
-          [
-            15,
-            24
-          ],
-          [
-            15,
-            26
-          ],
-          [
-            15,
+            0,
             27
           ],
           [
+            0,
+            28
+          ],
+          [
+            0,
+            29
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            1,
+            10
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            1,
+            25
+          ],
+          [
+            1,
+            28
+          ],
+          [
+            1,
+            29
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            22
+          ],
+          [
+            2,
+            23
+          ],
+          [
+            2,
+            25
+          ],
+          [
+            2,
+            28
+          ],
+          [
+            2,
+            29
+          ],
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            17
+          ],
+          [
+            3,
+            18
+          ],
+          [
+            3,
+            22
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            14
+          ],
+          [
+            4,
+            15
+          ],
+          [
+            4,
+            17
+          ],
+          [
+            4,
+            18
+          ],
+          [
+            4,
+            22
+          ],
+          [
+            4,
+            25
+          ],
+          [
+            4,
+            28
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            5,
+            15
+          ],
+          [
+            5,
+            17
+          ],
+          [
+            5,
+            18
+          ],
+          [
+            5,
+            22
+          ],
+          [
+            5,
+            25
+          ],
+          [
+            5,
+            26
+          ],
+          [
+            5,
+            28
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            6,
+            10
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            6,
+            15
+          ],
+          [
+            6,
+            17
+          ],
+          [
+            6,
+            18
+          ],
+          [
+            6,
+            22
+          ],
+          [
+            6,
+            25
+          ],
+          [
+            6,
+            26
+          ],
+          [
+            6,
+            27
+          ],
+          [
+            6,
+            28
+          ],
+          [
+            7,
+            10
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            7,
+            26
+          ],
+          [
+            7,
+            27
+          ],
+          [
+            7,
+            28
+          ],
+          [
+            8,
+            7
+          ],
+          [
+            8,
+            8
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            8,
+            15
+          ],
+          [
+            8,
+            22
+          ],
+          [
+            8,
+            24
+          ],
+          [
+            8,
+            26
+          ],
+          [
+            8,
+            27
+          ],
+          [
+            8,
+            28
+          ],
+          [
+            9,
+            0
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            9,
+            28
+          ],
+          [
+            10,
+            0
+          ],
+          [
+            10,
+            10
+          ],
+          [
+            10,
+            12
+          ],
+          [
+            10,
+            20
+          ],
+          [
+            11,
+            0
+          ],
+          [
+            11,
+            16
+          ],
+          [
+            11,
+            17
+          ],
+          [
+            11,
+            18
+          ],
+          [
+            11,
+            20
+          ],
+          [
+            11,
+            29
+          ],
+          [
+            12,
+            0
+          ],
+          [
+            12,
+            5
+          ],
+          [
+            12,
+            6
+          ],
+          [
+            12,
+            16
+          ],
+          [
+            12,
+            17
+          ],
+          [
+            12,
+            18
+          ],
+          [
+            12,
+            26
+          ],
+          [
+            12,
+            29
+          ],
+          [
+            13,
+            3
+          ],
+          [
+            13,
+            5
+          ],
+          [
+            13,
+            6
+          ],
+          [
+            13,
+            7
+          ],
+          [
+            13,
+            9
+          ],
+          [
+            13,
+            10
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            13,
+            23
+          ],
+          [
+            13,
+            26
+          ],
+          [
+            13,
+            29
+          ],
+          [
+            14,
+            6
+          ],
+          [
+            14,
+            7
+          ],
+          [
+            14,
+            9
+          ],
+          [
+            14,
+            10
+          ],
+          [
+            14,
+            20
+          ],
+          [
+            14,
+            29
+          ],
+          [
+            15,
+            3
+          ],
+          [
+            15,
+            4
+          ],
+          [
+            15,
+            6
+          ],
+          [
+            15,
+            7
+          ],
+          [
+            15,
+            9
+          ],
+          [
+            15,
+            10
+          ],
+          [
             15,
             29
           ],
           [
             16,
-            0
+            9
           ],
           [
             16,
-            1
+            10
           ],
           [
             16,
-            2
-          ],
-          [
-            16,
-            3
-          ],
-          [
-            16,
-            4
+            14
           ],
           [
             16,
@@ -1572,23 +1818,11 @@
           ],
           [
             17,
-            0
-          ],
-          [
-            17,
             1
           ],
           [
             17,
             2
-          ],
-          [
-            17,
-            3
-          ],
-          [
-            17,
-            4
           ],
           [
             17,
@@ -1597,14 +1831,6 @@
           [
             17,
             10
-          ],
-          [
-            17,
-            12
-          ],
-          [
-            17,
-            13
           ],
           [
             17,
@@ -1620,87 +1846,55 @@
           ],
           [
             17,
-            18
-          ],
-          [
-            17,
-            22
-          ],
-          [
-            17,
-            24
-          ],
-          [
-            17,
-            26
-          ],
-          [
-            17,
-            28
-          ],
-          [
-            17,
-            29
-          ],
-          [
-            18,
-            0
-          ],
-          [
-            18,
-            1
-          ],
-          [
-            18,
-            2
-          ],
-          [
-            18,
-            3
-          ],
-          [
-            18,
-            4
-          ],
-          [
-            18,
-            9
-          ],
-          [
-            18,
-            10
-          ],
-          [
-            18,
-            12
-          ],
-          [
-            18,
-            13
-          ],
-          [
-            18,
-            14
-          ],
-          [
-            18,
-            16
-          ],
-          [
-            18,
-            17
-          ],
-          [
-            18,
-            18
-          ],
-          [
-            18,
             19
           ],
           [
+            17,
+            23
+          ],
+          [
+            17,
+            25
+          ],
+          [
+            17,
+            29
+          ],
+          [
             18,
-            22
+            1
+          ],
+          [
+            18,
+            2
+          ],
+          [
+            18,
+            3
+          ],
+          [
+            18,
+            4
+          ],
+          [
+            18,
+            6
+          ],
+          [
+            18,
+            7
+          ],
+          [
+            18,
+            8
+          ],
+          [
+            18,
+            9
+          ],
+          [
+            18,
+            10
           ],
           [
             18,
@@ -1708,15 +1902,7 @@
           ],
           [
             18,
-            24
-          ],
-          [
-            18,
-            26
-          ],
-          [
-            18,
-            28
+            25
           ],
           [
             18,
@@ -1724,31 +1910,43 @@
           ],
           [
             19,
-            0
+            1
           ],
           [
             19,
-            7
+            2
           ],
           [
             19,
-            16
+            3
           ],
           [
             19,
-            17
+            4
           ],
           [
             19,
-            18
+            11
           ],
           [
             19,
-            19
+            12
           ],
           [
             19,
-            28
+            14
+          ],
+          [
+            19,
+            22
+          ],
+          [
+            19,
+            23
+          ],
+          [
+            19,
+            25
           ],
           [
             19,
@@ -1758,16 +1956,71 @@
         "grid": [
           [
             {
-              "kind": "letter",
-              "answer": "ب"
+              "kind": "block"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-027"
+              ]
             },
             {
               "kind": "letter",
-              "answer": "ا"
+              "answer": "د"
             },
             {
               "kind": "letter",
-              "answer": "ت"
+              "answer": "ز"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-041",
+                "auto-042"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
             },
             {
               "kind": "letter",
@@ -1775,11 +2028,69 @@
             },
             {
               "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
               "answer": "ا"
             },
             {
               "kind": "letter",
-              "answer": "م"
+              "answer": "خ"
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-067",
+                "auto-068"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            }
+          ],
+          [
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "letter",
+              "answer": "ف"
+            },
+            {
+              "kind": "letter",
+              "answer": "ص"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
             },
             {
               "kind": "clue",
@@ -1787,6 +2098,18 @@
                 "auto-009",
                 "auto-010"
               ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
             },
             {
               "kind": "block"
@@ -1801,11 +2124,112 @@
             },
             {
               "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ف"
+            },
+            {
+              "kind": "letter",
+              "answer": "ج"
+            },
+            {
+              "kind": "letter",
               "answer": "ی"
             },
             {
               "kind": "letter",
-              "answer": "آ"
+              "answer": "ل"
+            },
+            {
+              "kind": "letter",
+              "answer": "خ"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-050",
+                "auto-051"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ل"
+            },
+            {
+              "kind": "letter",
+              "answer": "ف"
+            },
+            {
+              "kind": "letter",
+              "answer": "ق"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-064",
+                "auto-065"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-070"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            }
+          ],
+          [
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-053",
+                "auto-054"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "پ"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ک"
             },
             {
               "kind": "letter",
@@ -1813,7 +2237,21 @@
             },
             {
               "kind": "letter",
-              "answer": "و"
+              "answer": "ل"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-034"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
             },
             {
               "kind": "letter",
@@ -1821,11 +2259,15 @@
             },
             {
               "kind": "letter",
-              "answer": "ئ"
+              "answer": "ج"
             },
             {
               "kind": "letter",
-              "answer": "و"
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
             },
             {
               "kind": "letter",
@@ -1834,12 +2276,62 @@
             {
               "kind": "clue",
               "clueIds": [
-                "auto-021",
-                "auto-022"
+                "auto-048",
+                "auto-049"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-066"
               ]
             },
             {
               "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ج"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ق"
+            },
+            {
+              "kind": "letter",
+              "answer": "ش"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            }
+          ],
+          [
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
             },
             {
               "kind": "letter",
@@ -1876,55 +2368,9 @@
             {
               "kind": "clue",
               "clueIds": [
-                "auto-055",
-                "auto-056"
+                "auto-018",
+                "auto-019"
               ]
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-065",
-                "auto-066"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ه"
             },
             {
               "kind": "letter",
@@ -1932,60 +2378,17 @@
             },
             {
               "kind": "letter",
-              "answer": "ا"
+              "answer": "ح"
             },
             {
               "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
+              "answer": "ز"
             },
             {
               "kind": "clue",
               "clueIds": [
-                "auto-001",
-                "auto-002"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "خ"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-035",
-                "auto-036"
+                "auto-055",
+                "auto-056"
               ]
             },
             {
@@ -1993,111 +2396,6 @@
             },
             {
               "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "گ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-007",
-                "auto-008"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
             },
             {
               "kind": "letter",
@@ -2105,68 +2403,28 @@
             },
             {
               "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "پ"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-045",
-                "auto-046"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
+              "answer": "ب"
             },
             {
               "kind": "letter",
               "answer": "ت"
             },
             {
+              "kind": "block"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-052"
+              ]
+            },
+            {
               "kind": "letter",
-              "answer": "ا"
+              "answer": "ز"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
             },
             {
               "kind": "letter",
@@ -2177,14 +2435,24 @@
               "answer": "ب"
             },
             {
-              "kind": "clue",
-              "clueIds": [
-                "auto-013",
-                "auto-014"
-              ]
+              "kind": "letter",
+              "answer": "ت"
             },
             {
+              "kind": "clue",
+              "clueIds": [
+                "auto-062",
+                "auto-063"
+              ]
+            }
+          ],
+          [
+            {
               "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
             },
             {
               "kind": "block"
@@ -2194,11 +2462,24 @@
               "answer": "ی"
             },
             {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "پ"
             },
             {
               "kind": "letter",
-              "answer": "خ"
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ک"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
             },
             {
               "kind": "letter",
@@ -2206,7 +2487,7 @@
             },
             {
               "kind": "letter",
-              "answer": "ه"
+              "answer": "ک"
             },
             {
               "kind": "letter",
@@ -2217,8 +2498,394 @@
               "answer": "م"
             },
             {
+              "kind": "clue",
+              "clueIds": [
+                "auto-011",
+                "auto-012"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
               "kind": "letter",
               "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ج"
+            }
+          ],
+          [
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "پ"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ک"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-016",
+                "auto-017"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "گ"
+            },
+            {
+              "kind": "letter",
+              "answer": "ظ"
+            },
+            {
+              "kind": "letter",
+              "answer": "ل"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ش"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "غ"
+            }
+          ],
+          [
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "letter",
+              "answer": "ش"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-023",
+                "auto-024"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ج"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            }
+          ],
+          [
+            {
+              "kind": "letter",
+              "answer": "ک"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "ز"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "ف"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-035",
+                "auto-036"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ج"
+            },
+            {
+              "kind": "letter",
+              "answer": "آ"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-071",
+                "auto-072"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-045"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ل"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
             },
             {
               "kind": "letter",
@@ -2227,6 +2894,40 @@
             {
               "kind": "letter",
               "answer": "ا"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-046",
+                "auto-047"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            }
+          ],
+          [
+            {
+              "kind": "letter",
+              "answer": "ف"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
             },
             {
               "kind": "clue",
@@ -2237,7 +2938,43 @@
             },
             {
               "kind": "letter",
-              "answer": "ک"
+              "answer": "ش"
+            },
+            {
+              "kind": "letter",
+              "answer": "ل"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "آ"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
             },
             {
               "kind": "block"
@@ -2247,18 +2984,225 @@
               "answer": "ا"
             },
             {
-              "kind": "block"
-            }
-          ],
-          [
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
+            },
             {
               "kind": "clue",
               "clueIds": [
-                "auto-068"
+                "auto-057",
+                "auto-058"
               ]
             },
             {
               "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ف"
+            }
+          ],
+          [
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ش"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "ز"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-001",
+                "auto-002"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "خ"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
+            },
+            {
+              "kind": "letter",
+              "answer": "ع"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-030",
+                "auto-031"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "چ"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "ق"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-075"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            }
+          ],
+          [
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ژ"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-020",
+                "auto-021"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
             },
             {
               "kind": "block"
@@ -2272,39 +3216,93 @@
             },
             {
               "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
               "answer": "ر"
             },
             {
               "kind": "letter",
-              "answer": "و"
+              "answer": "ی"
             },
             {
               "kind": "letter",
-              "answer": "پ"
+              "answer": "ت"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-028",
+                "auto-029"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
             },
             {
               "kind": "letter",
               "answer": "م"
             },
             {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
+              "kind": "clue",
+              "clueIds": [
+                "auto-081",
+                "auto-082"
+              ]
             },
             {
               "kind": "letter",
               "answer": "ا"
+            }
+          ],
+          [
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-083"
+              ]
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-080"
+              ]
             },
             {
               "kind": "letter",
@@ -2312,14 +3310,27 @@
             },
             {
               "kind": "letter",
-              "answer": "ک"
+              "answer": "س"
             },
             {
-              "kind": "clue",
-              "clueIds": [
-                "auto-005",
-                "auto-006"
-              ]
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
             },
             {
               "kind": "letter",
@@ -2331,7 +3342,46 @@
             },
             {
               "kind": "letter",
-              "answer": "چ"
+              "answer": "ب"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-003",
+                "auto-004"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ب"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
             },
             {
               "kind": "letter",
@@ -2342,33 +3392,23 @@
               "answer": "ی"
             },
             {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
               "kind": "clue",
               "clueIds": [
-                "auto-015",
-                "auto-016"
+                "auto-073",
+                "auto-074"
               ]
             },
             {
               "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
+              "answer": "ج"
             },
             {
               "kind": "block"
@@ -2376,26 +3416,7 @@
           ],
           [
             {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
               "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
             },
             {
               "kind": "letter",
@@ -2403,147 +3424,11 @@
             },
             {
               "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "م"
+              "answer": "ر"
             },
             {
               "kind": "letter",
               "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-017",
-                "auto-018"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ز"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "letter",
-              "answer": "پ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-031",
-                "auto-032"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "ط"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-047",
-                "auto-048"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
             },
             {
               "kind": "letter",
@@ -2553,12 +3438,7 @@
               "kind": "block"
             },
             {
-              "kind": "letter",
-              "answer": "ز"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
+              "kind": "block"
             },
             {
               "kind": "letter",
@@ -2570,44 +3450,81 @@
             },
             {
               "kind": "letter",
-              "answer": "ب"
+              "answer": "س"
             },
             {
               "kind": "letter",
-              "answer": "آ"
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
             },
             {
               "kind": "clue",
               "clueIds": [
-                "auto-011",
-                "auto-012"
+                "auto-014",
+                "auto-015"
               ]
             },
             {
               "kind": "letter",
-              "answer": "ر"
+              "answer": "ه"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
+            },
+            {
+              "kind": "letter",
+              "answer": "ک"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
             },
             {
               "kind": "block"
             },
             {
               "kind": "letter",
-              "answer": "ف"
+              "answer": "ی"
             },
             {
               "kind": "letter",
-              "answer": "ر"
+              "answer": "و"
             },
             {
               "kind": "letter",
-              "answer": "ب"
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
             },
             {
               "kind": "clue",
               "clueIds": [
-                "auto-041",
-                "auto-042"
+                "auto-032",
+                "auto-033"
               ]
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
             },
             {
               "kind": "letter",
@@ -2619,46 +3536,155 @@
           ],
           [
             {
+              "kind": "clue",
+              "clueIds": [
+                "auto-076"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ج"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ف"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-022"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
               "kind": "letter",
               "answer": "ر"
             },
             {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "ن"
             },
             {
               "kind": "letter",
-              "answer": "چ"
+              "answer": "ا"
             },
             {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "گ"
             },
             {
               "kind": "letter",
               "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "گ"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-059"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ی"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ژ"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ق"
+            },
+            {
+              "kind": "letter",
+              "answer": "گ"
+            },
+            {
+              "kind": "block"
+            }
+          ],
+          [
+            {
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ط"
+            },
+            {
+              "kind": "letter",
+              "answer": "ع"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-077",
+                "auto-078"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
             },
             {
               "kind": "letter",
@@ -2668,26 +3694,15 @@
               "kind": "block"
             },
             {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ف"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
               "kind": "block"
             },
             {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "د"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
             },
             {
               "kind": "letter",
@@ -2695,7 +3710,33 @@
             },
             {
               "kind": "letter",
-              "answer": "ت"
+              "answer": "آ"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "خ"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-005",
+                "auto-006"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "block"
             },
             {
               "kind": "letter",
@@ -2725,129 +3766,12 @@
               ]
             },
             {
-              "kind": "block"
-            }
-          ],
-          [
-            {
               "kind": "letter",
-              "answer": "ی"
+              "answer": "ف"
             },
             {
               "kind": "letter",
-              "answer": "ش"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ک"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "پ"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-025",
-                "auto-026"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "آ"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-003",
-                "auto-004"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
+              "answer": "ل"
             },
             {
               "kind": "block"
@@ -2855,10 +3779,19 @@
           ],
           [
             {
-              "kind": "clue",
-              "clueIds": [
-                "auto-069"
-              ]
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ض"
+            },
+            {
+              "kind": "block"
             },
             {
               "kind": "block"
@@ -2868,102 +3801,10 @@
               "answer": "ز"
             },
             {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "پ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-023",
-                "auto-024"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
               "kind": "block"
             },
             {
               "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "م"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
             },
             {
               "kind": "letter",
@@ -2971,72 +3812,9 @@
             },
             {
               "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "letter",
-              "answer": "ر"
             },
             {
               "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "غ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "م"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "letter",
-              "answer": "ط"
-            },
-            {
-              "kind": "letter",
-              "answer": "ق"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-033",
-                "auto-034"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ش"
             },
             {
               "kind": "letter",
@@ -3044,71 +3822,7 @@
             },
             {
               "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ک"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-029",
-                "auto-030"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "letter",
-              "answer": "م"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
+              "answer": "د"
             },
             {
               "kind": "letter",
@@ -3117,6 +3831,18 @@
             {
               "kind": "letter",
               "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ش"
+            },
+            {
+              "kind": "letter",
+              "answer": "ف"
             },
             {
               "kind": "letter",
@@ -3128,29 +3854,14 @@
             },
             {
               "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ز"
+              "answer": "آ"
             },
             {
               "kind": "clue",
               "clueIds": [
-                "auto-027",
-                "auto-028"
+                "auto-007",
+                "auto-008"
               ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
             },
             {
               "kind": "letter",
@@ -3158,19 +3869,23 @@
             },
             {
               "kind": "letter",
-              "answer": "م"
+              "answer": "ژ"
             },
             {
               "kind": "letter",
-              "answer": "ر"
+              "answer": "ی"
             },
             {
               "kind": "letter",
-              "answer": "ج"
+              "answer": "س"
             },
             {
               "kind": "letter",
-              "answer": "آ"
+              "answer": "ک"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
             },
             {
               "kind": "clue",
@@ -3181,40 +3896,6 @@
             },
             {
               "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ع"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ک"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ک"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "block"
             }
           ],
           [
@@ -3224,110 +3905,11 @@
             },
             {
               "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ف"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "غ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ج"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-053",
-                "auto-054"
-              ]
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "آ"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "letter",
               "answer": "ن"
             },
             {
               "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
               "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-019",
-                "auto-020"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "letter",
-              "answer": "پ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ج"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "block"
             },
             {
               "kind": "letter",
@@ -3335,13 +3917,40 @@
             },
             {
               "kind": "letter",
-              "answer": "ش"
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-085"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
             },
             {
               "kind": "block"
-            }
-          ],
-          [
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
             {
               "kind": "letter",
               "answer": "ن"
@@ -3350,7 +3959,16 @@
               "kind": "block"
             },
             {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
             },
             {
               "kind": "letter",
@@ -3358,100 +3976,49 @@
             },
             {
               "kind": "letter",
-              "answer": "ر"
+              "answer": "س"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-025",
+                "auto-026"
+              ]
             },
             {
               "kind": "letter",
-              "answer": "ت"
+              "answer": "س"
             },
             {
               "kind": "letter",
-              "answer": "ش"
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
             },
             {
               "kind": "letter",
               "answer": "م"
             },
             {
-              "kind": "clue",
-              "clueIds": [
-                "auto-057",
-                "auto-058"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "گ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
               "kind": "letter",
               "answer": "ر"
             },
             {
-              "kind": "letter",
-              "answer": "ه"
+              "kind": "clue",
+              "clueIds": [
+                "auto-060",
+                "auto-061"
+              ]
             },
             {
               "kind": "letter",
               "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
             },
             {
               "kind": "block"
@@ -3460,59 +4027,21 @@
           [
             {
               "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "letter",
               "answer": "س"
             },
             {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-063",
-                "auto-064"
-              ]
+              "kind": "block"
             },
             {
               "kind": "block"
             },
             {
               "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
+              "answer": "ه"
             },
             {
               "kind": "letter",
               "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ش"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
             },
             {
               "kind": "letter",
@@ -3520,7 +4049,120 @@
             },
             {
               "kind": "letter",
-              "answer": "ی"
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "پ"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-079"
+              ]
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
+            },
+            {
+              "kind": "letter",
+              "answer": "ج"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ش"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "م"
+            },
+            {
+              "kind": "letter",
+              "answer": "چ"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "block"
+            }
+          ],
+          [
+            {
+              "kind": "letter",
+              "answer": "ن"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
             },
             {
               "kind": "block"
@@ -3537,32 +4179,67 @@
             },
             {
               "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
               "answer": "س"
             },
             {
               "kind": "letter",
-              "answer": "ی"
+              "answer": "و"
             },
             {
               "kind": "letter",
-              "answer": "س"
+              "answer": "ن"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "clue",
+              "clueIds": [
+                "auto-013"
+              ]
+            },
+            {
+              "kind": "letter",
+              "answer": "ش"
+            },
+            {
+              "kind": "letter",
+              "answer": "ر"
+            },
+            {
+              "kind": "letter",
+              "answer": "ه"
             },
             {
               "kind": "block"
             },
             {
               "kind": "letter",
-              "answer": "ب"
+              "answer": "و"
             },
             {
               "kind": "block"
             },
             {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "ا"
+            },
+            {
+              "kind": "letter",
+              "answer": "ک"
             },
             {
               "kind": "letter",
@@ -3575,11 +4252,31 @@
           [
             {
               "kind": "letter",
+              "answer": "ج"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "block"
+            },
+            {
+              "kind": "letter",
               "answer": "ن"
             },
             {
               "kind": "letter",
-              "answer": "ی"
+              "answer": "و"
+            },
+            {
+              "kind": "letter",
+              "answer": "ت"
             },
             {
               "kind": "letter",
@@ -3587,286 +4284,13 @@
             },
             {
               "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ک"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-061",
-                "auto-062"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "م"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ف"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ب"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
               "answer": "ن"
             },
             {
-              "kind": "letter",
-              "answer": "ک"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "خ"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "م"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ش"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "خ"
-            },
-            {
               "kind": "clue",
               "clueIds": [
-                "auto-051",
-                "auto-052"
+                "auto-084"
               ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ض"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-049",
-                "auto-050"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ج"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "س"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-059",
-                "auto-060"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "م"
-            },
-            {
-              "kind": "letter",
-              "answer": "ق"
-            },
-            {
-              "kind": "letter",
-              "answer": "ق"
-            },
-            {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "block"
             },
             {
               "kind": "block"
@@ -3879,60 +4303,11 @@
               "answer": "ل"
             },
             {
-              "kind": "letter",
-              "answer": "و"
-            },
-            {
-              "kind": "letter",
-              "answer": "ی"
-            },
-            {
               "kind": "block"
             },
             {
               "kind": "letter",
-              "answer": "پ"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ف"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
+              "answer": "ه"
             },
             {
               "kind": "letter",
@@ -3940,143 +4315,16 @@
             },
             {
               "kind": "letter",
-              "answer": "ی"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ش"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ژ"
+              "answer": "ه"
             },
             {
               "kind": "letter",
               "answer": "ز"
             },
             {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "block"
-            }
-          ],
-          [
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "ف"
-            },
-            {
-              "kind": "letter",
-              "answer": "ق"
-            },
-            {
               "kind": "clue",
               "clueIds": [
-                "auto-071"
-              ]
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ه"
-            },
-            {
-              "kind": "block"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ر"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "letter",
-              "answer": "ا"
-            },
-            {
-              "kind": "letter",
-              "answer": "ئ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ت"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-067"
+                "auto-069"
               ]
             },
             {
@@ -4084,13 +4332,18 @@
               "answer": "ت"
             },
             {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "ی"
             },
             {
               "kind": "block"
             },
             {
               "kind": "block"
+            },
+            {
+              "kind": "letter",
+              "answer": "س"
             },
             {
               "kind": "block"
@@ -4098,39 +4351,14 @@
             {
               "kind": "letter",
               "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "د"
-            },
-            {
-              "kind": "letter",
-              "answer": "ل"
-            },
-            {
-              "kind": "letter",
-              "answer": "گ"
-            },
-            {
-              "kind": "letter",
-              "answer": "ن"
-            },
-            {
-              "kind": "letter",
-              "answer": "ج"
-            },
-            {
-              "kind": "clue",
-              "clueIds": [
-                "auto-070"
-              ]
             },
             {
               "kind": "letter",
               "answer": "ش"
             },
             {
-              "kind": "block"
+              "kind": "letter",
+              "answer": "ک"
             },
             {
               "kind": "block"
@@ -4140,22 +4368,23 @@
         "meta": {
           "status": "published",
           "method": "editor-approved",
+          "seed": 20332375,
+          "generatedAt": "2026-11-04T08:07:17.227Z",
+          "bankRows": 210,
+          "eligibleWords": 209,
+          "attempted": 1,
+          "complete": true,
           "source": "private-google-sheets-selected-entries",
-          "sheetSource": "بانک مرکزی جدول فارسی",
-          "seed": 93015,
-          "layoutVersion": 2,
-          "generation": "paired-clue-first",
-          "publishedAt": "2026-11-04T04:30:41.926Z",
-          "revisedAt": "2026-11-04T07:37:03.283Z",
-          "editorialApproval": true,
-          "sourcePairsVerified": true,
-          "capitals": 13,
-          "dualClueCells": 33,
-          "borderSingleClueCells": 5,
-          "imageReserve": [
-            7,
-            14
-          ]
+          "revision": "2",
+          "revisedAt": "2026-11-04T08:07:17.237Z",
+          "photoSlot": [
+            8,
+            15
+          ],
+          "maxCapitalClues": 15,
+          "dualClueCount": 34,
+          "shortClueDisplay": true,
+          "editorialApproval": true
         }
       }
     }
