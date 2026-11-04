@@ -106,12 +106,13 @@ function createPlayer(container,item){
     const e=item.puzzle.entries.find(x=>x.id===id);
     if(!e)continue;
     const brief=String(e.shortClue||e.clue);
-    const btn=create('button','clue-question-part',brief+' '+(e.direction==='across'?'←':'↓'));
-    btn.type='button';btn.title=e.clue;
+    const marker=(e.direction==='across'?'←':'↓')+fmt.format([...e.answer].length);
+    const btn=create('button','clue-question-part',marker+' '+brief);
+    btn.type='button';btn.title=e.clue+' ('+fmt.format([...e.answer].length)+' حرف)';
     btn.style.fontSize=cell.clueIds.length===2?
      (brief.length>13?'5.25px':brief.length>9?'5.75px':'6.5px'):
      (brief.length>16?'6.25px':'7.3px');
-    btn.setAttribute('aria-label',e.clue+'، '+(e.direction==='across'?'افقی':'عمودی'));
+    btn.setAttribute('aria-label',e.clue+'، '+(e.direction==='across'?'افقی':'عمودی')+'، '+fmt.format([...e.answer].length)+' حرف');
     btn.addEventListener('click',()=>highlight(e));
     box.append(btn);
    }
