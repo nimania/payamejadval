@@ -1,0 +1,34 @@
+name: Publish daily kids crossword
+on:
+  schedule:
+    - cron: '15 8 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: daily-kids-crossword
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate validated puzzle
+        run: python scripts/generate_kids.py
+      - name: Commit only when new puzzle exists
+        run: |
+          if git diff --quiet -- data/kids-published.json; then
+            echo "No new valid puzzle; no publish"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/kids-published.json
+          git commit -m "Publish validated daily children's crossword"
+          git push
