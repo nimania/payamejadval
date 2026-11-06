@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "ageMin": 7,
+  "ageMax": 9,
+  "words": [
+    {
+      "answer": "چوب",
+      "clue": "ماده‌ای که از تنهٔ درخت به دست می‌آید",
+      "reviewed": true
+    },
+    {
+      "answer": "تار",
+      "clue": "ساز ایرانی با سیم‌های بلند",
+      "reviewed": true
+    },
+    {
+      "answer": "رنگ",
+      "clue": "با مدادرنگی به نقاشی می‌دهیم",
+      "reviewed": true
+    },
+    {
+      "answer": "چتر",
+      "clue": "وسیله‌ای که زیر باران باز می‌کنیم",
+      "reviewed": true
+    },
+    {
+      "answer": "وان",
+      "clue": "جایی برای نشستن و حمام‌کردن",
+      "reviewed": true
+    },
+    {
+      "answer": "برگ",
+      "clue": "بخش سبز درخت",
+      "reviewed": true
+    },
+    {
+      "answer": "ران",
+      "clue": "بخش بالایی پا",
+      "reviewed": true
+    },
+    {
+      "answer": "چرب",
+      "clue": "غذایی که روغن زیادی دارد",
+      "reviewed": true
+    },
+    {
+      "answer": "چشم",
+      "clue": "با آن می‌بینیم",
+      "reviewed": true
+    },
+    {
+      "answer": "نور",
+      "clue": "روشنایی خورشید یا چراغ",
+      "reviewed": true
+    },
+    {
+      "answer": "گرد",
+      "clue": "شکلی مانند دایره",
+      "reviewed": true
+    },
+    {
+      "answer": "چنگ",
+      "clue": "ساز قدیمی با سیم‌های فراوان",
+      "reviewed": true
+    },
+    {
+      "answer": "شور",
+      "clue": "مزهٔ نمک",
+      "reviewed": true
+    },
+    {
+      "answer": "مرد",
+      "clue": "انسان بزرگسال مذکر",
+      "reviewed": true
+    },
+    {
+      "answer": "چمن",
+      "clue": "گیاه سبز کوتاه در پارک",
+      "reviewed": true
+    },
+    {
+      "answer": "شام",
+      "clue": "غذایی که شب می‌خوریم",
+      "reviewed": true
+    },
+    {
+      "answer": "مار",
+      "clue": "جانور دراز و بدون پا",
+      "reviewed": true
+    },
+    {
+      "answer": "نمد",
+      "clue": "پارچهٔ ضخیمی که از پشم ساخته می‌شود",
+      "reviewed": true
+    },
+    {
+      "answer": "آرد",
+      "clue": "از آسیاب‌کردن گندم به دست می‌آید",
+      "reviewed": true
+    },
+    {
+      "answer": "توی",
+      "clue": "همان داخل، به زبان خودمانی",
+      "reviewed": true
+    },
+    {
+      "answer": "شیر",
+      "clue": "حیوانی که به سلطان جنگل معروف است",
+      "reviewed": true
+    },
+    {
+      "answer": "آتش",
+      "clue": "چیزی داغ با شعله",
+      "reviewed": true
+    },
+    {
+      "answer": "روی",
+      "clue": "برعکسِ زیر",
+      "reviewed": true
+    },
+    {
+      "answer": "دیر",
+      "clue": "برعکسِ زود",
+      "reviewed": true
+    },
+    {
+      "answer": "داس",
+      "clue": "ابزار خمیدهٔ دروکردن گیاهان",
+      "reviewed": true
+    },
+    {
+      "answer": "اسب",
+      "clue": "حیوانی که می‌توان بر آن سوار شد",
+      "reviewed": true
+    },
+    {
+      "answer": "دان",
+      "clue": "دانهٔ خوراک پرندگان",
+      "reviewed": true
+    },
+    {
+      "answer": "اسم",
+      "clue": "نام هر چیز یا شخص",
+      "reviewed": true
+    },
+    {
+      "answer": "سبد",
+      "clue": "ظرفی برای گذاشتن میوه یا خرید",
+      "reviewed": true
+    },
+    {
+      "answer": "مزه",
+      "clue": "چیزی که زبان از غذا حس می‌کند",
+      "reviewed": true
+    },
+    {
+      "answer": "ترس",
+      "clue": "احساس هنگام دیدن چیز خطرناک",
+      "reviewed": true
+    },
+    {
+      "answer": "روح",
+      "clue": "در داستان‌ها گاهی شبح نامیده می‌شود",
+      "reviewed": true
+    },
+    {
+      "answer": "ترش",
+      "clue": "مزهٔ لیمو",
+      "reviewed": true
+    },
+    {
+      "answer": "سحر",
+      "clue": "وقت نزدیک طلوع آفتاب",
+      "reviewed": true
+    },
+    {
+      "answer": "پدر",
+      "clue": "بابا در خانواده",
+      "reviewed": true
+    },
+    {
+      "answer": "پول",
+      "clue": "با آن خرید می‌کنیم",
+      "reviewed": true
+    },
+    {
+      "answer": "لنگ",
+      "clue": "پارچه‌ای که گاهی در حمام استفاده می‌شود",
+      "reviewed": true
+    },
+    {
+      "answer": "رای",
+      "clue": "انتخابی که هنگام رأی‌گیری می‌کنیم",
+      "reviewed": true
+    }
+  ]
+}
