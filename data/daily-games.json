@@ -3,6 +3,60 @@
   "updatedAt": "2026-11-06",
   "items": [
     {
+      "id": "sudoku-2026-11-07-easy",
+      "type": "sudoku",
+      "title": "سودوکو آسان ـ 2026-11-07",
+      "publishedAt": "2026-11-07T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "easy",
+        "givens": "487061002350408061906500847003800106074196050060203700048010005230780009000320000",
+        "solution": "487961532352478961916532847523847196874196253169253784748619325235784619691325478",
+        "quality": {
+          "unique": true,
+          "givens": 43,
+          "singlesUnsolved": 0,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
+    {
+      "id": "sudoku-2026-11-07-hard",
+      "type": "sudoku",
+      "title": "سودوکو سخت ـ 2026-11-07",
+      "publishedAt": "2026-11-07T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "hard",
+        "givens": "007002508000740209060010000090200000600070003000004080004600001000130904731020006",
+        "solution": "347962518518743269269815347493286175682571493175394682924658731856137924731429856",
+        "quality": {
+          "unique": true,
+          "givens": 29,
+          "singlesUnsolved": 38,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
+    {
+      "id": "sudoku-2026-11-07-medium",
+      "type": "sudoku",
+      "title": "سودوکو متوسط ـ 2026-11-07",
+      "publishedAt": "2026-11-07T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "medium",
+        "givens": "000804003005000407700003900004005001002910708600480000007030000160040500253090804",
+        "solution": "916874253325169487748253916874325691532916748691487325487532169169748532253691874",
+        "quality": {
+          "unique": true,
+          "givens": 32,
+          "singlesUnsolved": 19,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
+    {
       "id": "sudoku-2026-11-06-easy",
       "type": "sudoku",
       "title": "سودوکو آسان ـ 2026-11-06",
