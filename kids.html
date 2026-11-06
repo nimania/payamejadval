@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="جدول کلمات متقاطع ۳ در ۳ فارسی برای کودکان ۷ تا ۹ سال با شش جواب متفاوت و جدول‌های روزانه">
+<title>جدول کودک | پیام جدول</title><link rel="icon" href="./assets/favicon.svg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box}body{margin:0;background:#f7f7f1;color:#203343;font:16px Vazirmatn,Tahoma,sans-serif}
+header{background:white;border-bottom:1px solid #e0e7e9}header>div{max-width:1050px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+header img{width:132px}a{color:#176488;text-decoration:none;font-weight:700}
+main{max-width:1050px;margin:auto;padding:28px 18px 70px}h1{font-size:clamp(24px,5vw,36px);margin:0}h2{font-size:21px}
+.hero{background:#fff;border:1px solid #e1e7e8;border-radius:20px;padding:25px;margin-bottom:22px}.hero p{line-height:2;color:#607380}
+.picker{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.picker button{padding:10px 17px;border:1px solid #cfdee5;background:#fff;border-radius:10px;color:#24516c}
+.picker button.active{background:#195f78;color:white;border-color:#195f78}
+.game{display:grid;grid-template-columns:minmax(0,380px) minmax(260px,1fr);gap:25px;align-items:start}
+.panel{background:#fff;border:1px solid #e0e7e9;border-radius:18px;padding:22px;min-width:0}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));direction:rtl;border:3px solid #263c49;background:#263c49;gap:2px;aspect-ratio:1}
+.cell{min-width:0;width:100%;height:100%;border:0;border-radius:0;text-align:center;background:#fff;color:#193b52;font:800 clamp(28px,6vw,48px) Vazirmatn,Tahoma,sans-serif}
+.cell:focus{outline:4px solid #e7ad42;outline-offset:-4px;background:#fff4d6}
+.cell.good{background:#e0f4e9}.cell.bad{background:#ffe4de}
+.panel h3{margin:0 0 10px;color:#245c75;font-size:16px}.clue-list{padding:0;margin:0 0 16px;list-style:none}
+.clue-list li{padding:9px 3px;border-bottom:1px solid #edf1f2;line-height:1.8;font-size:14px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin:17px 0}
+button{font:700 14px Vazirmatn,Tahoma,sans-serif;cursor:pointer}
+.action{padding:10px 16px;border:1px solid #abc7d5;border-radius:10px;color:#24556d;background:#fff}
+.action.primary{background:#195f78;color:#fff;border-color:#195f78}
+#status{min-height:32px;line-height:1.9;color:#3d626e}small{color:#778892}#answer{white-space:pre-line;line-height:2.1;background:#f1f7f4;padding:12px;border-radius:9px;margin-top:14px}
+@media(max-width:720px){.game{grid-template-columns:1fr}.hero{padding:17px}.panel{padding:15px}.board{max-width:400px;margin:auto}}
+</style></head>
+<body><header><div><a href="./"><img src="./assets/payamejadval-logo.webp" alt="پیام جدول"></a><a href="./">خانه</a><a href="./?type=mini">جدول مینی</a><a href="./kids.html">جدول کودک</a></div></header>
+<main><section class="hero"><h1>🧩 جدول کوچولوهای باهوش</h1><p>جدول کلمات متقاطع ۳ در ۳ برای بچه‌های ۷ تا ۹ سال. در هر جدول، ۶ سؤال و ۶ جواب <strong>کاملاً متفاوت</strong> داریم. هر روز یک جدول جدید، فقط وقتی همهٔ جواب‌ها درست و بررسی‌شده باشند.</p><small>افقی: از راست به چپ • عمودی: از بالا به پایین</small></section>
+<h2>جدول‌های کودک</h2><div id="picker" class="picker" aria-label="انتخاب جدول"></div>
+<section id="game" class="game" hidden>
+<div class="panel"><h2 id="puzzle-title">جدول</h2><div class="board" id="board" aria-label="جدول سه در سه"></div>
+<div class="actions"><button id="check" class="action primary">بررسی پاسخ‌ها</button><button id="reset" class="action">پاک کردن</button><button id="reveal" class="action">پاسخ‌نامه</button></div><div id="status" role="status"></div><div id="answer" hidden></div></div>
+<div class="panel"><h3>← افقی</h3><ol class="clue-list" id="across"></ol><h3>↓ عمودی</h3><ol class="clue-list" id="down"></ol><small>با انتخاب هر خانه و نوشتن یک حرف فارسی، جدول را حل کن. پیشرفتت در همین مرورگر حفظ می‌شود.</small></div>
+</section><p id="loading" role="status">در حال خواندن جدول‌ها…</p></main>
+<script src="./kids.js"></script></body></html>
