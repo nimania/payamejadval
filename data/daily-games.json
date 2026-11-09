@@ -1,7 +1,61 @@
 {
   "schema": 1,
-  "updatedAt": "2026-11-08",
+  "updatedAt": "2026-11-09",
   "items": [
+    {
+      "id": "sudoku-2026-11-09-easy",
+      "type": "sudoku",
+      "title": "سودوکو آسان ـ 2026-11-09",
+      "publishedAt": "2026-11-09T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "easy",
+        "givens": "890037006407651098001092734100083000000009380003705060324070019010320605070910400",
+        "solution": "892437156437651298651892734169283547745169382283745961324576819918324675576918423",
+        "quality": {
+          "unique": true,
+          "givens": 43,
+          "singlesUnsolved": 0,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
+    {
+      "id": "sudoku-2026-11-09-hard",
+      "type": "sudoku",
+      "title": "سودوکو سخت ـ 2026-11-09",
+      "publishedAt": "2026-11-09T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "hard",
+        "givens": "050807300800006549000000070700000050480021006000080000162040080300000001578060000",
+        "solution": "954817362817236549236954178721693854485721936693485217162349785349578621578162493",
+        "quality": {
+          "unique": true,
+          "givens": 29,
+          "singlesUnsolved": 20,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
+    {
+      "id": "sudoku-2026-11-09-medium",
+      "type": "sudoku",
+      "title": "سودوکو متوسط ـ 2026-11-09",
+      "publishedAt": "2026-11-09T08:00:00+03:30",
+      "puzzle": {
+        "version": 1,
+        "difficulty": "medium",
+        "givens": "050901800010002570203400090000820007300750100045009000069200005030547000070000020",
+        "solution": "457961832916382574283475691691823457328754169745619283169238745832547916574196328",
+        "quality": {
+          "unique": true,
+          "givens": 32,
+          "singlesUnsolved": 28,
+          "method": "unique-solution-generator-v1"
+        }
+      }
+    },
     {
       "id": "sudoku-2026-11-08-easy",
       "type": "sudoku",
