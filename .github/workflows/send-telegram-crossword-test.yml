@@ -1,0 +1,30 @@
+name: Send 7x7 crossword privately via PayameJadvalBot
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_code:
+        description: "Unique code you send to the bot as /jadval CODE (8+ ASCII characters)"
+        required: true
+        type: string
+      confirm_send:
+        description: "Enable actual message delivery; off = connection and widget checks"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  send-private-trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify bot and send to the matching private chat only
+        env:
+          TELEGRAM_CROSSWORD_BOT_TOKEN: ${{ secrets.TELEGRAM_CROSSWORD_BOT_TOKEN }}
+          TELEGRAM_CROSSWORD_TEST_CODE: ${{ inputs.test_code }}
+          TELEGRAM_CROSSWORD_CONFIRM_SEND: ${{ inputs.confirm_send }}
+        run: python3 telegram/send-private-test.py
