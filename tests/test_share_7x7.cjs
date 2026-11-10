@@ -1,0 +1,24 @@
+"use strict";
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const quality = require("../quality-gate.js");
+
+const html = fs.readFileSync(path.join(__dirname, "../share-7x7-20261110.html"), "utf8");
+const match = html.match(/<script id="puzzleData" type="application\/json">([\s\S]*?)<\/script>/);
+assert.ok(match, "Embedded puzzle JSON must exist");
+const puzzle = JSON.parse(match[1]);
+const report = quality.audit(puzzle, null);
+assert.equal(report.technicalPassed, true, JSON.stringify(report.errors));
+assert.equal(report.errors.length, 0, JSON.stringify(report.errors));
+assert.equal(puzzle.meta.profile, "iran-magazine");
+assert.equal(puzzle.grid.length, 7);
+assert.equal(report.stats.whiteCount, 39);
+assert.equal(report.stats.blackCount, 10);
+assert.equal(report.stats.slots, 22);
+assert.equal(new Set(report.slots.map(slot => slot.answer)).size, 22, "No duplicate words");
+assert.equal(report.stats.shortSlots, 8, "Magazine profile explicitly permits two-character words");
+assert.equal(report.bankPassed, false, "Unreviewed demonstration must not be marked as bank-verified");
+const normalized=report.slots.map(slot=>slot.answer).join(" ");
+assert.ok(!normalized.includes("#"),"All white cells contain valid letters");
+console.log("7x7 shareable magazine trial passes geometry and all clue-count tests");
