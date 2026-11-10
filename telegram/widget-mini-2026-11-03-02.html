@@ -1,0 +1,37 @@
+<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+*{box-sizing:border-box}body{margin:3px 6px;color:var(--tg-theme-text-color,#26323f);font:12px Tahoma,sans-serif}h3{font-size:14px;margin:3px 0 6px}.board{width:100%;max-width:310px;display:grid;grid-template-columns:18px repeat(5,minmax(0,1fr));gap:2px;direction:rtl;margin:0 auto}.axis{display:flex;align-items:center;justify-content:center;font:11px Tahoma,sans-serif;color:var(--tg-theme-hint-color,#75818f)}button{font:inherit;cursor:pointer}.cell{aspect-ratio:1;min-width:0;padding:0;position:relative;background:var(--tg-theme-secondary-bg-color,#f4f7f9);border:1px solid #c2ced5;border-radius:3px;color:var(--tg-theme-text-color,#253847);font-weight:700;font-size:17px}.red{background:#bd0b1b;border:1px solid #bd0b1b;pointer-events:none}.word{background:#d8eefa;color:#203a4e}.focus{background:#a7d7f6;outline:2px solid #2a7dab;outline-offset:-2px;color:#17344d}.error{background:#ffd6d6;color:#892333}.clue{border:1px solid #ccd7df;background:var(--tg-theme-secondary-bg-color,#f5f8fa);border-radius:6px;padding:7px;margin:7px 0;min-height:44px}.clue b{font-size:11px}.clue p{margin:3px 0 0;font-size:12px}.tools{display:flex;gap:4px;margin:5px 0}.tools button{min-width:0;flex:1;font-size:11px;padding:5px 2px;background:var(--tg-theme-secondary-bg-color,#edf4f8);color:var(--tg-theme-text-color,#273847);border:1px solid #cad6de;border-radius:5px}.tools button.main{background:var(--tg-theme-button-color,#217abd);color:var(--tg-theme-button-text-color,#fff);border:0}.kbd{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;margin-top:7px}.kbd button{min-width:0;height:26px;padding:0;border:1px solid #c5d1da;border-radius:4px;background:var(--tg-theme-secondary-bg-color,#f4f7f9);color:var(--tg-theme-text-color,#253947);font-size:13px;font-weight:700}#progress{text-align:center;font-size:11px;min-height:18px;padding:3px}
+</style><body><h3>🧩 پیام جدول | ۵×۵</h3><div id="board" class="board"></div><div class="clue"><b id="clabel"></b><p id="ctext"></p></div><div class="tools"><button id="prev">قبل</button><button id="next">بعد</button><button id="del">پاک‌کردن</button></div><div id="kbd" class="kbd"></div><div class="tools"><button id="hint">راهنمایی</button><button class="main" id="check">بررسی پاسخ</button></div><div class="tools"><button id="share">📤 کپی لینک / نتیجه</button><button id="invite">👥 دعوت در تلگرام</button></div><div id="progress"></div>
+<script>
+const G=["زابرس","اوهیب","هراما","دادیب","یدراه"],C={"horizontal":{"1":["خدمت‌کننده در نیروهای نظامی"],"2":["ناگهانی و بدون مقدمه"],"3":["در ترکیب «نفس اماره» به‌معنی فرمان‌دهنده به بدی"],"4":["ظلم و ستم"],"5":["نام خانوادگی اولیور در زوج کمدی لورل و هاردی"]},"vertical":{"1":["انگشت اشاره"],"2":["فن شعبده و تردستی در متون قدیم"],"3":["دلیر و شجاع"],"4":["جمع ورد؛ دعاها و ذکرها"],"5":["نام نوعی خرما"]}},N=5,$=x=>document.getElementById(x),entries=[],pos=(r,c)=>5*r+c;
+for(const dir of ['horizontal','vertical'])for(let i=0;i<N;i++){let run=[],j=0;
+for(;j<=N;j++){let r=dir==='horizontal'?i:j,c=dir==='horizontal'?4-j:4-i,blocked=j===N||G[r][c]==='#';if(blocked){if(run.length){let group=i+1,part=entries.filter(e=>e.dir===dir&&e.group===group).length;
+entries.push({dir,group,part,cells:run,word:run.map(([y,x])=>G[y][x]).join(''),clue:C[dir][String(group)][part]});run=[]}}else run.push([r,c]);}}
+let values=Array(25).fill(''),selected=0,offset=0,checked=false,hints=0,misses=0,started=0,done=0;
+const web='https://nimania.github.io/payamejadval/share-mini-2026-11-03-02.html',
+invite='https://t.me/PayameJadvalBot?start=p_mini-2026-11-03-02',
+share='https://t.me/share/url?url='+encodeURIComponent(web)+'&text='+encodeURIComponent('🧩 جدول ۵×۵ پیام جدول، تو هم حلش کن!');
+try{let x=JSON.parse(localStorage.getItem('pj-mini-2026-11-03-02')||'null');if(x&&x.values&&x.values.length===25){values=x.values;hints=x.hints||0;misses=x.misses||0;started=x.started||0;done=x.done||0}}catch(e){}
+function save(){try{localStorage.setItem('pj-mini-2026-11-03-02',JSON.stringify({values,hints,misses,started,done}))}catch(e){}}
+function ids(e){return e.cells.map(([r,c])=>pos(r,c))}
+function go(n){selected=(n+entries.length)%entries.length;offset=0;checked=false;draw()}
+function pick(r,c){let k=pos(r,c),a=entries.map((e,i)=>ids(e).includes(k)?i:-1).filter(i=>i>=0);if(!a.length)return;selected=a.includes(selected)?a[(a.indexOf(selected)+1)%a.length]:a[0];offset=ids(entries[selected]).indexOf(k);checked=false;draw()}
+function draw(){let board=$('board'),active=ids(entries[selected]),white=0,filled=0,wrong=0;board.replaceChildren();
+let corner=document.createElement('span');board.append(corner);for(let col=1;col<=5;col++){let b=document.createElement('div');b.className='axis';b.textContent=col;board.append(b)}
+for(let r=0;r<N;r++){let a=document.createElement('div');a.className='axis';a.textContent=r+1;board.append(a);
+for(let c=4;c>=0;c--{let id=pos(r,c),b=document.createElement('button');b.className='cell';b.type='button';if(G[r][c]==='#'){b.className+=' red';b.disabled=true;}else{white++;if(values[id]){filled++;if(checked&&values[id]!==G[r][c]){b.className+=' error';wrong++;}}
+if(active.includes(id))b.className+=active[offset]===id?' focus':' word';b.textContent=values[id]||'';b.onclick=()=>pick(r,c);}board.append(b)}}
+let e=entries[selected],part=entries.filter(x=>x.dir===e.dir&&x.group===e.group).length>1?' ('+(e.part+1)+')':'';
+$('clabel').textContent=(e.dir==='horizontal'?'افقی ':'عمودی ')+e.group+part+' • '+e.word.length+' حرف';$('ctext').textContent=e.clue;
+let solved=values.every((v,i)=>G[Math.floor(i/5)][i%5]==='#'||v===G[Math.floor(i/5)][i%5]);
+if(solved&&!done){done=Date.now();save()}
+$('progress').textContent=solved?'🎉 حل شد • '+points()+' امتیاز آزمایشی (غیررسمی)':checked?(wrong?wrong+' حرف نادرست وارد شده':'تا اینجا حروف واردشده درست‌اند'):'خانه‌های پر: '+filled+' از '+white+' • راهنمایی: '+hints+' • بررسی نادرست: '+misses;}
+function points(){return Math.max(0,100-10*hints-5*misses)+Math.max(0,20-2*Math.ceil(Math.max(0,done-started)/60000))}
+function type(ch){if(!started)started=Date.now();let a=ids(entries[selected]);values[a[offset]]=ch;if(offset<a.length-1)offset++;checked=false;save();draw()}
+function del(){let a=ids(entries[selected]);if(!values[a[offset]]&&offset>0)offset--;values[a[offset]]='';checked=false;save();draw()}
+$('prev').onclick=()=>go(selected-1);$('next').onclick=()=>go(selected+1);$('del').onclick=del;$('check').onclick=()=>{if(values.some((v,i)=>v&&G[Math.floor(i/5)][i%5]!=='#'&&v!==G[Math.floor(i/5)][i%5]))misses++;checked=true;save();draw()};
+$('hint').onclick=()=>{if(!started)started=Date.now();let e=entries[selected],a=ids(e),i=a.findIndex((x,j)=>values[x]!==e.word[j]);if(i<0){go(selected+1);return;}offset=i;values[a[i]]=e.word[i];hints++;checked=false;save();draw()};
+$('share').onclick=()=>{let text=done?'من جدول ۵×۵ پیام جدول را با '+points()+' امتیاز آزمایشی حل کردم 🎉\n'+web:web;TelegramWidget.copyText(text)};
+$('invite').onclick=()=>TelegramWidget.openTelegramLink(share);
+'آ ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ی'.split(' ').forEach(ch=>{let b=document.createElement('button');b.textContent=ch;b.onclick=()=>type(ch);$('kbd').append(b)});
+draw();
+</script></body></html>
