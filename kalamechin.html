@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173e4b">
+<meta name="description" content="کلمه‌چین؛ بازی فارسی اتصال حروف در مجموعه پیام جدول. ۵۰ مرحله همراه با سکه و راهنمایی.">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<title>کلمه‌چین | پیام جدول</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+:root{font-family:Vazirmatn,Tahoma,Arial,sans-serif;color:var(--tg-theme-text-color,#18313b);background:var(--tg-theme-bg-color,#f5f2e9)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;min-height:100vh}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}
+.app{max-width:630px;margin:auto;padding:12px 17px max(28px,env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 0 13px}
+.brand{display:flex;align-items:center;gap:10px}.emblem{width:42px;height:42px;border-radius:13px;background:#1b5664;color:#fff;display:grid;place-items:center;font-weight:900;font-size:23px;box-shadow:0 4px 12px #123e4b30}
+.brand h1{font-size:19px;line-height:1.3;margin:0}.brand small{font-size:11px;color:var(--tg-theme-hint-color,#70818b)}
+.home{border:1px solid #cbd7d4;border-radius:12px;padding:8px 12px;font-size:12px;background:var(--tg-theme-secondary-bg-color,#fff)}
+.panel{background:var(--tg-theme-secondary-bg-color,#fff);border:1px solid #e2e6e1;border-radius:22px;padding:18px;box-shadow:0 7px 22px #23434a0b}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.eyebrow{font-size:12px;color:var(--tg-theme-hint-color,#78858c)}.headline{font-size:21px;font-weight:900;margin-top:2px}
+.pill{border-radius:99px;background:#fff4d9;color:#8a570c;border:1px solid #f3d69b;padding:7px 13px;display:flex;align-items:center;gap:7px;font-weight:800;font-size:14px}
+.progress{margin-top:15px;height:8px;background:#e7ede9;border-radius:99px;overflow:hidden}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#3a9b8f,#1b6374);width:0;transition:width .3s}
+.minor{display:flex;justify-content:space-between;margin:7px 0 17px;font-size:11px;color:var(--tg-theme-hint-color,#71808a)}
+.instructions{background:#e9f2ef;color:#285860;padding:9px 12px;border-radius:12px;font-size:12px;line-height:1.9;text-align:center;margin-bottom:15px}
+.targets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
+.target{border:1px solid #e4e8e5;border-radius:13px;padding:11px 8px;background:#fafbf9;text-align:center;min-width:0}
+.target.solved{background:#e2f4ed;border-color:#b2ddca}
+.target-label{font-size:10px;color:#71808b;margin-bottom:7px}
+.letters{direction:rtl;display:flex;justify-content:center;flex-wrap:wrap;gap:3px}
+.cell{width:clamp(21px,5.5vw,33px);height:clamp(28px,7vw,38px);border-radius:7px;background:#e8eeed;border-bottom:3px solid #b7cac9;display:grid;place-items:center;font-size:16px;font-weight:900;color:#245665}
+.solved .cell{background:#d5ecdf;border-bottom-color:#8fc7a9;color:#22644b}
+.cell.hinted{background:#fff2c5;border-bottom-color:#e1c36a}
+.play{position:relative;margin:14px auto 4px;width:min(320px,100%);aspect-ratio:1;touch-action:none;user-select:none;-webkit-user-select:none}
+.ring{position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#f9f4e7 0,#f3e9d6 71%,#e5d8bf 100%);border:2px solid #dfd2ba;box-shadow:inset 0 4px 14px #b4a88d24}
+.path{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2}
+.letter{position:absolute;transform:translate(-50%,-50%);width:18%;height:18%;max-width:60px;max-height:60px;border-radius:50%;background:#fff;color:#20505c;border:2px solid #bfd3d3;box-shadow:0 5px 0 #c7d4d1,0 8px 14px #183b4530;font-size:clamp(21px,6.5vw,29px);font-weight:900;z-index:3;display:grid;place-items:center;touch-action:none}
+.letter.chosen{background:#196477;color:#fff;border-color:#196477;box-shadow:0 4px 0 #0c3e52,0 8px 14px #183b4540}
+.center{position:absolute;inset:34%;border-radius:50%;display:grid;place-items:center;text-align:center;z-index:1;color:#56717a;font-size:13px;font-weight:700;pointer-events:none;padding:8px;overflow-wrap:anywhere}
+.center strong{font-size:clamp(14px,4.7vw,23px);color:#174e61}
+.status{min-height:44px;display:grid;place-items:center;font-size:13px;line-height:1.6;text-align:center;font-weight:700;color:#1b6a6d;margin:0 0 5px}
+.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.action{border:1px solid #ccd9d8;background:#f7faf8;border-radius:12px;padding:11px 5px;font-size:13px;font-weight:800;color:#315e68}
+.action.primary{background:var(--tg-theme-button-color,#1a6376);color:var(--tg-theme-button-text-color,#fff);border-color:transparent}
+.action:disabled{opacity:.38;cursor:not-allowed}
+.bottom{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:15px}
+.bottom .action{flex:1}
+.foot{font-size:11px;text-align:center;color:var(--tg-theme-hint-color,#77858b);line-height:2;margin-top:16px}
+.overlay{position:fixed;inset:0;background:#0c2535a8;z-index:10;display:grid;place-items:center;padding:20px}
+.overlay[hidden]{display:none}.modal{background:#fff;color:#18313b;border-radius:24px;padding:25px 22px;text-align:center;width:min(100%,370px);box-shadow:0 18px 60px #0c253555}
+.modal .star{font-size:51px;line-height:1.2}.modal h2{font-size:23px;margin:10px 0}.modal p{font-size:14px;color:#65747d;line-height:2}
+.modal .action{width:100%;margin-top:10px}
+@media(max-width:365px){.app{padding-inline:9px}.panel{padding:12px}.targets{gap:6px}.target{padding:9px 4px}.letter{font-size:21px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="app">
+<header class="top">
+<div class="brand"><div class="emblem" aria-hidden="true">چ</div><div><h1>کلمه‌چین</h1><small>یکی از بازی‌های پیام جدول</small></div></div>
+<a class="home" href="./" aria-label="بازگشت به پیام جدول">⌂ صفحه اصلی</a>
+</header>
+<main class="panel">
+<div class="topline">
+<div><div class="eyebrow" id="stageLabel">مرحله ۱ از ۵۰</div><div class="headline">حروف را به هم وصل کن</div></div>
+<div class="pill" aria-label="موجودی سکه"><span aria-hidden="true">●</span><span id="coins">۴۰</span> سکه</div>
+</div>
+<div class="progress" aria-label="پیشرفت مرحله"><span id="progress"></span></div>
+<div class="minor"><span id="doneLabel">۰ واژه از ۳ واژه</span><span id="bonusLabel">کلمات اضافی: ۰</span></div>
+<div class="instructions">روی حروف بکش یا آن‌ها را به‌ترتیب لمس کن و «ثبت واژه» را بزن.</div>
+<div class="targets" id="targets" aria-label="کلمات مورد نیاز مرحله"></div>
+<div class="play" id="wheel" aria-label="انتخاب و اتصال حروف">
+<div class="ring"></div><svg class="path" id="path" viewBox="0 0 320 320" aria-hidden="true"></svg>
+<div class="center" id="current">واژه بساز</div>
+</div>
+<div class="status" id="status" aria-live="polite" role="status">برای شروع، حروف را انتخاب کن.</div>
+<div class="actions">
+<button type="button" class="action" id="clear">پاک‌کردن</button>
+<button type="button" class="action primary" id="submit">ثبت واژه</button>
+<button type="button" class="action" id="hint">راهنمایی ۲۵ ●</button>
+</div>
+<div class="bottom">
+<button class="action" id="prev" type="button">مرحله قبل</button>
+<button class="action" id="next" type="button">مرحله بعد</button>
+<button class="action" id="share" type="button">اشتراک‌گذاری</button>
+</div>
+</main>
+<p class="foot">پیشرفت این نسخه فقط روی همین مرورگر یا دستگاه ذخیره می‌شود.<br>نسخه آزمایشی · بدون ثبت‌نام و خرید درون‌برنامه‌ای</p>
+</div>
+<div id="win" class="overlay" hidden>
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+<div class="star" aria-hidden="true">🏆</div>
+<h2 id="winTitle">مرحله تمام شد!</h2>
+<p id="winText">همه واژه‌ها را پیدا کردی.</p>
+<button class="action primary" id="continue" type="button">مرحله بعد</button>
+<button class="action" id="stay" type="button">بازگشت به بازی</button>
+</div>
+</div>
+<script>
+'use strict';
+const LEVELS=[{"id":1,"letters":"باد","words":["باد","با","بد"]},{"id":2,"letters":"بار","words":["بار","بر","رب","را","با"]},{"id":3,"letters":"دار","words":["دار","در","رد","را"]},{"id":4,"letters":"کار","words":["کار","را","رک"]},{"id":5,"letters":"مار","words":["مار","ما","را"]},{"id":6,"letters":"یار","words":["یار","رای","را","یا"]},{"id":7,"letters":"نام","words":["نام","من","ما","نم"]},{"id":8,"letters":"دان","words":["دان","ندا","اند"]},{"id":9,"letters":"ران","words":["ران","نار","را"]},{"id":10,"letters":"کام","words":["کام","کم","ما"]},{"id":11,"letters":"شاد","words":["شاد","شد"]},{"id":12,"letters":"تاب","words":["تاب","بت","با"]},{"id":13,"letters":"روز","words":["روز","زور","رو"]},{"id":14,"letters":"نور","words":["نور","نو","رو"]},{"id":15,"letters":"دور","words":["دور","رود","در","رو"]},{"id":16,"letters":"سود","words":["سود","دو","سو"]},{"id":17,"letters":"شور","words":["شور","روش","رو"]},{"id":18,"letters":"گوش","words":["گوش","شو"]},{"id":19,"letters":"گرم","words":["گرم","مرگ","رگ"]},{"id":20,"letters":"نگار","words":["نگار","گران","رنگ","نار"]},{"id":21,"letters":"دریا","words":["دریا","یار","رای","دار","در"]},{"id":22,"letters":"ایران","words":["ایران","یاران","انار","رای","ران"]},{"id":23,"letters":"کتاب","words":["کتاب","تاب","تک","بت"]},{"id":24,"letters":"باران","words":["باران","انبار","بار","ران","نار"]},{"id":25,"letters":"بازار","words":["بازار","بارز","باز","راز","بار"]},{"id":26,"letters":"بهار","words":["بهار","باره","راه","بار"]},{"id":27,"letters":"بازی","words":["بازی","زیبا","باز","بیا"]},{"id":28,"letters":"پاره","words":["پاره","راه","پار","پر"]},{"id":29,"letters":"پوست","words":["پوست","پست","تو","سو"]},{"id":30,"letters":"ستاره","words":["ستاره","راست","راه","تار","سار"]},{"id":31,"letters":"سیما","words":["سیما","سیم","اسم","ماس"]},{"id":32,"letters":"میان","words":["میان","نامی","مینا","نام","نیم"]},{"id":33,"letters":"جوان","words":["جوان","جان","نوا","نو"]},{"id":34,"letters":"توان","words":["توان","نوا","تان","نو","تو"]},{"id":35,"letters":"خواب","words":["خواب","خوب","با"]},{"id":36,"letters":"خنده","words":["خنده","دهن","نخ","ده"]},{"id":37,"letters":"دوست","words":["دوست","سود","دو","تو","سو"]},{"id":38,"letters":"دلبر","words":["دلبر","بلد","برد","دل","بر"]},{"id":39,"letters":"پرواز","words":["پرواز","راز","زور","پر"]},{"id":40,"letters":"رویا","words":["رویا","یار","رای","روا"]},{"id":41,"letters":"دانه","words":["دانه","دهان","ندا","دهن"]},{"id":42,"letters":"نانوا","words":["نانوا","نان","نوا","وان"]},{"id":43,"letters":"سرما","words":["سرما","مار","رام","اسم"]},{"id":44,"letters":"سنگر","words":["سنگر","سنگ","رنگ","سر"]},{"id":45,"letters":"زمستان","words":["زمستان","زمان","ساز","ناز","متن"]},{"id":46,"letters":"پاییز","words":["پاییز","پای","زیپ"]},{"id":47,"letters":"دلدار","words":["دلدار","داد","درد","دار","دل"]},{"id":48,"letters":"گلزار","words":["گلزار","گاز","راز","گل"]},{"id":49,"letters":"پرنده","words":["پرنده","پدر","نرد","پر","در"]},{"id":50,"letters":"پرچم","words":["پرچم","چرم","چپ","پر"]}];
+const TOTAL=LEVELS.length;
+const $=id=>document.getElementById(id);
+const FA=n=>new Intl.NumberFormat('fa-IR').format(n);
+const KEY='payamejadval-kalamechin-v1';
+const normalize=s=>String(s||'').replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/\u200c/g,'').trim();
+const LEXICON=new Set(LEVELS.flatMap(l=>l.words));
+function load(){
+ let v={};try{v=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(_){}
+ const unlocked=Math.max(1,Math.min(TOTAL,Math.trunc(Number(v.unlocked)||1)));
+ return {coins:Number.isFinite(v.coins)?Math.max(0,Math.min(100000,Math.trunc(v.coins))):40,
+ unlocked:unlocked,stage:Math.max(1,Math.min(unlocked,Math.trunc(Number(v.stage)||1))),
+ solved:v.solved&&typeof v.solved==='object'?v.solved:{},bonus:v.bonus&&typeof v.bonus==='object'?v.bonus:{},
+ completed:v.completed&&typeof v.completed==='object'?v.completed:{}};
+}
+let state=load(),selection=[],drag=false,moved=false,points=[];
+const cur=()=>LEVELS[state.stage-1];
+function saved(){
+ try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}
+}
+function wordsSolved(){
+ const x=state.solved[state.stage];
+ return Array.isArray(x)?x.filter(w=>cur().words.includes(w)):[];
+}
+function extraSolved(){
+ const x=state.bonus[state.stage];return Array.isArray(x)?x:[];
+}
+function fits(word,letters){
+ const pool=Array.from(letters);
+ for(const char of word){const idx=pool.indexOf(char);if(idx<0)return false;pool.splice(idx,1)}
+ return true;
+}
+function activeWord(){return selection.map(i=>cur().letters[i]).join('')}
+function notice(msg){$('status').textContent=msg}
+function selected(index){
+ if(!Number.isInteger(index)||index<0||index>=cur().letters.length||selection.includes(index))return;
+ selection.push(index);updateSelection();
+}
+function clear(){selection=[];updateSelection()}
+function centers(){
+ const n=cur().letters.length;return Array.from({length:n},(_,i)=>{
+ const a=-Math.PI/2+(Math.PI*2*i/n);
+ return {x:160+122*Math.cos(a),y:160+122*Math.sin(a)}
+ });
+}
+function updateSelection(){
+ const word=activeWord();$('current').replaceChildren();
+ if(word){const t=document.createElement('strong');t.textContent=word;$('current').append(t)}
+ else $('current').textContent='واژه بساز';
+ for(const [i,el] of [...$('wheel').querySelectorAll('.letter')].entries()){
+  el.classList.toggle('chosen',selection.includes(i));
+  el.setAttribute('aria-pressed',selection.includes(i)?'true':'false');
+ }
+ const svg=$('path');svg.replaceChildren();
+ if(selection.length){
+  const c=centers(),p=selection.map(i=>c[i].x+','+c[i].y).join(' ');
+  const line=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+  line.setAttribute('points',p);line.setAttribute('fill','none');line.setAttribute('stroke','#d79b44');
+  line.setAttribute('stroke-width','10');line.setAttribute('stroke-linecap','round');line.setAttribute('stroke-linejoin','round');
+  svg.append(line);
+ }
+}
+function drawWheel(){
+ [...$('wheel').querySelectorAll('.letter')].forEach(x=>x.remove());
+ const letters=Array.from(cur().letters),c=centers();
+ letters.forEach((ch,i)=>{
+  const b=document.createElement('button');b.type='button';b.className='letter';
+  b.textContent=ch;b.dataset.index=i;b.setAttribute('aria-label','حرف '+ch);
+  b.style.left=(c[i].x/320*100)+'%';b.style.top=(c[i].y/320*100)+'%';
+  $('wheel').append(b);
+ });
+ updateSelection();
+}
+function render(){
+ const l=cur();const solved=wordsSolved(),bonuses=extraSolved();
+ $('stageLabel').textContent='مرحله '+FA(state.stage)+' از '+FA(TOTAL);
+ $('coins').textContent=FA(state.coins);
+ $('progress').style.width=(100*solved.length/l.words.length)+'%';
+ $('doneLabel').textContent=FA(solved.length)+' واژه از '+FA(l.words.length)+' واژه';
+ $('bonusLabel').textContent='کلمات اضافی: '+FA(bonuses.length);
+ $('prev').disabled=state.stage===1;
+ $('next').disabled=state.stage>=state.unlocked||state.stage===TOTAL;
+ $('targets').replaceChildren();
+ l.words.slice().sort((a,b)=>a.length-b.length||a.localeCompare(b,'fa')).forEach((word,i)=>{
+  const hit=solved.includes(word),wrap=document.createElement('div');wrap.className='target'+(hit?' solved':'');
+  const label=document.createElement('div');label.className='target-label';
+  label.textContent=FA(word.length)+' حرفی'+(hit?' ✓':'');
+  const tiles=document.createElement('div');tiles.className='letters';
+  [...word].forEach((ch,j)=>{
+   const tile=document.createElement('span');tile.className='cell';
+   tile.textContent=hit?ch:'';
+   tiles.append(tile);
+  });
+  wrap.append(label,tiles);$('targets').append(wrap);
+ });
+ drawWheel();saved();
+}
+function finish(){
+ if(!state.completed[state.stage]){
+  state.completed[state.stage]=true;state.coins+=12;
+ }
+ if(state.stage<TOTAL)state.unlocked=Math.max(state.unlocked,state.stage+1);
+ saved();render();
+ $('winTitle').textContent=state.stage===TOTAL?'تبریک! همه مراحل تمام شد':'مرحله '+FA(state.stage)+' تمام شد!';
+ $('winText').textContent='تمام واژه‌ها را پیدا کردی. پاداش تکمیل مرحله: ۱۲ سکه.';
+ $('continue').textContent=state.stage===TOTAL?'بازگشت به مرحله اول':'مرحله بعد';
+ $('win').hidden=false;
+}
+function solve(word,hinted){
+ const list=state.solved[state.stage]||[];
+ if(list.includes(word)){notice('این واژه را قبلاً پیدا کرده‌ای.');return}
+ list.push(word);state.solved[state.stage]=list;
+ if(!hinted)state.coins+=4;
+ notice(hinted?'یک واژه با راهنمایی آشکار شد.':'آفرین! «'+word+'» درست بود. +۴ سکه');
+ const complete=cur().words.every(w=>list.includes(w));
+ if(complete)finish();else render();
+}
+function submit(){
+ const word=normalize(activeWord());clear();
+ if(word.length<2){notice('دست‌کم دو حرف را انتخاب کن.');return}
+ if(cur().words.includes(word)){solve(word,false);return}
+ if(LEXICON.has(word)&&fits(word,cur().letters)){
+  const list=state.bonus[state.stage]||[];
+  if(list.includes(word)){notice('این واژه اضافی قبلاً ثبت شده است.');return}
+  list.push(word);state.bonus[state.stage]=list;state.coins+=2;
+  notice('«'+word+'» واژه اضافی بود. +۲ سکه');render();return;
+ }
+ notice('«'+word+'» در فهرست واژه‌های این نسخه نیست. دوباره تلاش کن.');
+}
+function hint(){
+ if(state.coins<25){notice('برای راهنمایی به ۲۵ سکه نیاز داری.');return}
+ const word=cur().words.find(w=>!wordsSolved().includes(w));
+ if(!word){notice('این مرحله کامل شده است.');return}
+ state.coins-=25;solve(word,true);
+}
+function stage(n){
+ if(n<1||n>state.unlocked||n>TOTAL)return;
+ state.stage=n;selection=[];$('win').hidden=true;render();
+ notice(state.completed[n]?'این مرحله را قبلاً به پایان رسانده‌ای.':'حروف را به هم وصل کن.');
+}
+function touchIndex(e){
+ const btn=document.elementFromPoint(e.clientX,e.clientY)?.closest('.letter');
+ return btn&&$('wheel').contains(btn)?Number(btn.dataset.index):null;
+}
+const wheel=$('wheel');
+wheel.addEventListener('pointerdown',e=>{
+ if(e.button!==0&&e.pointerType==='mouse')return;
+ const el=e.target.closest('.letter');if(!el)return;
+ e.preventDefault();drag=true;moved=false;
+ wheel.setPointerCapture(e.pointerId);selected(Number(el.dataset.index));
+});
+wheel.addEventListener('pointermove',e=>{
+ if(!drag)return;
+ const idx=touchIndex(e);if(idx!==null&&!selection.includes(idx)){selected(idx);moved=true}
+});
+wheel.addEventListener('pointerup',e=>{
+ if(!drag)return;const idx=touchIndex(e);
+ if(idx!==null&&!selection.includes(idx)){selected(idx);moved=true}
+ drag=false;
+ if(moved&&selection.length>1)submit();
+});
+wheel.addEventListener('pointercancel',()=>{drag=false;clear()});
+$('submit').addEventListener('click',submit);
+$('clear').addEventListener('click',()=>{clear();notice('انتخاب پاک شد.')});
+$('hint').addEventListener('click',hint);
+$('prev').addEventListener('click',()=>stage(state.stage-1));
+$('next').addEventListener('click',()=>stage(state.stage+1));
+$('stay').addEventListener('click',()=>{$('win').hidden=true});
+$('continue').addEventListener('click',()=>stage(state.stage===TOTAL?1:state.stage+1));
+$('share').addEventListener('click',()=>{
+ const txt='من در بازی کلمه‌چین پیام جدول به مرحله '+FA(state.unlocked)+' رسیده‌ام. تو هم امتحان کن!';
+ const url='https://t.me/share/url?url='+encodeURIComponent(location.origin+location.pathname)+'&text='+encodeURIComponent(txt);
+ try{if(window.Telegram?.WebApp?.openTelegramLink){window.Telegram.WebApp.openTelegramLink(url);return}}catch(_){}
+ window.open(url,'_blank','noopener,noreferrer');
+});
+document.addEventListener('keydown',e=>{
+ if(e.target instanceof HTMLElement&&/INPUT|TEXTAREA/.test(e.target.tagName))return;
+ if(e.key==='Enter'){submit()}
+ if(e.key==='Backspace'){selection.pop();updateSelection()}
+ if(e.key==='Escape'){clear()}
+});
+try{window.Telegram?.WebApp?.ready();window.Telegram?.WebApp?.expand()}catch(_){}
+render();
+</script>
+</body></html>
