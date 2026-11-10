@@ -62,6 +62,7 @@ jobs:
           node tests/test_mini.cjs
           node tests/test_share_7x7.cjs
           node tests/test_telegram_widget.cjs
+          python3 -m py_compile telegram/send-private-test.py telegram/configure-webhook.py
           node tests/test_mini_image.cjs
           node tests/test_clue_in_cell_model.cjs
           node tests/test_clue_in_cell.cjs
