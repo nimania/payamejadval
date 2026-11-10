@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>جدول سریع ۵×۵ | پیام جدول</title>
+<meta name="description" content="جدول واقعی کلمات متقاطع ۵×۵؛ ۱۰ پرسش افقی و عمودی. همین‌جا روی گوشی حل کن.">
+<meta property="og:type" content="website"><meta property="og:title" content="🧩 چالش جدول ۵×۵ پیام جدول">
+<meta property="og:description" content="جدول ۵×۵ با ۱۰ پرسش واقعی؛ روی لینک بزن و حلش کن!">
+<meta property="og:url" content="https://nimania.github.io/payamejadval/share-mini-2026-11-03-01.html">
+<meta property="og:image" content="https://nimania.github.io/payamejadval/assets/payamejadval-logo.webp">
+<meta name="theme-color" content="#bd0b1b">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+:root{font-family:Vazirmatn,Tahoma,Arial,sans-serif;background:#f5f6f7;color:#23313e;direction:rtl}
+*{box-sizing:border-box}body{margin:0}button{font:inherit;cursor:pointer}main{max-width:660px;padding:16px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 12px}
+.logo{font-size:15px;font-weight:800;display:flex;align-items:center;gap:8px}
+.stamp{display:inline-flex;background:#fcebee;color:#a30817;padding:4px 10px;border-radius:30px;font-size:11px;font-weight:800}
+h1{font-size:21px;line-height:1.6;margin:0 0 5px}p{margin:3px 0 11px;line-height:1.7}
+.sub{color:#607283;font-size:12px}a{color:#106c95}
+.paper{border:1px solid #e1e4e8;border-radius:18px;background:white;padding:13px;box-shadow:0 3px 20px #1426390b}
+.statusbar{display:flex;gap:8px;align-items:center;justify-content:space-between;font-size:12px;color:#526572}
+.meter{height:6px;width:100%;background:#edf1f4;border-radius:20px;overflow:hidden;margin:9px 0 15px}.meter div{height:100%;width:0;background:#bd0b1b;border-radius:20px;transition:width .2s}
+.board{width:min(100%,420px);margin:0 auto;display:grid;direction:rtl;grid-template-columns:21px repeat(5,minmax(0,1fr));gap:2px}
+.axis{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#6b7b86}
+.cell{aspect-ratio:1;min-width:0;border:1px solid #cfdae0;background:#fff;color:#243643;border-radius:4px;font-size:clamp(16px,4vw,24px);font-weight:800;padding:0;position:relative}
+.block{background:#bd0b1b;border-color:#bd0b1b;border-radius:4px;pointer-events:none}
+.inword{background:#e4f0f7;border-color:#9cbdd0}.active{background:#bbdfef;border:2px solid #287da5}
+.wrong{background:#ffe0e0;border-color:#d85766;color:#ad0a1a}.right{background:#dcf3e6;border-color:#91cbaa;color:#146b46}
+.cell .start{position:absolute;right:2px;top:1px;font:8px Tahoma,sans-serif;color:#667e90}
+.cluebar{margin-top:15px;padding:11px;background:#f5f8fa;border-radius:11px;border:1px solid #e0e7eb;min-height:65px}
+.cluebar strong{color:#bd0b1b;font-size:12px}.cluebar p{font-size:14px;font-weight:700;margin:4px 0 0}
+.controls{display:flex;gap:7px;margin:11px 0}.controls button{flex:1;border-radius:9px;padding:8px 4px;border:1px solid #d4e0e6;background:#f5f8fa;color:#314858;font-size:12px;font-weight:700}
+.keys{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:5px}
+.keys button{height:38px;border:1px solid #d0dbe3;background:#f6f8fa;color:#213844;font-size:16px;font-weight:800;border-radius:7px;padding:0}
+.keys button:active{background:#d9eaf5}.controls .primary{background:#bd0b1b;border-color:#bd0b1b;color:#fff}
+.feedback{text-align:center;margin:9px 0 0;min-height:23px;font-size:12px;color:#516471;font-weight:700}
+.lower{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 0}
+.lower a,.lower button{flex:1;min-width:130px;display:inline-block;text-align:center;padding:10px;border:1px solid #d1dde5;border-radius:10px;font-size:12px;font-weight:700;text-decoration:none;background:#fff;color:#2f5366}
+.lower .share{background:#bd0b1b;color:#fff;border-color:#bd0b1b}
+details{margin-top:15px;border:1px solid #e0e5e9;border-radius:13px;overflow:hidden;background:white}summary{cursor:pointer;padding:13px;font-weight:800;font-size:13px}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:2px 14px 15px}.panels h2{font-size:13px;margin:7px 0}.panels button{display:block;text-align:right;width:100%;font:12px Vazirmatn,Tahoma,sans-serif;border:0;padding:6px 4px;background:none;color:#344652;border-bottom:1px solid #eef0f3}.panels button:hover,.panels button.isactive{color:#bd0b1b;background:#fff5f5}
+footer{padding:13px 0;font-size:11px;line-height:1.9;color:#657783;text-align:center}
+@media(max-width:410px){main{padding:10px}.paper{padding:9px}.keys{gap:3px}.keys button{height:34px}.panels{grid-template-columns:1fr}h1{font-size:18px}.axis{font-size:10px}}
+</style></head><body>
+<main><header><div class="logo">🧩 پیام جدول</div><div class="stamp">جدول مینی منتشرشده</div></header>
+<h1>جدول کلمات متقاطع ۵×۵</h1>
+<p class="sub">۲۲ سرنخ افقی و عمودی • کامل و دارای تقاطع • قابل‌حل روی گوشی و داخل مرورگر تلگرام</p>
+<div class="paper"><div class="statusbar"><span id="progress">۰ از ۲۵ خانه</span><span id="elapsed">زمان: ۰۰:۰۰</span><span id="hints">راهنمایی: ۰</span></div><div class="meter"><div id="meter"></div></div>
+<div class="board" id="board" role="grid" aria-label="جدول کلمات متقاطع هفت در هفت"></div>
+<div class="cluebar"><strong id="clueLabel"></strong><p id="clueText"></p></div>
+<div class="controls"><button id="previous">سؤال قبل</button><button id="next">سؤال بعد</button><button id="backspace">پاک‌کردن حرف</button></div>
+<div class="keys" id="keyboard" aria-label="صفحه کلید فارسی"></div>
+<div class="controls"><button id="hint">نمایش یک حرف</button><button id="check" class="primary">بررسی جواب‌ها</button><button id="reset">شروع دوباره</button></div>
+<div id="feedback" class="feedback" role="status" aria-live="polite"></div></div>
+<div class="lower"><a class="share" id="share" href="#" rel="noopener">فرستادن همین جدول در تلگرام</a><button id="copy">کپی لینک بازی</button></div>
+<details><summary>فهرست کامل سؤال‌ها (برای انتخاب مستقیم باز کن)</summary><div class="panels"><section><h2>افقی</h2><div id="horizontal"></div></section><section><h2>عمودی</h2><div id="vertical"></div></section></div></details>
+<footer>این جدول مینی بدون خانهٔ قرمز است. با انتخاب یک خانه و لمس دوبارهٔ آن، جهت افقی/عمودی تغییر می‌کند. پاسخ‌ها و پیشرفت فقط روی دستگاه بازیکن ذخیره می‌شوند. این آزمون، انتشار رسمی در آرشیو نیست.</footer>
+</main>
+<script id="puzzleData" type="application/json">{"version":3,"grid":[["د","ی","ل","و","ت"],["م","ا","ج","ر","ف"],["د","ر","ا","و","ت"],["م","ا","ج","ن","ا"],["ی","ن","ت","ا","ن"]],"clues":{"horizontal":{"1":["پدید آوردن و ایجاد"],"2":["عاقبت و پایان"],"3":["پیاپی وارد شدن"],"4":["عملی ساختن"],"5":["فرزندی که تنها یکی از والدینش با فرزند دیگر مشترک است"]},"vertical":{"1":["آتشفشانی در جنوب شرقی ایران"],"2":["تیم فوتبال ایتالیایی"],"3":["یک‌دندگی"],"4":["رفقا و همراهان"],"5":["بی‌ثبات در تصمیم و سلیقه"]}},"meta":{"status":"published","method":"editor-approved","profile":"mini-full","source":"owner-attested-private-lexicon-mini-selection","length":5,"id":"mini-2026-11-03-01","title":"جدول مینی ۵×۵ ـ شمارهٔ ۱","size":{"rows":5,"cols":5},"editorialStatus":"site-published-mini"}}</script>
+<script>
+"use strict";
+const puzzle=JSON.parse(document.getElementById("puzzleData").textContent),G=puzzle.grid,N=5;
+const $=id=>document.getElementById(id),id=(r,c)=>r*N+c;
+const entries=[];
+for(const dir of ["horizontal","vertical"]){
+ for(let line=0;line<N;line++){
+  let span=[],part=0;
+  for(let j=0;j<=N;j++){
+   const r=dir==="horizontal"?line:j,c=dir==="horizontal"?N-1-j:N-1-line;
+   const blocked=j===N||G[r][c]==="";
+   if(blocked){
+    if(span.length){const group=String(line+1),clue=puzzle.clues[dir][group][part];entries.push({dir,line:line+1,part:++part,clue,cells:span,answer:span.map(([y,x])=>G[y][x]).join("")});span=[]}
+   }else span.push([r,c]);
+  }
+ }
+}
+const storeKey="payamejadval-mini-2026-11-03-01";
+let values=Array(N*N).fill(""),selected=0,offset=0,checked=false,help=0,started=0,completed=0;
+try{const prev=JSON.parse(localStorage.getItem(storeKey)||"null");if(prev&&Array.isArray(prev.values)&&prev.values.length===N*N){values=prev.values;help=prev.help||0;started=prev.started||0;completed=prev.completed||0}}catch(_){}
+function save(){try{localStorage.setItem(storeKey,JSON.stringify({values,help,started,completed}))}catch(_){}}
+function slots(e){return e.cells.map(([r,c])=>id(r,c))}
+function title(e){return (e.dir==="horizontal"?"افقی ":"عمودی ")+e.line+(entries.filter(x=>x.dir===e.dir&&x.line===e.line).length>1?" ("+e.part+")":"")}
+function showTime(){const n=started?Math.floor(((completed||Date.now())-started)/1000):0;const t=Math.max(n,0);$("elapsed").textContent="زمان: "+String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")}
+function draw(){
+ const board=$("board"),current=slots(entries[selected]);board.replaceChildren();
+ board.append(document.createElement("span"));
+ for(let j=1;j<=N;j++){let axis=document.createElement("div");axis.className="axis";axis.textContent=j;board.append(axis);}
+ let count=0,wrong=0,correct=0,white=0;
+ for(let r=0;r<N;r++){
+  const axis=document.createElement("div");axis.className="axis";axis.textContent=r+1;board.append(axis);
+  for(let c=N-1;c>=0;c--){
+   const index=id(r,c),btn=document.createElement("button");btn.type="button";btn.className="cell";
+   if(!G[r][c]){btn.className+=" block";btn.disabled=true;btn.setAttribute("aria-label","خانهٔ قرمز");}
+   else{white++;if(values[index]){count++;if(values[index]===G[r][c])correct++;else wrong++;}
+    if(checked&&values[index])btn.className+=values[index]===G[r][c]?" right":" wrong";
+    else if(current.includes(index))btn.className+=index===current[offset]?" active":" inword";
+    btn.textContent=values[index]||"";
+    btn.setAttribute("aria-label","ردیف "+(r+1)+" ستون "+(N-c));
+    btn.onclick=()=>pickCell(r,c);
+   }
+   board.append(btn);
+  }
+ }
+ const cur=entries[selected];$("clueLabel").textContent=title(cur)+" — "+cur.answer.length+" حرف";
+ $("clueText").textContent=cur.clue;$("progress").textContent=count+" از "+white+" خانه";$("hints").textContent="راهنمایی: "+help;
+ $("meter").style.width=(100*count/white).toFixed(2)+"%";
+ if(count===white&&wrong===0){if(!completed){completed=Date.now();save()}$("feedback").textContent="آفرین! هر ۱۰ پاسخ درست است. 🎉"}
+ else if(checked)$("feedback").textContent=wrong?wrong+" حرف نادرست پیدا شد؛ اصلاحش کن.":"تمام حرف‌هایی که وارد کردی درست‌اند.";
+ else $("feedback").textContent="روی خانه‌ها بزن یا از صفحه‌کلید فارسی استفاده کن.";
+ showTime();document.querySelectorAll(".panels button").forEach(x=>x.classList.toggle("isactive",Number(x.dataset.index)===selected));
+}
+function move(n){selected=(n+entries.length)%entries.length;offset=0;checked=false;draw()}
+function pickCell(r,c){const i=id(r,c),choices=entries.map((e,j)=>slots(e).includes(i)?j:-1).filter(x=>x>=0);if(!choices.length)return;selected=choices.includes(selected)?choices[(choices.indexOf(selected)+1)%choices.length]:choices[0];offset=slots(entries[selected]).indexOf(i);checked=false;draw()}
+function type(letter){if(completed)return;const cells=slots(entries[selected]);if(!started)started=Date.now();values[cells[offset]]=letter;if(offset<cells.length-1)offset++;checked=false;save();draw()}
+function back(){if(completed)return;const cells=slots(entries[selected]);if(!values[cells[offset]]&&offset>0)offset--;values[cells[offset]]="";checked=false;save();draw()}
+$("previous").onclick=()=>move(selected-1);$("next").onclick=()=>move(selected+1);$("backspace").onclick=back;
+$("check").onclick=()=>{checked=true;draw()};
+$("hint").onclick=()=>{if(completed)return;const cur=entries[selected],cells=slots(cur);let k=cells.findIndex((x,j)=>values[x]!==cur.answer[j]);if(k<0){move(selected+1);return}if(!started)started=Date.now();offset=k;values[cells[k]]=cur.answer[k];help++;checked=false;save();draw()};
+$("reset").onclick=()=>{if(!confirm("جدول را از ابتدا شروع می‌کنی؟"))return;values=Array(N*N).fill("");selected=0;offset=0;help=0;started=0;completed=0;checked=false;save();draw()};
+for(const letter of Array.from("آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی")){const b=document.createElement("button");b.type="button";b.textContent=letter;b.onclick=()=>type(letter);$("keyboard").append(b)}
+document.addEventListener("keydown",event=>{if(event.key==="Backspace"){back();event.preventDefault()}else if(event.key==="ArrowLeft"){move(selected+1)}else if(event.key==="ArrowRight"){move(selected-1)}else if(Array.from("آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی").includes(event.key)){type(event.key)}});
+entries.forEach((e,i)=>{const b=document.createElement("button");b.type="button";b.dataset.index=i;b.textContent=title(e)+" — "+e.clue;b.onclick=()=>{selected=i;offset=0;checked=false;draw();window.scrollTo({top:0,behavior:"smooth"})};$(e.dir).append(b)});
+const shareUrl="https://t.me/share/url?url="+encodeURIComponent(location.href)+"&text="+encodeURIComponent("🧩 جدول ۵×۵ پیام جدول\nمی‌تونی این جدول را حل کنی؟");
+$("share").href=shareUrl;$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(location.href);$("copy").textContent="لینک کپی شد ✓"}catch(_){$("copy").textContent="آدرس را از نوار مرورگر کپی کن"}};
+draw();setInterval(showTime,1000);
+</script></body></html>
