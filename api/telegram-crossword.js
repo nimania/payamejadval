@@ -8,6 +8,7 @@ const zlib = require("node:zlib");
 const TOKEN = process.env.TELEGRAM_CROSSWORD_BOT_TOKEN || "";
 const SECRET = process.env.TELEGRAM_WEBHOOK_SECRET || "";
 const BOT_USERNAME = "PayameJadvalBot";
+const WORD_GAME_URL = "https://nimania.github.io/payamejadval/kalamechin.html";
 const ROOT = path.resolve(__dirname, "..");
 const CATALOG = path.join(ROOT, "telegram", "catalog.json");
 
@@ -58,6 +59,7 @@ function readWidget(puzzle) {
 const menuMarkup = {
   keyboard: [
     [{text:"🧩 جدول امروز"}, {text:"🎲 یک جدول متفاوت"}],
+    [{text:"🔤 کلمه‌چین",web_app:{url:WORD_GAME_URL}}],
     [{text:"🏆 امتیازهای من"}, {text:"👥 دعوت دوستان"}]
   ],
   resize_keyboard:true,
@@ -93,6 +95,13 @@ async function action(chatId, kind) {
             "&text=" + encodeURIComponent("🧩 بیا جدول پیام جدول را حل کنیم!")}],
         [{text:"بازگشت به منو",callback_data:"pj:menu"}]
       ]}
+    });
+  }
+  if (kind === "word") {
+    return telegram("sendMessage",{
+      chat_id:chatId,
+      text:"🔤 کلمه‌چین: بازی اتصال حروف فارسی در ۵۰ مرحله. پیشرفت در همین دستگاه ذخیره می‌شود.",
+      reply_markup:{inline_keyboard:[[{text:"🎮 شروع کلمه‌چین",web_app:{url:WORD_GAME_URL}}]]}
     });
   }
   if (kind === "scores") {
@@ -143,7 +152,7 @@ module.exports = async function handler(req, res) {
       const chat=q.message?.chat;
       if (!chat || chat.type !== "private" || q.from?.id !== chat.id) return res.status(200).json({ok:true});
       const map={"pj:today":"today","pj:different":"different","pj:scores":"scores",
-        "pj:invite":"invite","pj:menu":"menu"};
+        "pj:invite":"invite","pj:menu":"menu","pj:word":"word"};
       const kind=map[q.data];
       await telegram("answerCallbackQuery",{callback_query_id:q.id});
       if (kind) await action(chat.id,kind);
@@ -158,6 +167,8 @@ module.exports = async function handler(req, res) {
         await action(m.chat.id,"today");
       } else if (command === "/new") {
         await action(m.chat.id,"different");
+      } else if (command === "/kalamechin" || command === "/word" || m.text === "🔤 کلمه‌چین") {
+        await action(m.chat.id,"word");
       } else if (command === "/scores" || m.text === "🏆 امتیازهای من") {
         await action(m.chat.id,"scores");
       } else if (m.text === "🧩 جدول امروز") {
