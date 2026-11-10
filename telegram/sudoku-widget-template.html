@@ -1,0 +1,37 @@
+<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+*{box-sizing:border-box}body{margin:2px 4px;font:12px Tahoma,sans-serif;color:var(--tg-theme-text-color,#243443)}
+h3{font-size:14px;margin:4px 0}.meta{color:var(--tg-theme-hint-color,#6b7b87);font-size:11px;margin:3px 0 8px}
+.board{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));direction:ltr;max-width:350px;margin:auto;border:2px solid #344454;gap:0}
+.cell{min-width:0;aspect-ratio:1;padding:0;border:1px solid #ced7dd;background:var(--tg-theme-secondary-bg-color,#f6f8fa);color:var(--tg-theme-text-color,#213743);font-weight:700;font-size:clamp(12px,3.6vw,18px)}
+.cell.given{background:#e1eaf0;color:#1a364d}.cell.pick{background:#a5d8f3;outline:2px solid #1575ab;outline-offset:-2px}.cell.wrong{background:#ffd5d5;color:#991c20}
+.cell.edgeR{border-right:2px solid #526b7d}.cell.edgeB{border-bottom:2px solid #526b7d}
+.keys{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:3px;margin:8px 0}.keys button{height:30px;border:1px solid #becbd3;border-radius:5px;font-size:17px;color:var(--tg-theme-text-color,#263744);background:var(--tg-theme-secondary-bg-color,#f3f6f9)}
+.tools{display:flex;gap:4px;margin:6px 0}.tools button{flex:1;min-width:0;padding:7px 1px;border:1px solid #c0cbd4;border-radius:5px;background:var(--tg-theme-secondary-bg-color,#f1f4f8);color:var(--tg-theme-text-color,#213747);font-size:11px}
+.tools button.primary{background:var(--tg-theme-button-color,#2279aa);color:var(--tg-theme-button-text-color,#fff);border:0}
+#status{min-height:28px;margin-top:5px;text-align:center;font-size:11px;line-height:1.7}
+</style><body><h3>🔢 سودوکوی پیام جدول</h3><div class="meta" id="title"></div><div class="board" id="board"></div><div class="keys" id="keys"></div><div class="tools"><button id="erase">پاک‌کردن</button><button id="hint">راهنمایی</button><button id="check" class="primary">بررسی</button></div><div class="tools"><button id="copy">📤 کپی لینک</button><button id="share">👥 دعوت به چالش</button></div><div id="status"></div>
+<script>
+const Q=__PUZZLE__,N=9,$=x=>document.getElementById(x),base=Q.givens.split(''),solution=Q.solution,key='pj-sudoku-'+Q.id;
+let v=base.slice(),sel=-1,hints=0,misses=0,started=0,done=0,checked=false;
+try{let a=JSON.parse(localStorage.getItem(key)||'null');if(a&&a.v&&a.v.length===81){v=a.v;hints=a.hints||0;misses=a.misses||0;started=a.started||0;done=a.done||0}}catch(_){}
+function save(){try{localStorage.setItem(key,JSON.stringify({v,hints,misses,started,done}))}catch(_){}}
+function score(){return Math.max(0,100-10*hints-5*misses)+Math.max(0,20-2*Math.ceil(Math.max(0,done-started)/60000))}
+function solved(){return v.join('')===solution}
+function pick(i){sel=i;checked=false;draw()}
+function input(d){if(done||sel<0||base[sel]!=='0')return;if(!started)started=Date.now();v[sel]=d;checked=false;
+if(d!=='0'){for(let n=1;n<=81;n++){let j=(sel+n)%81;if(base[j]==='0'&&v[j]==='0'){sel=j;break}}}
+save();draw()}
+function draw(){let board=$('board');board.replaceChildren();let count=0,wrong=0;for(let i=0;i<81;i++){let b=document.createElement('button');b.type='button';b.className='cell';b.textContent=v[i]==='0'?'':v[i];if(v[i]!=='0')count++;if(base[i]!=='0')b.className+=' given';if(i===sel)b.className+=' pick';if(i%9===2||i%9===5)b.className+=' edgeR';if(Math.floor(i/9)===2||Math.floor(i/9)===5)b.className+=' edgeB';if(v[i]!=='0'&&v[i]!==solution[i]&&checked){wrong++;b.className+=' wrong'}b.onclick=()=>pick(i);board.append(b)}
+if(solved()&&!done){done=Date.now();save()}
+$('status').textContent=done?'🎉 حل کامل! '+score()+' امتیاز آزمایشی (غیررسمی)':checked&&wrong?wrong+' خانه نادرست است.':count+' از ۸۱ خانه • راهنمایی: '+hints+' • بررسی غلط: '+misses}
+$('title').textContent=Q.title+' • '+Q.date+' • امتیاز فعلاً فقط روی این دستگاه';
+for(let n=1;n<=9;n++){let b=document.createElement('button');b.textContent=n;b.onclick=()=>input(String(n));$('keys').append(b)}
+$('erase').onclick=()=>input('0');
+$('hint').onclick=()=>{if(done)return;let i=sel>=0&&base[sel]==='0'&&v[sel]!==solution[sel]?sel:v.findIndex((x,i)=>base[i]==='0'&&x!==solution[i]);if(i<0)return;if(!started)started=Date.now();v[i]=solution[i];sel=i;hints++;checked=false;save();draw()};
+$('check').onclick=()=>{if(v.some((x,i)=>x!=='0'&&x!==solution[i]))misses++;checked=true;save();draw()};
+const link='https://t.me/PayameJadvalBot?start=s_'+Q.id,
+url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent('🔢 چالش سودوکوی پیام جدول؛ بیا ببینیم چه کسی حلش می‌کند!');
+$('copy').onclick=()=>TelegramWidget.copyText(link);
+$('share').onclick=()=>TelegramWidget.openTelegramLink(url);
+draw();
+</script></body></html>
