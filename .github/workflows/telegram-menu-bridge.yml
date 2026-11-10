@@ -1,0 +1,32 @@
+name: Temporary Telegram crossword private menu bridge
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'telegram/poll-telegram-menu.js'
+      - 'api/telegram-crossword.js'
+      - '.github/workflows/telegram-menu-bridge.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: payamejadval-temporary-telegram-poll
+  cancel-in-progress: false
+
+jobs:
+  private-poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify bot menu behavior
+        run: node tests/test_telegram_menu.cjs
+      - name: Check only @PayameJadvalBot private commands (skip when webhook exists)
+        env:
+          TELEGRAM_CROSSWORD_BOT_TOKEN: ${{ secrets.TELEGRAM_CROSSWORD_BOT_TOKEN }}
+        run: node telegram/poll-telegram-menu.js
