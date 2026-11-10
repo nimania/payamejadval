@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "functions": {
+    "api/telegram-crossword.js": {
+      "includeFiles": "telegram/widget-7x7.html"
+    }
+  }
+}
