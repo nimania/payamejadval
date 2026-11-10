@@ -34,6 +34,8 @@ jobs:
           cp index.html public/index.html
           cp telegram-7x7-demo.html public/telegram-7x7-demo.html
           cp share-7x7-20261110.html public/share-7x7-20261110.html
+          cp share-mini-2026-11-03-01.html public/share-mini-2026-11-03-01.html
+          cp share-mini-2026-11-03-02.html public/share-mini-2026-11-03-02.html
           cp public-app.js public/public-app.js
           cp player.js public/player.js
           cp sudoku.js public/sudoku.js
@@ -62,6 +64,7 @@ jobs:
           node tests/test_mini.cjs
           node tests/test_share_7x7.cjs
           node tests/test_telegram_widget.cjs
+          node tests/test_telegram_mini.cjs
           node tests/test_telegram_menu.cjs
           node tests/test_google_apps_script.cjs
           python3 -m py_compile telegram/send-private-test.py telegram/configure-webhook.py
