@@ -1,10 +1,13 @@
 "use strict";
-const fs=require("node:fs"),path=require("node:path"),zlib=require("node:zlib"),assert=require("node:assert/strict");
+const fs=require("node:fs"),path=require("node:path"),zlib=require("node:zlib"),assert=require("node:assert/strict"),vm=require("node:vm");
 const list=JSON.parse(fs.readFileSync(path.join(__dirname,"../data/mini-puzzles.json"),"utf8")).puzzles;
 for(const p of list){
  assert.equal(p.puzzle.meta.method,"editor-approved","Do not promote unreviewed puzzles");
  assert.equal(p.puzzle.meta.status,"published","No draft mini puzzles");
  const html=fs.readFileSync(path.join(__dirname,"../telegram/widget-"+p.id+".html"),"utf8");
+ const script=html.match(/<script>([\\s\\S]*?)<\\/script>/);
+ assert.ok(script,"Native mini widget script missing: "+p.id);
+ new vm.Script(script[1],{filename:p.id+".js"});
  const gz=zlib.deflateSync(Buffer.from(html,"utf8"),{level:9}).length;
  assert.ok(gz<=4096,"Widget compressed limit: "+p.id+" "+gz);
  assert.ok(Buffer.byteLength(html,"utf8")<=32768);
