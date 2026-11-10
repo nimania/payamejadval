@@ -107,6 +107,11 @@ function renderTypeCatalog(items){
  section.append(text('h2','انواع جدول‌ها و سرگرمی‌ها'));
  section.append(text('p','جدول کلمات متقاطع کلاسیک، سودوکوهای روزانه و قالب‌هایی که در ادامه تکمیل می‌شوند.','muted small'));
  const categories=text('div',undefined,'category-grid');
+ const newGame=text('article',undefined,'category-card');
+ newGame.append(text('h3','🔤 کلمه‌چین'),text('p','بازی مرحله‌ای اتصال حروف فارسی با ۵۰ مرحله، سکه و راهنمایی.','muted small'));
+ newGame.append(text('p','۵۰ مرحله قابل‌بازی','category-count'));
+ const play=text('a','شروع بازی','link');play.href='./kalamechin.html';newGame.append(play);
+ categories.append(newGame);
  for(const entry of archiveTypes){
   const card=text('article',undefined,'category-card'+(entry.active?'':' category-pending'));
   card.append(text('h3',entry.name),text('p',entry.description,'muted small'));
