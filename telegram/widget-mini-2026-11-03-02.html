@@ -9,7 +9,7 @@ entries.push({dir,group,part,cells:run,word:run.map(([y,x])=>G[y][x]).join(''),c
 let values=Array(25).fill(''),selected=0,offset=0,checked=false,hints=0,misses=0,started=0,done=0;
 const web='https://nimania.github.io/payamejadval/share-mini-2026-11-03-02.html',
 invite='https://t.me/PayameJadvalBot?start=p_mini-2026-11-03-02',
-share='https://t.me/share/url?url='+encodeURIComponent(web)+'&text='+encodeURIComponent('🧩 جدول ۵×۵ پیام جدول، تو هم حلش کن!');
+share='https://t.me/share/url?url='+encodeURIComponent(invite)+'&text='+encodeURIComponent('🧩 همین جدول پیام جدول را داخل ربات تلگرام حل کن!');
 try{let x=JSON.parse(localStorage.getItem('pj-mini-2026-11-03-02')||'null');if(x&&x.values&&x.values.length===25){values=x.values;hints=x.hints||0;misses=x.misses||0;started=x.started||0;done=x.done||0}}catch(e){}
 function save(){try{localStorage.setItem('pj-mini-2026-11-03-02',JSON.stringify({values,hints,misses,started,done}))}catch(e){}}
 function ids(e){return e.cells.map(([r,c])=>pos(r,c))}
