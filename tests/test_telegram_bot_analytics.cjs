@@ -23,7 +23,7 @@ function sheet(name) {
    setValues(matrix){const first=typeof a==="string"?Number((a.match(/[0-9]+/)||["1"])[0]):a;
     while(rows.length<first+matrix.length-1)rows.push([]);
     matrix.forEach((x,i)=>{rows[first-1+i]=[...x]});return this},
-   clearContent(){if(typeof a==="number"){for(let i=0;i<size;i++)for(let j=0;j<col;j++)rows[a-1+i][row-1+j]=''}return this}
+   clearContent(){if(typeof a==="number"){for(let i=0;i<col;i++)for(let j=0;j<size;j++)rows[a-1+i][row-1+j]=''}return this}
   }}
  };
  return instance;
