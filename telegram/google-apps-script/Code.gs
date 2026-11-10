@@ -255,7 +255,7 @@ function pjShareLinks_(puzzle) {
   return {bot:deep,web:web};
 }
 
-function pjSendPuzzle_(chatId, puzzle) {
+function pjSendPuzzle_(chatId, puzzle, sourceMessage) {
   var links = pjShareLinks_(puzzle);
   pjApi_('sendWidget', {
     chat_id:chatId,
@@ -266,6 +266,7 @@ function pjSendPuzzle_(chatId, puzzle) {
     allow_queries:false,
     is_shared:false
   });
+  pjTrack_(sourceMessage,'crossword_sent',puzzle.id);
 }
 
 function pjFindPuzzle_(id) {
@@ -278,7 +279,7 @@ function pjDaily_(p) {
   return p.status==='approved' && p.editorApproved===true && p.publishDate===today;
 }
 
-function pjPuzzle_(chatId, mode) {
+function pjPuzzle_(chatId, mode, sourceMessage) {
   var puzzles=pjCatalogue_(),filtered=[],info='';
   if (mode==='quick') {
     filtered=puzzles.filter(function(p){return p.size===5 && pjDaily_(p);});
@@ -302,11 +303,11 @@ function pjPuzzle_(chatId, mode) {
   if (mode==='different') {
     filtered=puzzles.filter(function(p){return p.size===7;});
     if (filtered.length<2){pjSendMessage_(chatId,'فعلاً جدول ۷×۷ دوم برای انتخاب متفاوت آماده نیست.');return;}
-    pjSendPuzzle_(chatId,filtered[(pjTehranDay_()+1)%filtered.length]);
+    pjSendPuzzle_(chatId,filtered[(pjTehranDay_()+1)%filtered.length],sourceMessage);
     return;
   }
   if (!filtered.length){pjSendMessage_(chatId,info);return;}
-  pjSendPuzzle_(chatId,filtered[pjTehranDay_()%filtered.length]);
+  pjSendPuzzle_(chatId,filtered[pjTehranDay_()%filtered.length],sourceMessage);
 }
 
 function pjShare_(chatId) {
@@ -376,7 +377,7 @@ function pjSudokuToday_(difficulty) {
   return matches.length===1?matches[0]:null;
 }
 
-function pjSendSudoku_(chatId,item) {
+function pjSendSudoku_(chatId,item,sourceMessage) {
   var res=UrlFetchApp.fetch(PJ.repoBase+'sudoku-widget-template.html',{muteHttpExceptions:true});
   if(res.getResponseCode()!==200)throw new Error('Sudoku widget template unavailable');
   var template=res.getContentText('UTF-8');
@@ -391,21 +392,22 @@ function pjSendSudoku_(chatId,item) {
       '\nامتیاز فعلاً آزمایشی و محلی است.',
     allow_queries:false,is_shared:false
   });
+  pjTrack_(sourceMessage,'sudoku_sent',item.id);
 }
 
-function pjSudoku_(chatId,level) {
+function pjSudoku_(chatId,level,sourceMessage) {
   var p=pjSudokuToday_(level);
   if(!p){
     pjSendMessage_(chatId,'سودوکوی '+level+' امروز هنوز منتشر نشده است. بازی‌های امروز پس از ساعت انتشار رسمی در دسترس‌اند.',pjSudokuKeyboard_());
     return;
   }
-  pjSendSudoku_(chatId,p);
+  pjSendSudoku_(chatId,p,sourceMessage);
 }
 
-function pjSudokuExact_(chatId,id) {
+function pjSudokuExact_(chatId,id,sourceMessage) {
   var items=pjSudokuList_().filter(function(x){return x.id===id&&pjReleasedSudoku_(x)});
   if(items.length!==1){pjSendMessage_(chatId,'این سودوکو هنوز منتشر نشده یا در بانک معتبر نیست.');return;}
-  pjSendSudoku_(chatId,items[0]);
+  pjSendSudoku_(chatId,items[0],sourceMessage);
 }
 
 function pjHandle_(message) {
@@ -415,32 +417,54 @@ function pjHandle_(message) {
   if (!message.text) return;
   var t = String(message.text).trim();
   var command = t.split(/\s+/)[0].toLowerCase();
+  if(/^\/forgetme(@payamejadvalbot)?$/.test(command)){
+    var forgotten=pjForgetUser_(message);
+    pjSendMessage_(chat.id,forgotten?'اطلاعات آماری پیشین تو پاک شد و ثبت رویدادهای بعدی برایت خاموش است.':'هنوز دفتر آمار مرکزی فعال نیست؛ اطلاعاتی از تو ذخیره نشده است.');
+    return;
+  }
+  if(/^\/showname(@payamejadvalbot)?$/.test(command)){
+    pjSendMessage_(chat.id,pjSetNameConsent_(message,true)?
+      'نمایش نام و نام کاربری‌ات در آمار خصوصی مدیر را با رضایت فعال کردی. هر وقت خواستی /hidename یا /forgetme بزن.':
+      'هنوز سامانهٔ آمار فعال نیست.');
+    return;
+  }
+  if(/^\/hidename(@payamejadvalbot)?$/.test(command)){
+    pjSendMessage_(chat.id,pjSetNameConsent_(message,false)?
+      'نام و نام کاربری از گزارش‌های ذخیره‌شده پاک شد. رویدادها همچنان با شناسهٔ ناشناس ثبت می‌شوند.':
+      'هنوز سامانهٔ آمار فعال نیست.');
+    return;
+  }
+  if(/^\/privacy(@payamejadvalbot)?$/.test(command)){
+    pjSendMessage_(chat.id,'🛡 آمار استفاده: در صورت فعال بودن دفتر آمار، فقط نوع درخواست بازی، زمان، موفقیت ارسال و شناسهٔ ناشناس ثبت می‌شود. نام و نام کاربری فقط با فرمان /showname ذخیره می‌شود.\n\nبرای حذف همهٔ داده‌ها و توقف ثبت: /forgetme\nبرای پنهان‌کردن نام: /hidename\nامتیازها، پاسخ‌ها و زمان حل فعلاً به ربات فرستاده نمی‌شوند.');
+    return;
+  }
+  pjTrackAction_(message,t);
   var start=t.match(/^\/start(?:@payamejadvalbot)?(?:\s+([ps])_([A-Za-z0-9_-]{4,61}))?$/i);
   if (start) {
     if (start[1]==='p') {
       var chosen=pjFindPuzzle_(start[2]);
-      if (chosen) pjSendPuzzle_(chat.id,chosen);
+      if (chosen) pjSendPuzzle_(chat.id,chosen,message);
       else pjSendMessage_(chat.id,'این جدول در آرشیو فعال پیدا نشد. از منوی بازی، جدول موجود را انتخاب کن.');
     } else if(start[1]==='s') {
-      pjSudokuExact_(chat.id,start[2]);
+      pjSudokuExact_(chat.id,start[2],message);
     } else {
-      pjSendMessage_(chat.id, '🧩 به پیام جدول خوش آمدی! ⚡ روزانه ۵×۵ و 🧩 روزانه ۷×۷؛ جمعه‌ها چالش ۹×۹. فقط جدول‌های بازبینی‌شده منتشر می‌شوند.');
+      pjSendMessage_(chat.id, '🧩 به پیام جدول خوش آمدی!\n⚡ جدول سریع ۵×۵ | 🧩 جدول اصلی ۷×۷ | 🔢 سودوکو | جمعه‌ها ۹×۹\nآمار استفاده فقط با شناسهٔ ناشناس ثبت می‌شود؛ دربارهٔ آن: /privacy');
     }
   } else if (/^\/menu(@payamejadvalbot)?$/.test(command)) {
     pjSendMessage_(chat.id,'🧩 از منوی پایین یک بازی انتخاب کن.');
   } else if (t==='⚡ جدول سریع' || /^\/quick(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'quick');
+    pjPuzzle_(chat.id,'quick',message);
   } else if (t==='🧩 جدول اصلی' || t==='🧩 جدول امروز' ||
              /^\/(jadval|today)(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'main');
+    pjPuzzle_(chat.id,'main',message);
   } else if (t==='🔢 سودوکو' || /^\/sudoku(@payamejadvalbot)?$/.test(command)) {
     pjSendMessage_(chat.id,'🔢 سطح سودوکوی امروز را انتخاب کن. هر سطح یک جدول مشترک برای همه است.',pjSudokuKeyboard_());
   } else if (t==='🔢 سودوکو آسان' || t==='🔢 سودوکو متوسط' || t==='🔢 سودوکو سخت') {
-    pjSudoku_(chat.id,t.indexOf('آسان')>=0?'easy':t.indexOf('متوسط')>=0?'medium':'hard');
+    pjSudoku_(chat.id,t.indexOf('آسان')>=0?'easy':t.indexOf('متوسط')>=0?'medium':'hard',message);
   } else if (t==='🏠 منوی اصلی') {
     pjSendMessage_(chat.id,'🧩 از منوی اصلی بازی انتخاب کن.');
   } else if (t==='🏆 چالش جمعه' || /^\/friday(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'friday');
+    pjPuzzle_(chat.id,'friday',message);
   } else if (t==='📚 آرشیو جدول‌ها') {
     pjSendMessage_(chat.id,'📚 آرشیو و بازی‌های منتشرشده:\nhttps://nimania.github.io/payamejadval/\n\nبرای بازی داخل همین چت، از لینک اختصاصی هر جدول استفاده کن.');
   } else if (t==='🏅 امتیازهای من' || t==='🏆 امتیازهای من' ||
@@ -450,7 +474,7 @@ function pjHandle_(message) {
              /^\/invite(@payamejadvalbot)?$/.test(command)) {
     pjShare_(chat.id);
   } else if (t==='🎲 یک جدول متفاوت' || /^\/new(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'different');
+    pjPuzzle_(chat.id,'different',message);
   }
 }
 
@@ -476,7 +500,9 @@ function setupBot() {
     {command:'friday',description:'چالش جمعه ۹×۹'},
     {command:'invite',description:'اشتراک جدول'},
     {command:'new',description:'جدول متفاوت'},
-    {command:'scores',description:'امتیازهای من'}
+    {command:'scores',description:'امتیازهای من'},
+    {command:'privacy',description:'حریم خصوصی و آمار'},
+    {command:'forgetme',description:'حذف داده‌های آماری من'}
   ]});
 
   // Don't replay the old backlog as surprise messages to earlier testers.
