@@ -1,0 +1,30 @@
+name: Validate Persian word game
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kalamechin.html'
+      - 'index.html'
+      - 'public-app.js'
+      - 'tests/test_kalamechin.cjs'
+      - '.github/workflows/word-game-tests.yml'
+  pull_request:
+    paths:
+      - 'kalamechin.html'
+      - 'index.html'
+      - 'public-app.js'
+      - 'tests/test_kalamechin.cjs'
+      - '.github/workflows/word-game-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/test_kalamechin.cjs
+      - run: node tests/test_telegram_menu.cjs
