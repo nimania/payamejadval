@@ -9,6 +9,7 @@
  */
 var PJ = {
   username: 'PayameJadvalBot',
+  wordGameUrl: 'https://nimania.github.io/payamejadval/kalamechin.html',
   repoBase: 'https://raw.githubusercontent.com/nimania/payamejadval/main/telegram/',
   offsetKey: 'PJ_NEXT_UPDATE_OFFSET',
   cacheSeconds: 300,
@@ -88,6 +89,7 @@ function pjTrackAction_(message,t) {
     '⚡ جدول سریع':'request_quick','🧩 جدول اصلی':'request_main',
     '🧩 جدول امروز':'request_main','🔢 سودوکو':'sudoku_menu',
     '🔢 سودوکو آسان':'request_sudoku_easy',
+    '🔤 کلمه‌چین':'word_game_open',
     '🔢 سودوکو متوسط':'request_sudoku_medium',
     '🔢 سودوکو سخت':'request_sudoku_hard',
     '🏆 چالش جمعه':'request_friday','📚 آرشیو جدول‌ها':'archive_open',
@@ -97,7 +99,7 @@ function pjTrackAction_(message,t) {
   var event=events[t];
   if(!event){
     if(/^\/start\b/i.test(t))event='start';
-    else if(/^\/(quick|jadval|sudoku|today|new|friday|invite|scores|menu)\b/i.test(t))
+    else if(/^\/(quick|jadval|sudoku|kalamechin|today|new|friday|invite|scores|menu)\b/i.test(t))
       event='command_'+t.split(/\s/)[0].replace(/^\/|@.*$/g,'').slice(0,20);
   }
   if(event)pjTrack_(message,event,'');
@@ -191,6 +193,7 @@ function pjMenu_() {
     keyboard: [
       [{text: '⚡ جدول سریع'}, {text: '🧩 جدول اصلی'}],
       [{text: '🔢 سودوکو'}, {text: '🏆 چالش جمعه'}],
+      [{text: '🔤 کلمه‌چین', web_app: {url: PJ.wordGameUrl}}],
       [{text: '📚 آرشیو جدول‌ها'}],
       [{text: '🏅 امتیازهای من'}, {text: '📤 اشتراک‌گذاری'}]
     ],
@@ -448,7 +451,7 @@ function pjHandle_(message) {
     } else if(start[1]==='s') {
       pjSudokuExact_(chat.id,start[2],message);
     } else {
-      pjSendMessage_(chat.id, '🧩 به پیام جدول خوش آمدی!\n⚡ جدول سریع ۵×۵ | 🧩 جدول اصلی ۷×۷ | 🔢 سودوکو | جمعه‌ها ۹×۹\nآمار استفاده فقط با شناسهٔ ناشناس ثبت می‌شود؛ دربارهٔ آن: /privacy');
+      pjSendMessage_(chat.id, '🧩 به پیام جدول خوش آمدی!\n⚡ جدول سریع ۵×۵ | 🧩 جدول اصلی ۷×۷ | 🔢 سودوکو | 🔤 کلمه‌چین | جمعه‌ها ۹×۹\nآمار استفاده فقط با شناسهٔ ناشناس ثبت می‌شود؛ دربارهٔ آن: /privacy');
     }
   } else if (/^\/menu(@payamejadvalbot)?$/.test(command)) {
     pjSendMessage_(chat.id,'🧩 از منوی پایین یک بازی انتخاب کن.');
@@ -457,6 +460,12 @@ function pjHandle_(message) {
   } else if (t==='🧩 جدول اصلی' || t==='🧩 جدول امروز' ||
              /^\/(jadval|today)(@payamejadvalbot)?$/.test(command)) {
     pjPuzzle_(chat.id,'main',message);
+  } else if (t==='🔤 کلمه‌چین' || /^\/kalamechin(@payamejadvalbot)?$/.test(command)) {
+    pjApi_('sendMessage', {
+      chat_id:chat.id,
+      text:'🔤 کلمه‌چین: بازی اتصال حروف با ۵۰ مرحله. پیشرفت نسخهٔ فعلی روی همین دستگاه ذخیره می‌شود.',
+      reply_markup:{inline_keyboard:[[{text:'🎮 شروع بازی کلمه‌چین',web_app:{url:PJ.wordGameUrl}}]]}
+    });
   } else if (t==='🔢 سودوکو' || /^\/sudoku(@payamejadvalbot)?$/.test(command)) {
     pjSendMessage_(chat.id,'🔢 سطح سودوکوی امروز را انتخاب کن. هر سطح یک جدول مشترک برای همه است.',pjSudokuKeyboard_());
   } else if (t==='🔢 سودوکو آسان' || t==='🔢 سودوکو متوسط' || t==='🔢 سودوکو سخت') {
@@ -497,6 +506,7 @@ function setupBot() {
     {command:'jadval',description:'جدول اصلی ۷×۷'},
     {command:'quick',description:'جدول سریع ۵×۵'},
     {command:'sudoku',description:'سودوکوی روزانه'},
+    {command:'kalamechin',description:'بازی مرحله‌ای کلمه‌چین'},
     {command:'friday',description:'چالش جمعه ۹×۹'},
     {command:'invite',description:'اشتراک جدول'},
     {command:'new',description:'جدول متفاوت'},
