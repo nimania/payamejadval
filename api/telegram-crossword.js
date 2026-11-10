@@ -56,12 +56,12 @@ function readWidget(puzzle) {
 }
 
 const menuMarkup = {
-  inline_keyboard: [
-    [{text:"🧩 جدول امروز", callback_data:"pj:today"},
-     {text:"🎲 یک جدول متفاوت", callback_data:"pj:different"}],
-    [{text:"🏆 امتیازهای من", callback_data:"pj:scores"},
-     {text:"👥 دعوت دوستان", callback_data:"pj:invite"}]
-  ]
+  keyboard: [
+    [{text:"🧩 جدول امروز"}, {text:"🎲 یک جدول متفاوت"}],
+    [{text:"🏆 امتیازهای من"}, {text:"👥 دعوت دوستان"}]
+  ],
+  resize_keyboard:true,
+  is_persistent:true
 };
 
 async function menu(chatId) {
@@ -101,7 +101,7 @@ async function action(chatId, kind) {
       text:"🏆 هنوز رتبه‌بندی و امتیاز مرکزی فعال نشده است.\n" +
        "در نسخهٔ آزمایشی، حروف و تعداد راهنمایی فقط در حافظهٔ همان پیام در دستگاه خودت ذخیره می‌شوند. " +
        "نتایج قدیمی قابل بازیابی به عنوان امتیاز رسمی نیستند.",
-      reply_markup:{inline_keyboard:[[{text:"بازگشت به منو",callback_data:"pj:menu"}]]}
+      reply_markup:menuMarkup
     });
   }
   if (kind === "menu") return menu(chatId);
@@ -113,7 +113,7 @@ async function action(chatId, kind) {
     return telegram("sendMessage", {
       chat_id:chatId,
       text:"فعلاً فقط یک جدول ۷×۷ آزمایشی داریم. برای «جدول متفاوت» باید جدول‌های تازه در پروژهٔ jadval ساخته، بررسی و به فهرست بازی اضافه شوند.",
-      reply_markup:{inline_keyboard:[[{text:"جدول موجود",callback_data:"pj:today"}]]}
+      reply_markup:menuMarkup
     });
   }
   const chosen = available[(dayIndex(available.length) + (kind === "different" ? 1 : 0)) % available.length];
@@ -123,11 +123,7 @@ async function action(chatId, kind) {
     caption:"🧩 " + chosen.title + (chosen.status === "private-trial" ? "\nنسخهٔ آزمایشی دوستانه" : ""),
     allow_queries:false,
     is_shared:false,
-    reply_markup:{inline_keyboard:[
-      [{text:"🧩 جدول امروز",callback_data:"pj:today"},
-       {text:"🎲 جدول متفاوت",callback_data:"pj:different"}],
-      [{text:"🏆 امتیازها",callback_data:"pj:scores"}]
-    ]}
+    reply_markup:menuMarkup
   });
 }
 
@@ -162,8 +158,14 @@ module.exports = async function handler(req, res) {
         await action(m.chat.id,"today");
       } else if (command === "/new") {
         await action(m.chat.id,"different");
-      } else if (command === "/scores") {
+      } else if (command === "/scores" || m.text === "🏆 امتیازهای من") {
         await action(m.chat.id,"scores");
+      } else if (m.text === "🧩 جدول امروز") {
+        await action(m.chat.id,"today");
+      } else if (m.text === "🎲 یک جدول متفاوت") {
+        await action(m.chat.id,"different");
+      } else if (m.text === "👥 دعوت دوستان") {
+        await action(m.chat.id,"invite");
       }
     }
     return res.status(200).json({ok:true});
