@@ -4,12 +4,6 @@ on:
   # Polling schedule retired for Google Apps Script migration.
   # Manual workflow_dispatch retained as an emergency diagnostic.
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'telegram/poll-telegram-menu.js'
-      - 'api/telegram-crossword.js'
-      - '.github/workflows/telegram-menu-bridge.yml'
 
 permissions:
   contents: read
