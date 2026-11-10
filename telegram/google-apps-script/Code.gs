@@ -49,7 +49,8 @@ function pjMenu_() {
   return {
     keyboard: [
       [{text: '⚡ جدول سریع'}, {text: '🧩 جدول اصلی'}],
-      [{text: '🏆 چالش جمعه'}, {text: '📚 آرشیو جدول‌ها'}],
+      [{text: '🔢 سودوکو'}, {text: '🏆 چالش جمعه'}],
+      [{text: '📚 آرشیو جدول‌ها'}],
       [{text: '🏅 امتیازهای من'}, {text: '📤 اشتراک‌گذاری'}]
     ],
     resize_keyboard: true,
@@ -57,10 +58,16 @@ function pjMenu_() {
   };
 }
 
-function pjSendMessage_(chatId, message) {
+function pjSendMessage_(chatId, message, keyboard) {
   return pjApi_('sendMessage', {
-    chat_id: chatId, text: message, reply_markup: pjMenu_()
+    chat_id: chatId, text: message, reply_markup: keyboard || pjMenu_()
   });
+}
+function pjSudokuKeyboard_() {
+  return {keyboard:[
+    [{text:'🔢 سودوکو آسان'}, {text:'🔢 سودوکو متوسط'}, {text:'🔢 سودوکو سخت'}],
+    [{text:'🏠 منوی اصلی'}]
+  ],resize_keyboard:true,is_persistent:true};
 }
 
 function pjCatalogue_() {
@@ -179,6 +186,87 @@ function pjShare_(chatId) {
   });
 }
 
+
+function pjSudokuList_() {
+  var cache=CacheService.getScriptCache(),key='pj-daily-sudoku-v1';
+  var cached=cache.get(key);
+  if(cached)return JSON.parse(cached);
+  var url='https://raw.githubusercontent.com/nimania/payamejadval/main/data/daily-games.json';
+  var res=UrlFetchApp.fetch(url,{muteHttpExceptions:true});
+  if(res.getResponseCode()!==200)throw new Error('Sudoku bank unavailable');
+  var data=JSON.parse(res.getContentText('UTF-8'));
+  if(data.schema!==1||!Array.isArray(data.items))throw new Error('Invalid daily games catalog');
+  var items=data.items.filter(pjValidSudoku_);
+  cache.put(key,JSON.stringify(items),PJ.cacheSeconds);
+  return items;
+}
+
+function pjValidSudoku_(item) {
+  if(!item || item.type!=='sudoku' || !item.puzzle ||
+     !/^sudoku-20\d\d-\d\d-\d\d-(easy|medium|hard)$/.test(String(item.id)) ||
+     !/^20\d\d-\d\d-\d\dT/.test(String(item.publishedAt)) ||
+     !/^[0-9]{81}$/.test(String(item.puzzle.givens||'')) ||
+     !/^[1-9]{81}$/.test(String(item.puzzle.solution||'')) ||
+     item.puzzle.quality?.unique!==true)return false;
+  var a=item.puzzle.givens,b=item.puzzle.solution,groups=[];
+  for(var i=0;i<81;i++)if(a[i]!=='0'&&a[i]!==b[i])return false;
+  for(var r=0;r<9;r++){
+    var row='',col='';
+    for(var c=0;c<9;c++){row+=b[r*9+c];col+=b[c*9+r]}
+    groups.push(row,col);
+  }
+  for(var br=0;br<3;br++)for(var bc=0;bc<3;bc++){
+    var box='';
+    for(var rr=0;rr<3;rr++)for(var cc=0;cc<3;cc++)box+=b[(br*3+rr)*9+bc*3+cc];
+    groups.push(box);
+  }
+  return groups.every(function(x){return new Set(x).size===9;});
+}
+
+function pjReleasedSudoku_(item) {
+  return Date.parse(item.publishedAt)<=Date.now();
+}
+
+function pjSudokuToday_(difficulty) {
+  var today=Utilities.formatDate(new Date(),'Asia/Tehran','yyyy-MM-dd');
+  var matches=pjSudokuList_().filter(function(x){
+    return x.id==='sudoku-'+today+'-'+difficulty && pjReleasedSudoku_(x);
+  });
+  return matches.length===1?matches[0]:null;
+}
+
+function pjSendSudoku_(chatId,item) {
+  var res=UrlFetchApp.fetch(PJ.repoBase+'sudoku-widget-template.html',{muteHttpExceptions:true});
+  if(res.getResponseCode()!==200)throw new Error('Sudoku widget template unavailable');
+  var template=res.getContentText('UTF-8');
+  if(template.indexOf('__PUZZLE__')<0)throw new Error('Sudoku template marker missing');
+  var q={id:item.id,date:item.id.slice(7,17),title:item.title,
+    givens:item.puzzle.givens,solution:item.puzzle.solution};
+  var html=template.replace('__PUZZLE__',JSON.stringify(q));
+  if(html.length>32768)throw new Error('Sudoku widget too large');
+  pjApi_('sendWidget',{
+    chat_id:chatId,html:html,
+    caption:'🔢 '+item.title+'\nچالش همین جدول: https://t.me/PayameJadvalBot?start=s_'+item.id+
+      '\nامتیاز فعلاً آزمایشی و محلی است.',
+    allow_queries:false,is_shared:false
+  });
+}
+
+function pjSudoku_(chatId,level) {
+  var p=pjSudokuToday_(level);
+  if(!p){
+    pjSendMessage_(chatId,'سودوکوی '+level+' امروز هنوز منتشر نشده است. بازی‌های امروز پس از ساعت انتشار رسمی در دسترس‌اند.',pjSudokuKeyboard_());
+    return;
+  }
+  pjSendSudoku_(chatId,p);
+}
+
+function pjSudokuExact_(chatId,id) {
+  var items=pjSudokuList_().filter(function(x){return x.id===id&&pjReleasedSudoku_(x)});
+  if(items.length!==1){pjSendMessage_(chatId,'این سودوکو هنوز منتشر نشده یا در بانک معتبر نیست.');return;}
+  pjSendSudoku_(chatId,items[0]);
+}
+
 function pjHandle_(message) {
   var chat = message && message.chat;
   var sender = message && message.from;
@@ -186,12 +274,14 @@ function pjHandle_(message) {
   if (!message.text) return;
   var t = String(message.text).trim();
   var command = t.split(/\s+/)[0].toLowerCase();
-  var start=t.match(/^\/start(?:@payamejadvalbot)?(?:\s+p_([A-Za-z0-9_-]{4,61}))?$/i);
+  var start=t.match(/^\/start(?:@payamejadvalbot)?(?:\s+([ps])_([A-Za-z0-9_-]{4,61}))?$/i);
   if (start) {
-    if (start[1]) {
-      var chosen=pjFindPuzzle_(start[1]);
+    if (start[1]==='p') {
+      var chosen=pjFindPuzzle_(start[2]);
       if (chosen) pjSendPuzzle_(chat.id,chosen);
       else pjSendMessage_(chat.id,'این جدول در آرشیو فعال پیدا نشد. از منوی بازی، جدول موجود را انتخاب کن.');
+    } else if(start[1]==='s') {
+      pjSudokuExact_(chat.id,start[2]);
     } else {
       pjSendMessage_(chat.id, '🧩 به پیام جدول خوش آمدی! ⚡ روزانه ۵×۵ و 🧩 روزانه ۷×۷؛ جمعه‌ها چالش ۹×۹. فقط جدول‌های بازبینی‌شده منتشر می‌شوند.');
     }
@@ -202,6 +292,12 @@ function pjHandle_(message) {
   } else if (t==='🧩 جدول اصلی' || t==='🧩 جدول امروز' ||
              /^\/(jadval|today)(@payamejadvalbot)?$/.test(command)) {
     pjPuzzle_(chat.id,'main');
+  } else if (t==='🔢 سودوکو' || /^\/sudoku(@payamejadvalbot)?$/.test(command)) {
+    pjSendMessage_(chat.id,'🔢 سطح سودوکوی امروز را انتخاب کن. هر سطح یک جدول مشترک برای همه است.',pjSudokuKeyboard_());
+  } else if (t==='🔢 سودوکو آسان' || t==='🔢 سودوکو متوسط' || t==='🔢 سودوکو سخت') {
+    pjSudoku_(chat.id,t.indexOf('آسان')>=0?'easy':t.indexOf('متوسط')>=0?'medium':'hard');
+  } else if (t==='🏠 منوی اصلی') {
+    pjSendMessage_(chat.id,'🧩 از منوی اصلی بازی انتخاب کن.');
   } else if (t==='🏆 چالش جمعه' || /^\/friday(@payamejadvalbot)?$/.test(command)) {
     pjPuzzle_(chat.id,'friday');
   } else if (t==='📚 آرشیو جدول‌ها') {
@@ -235,6 +331,7 @@ function setupBot() {
     {command:'start',description:'منوی بازی'},
     {command:'jadval',description:'جدول اصلی ۷×۷'},
     {command:'quick',description:'جدول سریع ۵×۵'},
+    {command:'sudoku',description:'سودوکوی روزانه'},
     {command:'friday',description:'چالش جمعه ۹×۹'},
     {command:'invite',description:'اشتراک جدول'},
     {command:'new',description:'جدول متفاوت'},
