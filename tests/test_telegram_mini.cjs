@@ -5,7 +5,7 @@ for(const p of list){
  assert.equal(p.puzzle.meta.method,"editor-approved","Do not promote unreviewed puzzles");
  assert.equal(p.puzzle.meta.status,"published","No draft mini puzzles");
  const html=fs.readFileSync(path.join(__dirname,"../telegram/widget-"+p.id+".html"),"utf8");
- const script=html.match(/<script>([\\s\\S]*?)<\\/script>/);
+ const script=html.match(/<script>([\s\S]*?)<\/script>/);
  assert.ok(script,"Native mini widget script missing: "+p.id);
  new vm.Script(script[1],{filename:p.id+".js"});
  const gz=zlib.deflateSync(Buffer.from(html,"utf8"),{level:9}).length;
