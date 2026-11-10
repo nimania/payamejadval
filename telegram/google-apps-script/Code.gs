@@ -45,6 +45,147 @@ function pjApi_(method, body) {
   return output.result;
 }
 
+/**
+ * OPTIONAL first-party analytics. Only Telegram interactions are observable:
+ * commands, game requests, and successful widget sends. The widget's local
+ * taps, game completion and local scores are not transmitted to this bot.
+ *
+ * setupAnalytics() creates a PRIVATE Google Sheet in the owner's Drive.
+ * Pseudonymous player IDs are salted SHA-256 hashes; names are NOT retained
+ * unless a user explicitly sends /showname. /forgetme erases and opts out.
+ */
+function pjAnalyticsId_() {
+  return pjProperties_().getProperty('PJ_ANALYTICS_SHEET_ID') || '';
+}
+function pjPlayerKey_(id) {
+  var salt=pjProperties_().getProperty('PJ_ANALYTICS_SALT');
+  if(!salt)throw new Error('Analytics salt missing');
+  return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,salt+'|'+String(id))
+    .slice(0,16).map(function(x){return ('0'+((x+256)%256).toString(16)).slice(-2)}).join('');
+}
+function pjAnalyticsSheet_() {
+  var id=pjAnalyticsId_();
+  if(!id)return null;
+  return SpreadsheetApp.openById(id).getSheetByName('رویدادها');
+}
+function pjTrack_(message,event,puzzleId) {
+  if(!pjAnalyticsId_()||!message||!message.from||message.from.id===undefined)return;
+  try{
+    var h=pjPlayerKey_(message.from.id),pr=pjProperties_();
+    if(pr.getProperty('PJ_OPTOUT_'+h)==='1')return;
+    var named=pr.getProperty('PJ_NAMED_'+h)==='1';
+    var now=new Date(),t=Utilities.formatDate(now,'Asia/Tehran','yyyy-MM-dd HH:mm:ss');
+    var name=named?[message.from.first_name||'',message.from.last_name||''].join(' ').trim():'';
+    var username=named?(message.from.username||''):'';
+    var tab=pjAnalyticsSheet_();
+    if(!tab)return;
+    tab.appendRow([t,t.slice(0,10),h,String(event).slice(0,40),
+      String(puzzleId||'').slice(0,64),name,username]);
+  }catch(err){console.warn('Analytics write was skipped; game delivery continues.');}
+}
+function pjTrackAction_(message,t) {
+  var events={
+    '⚡ جدول سریع':'request_quick','🧩 جدول اصلی':'request_main',
+    '🧩 جدول امروز':'request_main','🔢 سودوکو':'sudoku_menu',
+    '🔢 سودوکو آسان':'request_sudoku_easy',
+    '🔢 سودوکو متوسط':'request_sudoku_medium',
+    '🔢 سودوکو سخت':'request_sudoku_hard',
+    '🏆 چالش جمعه':'request_friday','📚 آرشیو جدول‌ها':'archive_open',
+    '🏅 امتیازهای من':'scores_open','🏆 امتیازهای من':'scores_open',
+    '📤 اشتراک‌گذاری':'share_clicked','👥 دعوت دوستان':'share_clicked'
+  };
+  var event=events[t];
+  if(!event){
+    if(/^\/start\b/i.test(t))event='start';
+    else if(/^\/(quick|jadval|sudoku|today|new|friday|invite|scores|menu)\b/i.test(t))
+      event='command_'+t.split(/\s/)[0].replace(/^\/|@.*$/g,'').slice(0,20);
+  }
+  if(event)pjTrack_(message,event,'');
+}
+
+function setupAnalytics() {
+  var old=pjAnalyticsId_();
+  if(old){
+    console.log('Existing private analytics sheet: https://docs.google.com/spreadsheets/d/'+old+'/edit');
+    return;
+  }
+  // Explicit consent of project owner required: run this manually once.
+  var book=SpreadsheetApp.create('پیام جدول — آمار خصوصی استفاده');
+  book.setSpreadsheetTimeZone('Asia/Tehran');
+  var events=book.getActiveSheet();events.setName('رویدادها');
+  events.appendRow(['زمان تهران','تاریخ','شناسهٔ ناشناس بازیکن','رویداد',
+    'شناسهٔ بازی','نام با رضایت','نام کاربری با رضایت']);
+  events.setFrozenRows(1);
+  events.getRange('A1:G1').setBackground('#b20a20').setFontColor('#ffffff').setFontWeight('bold');
+  events.setColumnWidths(1,2,120);events.setColumnWidth(3,230);
+  events.setColumnWidths(4,4,170);
+  var report=book.insertSheet('داشبورد');
+  report.getRange('A1:B8').setValues([
+    ['شاخص','مقدار'],
+    ['کاربران یکتای شناخته‌شده','=IFERROR(COUNTA(UNIQUE(FILTER(رویدادها!C2:C,رویدادها!C2:C<>""))),0)'],
+    ['مجموع رویدادها','=COUNTA(رویدادها!D2:D)'],
+    ['ورود به ربات','=COUNTIF(رویدادها!D2:D,"start")'],
+    ['جدول کلمات ارسال‌شده','=COUNTIF(رویدادها!D2:D,"crossword_sent")'],
+    ['سودوکوهای ارسال‌شده','=COUNTIF(رویدادها!D2:D,"sudoku_sent")'],
+    ['انتخاب اشتراک‌گذاری','=COUNTIF(رویدادها!D2:D,"share_clicked")'],
+    ['بازیکنان یکتای امروز','=IFERROR(COUNTA(UNIQUE(FILTER(رویدادها!C2:C,رویدادها!B2:B=TEXT(TODAY(),"yyyy-mm-dd")))),0)']
+  ]);
+  report.getRange('A1:B1').setBackground('#b20a20').setFontColor('#ffffff').setFontWeight('bold');
+  report.setColumnWidth(1,250);report.setColumnWidth(2,190);report.setFrozenRows(1);
+  report.getRange('A10:B13').setValues([
+    ['دربارهٔ این آمار',''],
+    ['ارسال ویجت','پذیرفته‌شدن درخواست ارسال، نه لزوماً مشاهده یا حل'],
+    ['حل کامل و زمان حل','هنوز از ویجت به سرور منتقل نمی‌شود'],
+    ['نمایش نام','فقط بعد از انتخاب آگاهانهٔ /showname']
+  ]);
+  var prop=pjProperties_();
+  prop.setProperty('PJ_ANALYTICS_SALT',Utilities.getUuid());
+  prop.setProperty('PJ_ANALYTICS_SHEET_ID',book.getId());
+  // Data retention: 90 days, best effort.
+  var triggers=ScriptApp.getProjectTriggers();
+  if(!triggers.some(function(x){return x.getHandlerFunction()==='purgeOldAnalytics'}))
+    ScriptApp.newTrigger('purgeOldAnalytics').timeBased().everyDays(1).create();
+  console.log('Analytics created privately: '+book.getUrl());
+}
+function purgeOldAnalytics() {
+  var tab=pjAnalyticsSheet_();if(!tab)return;
+  var rows=tab.getDataRange().getValues(),old=Date.now()-90*86400000;
+  for(var i=rows.length-1;i>=1;i--){
+    if(Date.parse(String(rows[i][1])+'T00:00:00Z')<old)tab.deleteRow(i+1);
+  }
+}
+function pjForgetUser_(message) {
+  if(!pjAnalyticsId_())return false;
+  var h=pjPlayerKey_(message.from.id),tab=pjAnalyticsSheet_();
+  if(tab){
+    var data=tab.getDataRange().getValues();
+    for(var i=data.length-1;i>=1;i--)if(data[i][2]===h)tab.deleteRow(i+1);
+  }
+  var pr=pjProperties_();
+  pr.deleteProperty('PJ_NAMED_'+h);
+  pr.setProperty('PJ_OPTOUT_'+h,'1');
+  return true;
+}
+function pjSetNameConsent_(message,enable) {
+  if(!pjAnalyticsId_())return false;
+  var h=pjPlayerKey_(message.from.id),prop=pjProperties_();
+  if(enable){
+    prop.deleteProperty('PJ_OPTOUT_'+h);
+    prop.setProperty('PJ_NAMED_'+h,'1');
+  }else{
+    prop.deleteProperty('PJ_NAMED_'+h);
+    var tab=pjAnalyticsSheet_(),rows=tab.getDataRange().getValues();
+    for(var i=1;i<rows.length;i++)if(rows[i][2]===h)
+      tab.getRange(i+1,6,1,2).clearContent();
+  }
+  return true;
+}
+function analyticsLink() {
+  var id=pjAnalyticsId_();
+  console.log(id?'Private usage dashboard: https://docs.google.com/spreadsheets/d/'+id+'/edit':
+    'Analytics is not enabled. Run setupAnalytics once.');
+}
+
 function pjMenu_() {
   return {
     keyboard: [
