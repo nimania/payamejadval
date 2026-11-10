@@ -32,6 +32,7 @@ jobs:
           mkdir -p public/data public/assets
           cp assets/payamejadval-logo.webp assets/favicon.svg public/assets/
           cp index.html public/index.html
+          cp telegram-7x7-demo.html public/telegram-7x7-demo.html
           cp public-app.js public/public-app.js
           cp player.js public/player.js
           cp sudoku.js public/sudoku.js
