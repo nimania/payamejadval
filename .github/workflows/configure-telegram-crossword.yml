@@ -1,0 +1,19 @@
+name: Configure private Telegram crossword webhook
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Register the private crossword bot webhook
+        env:
+          TELEGRAM_CROSSWORD_BOT_TOKEN: ${{ secrets.TELEGRAM_CROSSWORD_BOT_TOKEN }}
+          TELEGRAM_WEBHOOK_SECRET: ${{ secrets.TELEGRAM_WEBHOOK_SECRET }}
+          TELEGRAM_CROSSWORD_WEBHOOK_URL: ${{ secrets.TELEGRAM_CROSSWORD_WEBHOOK_URL }}
+        run: python3 telegram/configure-webhook.py
