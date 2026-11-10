@@ -202,6 +202,35 @@ function pjMenu_() {
   };
 }
 
+function pjWithProgress_(chatId, title, action) {
+  // Progress represents completed processing stages, not estimated time or network percentage.
+  var progressId=null;
+  try {
+    var ack=pjApi_('sendMessage',{
+      chat_id:chatId,
+      text:'⏳ '+title+'\nگام ۱ از ۳: درخواست دریافت شد؛ در حال بررسی انتشار'
+    });
+    progressId=ack && ack.message_id;
+  } catch(e) {
+    console.warn('Could not post progress; attempt to deliver game continues.');
+  }
+  function update(step,detail){
+    if(!progressId)return;
+    var line=step==='done'?'✅ '+detail:step==='error'?'❌ '+detail:
+      '⏳ '+title+'\nگام '+step+' از ۳: '+detail;
+    try{pjApi_('editMessageText',{chat_id:chatId,message_id:progressId,text:line});}
+    catch(e){console.warn('Progress message update skipped.');}
+  }
+  try{
+    var result=action(update);
+    update('done','بررسی انجام شد؛ نتیجه در پیام بعدی ارسال شده است.');
+    return result;
+  }catch(error){
+    update('error','آماده‌سازی یا ارسال بازی ناموفق بود. دوباره تلاش کن؛ اگر ادامه داشت /menu را بزن.');
+    throw error;
+  }
+}
+
 function pjSendMessage_(chatId, message, keyboard) {
   return pjApi_('sendMessage', {
     chat_id: chatId, text: message, reply_markup: keyboard || pjMenu_()
@@ -258,16 +287,22 @@ function pjShareLinks_(puzzle) {
   return {bot:deep,web:web};
 }
 
-function pjSendPuzzle_(chatId, puzzle, sourceMessage) {
+function pjSendPuzzle_(chatId, puzzle, sourceMessage, progress) {
   var links = pjShareLinks_(puzzle);
+  if(progress)progress(2,'بارگذاری و کنترل فایل جدول');
+  var html=pjWidgetHtml_(puzzle);
+  if(progress)progress(3,'ارسال جدول به تلگرام');
   pjApi_('sendWidget', {
     chat_id:chatId,
-    html:pjWidgetHtml_(puzzle),
+    html:html,
     caption:'🧩 ' + puzzle.title +
       (puzzle.status === 'private-trial' ? '\nجدول آزمایشی ـ رتبه‌بندی رسمی ندارد' : '') +
       '\nفرستادن همین جدول: ' + links.bot,
     allow_queries:false,
-    is_shared:false
+    is_shared:false,
+    reply_markup:{inline_keyboard:[[
+      {text:'🌐 اگر جدول خالی بود؛ نسخه وب',url:links.web}
+    ]]}
   });
   pjTrack_(sourceMessage,'crossword_sent',puzzle.id);
 }
@@ -282,7 +317,7 @@ function pjDaily_(p) {
   return p.status==='approved' && p.editorApproved===true && p.publishDate===today;
 }
 
-function pjPuzzle_(chatId, mode, sourceMessage) {
+function pjPuzzle_(chatId, mode, sourceMessage, progress) {
   var puzzles=pjCatalogue_(),filtered=[],info='';
   if (mode==='quick') {
     filtered=puzzles.filter(function(p){return p.size===5 && pjDaily_(p);});
@@ -306,11 +341,11 @@ function pjPuzzle_(chatId, mode, sourceMessage) {
   if (mode==='different') {
     filtered=puzzles.filter(function(p){return p.size===7;});
     if (filtered.length<2){pjSendMessage_(chatId,'فعلاً جدول ۷×۷ دوم برای انتخاب متفاوت آماده نیست.');return;}
-    pjSendPuzzle_(chatId,filtered[(pjTehranDay_()+1)%filtered.length],sourceMessage);
+    pjSendPuzzle_(chatId,filtered[(pjTehranDay_()+1)%filtered.length],sourceMessage,progress);
     return;
   }
   if (!filtered.length){pjSendMessage_(chatId,info);return;}
-  pjSendPuzzle_(chatId,filtered[pjTehranDay_()%filtered.length],sourceMessage);
+  pjSendPuzzle_(chatId,filtered[pjTehranDay_()%filtered.length],sourceMessage,progress);
 }
 
 function pjShare_(chatId) {
@@ -380,7 +415,8 @@ function pjSudokuToday_(difficulty) {
   return matches.length===1?matches[0]:null;
 }
 
-function pjSendSudoku_(chatId,item,sourceMessage) {
+function pjSendSudoku_(chatId,item,sourceMessage,progress) {
+  if(progress)progress(2,'دریافت و اعتبارسنجی سودوکو');
   var res=UrlFetchApp.fetch(PJ.repoBase+'sudoku-widget-template.html',{muteHttpExceptions:true});
   if(res.getResponseCode()!==200)throw new Error('Sudoku widget template unavailable');
   var template=res.getContentText('UTF-8');
@@ -389,22 +425,39 @@ function pjSendSudoku_(chatId,item,sourceMessage) {
     givens:item.puzzle.givens,solution:item.puzzle.solution};
   var html=template.replace('__PUZZLE__',JSON.stringify(q));
   if(html.length>32768)throw new Error('Sudoku widget too large');
+  if(progress)progress(3,'ارسال سودوکو به تلگرام');
   pjApi_('sendWidget',{
     chat_id:chatId,html:html,
     caption:'🔢 '+item.title+'\nچالش همین جدول: https://t.me/PayameJadvalBot?start=s_'+item.id+
       '\nامتیاز فعلاً آزمایشی و محلی است.',
-    allow_queries:false,is_shared:false
+    allow_queries:false,is_shared:false,
+    reply_markup:{inline_keyboard:[[
+      {text:'🌐 اگر سودوکو نمایش داده نشد؛ نسخه وب',
+       url:'https://nimania.github.io/payamejadval/?type=sudoku&id='+encodeURIComponent(item.id)}
+    ]]}
   });
   pjTrack_(sourceMessage,'sudoku_sent',item.id);
 }
 
-function pjSudoku_(chatId,level,sourceMessage) {
+function pjSudoku_(chatId,level,sourceMessage,progress) {
   var p=pjSudokuToday_(level);
   if(!p){
-    pjSendMessage_(chatId,'سودوکوی '+level+' امروز هنوز منتشر نشده است. بازی‌های امروز پس از ساعت انتشار رسمی در دسترس‌اند.',pjSudokuKeyboard_());
+    var today=Utilities.formatDate(new Date(),'Asia/Tehran','yyyy-MM-dd');
+    var all=pjSudokuList_();
+    var next=all.find(function(x){return x.id==='sudoku-'+today+'-'+level;});
+    var timestr=next?Utilities.formatDate(new Date(next.publishedAt),'Asia/Tehran','HH:mm'):null;
+    var previous=all.filter(function(x){
+      return x.puzzle.difficulty===level && pjReleasedSudoku_(x);
+    }).sort(function(a,b){return Date.parse(b.publishedAt)-Date.parse(a.publishedAt);})[0];
+    var label={easy:'آسان',medium:'متوسط',hard:'سخت'}[level]||level;
+    var note=next?'سودوکوی '+label+' امروز ساعت '+timestr+' به وقت تهران منتشر می‌شود.':
+      'سودوکوی '+label+' امروز هنوز منتشر نشده است.';
+    pjSendMessage_(chatId,note+(previous?'\nتا آن موقع آخرین سودوکوی منتشرشده را می‌فرستم.':
+      '\nفعلاً سودوکوی منتشرشدهٔ قبلی هم در دسترس نیست.'),pjSudokuKeyboard_());
+    if(previous)pjSendSudoku_(chatId,previous,sourceMessage,progress);
     return;
   }
-  pjSendSudoku_(chatId,p,sourceMessage);
+  pjSendSudoku_(chatId,p,sourceMessage,progress);
 }
 
 function pjSudokuExact_(chatId,id,sourceMessage) {
@@ -456,10 +509,10 @@ function pjHandle_(message) {
   } else if (/^\/menu(@payamejadvalbot)?$/.test(command)) {
     pjSendMessage_(chat.id,'🧩 از منوی پایین یک بازی انتخاب کن.');
   } else if (t==='⚡ جدول سریع' || /^\/quick(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'quick',message);
+    pjWithProgress_(chat.id,'جدول سریع ۵×۵',function(update){pjPuzzle_(chat.id,'quick',message,update);});
   } else if (t==='🧩 جدول اصلی' || t==='🧩 جدول امروز' ||
              /^\/(jadval|today)(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'main',message);
+    pjWithProgress_(chat.id,'جدول اصلی',function(update){pjPuzzle_(chat.id,'main',message,update);});
   } else if (t==='🔤 کلمه‌چین' || /^\/kalamechin(@payamejadvalbot)?$/.test(command)) {
     pjApi_('sendMessage', {
       chat_id:chat.id,
@@ -469,11 +522,11 @@ function pjHandle_(message) {
   } else if (t==='🔢 سودوکو' || /^\/sudoku(@payamejadvalbot)?$/.test(command)) {
     pjSendMessage_(chat.id,'🔢 سطح سودوکوی امروز را انتخاب کن. هر سطح یک جدول مشترک برای همه است.',pjSudokuKeyboard_());
   } else if (t==='🔢 سودوکو آسان' || t==='🔢 سودوکو متوسط' || t==='🔢 سودوکو سخت') {
-    pjSudoku_(chat.id,t.indexOf('آسان')>=0?'easy':t.indexOf('متوسط')>=0?'medium':'hard',message);
+    pjWithProgress_(chat.id,'سودوکو',function(update){pjSudoku_(chat.id,t.indexOf('آسان')>=0?'easy':t.indexOf('متوسط')>=0?'medium':'hard',message,update);});
   } else if (t==='🏠 منوی اصلی') {
     pjSendMessage_(chat.id,'🧩 از منوی اصلی بازی انتخاب کن.');
   } else if (t==='🏆 چالش جمعه' || /^\/friday(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'friday',message);
+    pjWithProgress_(chat.id,'چالش جمعه',function(update){pjPuzzle_(chat.id,'friday',message,update);});
   } else if (t==='📚 آرشیو جدول‌ها') {
     pjSendMessage_(chat.id,'📚 آرشیو و بازی‌های منتشرشده:\nhttps://nimania.github.io/payamejadval/\n\nبرای بازی داخل همین چت، از لینک اختصاصی هر جدول استفاده کن.');
   } else if (t==='🏅 امتیازهای من' || t==='🏆 امتیازهای من' ||
@@ -483,7 +536,7 @@ function pjHandle_(message) {
              /^\/invite(@payamejadvalbot)?$/.test(command)) {
     pjShare_(chat.id);
   } else if (t==='🎲 یک جدول متفاوت' || /^\/new(@payamejadvalbot)?$/.test(command)) {
-    pjPuzzle_(chat.id,'different',message);
+    pjWithProgress_(chat.id,'جدول متفاوت',function(update){pjPuzzle_(chat.id,'different',message,update);});
   }
 }
 
@@ -545,7 +598,15 @@ function pollUpdates() {
         var u = updates[i];
         if (u.message) {
           var date = Number(u.message.date || 0);
-          if (date && Date.now()/1000 - date < PJ.maxAgeSeconds) pjHandle_(u.message);
+          if (date && Date.now()/1000 - date < PJ.maxAgeSeconds) {
+            try{pjHandle_(u.message);}
+            catch(err){
+              console.error('Game delivery failed: '+String(err.message||err).replace(pjToken_(),'[redacted]'));
+              try{pjSendMessage_(u.message.chat.id,
+                '❌ در ارسال بازی مشکلی پیش آمد. درخواست را دوباره بفرست یا /menu را باز کن.');}
+              catch(e){console.error('Could not deliver the game error notice.');}
+            }
+          }
         }
         // Commit only after successful handling of the update.
         offset = Number(u.update_id) + 1;
