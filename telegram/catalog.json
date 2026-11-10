@@ -11,7 +11,57 @@
       "path": "telegram/widget-7x7.html",
       "status": "private-trial",
       "editorApproved": false,
-      "allowPrivateTrial": true
+      "allowPrivateTrial": true,
+      "track": "main",
+      "webUrl": "https://nimania.github.io/payamejadval/share-7x7-20261110.html"
+    },
+    {
+      "id": "mini-2026-11-03-01",
+      "title": "جدول سریع ۵×۵ ـ شمارهٔ 1",
+      "kind": "crossword",
+      "size": 5,
+      "track": "quick",
+      "publishDate": "2026-11-11",
+      "path": "telegram/widget-mini-2026-11-03-01.html",
+      "webUrl": "https://nimania.github.io/payamejadval/share-mini-2026-11-03-01.html",
+      "status": "approved",
+      "editorApproved": true,
+      "reviewSource": "data/mini-puzzles.json",
+      "originalSitePublishedAt": "2026-11-03"
+    },
+    {
+      "id": "mini-2026-11-03-02",
+      "title": "جدول سریع ۵×۵ ـ شمارهٔ 2",
+      "kind": "crossword",
+      "size": 5,
+      "track": "quick",
+      "publishDate": "2026-11-12",
+      "path": "telegram/widget-mini-2026-11-03-02.html",
+      "webUrl": "https://nimania.github.io/payamejadval/share-mini-2026-11-03-02.html",
+      "status": "approved",
+      "editorApproved": true,
+      "reviewSource": "data/mini-puzzles.json",
+      "originalSitePublishedAt": "2026-11-03"
     }
-  ]
+  ],
+  "schedule": {
+    "timezone": "Asia/Tehran",
+    "quick": {
+      "size": 5,
+      "cadence": "daily",
+      "oneSharedPuzzlePerDate": true
+    },
+    "main": {
+      "size": 7,
+      "cadence": "daily",
+      "oneSharedPuzzlePerDate": true
+    },
+    "friday": {
+      "size": 9,
+      "cadence": "weekly",
+      "weekday": "friday",
+      "oneSharedPuzzlePerDate": true
+    },
+    "missingPolicy": "no-false-publication-no-repeats"
+  }
 }
