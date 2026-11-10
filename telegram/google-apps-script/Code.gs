@@ -11,7 +11,7 @@ var PJ = {
   username: 'PayameJadvalBot',
   repoBase: 'https://raw.githubusercontent.com/nimania/payamejadval/main/telegram/',
   offsetKey: 'PJ_NEXT_UPDATE_OFFSET',
-  cacheSeconds: 900,
+  cacheSeconds: 300,
   maxAgeSeconds: 86400
 };
 
@@ -48,8 +48,9 @@ function pjApi_(method, body) {
 function pjMenu_() {
   return {
     keyboard: [
-      [{text: '🧩 جدول امروز'}, {text: '🎲 یک جدول متفاوت'}],
-      [{text: '🏆 امتیازهای من'}, {text: '👥 دعوت دوستان'}]
+      [{text: '⚡ جدول سریع'}, {text: '🧩 جدول اصلی'}],
+      [{text: '🏆 چالش جمعه'}, {text: '📚 آرشیو جدول‌ها'}],
+      [{text: '🏅 امتیازهای من'}, {text: '📤 اشتراک‌گذاری'}]
     ],
     resize_keyboard: true,
     is_persistent: true
@@ -64,20 +65,20 @@ function pjSendMessage_(chatId, message) {
 
 function pjCatalogue_() {
   var cache = CacheService.getScriptCache();
-  var cached = cache.get('pj-catalog-v1');
+  var cached = cache.get('pj-catalog-v2');
   if (cached) return JSON.parse(cached);
   var res = UrlFetchApp.fetch(PJ.repoBase + 'catalog.json', {muteHttpExceptions: true});
   if (res.getResponseCode() !== 200) throw new Error('Crossword catalogue unavailable');
   var data = JSON.parse(res.getContentText('UTF-8'));
   if (data.schema !== 1 || !Array.isArray(data.puzzles)) throw new Error('Invalid crossword catalogue');
   var puzzles = data.puzzles.filter(function(p) {
-    return p && p.kind === 'crossword' && p.size === 7
+    return p && p.kind === 'crossword' && [5,7,9].indexOf(p.size) >= 0
       && /^[a-z0-9-]{4,64}$/.test(p.id)
       && /^telegram\/[A-Za-z0-9-]+\.html$/.test(p.path)
       && ((p.status === 'approved' && p.editorApproved === true)
        || (p.status === 'private-trial' && p.allowPrivateTrial === true));
   });
-  cache.put('pj-catalog-v1', JSON.stringify(puzzles), PJ.cacheSeconds);
+  cache.put('pj-catalog-v2', JSON.stringify(puzzles), PJ.cacheSeconds);
   return puzzles;
 }
 
@@ -99,24 +100,82 @@ function pjTehranDay_() {
   return Number(Utilities.formatDate(new Date(), 'Asia/Tehran', 'yyyyMMdd'));
 }
 
-function pjPuzzle_(chatId, different) {
-  var puzzles = pjCatalogue_();
-  if (!puzzles.length) {
-    pjSendMessage_(chatId, 'هنوز جدول مجاز و بررسی‌شده‌ای برای بازی آماده نشده است.');
-    return;
-  }
-  if (different && puzzles.length < 2) {
-    pjSendMessage_(chatId, 'فعلاً فقط یک جدول ۷×۷ آزمایشی آماده است. وقتی جدول دوم بررسی و اضافه شود، دکمهٔ «جدول متفاوت» فعال خواهد شد.');
-    return;
-  }
-  var index = (pjTehranDay_() % puzzles.length + (different ? 1 : 0)) % puzzles.length;
-  var selected = puzzles[index];
+function pjShareLinks_(puzzle) {
+  var deep = 'https://t.me/PayameJadvalBot?start=p_' + puzzle.id;
+  var web = /^https:\/\/nimania\.github\.io\/payamejadval\/[A-Za-z0-9-]+\.html$/.test(puzzle.webUrl || '')
+    ? puzzle.webUrl : 'https://nimania.github.io/payamejadval/';
+  return {bot:deep,web:web};
+}
+
+function pjSendPuzzle_(chatId, puzzle) {
+  var links = pjShareLinks_(puzzle);
   pjApi_('sendWidget', {
-    chat_id: chatId,
-    html: pjWidgetHtml_(selected),
-    caption: '🧩 ' + selected.title + (selected.status === 'private-trial' ? '\nنسخهٔ آزمایشی دوستانه' : ''),
-    allow_queries: false,
-    is_shared: false
+    chat_id:chatId,
+    html:pjWidgetHtml_(puzzle),
+    caption:'🧩 ' + puzzle.title +
+      (puzzle.status === 'private-trial' ? '\nجدول آزمایشی ـ رتبه‌بندی رسمی ندارد' : '') +
+      '\nفرستادن همین جدول: ' + links.bot,
+    allow_queries:false,
+    is_shared:false
+  });
+}
+
+function pjFindPuzzle_(id) {
+  var matches=pjCatalogue_().filter(function(p){return p.id===id;});
+  return matches.length===1?matches[0]:null;
+}
+
+function pjDaily_(p) {
+  var today=Utilities.formatDate(new Date(), 'Asia/Tehran', 'yyyy-MM-dd');
+  return p.status==='approved' && p.editorApproved===true && p.publishDate===today;
+}
+
+function pjPuzzle_(chatId, mode) {
+  var puzzles=pjCatalogue_(),filtered=[],info='';
+  if (mode==='quick') {
+    filtered=puzzles.filter(function(p){return p.size===5 && pjDaily_(p);});
+    info='هنوز جدول سریع ۵×۵ تأییدشده‌ای برای امروز منتشر نشده است.';
+  } else if (mode==='friday') {
+    var date=Utilities.formatDate(new Date(), 'Asia/Tehran', 'yyyy-MM-dd');
+    if (new Date(date+'T12:00:00Z').getUTCDay()!==5) {
+      pjSendMessage_(chatId,'🏆 چالش ۹×۹ هر جمعه منتشر می‌شود. در روز جمعه دوباره بررسی کن.');
+      return;
+    }
+    filtered=puzzles.filter(function(p){return p.size===9 && pjDaily_(p);});
+    info='چالش ۹×۹ این جمعه هنوز آماده یا تأیید نشده است.';
+  } else {
+    filtered=puzzles.filter(function(p){return p.size===7 && pjDaily_(p);});
+    if (!filtered.length) {
+      // Keep the existing private demo accessible, but never call it "today's official puzzle".
+      filtered=puzzles.filter(function(p){return p.size===7 && p.status==='private-trial';});
+    }
+    info='جدول اصلی ۷×۷ امروز هنوز منتشر نشده است.';
+  }
+  if (mode==='different') {
+    filtered=puzzles.filter(function(p){return p.size===7;});
+    if (filtered.length<2){pjSendMessage_(chatId,'فعلاً جدول ۷×۷ دوم برای انتخاب متفاوت آماده نیست.');return;}
+    pjSendPuzzle_(chatId,filtered[(pjTehranDay_()+1)%filtered.length]);
+    return;
+  }
+  if (!filtered.length){pjSendMessage_(chatId,info);return;}
+  pjSendPuzzle_(chatId,filtered[pjTehranDay_()%filtered.length]);
+}
+
+function pjShare_(chatId) {
+  var puzzles=pjCatalogue_().filter(function(p){return p.size===7;});
+  if (!puzzles.length){pjSendMessage_(chatId,'هنوز جدولی برای اشتراک‌گذاری آماده نیست.');return;}
+  var latest=puzzles.find(function(p){return pjDaily_(p);})||puzzles[0],links=pjShareLinks_(latest);
+  pjApi_('sendMessage',{
+    chat_id:chatId,
+    text:'📤 دو راه برای دعوت دوستان:\n\n' +
+      '۱. همین جدول داخل ربات تلگرام:\n'+links.bot+'\n\n' +
+      '۲. حل همان جدول در مرورگر و ارسال لینک به واتس‌اپ و دیگر برنامه‌ها:\n'+links.web+
+      '\n\nدر نسخهٔ عمومی تلگرام، خودِ پیام ویجت هنوز قابل فوروارد نیست؛ لینک آن قابل اشتراک‌گذاری است.',
+    reply_markup:{inline_keyboard:[
+      [{text:'📨 فرستادن به دوستان تلگرام',
+        url:'https://t.me/share/url?url='+encodeURIComponent(links.bot)+'&text='+encodeURIComponent('🧩 بیا این جدول را حل کنیم!')}],
+      [{text:'🌐 بازی در مرورگر',url:links.web}]
+    ]}
   });
 }
 
@@ -127,16 +186,34 @@ function pjHandle_(message) {
   if (!message.text) return;
   var t = String(message.text).trim();
   var command = t.split(/\s+/)[0].toLowerCase();
-  if (/^\/(start|menu)(@payamejadvalbot)?$/.test(command)) {
-    pjSendMessage_(chat.id, '🧩 به پیام جدول خوش آمدی!\nبرای شروع یکی از دکمه‌های پایین را لمس کن.');
-  } else if (/^\/(jadval|today)(@payamejadvalbot)?$/.test(command) || t === '🧩 جدول امروز') {
-    pjPuzzle_(chat.id, false);
-  } else if (/^\/new(@payamejadvalbot)?$/.test(command) || t === '🎲 یک جدول متفاوت') {
-    pjPuzzle_(chat.id, true);
-  } else if (/^\/scores(@payamejadvalbot)?$/.test(command) || t === '🏆 امتیازهای من') {
-    pjSendMessage_(chat.id, '🏆 فعلاً امتیاز رسمی و رتبه‌بندی مرکزی فعال نشده است.\nپیشرفت جدول فقط روی دستگاه خودت می‌ماند.');
-  } else if (t === '👥 دعوت دوستان' || /^\/invite(@payamejadvalbot)?$/.test(command)) {
-    pjSendMessage_(chat.id, '👥 این لینک را برای دوستانت بفرست:\nhttps://t.me/PayameJadvalBot\nبعد از Start، هر نفر جدول را در چت خودش دریافت می‌کند.');
+  var start=t.match(/^\/start(?:@payamejadvalbot)?(?:\s+p_([A-Za-z0-9_-]{4,61}))?$/i);
+  if (start) {
+    if (start[1]) {
+      var chosen=pjFindPuzzle_(start[1]);
+      if (chosen) pjSendPuzzle_(chat.id,chosen);
+      else pjSendMessage_(chat.id,'این جدول در آرشیو فعال پیدا نشد. از منوی بازی، جدول موجود را انتخاب کن.');
+    } else {
+      pjSendMessage_(chat.id, '🧩 به پیام جدول خوش آمدی! ⚡ روزانه ۵×۵ و 🧩 روزانه ۷×۷؛ جمعه‌ها چالش ۹×۹. فقط جدول‌های بازبینی‌شده منتشر می‌شوند.');
+    }
+  } else if (/^\/menu(@payamejadvalbot)?$/.test(command)) {
+    pjSendMessage_(chat.id,'🧩 از منوی پایین یک بازی انتخاب کن.');
+  } else if (t==='⚡ جدول سریع' || /^\/quick(@payamejadvalbot)?$/.test(command)) {
+    pjPuzzle_(chat.id,'quick');
+  } else if (t==='🧩 جدول اصلی' || t==='🧩 جدول امروز' ||
+             /^\/(jadval|today)(@payamejadvalbot)?$/.test(command)) {
+    pjPuzzle_(chat.id,'main');
+  } else if (t==='🏆 چالش جمعه' || /^\/friday(@payamejadvalbot)?$/.test(command)) {
+    pjPuzzle_(chat.id,'friday');
+  } else if (t==='📚 آرشیو جدول‌ها') {
+    pjSendMessage_(chat.id,'📚 آرشیو و بازی‌های منتشرشده:\nhttps://nimania.github.io/payamejadval/\n\nبرای بازی داخل همین چت، از لینک اختصاصی هر جدول استفاده کن.');
+  } else if (t==='🏅 امتیازهای من' || t==='🏆 امتیازهای من' ||
+             /^\/scores(@payamejadvalbot)?$/.test(command)) {
+    pjSendMessage_(chat.id,'🏅 امتیاز فعلی در ویجت فقط روی دستگاه محاسبه می‌شود و غیررسمی است. رتبه‌بندی مرکزی و رقابت هفتگی هنوز فعال نشده‌اند.');
+  } else if (t==='📤 اشتراک‌گذاری' || t==='👥 دعوت دوستان' ||
+             /^\/invite(@payamejadvalbot)?$/.test(command)) {
+    pjShare_(chat.id);
+  } else if (t==='🎲 یک جدول متفاوت' || /^\/new(@payamejadvalbot)?$/.test(command)) {
+    pjPuzzle_(chat.id,'different');
   }
 }
 
@@ -156,7 +233,10 @@ function setupBot() {
   }
   pjApi_('setMyCommands', {commands: [
     {command:'start',description:'منوی بازی'},
-    {command:'jadval',description:'جدول امروز'},
+    {command:'jadval',description:'جدول اصلی ۷×۷'},
+    {command:'quick',description:'جدول سریع ۵×۵'},
+    {command:'friday',description:'چالش جمعه ۹×۹'},
+    {command:'invite',description:'اشتراک جدول'},
     {command:'new',description:'جدول متفاوت'},
     {command:'scores',description:'امتیازهای من'}
   ]});
