@@ -25,8 +25,8 @@ function chatId(u) {
 }
 function actionable(u) {
  const t=u.message?.text||"";
- if (/^\/(start|jadval|today|menu|new|scores)(?:@PayameJadvalBot)?(?:\s|$)/i.test(t)) return true;
- return ["🧩 جدول امروز","🎲 یک جدول متفاوت","🏆 امتیازهای من","👥 دعوت دوستان"].includes(t);
+ if (/^\/(start|jadval|today|menu|new|scores|kalamechin|word)(?:@PayameJadvalBot)?(?:\s|$)/i.test(t)) return true;
+ return ["🧩 جدول امروز","🎲 یک جدول متفاوت","🔤 کلمه‌چین","🏆 امتیازهای من","👥 دعوت دوستان"].includes(t);
 }
 function safeRecent(u) {
  const date=u.message?.date;
