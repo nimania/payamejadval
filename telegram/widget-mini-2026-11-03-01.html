@@ -18,7 +18,7 @@ function pick(r,c){let k=pos(r,c),a=entries.map((e,i)=>ids(e).includes(k)?i:-1).
 function draw(){let board=$('board'),active=ids(entries[selected]),white=0,filled=0,wrong=0;board.replaceChildren();
 let corner=document.createElement('span');board.append(corner);for(let col=1;col<=5;col++){let b=document.createElement('div');b.className='axis';b.textContent=col;board.append(b)}
 for(let r=0;r<N;r++){let a=document.createElement('div');a.className='axis';a.textContent=r+1;board.append(a);
-for(let c=4;c>=0;c--{let id=pos(r,c),b=document.createElement('button');b.className='cell';b.type='button';if(G[r][c]==='#'){b.className+=' red';b.disabled=true;}else{white++;if(values[id]){filled++;if(checked&&values[id]!==G[r][c]){b.className+=' error';wrong++;}}
+for(let c=4;c>=0;c--){let id=pos(r,c),b=document.createElement('button');b.className='cell';b.type='button';if(G[r][c]==='#'){b.className+=' red';b.disabled=true;}else{white++;if(values[id]){filled++;if(checked&&values[id]!==G[r][c]){b.className+=' error';wrong++;}}
 if(active.includes(id))b.className+=active[offset]===id?' focus':' word';b.textContent=values[id]||'';b.onclick=()=>pick(r,c);}board.append(b)}}
 let e=entries[selected],part=entries.filter(x=>x.dir===e.dir&&x.group===e.group).length>1?' ('+(e.part+1)+')':'';
 $('clabel').textContent=(e.dir==='horizontal'?'افقی ':'عمودی ')+e.group+part+' • '+e.word.length+' حرف';$('ctext').textContent=e.clue;
