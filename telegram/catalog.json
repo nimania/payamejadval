@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "description": "Curated Telegram crossword playable widget releases. Add new reviewed entries without changing the bot.",
+  "timeZone": "Asia/Tehran",
+  "puzzles": [
+    {
+      "id": "friends-7x7-2026-11-10",
+      "title": "جدول کلمات متقاطع ۷×۷ ـ آزمایش دوستانهٔ ۱",
+      "kind": "crossword",
+      "size": 7,
+      "path": "telegram/widget-7x7.html",
+      "status": "private-trial",
+      "editorApproved": false,
+      "allowPrivateTrial": true
+    }
+  ]
+}
