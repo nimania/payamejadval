@@ -120,6 +120,8 @@ button,a{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transpar
 }
 @media(max-height:550px) and (min-width:801px){.under,.footer{display:none}}
 .mast-actions{display:flex;gap:6px;align-items:center}.mast-actions button{background:#1c404c;color:#f4eee0;padding:9px 10px;border:1px solid #3b626f;border-radius:12px;font-size:12px}.mast-actions a{white-space:nowrap}@media(max-width:800px){.mast-actions button{padding:6px 7px;font-size:10px}}
+.question-band{flex:0 0 auto;display:flex;gap:5px;align-items:baseline;flex-wrap:wrap;min-height:0;margin:4px 0;padding:8px 11px;background:#e8f1ee;border:1px solid #b5d2c9;border-right:4px solid #227989;border-radius:10px;direction:rtl;line-height:1.6;color:#224652}.question-band span{font-size:10px;font-weight:900;color:#256875;white-space:nowrap}.question-band strong{font-size:13px;font-weight:900;line-height:1.5;flex:1;min-width:160px}.question-top{margin-top:0}.question-bottom{margin-bottom:6px}
+@media(max-width:800px){.question-band{margin:2px 0;padding:4px 7px;gap:3px}.question-band span{font-size:9px}.question-band strong{font-size:11px;line-height:1.35}.question-bottom{margin-bottom:3px}body.typing .question-band{padding:3px 6px;margin:1px 0}body.typing .question-band strong{font-size:10px;line-height:1.25}}
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -141,7 +143,9 @@ button,a{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transpar
 <div class="xp"><span id="bar" style="width:0"></span></div>
 <section class="paper">
 <div class="intro"><b>خانه‌ها را با واژه‌ها کامل کن</b><small id="gridSize">جدول واژه‌ها</small></div>
+<div class="question-band question-top" role="status" aria-live="polite"><span id="questionTopRef">سؤال انتخاب‌شده</span><strong id="questionTopText">روی یک خانه بزن تا سؤال ظاهر شود</strong></div>
 <div class="board-wrap"><div class="board" id="board" dir="rtl" aria-label="جدول کلمات متقاطع حرفه‌ای"></div></div>
+<div class="question-band question-bottom"><span id="questionBottomRef">سؤال انتخاب‌شده</span><strong id="questionBottomText">روی یک خانه بزن تا سؤال ظاهر شود</strong></div>
 <div class="guide"><span id="selectedClue">روی خانه‌ای بزن و با کیبورد گوشی واژه را بنویس</span><b id="bonusCount">✦ ۰ اضافه</b></div>
 </section>
 <div class="inputzone">
@@ -285,8 +289,17 @@ function renderBoard(){
  }
 }
 function focusLabel(){
- const w=focusWord;
- $('selectedClue').textContent=w?'واژه انتخاب‌شده: '+FA(w.length)+' حرفی'+' · '+(solved().includes(w)?'تکمیل‌شده':'هنوز پیدا نشده') :'برای نوشتن واژه روی کادر یا یکی از خانه‌ها بزن';
+ const p=puzzle(),w=focusWord||p.words.find(x=>!solved().includes(x))||p.words[0];
+ const place=p.placements.find(x=>x.w===w);
+ const same=p.placements.filter(x=>x.d===place.d);
+ const number=FA(same.findIndex(x=>x.w===w)+1);
+ const label=(place.d==='h'?'افقی ':'عمودی ')+number+' · '+FA(w.length)+' حرف';
+ const clue=p.clues?.[w]||'یک واژهٔ '+FA(w.length)+' حرفی با حروف مرحله پیدا کن.';
+ $('questionTopRef').textContent=label;
+ $('questionBottomRef').textContent=label;
+ $('questionTopText').textContent=clue;
+ $('questionBottomText').textContent=clue;
+ $('selectedClue').textContent=solved().includes(w)?'این پاسخ کامل شده؛ برای سؤال دیگری روی جدول بزن.':'برای جواب همین سؤال، واژه را با کیبورد گوشی بنویس.';
 }
 function render(){
  if(!puzzles.length)return;
@@ -307,7 +320,7 @@ function render(){
  $('prev').disabled=mode==='daily'||stage()<=1;
  $('next').disabled=mode==='daily'||stage()>=profile.unlocked||stage()>=puzzles.length;
  $('meta').textContent=FA(p.words.length)+' پاسخ اصلی · '+FA(p.bonus.length)+' واژه پاداش';
- focusWord='';clearInput();renderBoard();drawLetterBank();focusLabel();save();requestAnimationFrame(renderBoard);
+ focusWord=p.words.find(w=>!found.includes(w))||p.words[0];clearInput();renderBoard();drawLetterBank();focusLabel();save();requestAnimationFrame(renderBoard);
 }
 function updatePanels(){
  const p=puzzle(),found=solved();
@@ -356,6 +369,7 @@ function submit(){
  if(found.includes(w)||extras.includes(w)){note('«'+w+'» را قبلاً پیدا کرده‌ای.');return}
  if(p.words.includes(w)){
   profile.solved[k]=[...found,w];profile.coins+=4;
+  focusWord=p.words.find(x=>!profile.solved[k].includes(x))||w;
   note('درست بود! «'+w+'» پیدا شد. ۴ سکه جایزه.');vibrate();updatePanels();
   if(p.words.every(x=>profile.solved[k].includes(x)))reward();
  }else if(p.bonus.includes(w)){
@@ -416,6 +430,7 @@ async function boot(){
   for(const p of puzzles){
    if(!p.letters||!Array.isArray(p.words)||!Array.isArray(p.placements)||p.words.length<4)throw Error('مرحله ناقص است.');
    for(const item of p.placements)if(!p.words.includes(item.w))throw Error('واژه بدون خانه در جدول.');
+   if(!p.clues||p.words.some(w=>typeof p.clues[w]!=='string'||!p.clues[w].trim()))throw Error('سرنخ یک واژه موجود نیست.');
   }
   profile=startState();render();
   note('واژه را با کیبورد گوشی بنویس؛ برای انتخاب خانه روی جدول بزن.');
