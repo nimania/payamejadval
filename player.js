@@ -105,7 +105,9 @@ function createPlayer(container,item){
    board.append(outer);
   }
  }
- const selectedHint=el('p','selected-hint','');
+ const selectedHint=el('p','selected-hint selected-hint-top','');
+ selectedHint.setAttribute('role','status');selectedHint.setAttribute('aria-live','polite');
+ const selectedHintBottom=el('p','selected-hint selected-hint-bottom','');
  const clueWrap=el('div','clues');
  for(const [dir,label] of [['horizontal','افقی'],['vertical','عمودی']]){
   const sec=el('section','clue-section'),heading=el('h2','',label),list=el('ul','clue-list');
@@ -127,7 +129,7 @@ function createPlayer(container,item){
  const playArea=el('div',magazineMode?'magazine-play-area':'standard-play-area');
  const boardPane=el('div','magazine-board-pane');
  const cluePane=el('div','magazine-clue-pane');
- boardPane.append(selectedHint,board,message);
+ boardPane.append(selectedHint,board,selectedHintBottom,message);
  cluePane.append(clueWrap);
  playArea.append(boardPane,cluePane);
  container.append(banner,toolbar,progress,playArea);
@@ -161,6 +163,7 @@ function createPlayer(container,item){
   const pos=group.indexOf(slot),clue=item.puzzle.clues[slot.dir][String(slot.group)][pos];
   selectedHint.textContent=(slot.dir==='horizontal'?'افقی ':'عمودی ')+fmt.format(slot.group)+
    ' — پاسخ '+fmt.format(pos+1)+' از '+fmt.format(group.length)+' — '+clue;
+  selectedHintBottom.textContent=selectedHint.textContent;
   if(focus){const chosen=key&&slot.cells.some(([r,c])=>cellKey(r,c)===key)?key:cellKey(...slot.cells[0]);cells.get(chosen)?.input.focus();}
  }
  function slotAt(key,dir){return slots.find(s=>s.dir===dir&&s.cells.some(([r,c])=>cellKey(r,c)===key));}
