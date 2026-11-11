@@ -118,7 +118,7 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}a{col
 </div>
 <div id="letterBank" class="letter-bank" aria-label="حروف مجاز"></div>
 </div>
-<div class="status" id="status" aria-live="polite" role="status">برای شروع، حروف را انتخاب کن.</div>
+<div class="status" id="status" aria-live="polite" role="status">برای شروع، واژه را با کیبورد گوشی بنویس.</div>
 <div class="actions">
 <button type="button" class="action" id="clear">پاک‌کردن</button>
 <button type="button" class="action primary" id="submit">ثبت واژه</button>
@@ -185,7 +185,7 @@ function drawLetterBank(){
 }
 function viewport(){
  const tg=window.Telegram?.WebApp,vv=window.visualViewport;
- document.documentElement.style.setProperty('--app-h',Math.max(260,Math.floor(vv?.height||tg?.viewportHeight||window.innerHeight))+'px');
+ document.documentElement.style.setProperty('--app-h',Math.max(120,Math.floor(vv?.height||tg?.viewportHeight||window.innerHeight))+'px');
  const top=tg?.isFullscreen?(tg.contentSafeAreaInset?.top??tg.safeAreaInset?.top??0):0;
  const bottom=tg?.isFullscreen?(tg.contentSafeAreaInset?.bottom??tg.safeAreaInset?.bottom??0):0;
  document.documentElement.style.setProperty('--tg-safe-top',Math.max(0,top)+'px');
