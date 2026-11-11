@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#112c38">
+<meta name="description" content="کلمه‌چین حرفه‌ای؛ جدول واژه‌های متقاطع، چالش روزانه، مراحل پیشرفته و کشف حروف در پیام جدول">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<title>کلمه‌چین حرفه‌ای | پیام جدول</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+:root{font-family:Vazirmatn,Tahoma,sans-serif;color:#f2efe6;background:#112c38}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 8%,#1f5160 0%,#112c38 55%,#0c202b 100%)}
+button,a{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}a{text-decoration:none;color:inherit}
+.shell{width:min(100%,690px);min-height:100vh;margin:auto;padding:13px 14px max(24px,env(safe-area-inset-bottom))}
+.mast{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0 16px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#d8af62;color:#1a3440;font-size:23px;font-weight:900;box-shadow:inset 0 -4px 0 #b18a43}
+.brand b{display:block;font-size:18px}.brand small{display:block;font-size:10px;color:#a5c3c8}
+.mast a{background:#1c404c;padding:9px 12px;border:1px solid #3b626f;border-radius:12px;font-size:12px}
+.topnav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:13px}
+.navbtn{border:1px solid #49636b;color:#c9dce0;border-radius:12px;background:#183c49;padding:10px 6px;font-size:12px;font-weight:800}
+.navbtn.active{background:#d9b26b;color:#233743;border-color:#edd395}
+.headcard{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#174451;border:1px solid #315e6d;border-radius:18px;padding:14px 16px;margin-bottom:12px}
+.small{font-size:11px;color:#b1ced2}.stage{font-weight:900;font-size:22px;margin:2px 0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{background:#10323e;border:1px solid #376475;border-radius:99px;padding:6px 9px;font-size:12px;font-weight:800;color:#eed49a}
+.xp{height:6px;border-radius:99px;background:#10323e;margin-top:10px;overflow:hidden}.xp span{display:block;background:#d9b26b;height:100%;transition:width .3s}
+.paper{border-radius:20px 20px 10px 10px;background:#f0eadc;color:#243944;box-shadow:0 15px 36px #08162145;padding:15px 12px 12px;position:relative}
+.paper::before{content:"";position:absolute;inset:0 0 auto;height:7px;background:repeating-linear-gradient(90deg,#ba965a 0 12px,#d4b77d 12px 24px);border-radius:20px 20px 0 0}
+.intro{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 5px 12px}
+.intro b{font-size:14px}.intro small{font-size:11px;color:#677983}
+.board-wrap{min-height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:4px 0 10px}
+.board{display:grid;gap:3px;direction:ltr;align-items:center;justify-content:center;max-width:100%;touch-action:manipulation}
+.tile{border:0;border-radius:6px;background:#fffaf0;color:transparent;box-shadow:inset 0 -3px 0 #d2c5af;display:grid;place-items:center;padding:0;width:var(--unit);height:var(--unit);font-weight:900;font-size:clamp(15px,4vw,24px);position:relative;transition:background .18s}
+.tile.blank{background:transparent;box-shadow:none;pointer-events:none}
+.tile.valid{background:#fbfbf6;box-shadow:inset 0 -3px 0 #ccd5ce}
+.tile.shown{color:#1c6269;background:#e0eddd;box-shadow:inset 0 -3px 0 #b3d2be}
+.tile.hinted{color:#7a511e;background:#f7e5b8;box-shadow:inset 0 -3px 0 #ddbc80}
+.tile.active{outline:2px solid #d9a34f;outline-offset:-1px}
+.tile .number{position:absolute;top:1px;right:3px;font-size:8px;color:#b9a78d}
+.guide{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#e4dfd1;border-radius:10px;padding:8px 11px;font-size:11px;color:#53646a}
+.guide b{color:#26515b;font-size:12px}
+.inputzone{padding:12px 2px 1px;text-align:center}
+.assembled{height:39px;display:flex;align-items:center;justify-content:center;gap:5px;font-size:24px;font-weight:900;letter-spacing:2px;color:#f4d896;line-height:1}
+.assembled small{font-size:12px;color:#90afba;letter-spacing:0}
+.wheel{position:relative;margin:0 auto;width:min(275px,78vw);aspect-ratio:1;touch-action:none;-webkit-user-select:none;user-select:none}
+.wheelring{position:absolute;inset:12%;border:2px solid #375d67;border-radius:50%;background:radial-gradient(circle,#1d4d5a 0,#1c4652 64%,#153b47 100%);box-shadow:inset 0 5px 18px #102933}
+.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.letter{position:absolute;transform:translate(-50%,-50%);width:18%;height:18%;border-radius:50%;border:2px solid #547984;background:#fbf8ec;color:#234553;font-size:clamp(20px,6vw,27px);font-weight:900;z-index:2;box-shadow:0 4px 0 #a2a697,0 8px 13px #07192344;touch-action:none}
+.letter.chosen{background:#edbe67;border-color:#f5dba7;color:#1a3e47;box-shadow:0 4px 0 #b78b46}
+.shuffler{position:absolute;inset:34%;display:grid;place-items:center;border:0;background:#133746;color:#d9ba7a;border-radius:50%;font-size:27px;z-index:1}
+.feedback{min-height:39px;font-size:12px;font-weight:700;display:grid;place-items:center;text-align:center;color:#d4e4d6;padding:0 6px}
+.controls{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:8px}
+.control{border-radius:12px;padding:11px 4px;font-size:12px;font-weight:800;border:1px solid #557481;color:#dae9e6;background:#234a58}
+.control.main{background:#dbb267;color:#263c47;border-color:#f0cc8c}
+.control:disabled{opacity:.42;cursor:not-allowed}
+.under{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.note{background:#173d4b;border:1px solid #365e6b;border-radius:12px;padding:12px;font-size:11px;line-height:1.8;color:#a5c2cb}
+.note strong{color:#ead49b}.subnav{display:flex;justify-content:space-between;align-items:center;gap:7px;margin:13px 0}
+.footer{margin:15px 0;text-align:center;font-size:10px;color:#97b1b8;line-height:1.9}
+.overlay{position:fixed;inset:0;z-index:10;background:#081e2cbb;display:flex;align-items:center;justify-content:center;padding:18px}
+.overlay[hidden]{display:none}
+.modal{width:min(100%,410px);max-height:min(84vh,720px);overflow:auto;background:#f6f0e3;color:#213f47;border-radius:22px;padding:19px;box-shadow:0 23px 60px #0006}
+.modal h2{margin:0 0 7px;font-size:22px}.modal p{font-size:12px;color:#687780;line-height:1.9}
+.modal .control{width:100%;margin-top:8px}.stagepicker{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}
+.stagepick{aspect-ratio:1;border:1px solid #c7d5d1;border-radius:13px;background:#fff;font-weight:900;color:#214756}
+.stagepick[disabled]{background:#e4e6e1;color:#9ca6a4}.stagepick.complete{background:#d3e9da;color:#256246}.stagepick.current{outline:3px solid #d4a358}
+.message-error{background:#fbe7d3;border:1px solid #d2ae77;border-radius:11px;color:#77502d;padding:16px;font-size:13px}
+@media(max-width:390px){.shell{padding-inline:9px}.paper{padding:12px 7px}.board{gap:2px}.stage{font-size:19px}.tile{border-radius:4px}.letter{font-size:19px}.control{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="shell">
+<header class="mast">
+<div class="brand"><div class="logo" aria-hidden="true">چ</div><div><b>کلمه‌چین حرفه‌ای</b><small>پیام جدول · اتصال واژه‌ها در جدول</small></div></div>
+<a href="./kalamechin.html">حالت ساده ↗</a>
+</header>
+<div class="topnav" role="navigation" aria-label="حالت‌های بازی">
+<button class="navbtn active" id="campaign" type="button">🧩 مراحل</button>
+<button class="navbtn" id="daily" type="button">📅 چالش روز</button>
+<button class="navbtn" id="levels" type="button">🏅 انتخاب مرحله</button>
+</div>
+<section class="headcard">
+<div><div class="small" id="modeLabel">مسیر پیشرفته</div><div class="stage" id="stageTitle">در حال بارگذاری...</div><div class="small" id="progressText">—</div></div>
+<div class="chips"><span class="chip" id="coins">🪙 —</span><span class="chip" id="streak">🔥 ۰</span></div>
+</section>
+<div class="xp"><span id="bar" style="width:0"></span></div>
+<section class="paper">
+<div class="intro"><b>خانه‌ها را با واژه‌ها کامل کن</b><small id="gridSize">جدول واژه‌ها</small></div>
+<div class="board-wrap"><div class="board" id="board" aria-label="جدول کلمات متقاطع حرفه‌ای"></div></div>
+<div class="guide"><span id="selectedClue">واژه‌ای را بساز یا روی خانه‌های جدول بزن</span><b id="bonusCount">✦ ۰ اضافه</b></div>
+</section>
+<div class="inputzone">
+<div class="assembled" id="assembled"><small>با کشیدن انگشت یا لمس حروف، واژه بساز</small></div>
+<div class="wheel" id="wheel" aria-label="حروف قابل اتصال">
+<div class="wheelring"></div><svg id="lines" class="lines" viewBox="0 0 320 320" aria-hidden="true"></svg>
+<button class="shuffler" type="button" id="shuffle" aria-label="به‌هم‌زدن حروف" title="به‌هم‌زدن حروف">⤨</button>
+</div>
+</div>
+<div class="feedback" id="status" role="status" aria-live="polite">در حال آماده‌سازی جدول...</div>
+<div class="controls">
+<button id="clear" class="control" type="button">پاک‌کردن</button>
+<button id="enter" class="control main" type="button">ثبت واژه</button>
+<button id="hint" class="control" type="button">💡 یک حرف · ۲۵</button>
+</div>
+<div class="subnav">
+<button id="prev" class="control" type="button">مرحله قبل</button>
+<button id="share" class="control" type="button">📤 اشتراک‌گذاری</button>
+<button id="next" class="control" type="button">مرحله بعد</button>
+</div>
+<div class="under">
+<div class="note">🏅 <strong>پاداش مرحله</strong><div id="award">۲۰ سکه · هر واژه ۴ سکه</div></div>
+<div class="note">✨ <strong>راهنمای مرحله</strong><div id="meta">واژه‌های هم‌پوشان را پیدا کن.</div></div>
+</div>
+<div class="footer">پیشرفت، سکه و رکورد فعلاً روی همین دستگاه ذخیره می‌شوند؛ رتبه‌بندی سراسری فعال نیست.</div>
+</div>
+<div class="overlay" id="overlay" hidden><div class="modal" id="dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<h2 id="modalTitle">تکمیل مرحله</h2><p id="modalText"></p>
+<div class="stagepicker" id="stagepicker" hidden></div>
+<button class="control main" id="modalAction" type="button">ادامه</button>
+<button class="control" id="modalClose" type="button">بستن</button>
+</div></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const FA=n=>new Intl.NumberFormat('fa-IR').format(n);
+const STORE='payamejadval-kalamechin-pro-v1';
+const ALLOWED=/^[آ-ی]+$/u;
+const norm=s=>String(s||'').replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/\u200c/g,'').trim();
+const dateTehran=()=>{
+ const p=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tehran',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const v=x=>p.find(t=>t.type===x)?.value||'00';
+ return v('year')+'-'+v('month')+'-'+v('day');
+};
+const dayNumber=s=>Math.floor(Date.parse(s+'T12:00:00Z')/86400000);
+const today=dateTehran();
+let puzzles=[],profile,mode='campaign',selected=[],wheelChars=[],dragging=false,dragMoved=false,focusWord='',boardCells=new Map(),currentPuzzle=null;
+function startState(){
+ let d={};try{d=JSON.parse(localStorage.getItem(STORE)||'{}')||{}}catch(_){}
+ return {coins:Number.isFinite(d.coins)?Math.max(0,Math.min(100000,Math.trunc(d.coins))):75,
+  unlocked:Math.max(1,Math.trunc(Number(d.unlocked)||1)),level:Math.max(1,Math.trunc(Number(d.level)||1)),
+  solved:typeof d.solved==='object'&&d.solved?d.solved:{},
+  bonus:typeof d.bonus==='object'&&d.bonus?d.bonus:{},
+  revealed:typeof d.revealed==='object'&&d.revealed?d.revealed:{},
+  completed:typeof d.completed==='object'&&d.completed?d.completed:{},
+  daily:typeof d.daily==='object'&&d.daily?d.daily:{},
+  streak:Math.max(0,Math.trunc(Number(d.streak)||0)),lastDaily:typeof d.lastDaily==='string'?d.lastDaily:''};
+}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(profile))}catch(_){}}
+function stage(){return mode==='daily'?1+(dayNumber(today)%puzzles.length):Math.min(puzzles.length,profile.level)}
+function puzzle(){return puzzles[stage()-1]}
+function key(){return mode==='daily'?'d'+today:'l'+stage()}
+function list(field){const v=profile[field][key()];return Array.isArray(v)?v:[]}
+function solved(){const p=puzzle();return list('solved').filter(w=>p.words.includes(w))}
+function bonus(){const p=puzzle();return list('bonus').filter(w=>p.bonus.includes(w))}
+function revealed(){return list('revealed').filter(s=>/^\d+,\d+$/.test(s))}
+function note(text){$('status').textContent=text}
+function fail(text){note(text);try{window.Telegram?.WebApp?.HapticFeedback?.notificationOccurred('error')}catch(_){}}
+function vibrate(){try{window.Telegram?.WebApp?.HapticFeedback?.notificationOccurred('success')}catch(_){}}
+function shuffle(){
+ wheelChars=[...puzzle().letters];
+ for(let i=wheelChars.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[wheelChars[i],wheelChars[j]]=[wheelChars[j],wheelChars[i]]}
+ selected=[];drawWheel();
+}
+function word(){return selected.map(i=>wheelChars[i]).join('')}
+function redrawSelection(){
+ $('assembled').replaceChildren();
+ const w=word(); if(w){$('assembled').textContent=w}else{const small=document.createElement('small');small.textContent='حروف را به هم وصل کن';$('assembled').append(small)}
+ for(const b of $('wheel').querySelectorAll('.letter'))b.classList.toggle('chosen',selected.includes(Number(b.dataset.i)));
+ const svg=$('lines');svg.replaceChildren();
+ if(selected.length){const pos=positions();const poly=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+ poly.setAttribute('points',selected.map(i=>pos[i].x+','+pos[i].y).join(' '));poly.setAttribute('fill','none');
+ poly.setAttribute('stroke','#deb56c');poly.setAttribute('stroke-width','9');poly.setAttribute('stroke-linejoin','round');poly.setAttribute('stroke-linecap','round');svg.append(poly)}
+}
+function positions(){const n=wheelChars.length;return wheelChars.map((_,i)=>{const a=-Math.PI/2+(Math.PI*2*i/n);return{x:160+124*Math.cos(a),y:160+124*Math.sin(a)}})}
+function addLetter(i){if(!Number.isInteger(i)||i<0||i>=wheelChars.length||selected.includes(i))return;selected.push(i);redrawSelection()}
+function drawWheel(){
+ $('wheel').querySelectorAll('.letter').forEach(x=>x.remove());
+ const xy=positions();
+ wheelChars.forEach((v,i)=>{const b=document.createElement('button');b.className='letter';b.type='button';b.dataset.i=i;b.textContent=v;b.setAttribute('aria-label','حرف '+v);
+ b.style.left=(xy[i].x/320*100)+'%';b.style.top=(xy[i].y/320*100)+'%';$('wheel').append(b)});
+ redrawSelection();
+}
+function buildCells(p){
+ boardCells=new Map();
+ for(const place of p.placements){for(let i=0;i<place.w.length;i++){
+  const r=place.r+(place.d==='v'?i:0),c=place.c-(place.d==='h'?i:0);
+  const k=r+','+c,x=boardCells.get(k)||{letter:place.w[i],words:[]};
+  if(x.letter!==place.w[i])throw Error('جدول نامعتبر');
+  x.words.push(place.w);boardCells.set(k,x);
+ }}
+}
+function renderBoard(){
+ const p=puzzle(),wins=solved(),known=new Set(revealed());
+ const unit=Math.max(21,Math.min(42,Math.floor((Math.min(window.innerWidth-46,620)-(p.cols-1)*3)/p.cols)));
+ const box=$('board');box.replaceChildren();
+ box.style.setProperty('--unit',unit+'px');box.style.gridTemplateColumns='repeat('+p.cols+','+unit+'px)';
+ for(let r=0;r<p.rows;r++)for(let c=0;c<p.cols;c++){
+  const k=r+','+c,x=boardCells.get(k),el=document.createElement('button');
+  el.type='button';el.className='tile'+(x?' valid':' blank');
+  if(x){const show=x.words.some(w=>wins.includes(w)),hint=known.has(k);
+   if(show||hint){el.classList.add(hint&&!show?'hinted':'shown');el.textContent=x.letter}
+   if(focusWord&&x.words.includes(focusWord))el.classList.add('active');
+   el.setAttribute('aria-label',show?'خانه '+x.letter:hint?'حرف راهنمایی '+x.letter:'خانه خالی در جدول');
+   el.addEventListener('click',()=>{focusWord=x.words.find(w=>!wins.includes(w))||x.words[0];renderBoard();focusLabel()});
+  }
+  box.append(el);
+ }
+}
+function focusLabel(){
+ const w=focusWord;
+ $('selectedClue').textContent=w?'واژه انتخاب‌شده: '+FA(w.length)+' حرفی'+' · '+(solved().includes(w)?'تکمیل‌شده':'هنوز پیدا نشده'):'یک خانه از جدول را لمس کن تا راهنمایی دقیق بگیری';
+}
+function render(){
+ if(!puzzles.length)return;
+ profile.level=Math.min(puzzles.length,Math.max(1,profile.level));
+ profile.unlocked=Math.min(puzzles.length,Math.max(1,profile.unlocked));
+ const p=puzzle(),found=solved();
+ currentPuzzle=p;buildCells(p);
+ $('campaign').classList.toggle('active',mode==='campaign');
+ $('daily').classList.toggle('active',mode==='daily');
+ $('modeLabel').textContent=mode==='daily'?'چالش مشترک امروز · '+today:'مسیر حرفه‌ای · '+FA(puzzles.length)+' مرحله';
+ $('stageTitle').textContent=mode==='daily'?'چالش روزانه':'مرحله '+FA(stage());
+ $('progressText').textContent=FA(found.length)+' از '+FA(p.words.length)+' واژه حل شده';
+ $('coins').textContent='🪙 '+FA(profile.coins);
+ $('streak').textContent='🔥 '+FA(profile.streak);
+ $('bar').style.width=found.length/p.words.length*100+'%';
+ $('bonusCount').textContent='✦ '+FA(bonus().length)+' اضافه';
+ $('gridSize').textContent=FA(p.rows)+' × '+FA(p.cols);
+ $('prev').disabled=mode==='daily'||stage()<=1;
+ $('next').disabled=mode==='daily'||stage()>=profile.unlocked||stage()>=puzzles.length;
+ $('meta').textContent=FA(p.words.length)+' پاسخ اصلی · '+FA(p.bonus.length)+' واژه پاداش';
+ focusWord='';renderBoard();shuffle();focusLabel();save();
+}
+function updatePanels(){
+ const p=puzzle(),found=solved();
+ $('progressText').textContent=FA(found.length)+' از '+FA(p.words.length)+' واژه حل شده';
+ $('bar').style.width=found.length/p.words.length*100+'%';
+ $('bonusCount').textContent='✦ '+FA(bonus().length)+' اضافه';
+ $('coins').textContent='🪙 '+FA(profile.coins);
+ $('streak').textContent='🔥 '+FA(profile.streak);
+ renderBoard();focusLabel();save();
+}
+function showDialog(title,msg,type){
+ $('modalTitle').textContent=title;$('modalText').textContent=msg;
+ $('stagepicker').hidden=type!=='stages';
+ $('modalAction').textContent=type==='win'?(mode==='daily'?'بازگشت به مسیر مراحل':'مرحله بعد'):'ادامه بازی';
+ $('modalAction').onclick=()=>{closeDialog();if(type==='win'){if(mode==='daily'){switchMode('campaign')}else if(stage()<puzzles.length){profile.level=Math.min(puzzles.length,stage()+1);render();note('مرحله جدید آماده است.')}}};
+ $('overlay').hidden=false;
+}
+function closeDialog(){$('overlay').hidden=true}
+function selectStage(n){if(n>profile.unlocked)return;profile.level=n;mode='campaign';closeDialog();render();note('مرحله '+FA(n)+' انتخاب شد.')}
+function chooseStages(){
+ const container=$('stagepicker');container.replaceChildren();
+ for(let i=1;i<=puzzles.length;i++){
+  const b=document.createElement('button');b.className='stagepick'+(profile.completed['l'+i]?' complete':'')+(i===profile.level?' current':'');
+  b.textContent=i<=profile.unlocked?FA(i):'🔒';b.disabled=i>profile.unlocked;b.setAttribute('aria-label','مرحله '+FA(i));
+  b.addEventListener('click',()=>selectStage(i));container.append(b);
+ }
+ showDialog('انتخاب مرحله','مرحله‌های سبز تکمیل شده‌اند. با حل هر جدول، مرحله بعد باز می‌شود.','stages');
+}
+function switchMode(next){mode=next;render();note(next==='daily'?'این چالش برای همه بازیکنان در یک روز یکسان است.':'حروف را به هم وصل کن و جدول را پر کن.')}
+function reward(){
+ const k=key();if(profile.completed[k])return;
+ profile.completed[k]=true;profile.coins+=20;
+ if(mode==='campaign')profile.unlocked=Math.max(profile.unlocked,Math.min(puzzles.length,stage()+1));
+ else if(profile.lastDaily!==today){
+  profile.streak=profile.lastDaily&&dayNumber(today)-dayNumber(profile.lastDaily)===1?profile.streak+1:1;
+  profile.lastDaily=today;
+ }
+ vibrate();updatePanels();
+ showDialog('🏆 جدول کامل شد!', 'همه واژه‌ها را کشف کردی و ۲۰ سکه جایزه گرفتی.'+(mode==='daily'?' روند روزانه: '+FA(profile.streak)+' روز.':''),'win');
+}
+function submit(){
+ const w=norm(word());selected=[];redrawSelection();
+ if(w.length<2){note('حداقل دو حرف انتخاب کن.');return}
+ const p=puzzle(),found=solved(),extras=bonus(),k=key();
+ if(found.includes(w)||extras.includes(w)){note('«'+w+'» را قبلاً پیدا کرده‌ای.');return}
+ if(p.words.includes(w)){
+  profile.solved[k]=[...found,w];profile.coins+=4;
+  note('درست بود! «'+w+'» پیدا شد. ۴ سکه جایزه.');vibrate();updatePanels();
+  if(p.words.every(x=>profile.solved[k].includes(x)))reward();
+ }else if(p.bonus.includes(w)){
+  profile.bonus[k]=[...extras,w];profile.coins+=2;
+  note('واژه اضافی «'+w+'» کشف شد. +۲ سکه');updatePanels();
+ }else fail('این واژه جزو پاسخ‌های تأییدشده مرحله نیست.');
+}
+function hint(){
+ const p=puzzle(),found=solved();
+ const target=focusWord&&!found.includes(focusWord)?focusWord:p.words.find(w=>!found.includes(w));
+ if(!target){note('همه واژه‌ها پیدا شده‌اند.');return}
+ if(profile.coins<25){fail('برای آشکار کردن یک حرف، ۲۵ سکه لازم است.');return}
+ const revealedSet=new Set(revealed()),place=p.placements.find(x=>x.w===target);
+ const hidden=[...target].map((ch,i)=>({r:place.r+(place.d==='v'?i:0),c:place.c-(place.d==='h'?i:0)}))
+  .find(pos=>{const k=pos.r+','+pos.c,x=boardCells.get(k);return !revealedSet.has(k)&&!x.words.some(w=>found.includes(w))});
+ if(!hidden){note('حروف این واژه در جدول آشکار شده‌اند؛ حالا آن را بساز.');return}
+ const k=key();profile.revealed[k]=[...revealed(),hidden.r+','+hidden.c];profile.coins-=25;focusWord=target;
+ note('یک حرف از واژه '+FA(target.length)+' حرفی باز شد.');updatePanels();
+}
+function share(){
+ const txt='من در کلمه‌چین حرفه‌ای پیام جدول '+(mode==='daily'?'چالش '+today:'مرحله '+FA(stage()))+' را بازی می‌کنم. تو هم امتحان کن!';
+ const link='https://t.me/share/url?url='+encodeURIComponent(location.origin+location.pathname)+'&text='+encodeURIComponent(txt);
+ try{if(window.Telegram?.WebApp?.openTelegramLink){window.Telegram.WebApp.openTelegramLink(link);return}}catch(_){}
+ window.open(link,'_blank','noopener,noreferrer');
+}
+function wheelIndex(e){
+ const el=document.elementFromPoint(e.clientX,e.clientY)?.closest('.letter');
+ return el&&$('wheel').contains(el)?Number(el.dataset.i):null;
+}
+$('wheel').addEventListener('pointerdown',e=>{
+ if(e.button!==0&&e.pointerType==='mouse')return;
+ const el=e.target.closest('.letter');if(!el)return;
+ e.preventDefault();dragging=true;dragMoved=false;
+ try{$('wheel').setPointerCapture(e.pointerId)}catch(_){}addLetter(Number(el.dataset.i));
+});
+$('wheel').addEventListener('pointermove',e=>{
+ if(!dragging)return;const n=wheelIndex(e);
+ if(n!==null&&!selected.includes(n)){addLetter(n);dragMoved=true}
+});
+$('wheel').addEventListener('pointerup',e=>{
+ if(!dragging)return;
+ const n=wheelIndex(e);if(n!==null&&!selected.includes(n)){addLetter(n);dragMoved=true}
+ dragging=false;if(dragMoved&&selected.length>=2)submit();
+});
+$('wheel').addEventListener('pointercancel',()=>{dragging=false;selected=[];redrawSelection()});
+$('shuffle').addEventListener('click',()=>{shuffle();note('حروف جابه‌جا شدند.')});
+$('enter').addEventListener('click',submit);
+$('clear').addEventListener('click',()=>{selected=[];redrawSelection();note('انتخاب پاک شد.')});
+$('hint').addEventListener('click',hint);
+$('campaign').addEventListener('click',()=>switchMode('campaign'));
+$('daily').addEventListener('click',()=>switchMode('daily'));
+$('levels').addEventListener('click',chooseStages);
+$('next').addEventListener('click',()=>{if(profile.level<profile.unlocked&&profile.level<puzzles.length){profile.level++;render()}});
+$('prev').addEventListener('click',()=>{if(profile.level>1){profile.level--;render()}});
+$('share').addEventListener('click',share);
+$('modalClose').addEventListener('click',closeDialog);
+document.addEventListener('keydown',e=>{
+ if(e.target instanceof HTMLElement&&/INPUT|TEXTAREA/.test(e.target.tagName))return;
+ if(e.key==='Enter'&&$('overlay').hidden)submit();
+ if(e.key==='Backspace'){selected.pop();redrawSelection()}
+ if(e.key==='Escape'){if(!$('overlay').hidden)closeDialog();else{selected=[];redrawSelection()}}
+});
+window.addEventListener('resize',()=>{if(puzzles.length)renderBoard()});
+async function boot(){
+ try{
+  const response=await fetch('./data/kalamechin-pro.json',{cache:'no-store'});
+  if(!response.ok)throw Error('داده مراحل هنوز منتشر نشده است.');
+  const data=await response.json();
+  if(data.schema!==1||!Array.isArray(data.levels)||!data.levels.length)throw Error('داده بازی معتبر نیست.');
+  puzzles=data.levels;
+  for(const p of puzzles){
+   if(!p.letters||!Array.isArray(p.words)||!Array.isArray(p.placements)||p.words.length<4)throw Error('مرحله ناقص است.');
+   for(const item of p.placements)if(!p.words.includes(item.w))throw Error('واژه بدون خانه در جدول.');
+  }
+  profile=startState();render();
+  note('در این حالت، واژه‌های متقاطع یکدیگر را آشکار می‌کنند.');
+  try{window.Telegram?.WebApp?.ready();window.Telegram?.WebApp?.expand()}catch(_){}
+ }catch(e){
+  $('status').textContent='بازی بارگذاری نشد: '+(e.message||'خطای نامشخص')+' — صفحه را دوباره باز کن.';
+  $('stageTitle').textContent='خطا در دریافت مراحل';
+ }
+}
+boot();
+</script>
+</body>
+</html>
