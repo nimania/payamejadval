@@ -8,7 +8,7 @@ const zlib = require("node:zlib");
 const TOKEN = process.env.TELEGRAM_CROSSWORD_BOT_TOKEN || "";
 const SECRET = process.env.TELEGRAM_WEBHOOK_SECRET || "";
 const BOT_USERNAME = "PayameJadvalBot";
-const WORD_GAME_URL = "https://nimania.github.io/payamejadval/kalamechin.html";
+const WORD_GAME_URL = "https://nimania.github.io/payamejadval/kalamechin-pro.html";
 const ROOT = path.resolve(__dirname, "..");
 const CATALOG = path.join(ROOT, "telegram", "catalog.json");
 
