@@ -35,7 +35,7 @@ for(const [i,level] of levels.entries()){
   answerCount++;
  }
 }
-for(const id of ["stageLabel","coins","targets","wheel","path","submit","hint","win","continue"]){
+for(const id of ["stageLabel","coins","targets","wordInput","letterBank","submit","hint","win","continue"]){
  assert.ok(html.includes('id="'+id+'"'),"Missing UI element "+id);
 }
 
@@ -44,6 +44,16 @@ const proData=JSON.parse(fs.readFileSync(path.join(root,"data/kalamechin-pro.jso
 assert.equal(proData.schema,1);
 assert.ok(proData.levels.length>=20,"Advanced mode needs at least 20 published stages");
 assert.ok(index.includes('href="./kalamechin-pro.html"'),"Professional mode must appear in nav");
+assert.ok(html.includes('id="wordInput"')&&!html.includes('id="wheel"'),"Classic uses the native phone keyboard");
+assert.ok(proHtml.includes('id="wordInput"')&&!proHtml.includes('id="wheel"'),"Advanced uses the native phone keyboard");
+assert.ok(proHtml.includes('direction:rtl'),"Advanced board must declare RTL layout");
+assert.ok(proHtml.includes('for(let c=p.cols-1;c>=0;c--)'),"RTL DOM must start at rightmost logical column");
+assert.ok(proHtml.includes("c=place.c-(place.d==='h'?i:0)"),"Horizontal words advance toward left of first letter");
+assert.ok(proHtml.includes("className='number horizontal'"),"Horizontal start numbers must render at right");
+assert.ok(proHtml.includes("right:2px"),"Horizontal numbers must be right-aligned");
+assert.ok(proHtml.includes("tg.requestFullscreen?.()"),"Mini App should request fullscreen on supported Telegram clients");
+assert.ok(proHtml.includes('visualViewport'),"Grid must adapt to mobile native keyboard height");
+
 assert.ok(html.includes('href="./kalamechin-pro.html"'),"Classic mode must link advanced mode");
 assert.ok(proHtml.includes('href="./kalamechin.html"'),"Advanced mode must link classic mode");
 assert.ok(proHtml.includes('data/kalamechin-pro.json'),"Client must load the professional level data");
