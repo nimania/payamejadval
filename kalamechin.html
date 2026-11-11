@@ -55,6 +55,41 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}a{col
 .modal .action{width:100%;margin-top:10px}
 @media(max-width:365px){.app{padding-inline:9px}.panel{padding:12px}.targets{gap:6px}.target{padding:9px 4px}.letter{font-size:21px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+.nativebox{padding:10px 3px 5px;flex:0 0 auto}
+.nativebox label{display:block;font-size:11px;color:#5f7a86;margin-bottom:4px;font-weight:700}
+.nativeentry{display:flex;gap:7px}
+#wordInput{font-family:Vazirmatn,Tahoma,sans-serif;flex:1;min-width:0;border:2px solid #8bb0b9;border-radius:12px;height:43px;background:#fff;color:#143d4a;font-size:16px;padding:5px 10px;text-align:center}
+#wordInput:focus{outline:2px solid #1d829d}
+#hideKeyboard{width:43px;border-radius:12px;background:#e8f0ed;color:#39606b;border:1px solid #bbd3d2;font-size:24px}
+.letter-bank{text-align:center;font-size:11px;line-height:1.8;color:#50747e;margin-top:4px}
+@media(max-width:800px){
+ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+ .app{height:var(--app-h,100dvh);min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:calc(5px + var(--tg-safe-top,0px)) 9px calc(4px + var(--tg-safe-bottom,0px))}
+ .top{flex:0 0 auto;padding:4px 0 7px}.brand h1{font-size:15px}.brand small{display:none}.emblem{width:30px;height:30px;font-size:19px}
+ .home{font-size:10px;padding:5px 8px}
+ .pro-upgrade{flex:0 0 auto;padding:8px 11px!important;margin-bottom:7px!important;font-size:12px!important}
+ .panel{flex:1 1 0;min-height:0;display:flex;flex-direction:column;padding:10px 10px 8px;border-radius:13px;overflow:hidden}
+ .topline{flex:0 0 auto}.headline{font-size:16px}.eyebrow{font-size:10px}.pill{font-size:11px;padding:5px 8px}
+ .progress{margin-top:7px;flex:0 0 auto;height:5px}
+ .minor{flex:0 0 auto;margin:5px 0;font-size:10px}
+ .instructions{flex:0 0 auto;padding:6px;font-size:10px;line-height:1.5;margin-bottom:5px}
+ .targets{flex:1 1 0;min-height:0;align-content:center;overflow:hidden;gap:5px}
+ .target{padding:5px 3px}.target-label{margin-bottom:3px}
+ .cell{width:clamp(17px,5vw,28px);height:clamp(22px,6vw,32px);font-size:14px}
+ .nativebox{padding:6px 0 0}.nativebox label{font-size:10px;margin-bottom:2px}
+ #wordInput{height:37px}.nativeentry #hideKeyboard{width:37px}
+ .letter-bank{font-size:10px;margin-top:1px}
+ .status{min-height:27px;font-size:11px;margin:0}
+ .actions{flex:0 0 auto;gap:5px}.actions .action{padding:8px 3px;font-size:11px}
+ .bottom{flex:0 0 auto;margin-top:5px;gap:4px}.bottom .action{padding:5px 3px;font-size:10px}
+ .foot{display:none}
+ body.typing .top,body.typing .pro-upgrade,body.typing .instructions,body.typing .bottom{display:none}
+ body.typing .panel{padding:7px}
+ body.typing .cell{height:clamp(17px,5vw,24px);width:clamp(16px,4.8vw,23px)}
+ body.typing .nativebox label{display:none}
+ body.typing .target{padding:3px 2px}
+}
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -64,19 +99,23 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}a{col
 <div class="brand"><div class="emblem" aria-hidden="true">چ</div><div><h1>کلمه‌چین</h1><small>یکی از بازی‌های پیام جدول</small></div></div>
 <a class="home" href="./" aria-label="بازگشت به پیام جدول">⌂ صفحه اصلی</a>
 </header>
-<a href="./kalamechin-pro.html" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#153e4d;color:#f4d997;border-radius:14px;padding:13px 16px;margin:0 0 12px;font-size:14px;font-weight:900;text-decoration:none;border:1px solid #55717a">🏆 ورود به حالت حرفه‌ای · جدول متقاطع و چالش روزانه <span aria-hidden="true">←</span></a>
+<a class="pro-upgrade" href="./kalamechin-pro.html" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#153e4d;color:#f4d997;border-radius:14px;padding:13px 16px;margin:0 0 12px;font-size:14px;font-weight:900;text-decoration:none;border:1px solid #55717a">🏆 ورود به حالت حرفه‌ای · جدول متقاطع و چالش روزانه <span aria-hidden="true">←</span></a>
 <main class="panel">
 <div class="topline">
-<div><div class="eyebrow" id="stageLabel">مرحله ۱ از ۵۰</div><div class="headline">حروف را به هم وصل کن</div></div>
+<div><div class="eyebrow" id="stageLabel">مرحله ۱ از ۵۰</div><div class="headline">واژه‌ها را پیدا کن</div></div>
 <div class="pill" aria-label="موجودی سکه"><span aria-hidden="true">●</span><span id="coins">۴۰</span> سکه</div>
 </div>
 <div class="progress" aria-label="پیشرفت مرحله"><span id="progress"></span></div>
 <div class="minor"><span id="doneLabel">۰ واژه از ۳ واژه</span><span id="bonusLabel">کلمات اضافی: ۰</span></div>
-<div class="instructions">روی حروف بکش یا آن‌ها را به‌ترتیب لمس کن و «ثبت واژه» را بزن.</div>
+<div class="instructions">واژه را با صفحه‌کلید گوشی بنویس و «ثبت واژه» را بزن.</div>
 <div class="targets" id="targets" aria-label="کلمات مورد نیاز مرحله"></div>
-<div class="play" id="wheel" aria-label="انتخاب و اتصال حروف">
-<div class="ring"></div><svg class="path" id="path" viewBox="0 0 320 320" aria-hidden="true"></svg>
-<div class="center" id="current">واژه بساز</div>
+<div class="nativebox">
+<label for="wordInput">نوشتن واژه با صفحه‌کلید گوشی</label>
+<div class="nativeentry">
+<input type="text" id="wordInput" lang="fa" dir="rtl" inputmode="text" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="12" placeholder="اینجا بنویس..." aria-label="واژه فارسی">
+<button id="hideKeyboard" type="button" aria-label="بستن صفحه‌کلید گوشی">⌄</button>
+</div>
+<div id="letterBank" class="letter-bank" aria-label="حروف مجاز"></div>
 </div>
 <div class="status" id="status" aria-live="polite" role="status">برای شروع، حروف را انتخاب کن.</div>
 <div class="actions">
@@ -118,7 +157,7 @@ function load(){
  solved:v.solved&&typeof v.solved==='object'?v.solved:{},bonus:v.bonus&&typeof v.bonus==='object'?v.bonus:{},
  completed:v.completed&&typeof v.completed==='object'?v.completed:{}};
 }
-let state=load(),selection=[],drag=false,moved=false,points=[];
+let state=load();
 const cur=()=>LEVELS[state.stage-1];
 function saved(){
  try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}
@@ -135,46 +174,21 @@ function fits(word,letters){
  for(const char of word){const idx=pool.indexOf(char);if(idx<0)return false;pool.splice(idx,1)}
  return true;
 }
-function activeWord(){return selection.map(i=>cur().letters[i]).join('')}
+function activeWord(){return normalize($('wordInput').value)}
 function notice(msg){$('status').textContent=msg}
-function selected(index){
- if(!Number.isInteger(index)||index<0||index>=cur().letters.length||selection.includes(index))return;
- selection.push(index);updateSelection();
+function clear(){$('wordInput').value=''}
+function drawLetterBank(){
+ const a=[...cur().letters];
+ for(let i=a.length-1;i>0;i--){const j=(i*7+state.stage)%(i+1);[a[i],a[j]]=[a[j],a[i]]}
+ $('letterBank').textContent='حروف قابل استفاده: '+a.join(' · ');
 }
-function clear(){selection=[];updateSelection()}
-function centers(){
- const n=cur().letters.length;return Array.from({length:n},(_,i)=>{
- const a=-Math.PI/2+(Math.PI*2*i/n);
- return {x:160+122*Math.cos(a),y:160+122*Math.sin(a)}
- });
-}
-function updateSelection(){
- const word=activeWord();$('current').replaceChildren();
- if(word){const t=document.createElement('strong');t.textContent=word;$('current').append(t)}
- else $('current').textContent='واژه بساز';
- for(const [i,el] of [...$('wheel').querySelectorAll('.letter')].entries()){
-  el.classList.toggle('chosen',selection.includes(i));
-  el.setAttribute('aria-pressed',selection.includes(i)?'true':'false');
- }
- const svg=$('path');svg.replaceChildren();
- if(selection.length){
-  const c=centers(),p=selection.map(i=>c[i].x+','+c[i].y).join(' ');
-  const line=document.createElementNS('http://www.w3.org/2000/svg','polyline');
-  line.setAttribute('points',p);line.setAttribute('fill','none');line.setAttribute('stroke','#d79b44');
-  line.setAttribute('stroke-width','10');line.setAttribute('stroke-linecap','round');line.setAttribute('stroke-linejoin','round');
-  svg.append(line);
- }
-}
-function drawWheel(){
- [...$('wheel').querySelectorAll('.letter')].forEach(x=>x.remove());
- const letters=Array.from(cur().letters),c=centers();
- letters.forEach((ch,i)=>{
-  const b=document.createElement('button');b.type='button';b.className='letter';
-  b.textContent=ch;b.dataset.index=i;b.setAttribute('aria-label','حرف '+ch);
-  b.style.left=(c[i].x/320*100)+'%';b.style.top=(c[i].y/320*100)+'%';
-  $('wheel').append(b);
- });
- updateSelection();
+function viewport(){
+ const tg=window.Telegram?.WebApp,vv=window.visualViewport;
+ document.documentElement.style.setProperty('--app-h',Math.max(260,Math.floor(vv?.height||tg?.viewportHeight||window.innerHeight))+'px');
+ const top=tg?.isFullscreen?(tg.contentSafeAreaInset?.top??tg.safeAreaInset?.top??0):0;
+ const bottom=tg?.isFullscreen?(tg.contentSafeAreaInset?.bottom??tg.safeAreaInset?.bottom??0):0;
+ document.documentElement.style.setProperty('--tg-safe-top',Math.max(0,top)+'px');
+ document.documentElement.style.setProperty('--tg-safe-bottom',Math.max(0,bottom)+'px');
 }
 function render(){
  const l=cur();const solved=wordsSolved(),bonuses=extraSolved();
@@ -198,7 +212,7 @@ function render(){
   });
   wrap.append(label,tiles);$('targets').append(wrap);
  });
- drawWheel();saved();
+ clear();drawLetterBank();saved();
 }
 function finish(){
  if(!state.completed[state.stage]){
@@ -222,7 +236,8 @@ function solve(word,hinted){
 }
 function submit(){
  const word=normalize(activeWord());clear();
- if(word.length<2){notice('دست‌کم دو حرف را انتخاب کن.');return}
+ if(word.length<2){notice('دست‌کم دو حرف فارسی بنویس.');return}
+ if(!/^[آ-ی]+$/u.test(word)||!fits(word,cur().letters)){notice('واژه با حروف مرحله ساخته نمی‌شود.');return}
  if(cur().words.includes(word)){solve(word,false);return}
  if(LEXICON.has(word)&&fits(word,cur().letters)){
   const list=state.bonus[state.stage]||[];
@@ -240,33 +255,17 @@ function hint(){
 }
 function stage(n){
  if(n<1||n>state.unlocked||n>TOTAL)return;
- state.stage=n;selection=[];$('win').hidden=true;render();
- notice(state.completed[n]?'این مرحله را قبلاً به پایان رسانده‌ای.':'حروف را به هم وصل کن.');
+ state.stage=n;$('win').hidden=true;render();
+ notice(state.completed[n]?'این مرحله را قبلاً به پایان رسانده‌ای.':'واژه را با کیبورد گوشی بنویس.');
 }
-function touchIndex(e){
- const btn=document.elementFromPoint(e.clientX,e.clientY)?.closest('.letter');
- return btn&&$('wheel').contains(btn)?Number(btn.dataset.index):null;
-}
-const wheel=$('wheel');
-wheel.addEventListener('pointerdown',e=>{
- if(e.button!==0&&e.pointerType==='mouse')return;
- const el=e.target.closest('.letter');if(!el)return;
- e.preventDefault();drag=true;moved=false;
- wheel.setPointerCapture(e.pointerId);selected(Number(el.dataset.index));
+$('wordInput').addEventListener('keydown',e=>{
+ if(e.key==='Enter'&&!e.isComposing){e.preventDefault();submit();$('wordInput').blur()}
 });
-wheel.addEventListener('pointermove',e=>{
- if(!drag)return;
- const idx=touchIndex(e);if(idx!==null&&!selection.includes(idx)){selected(idx);moved=true}
-});
-wheel.addEventListener('pointerup',e=>{
- if(!drag)return;const idx=touchIndex(e);
- if(idx!==null&&!selection.includes(idx)){selected(idx);moved=true}
- drag=false;
- if(moved&&selection.length>1)submit();
-});
-wheel.addEventListener('pointercancel',()=>{drag=false;clear()});
+$('wordInput').addEventListener('focus',()=>{document.body.classList.add('typing');viewport()});
+$('wordInput').addEventListener('blur',()=>{document.body.classList.remove('typing');viewport()});
+$('hideKeyboard').addEventListener('click',()=>{$('wordInput').blur()});
 $('submit').addEventListener('click',submit);
-$('clear').addEventListener('click',()=>{clear();notice('انتخاب پاک شد.')});
+$('clear').addEventListener('click',()=>{clear();notice('واژه پاک شد.');$('wordInput').focus({preventScroll:true})});
 $('hint').addEventListener('click',hint);
 $('prev').addEventListener('click',()=>stage(state.stage-1));
 $('next').addEventListener('click',()=>stage(state.stage+1));
@@ -280,11 +279,18 @@ $('share').addEventListener('click',()=>{
 });
 document.addEventListener('keydown',e=>{
  if(e.target instanceof HTMLElement&&/INPUT|TEXTAREA/.test(e.target.tagName))return;
- if(e.key==='Enter'){submit()}
- if(e.key==='Backspace'){selection.pop();updateSelection()}
- if(e.key==='Escape'){clear()}
+ if(e.key==='Escape'){$('wordInput').blur()}
 });
-try{window.Telegram?.WebApp?.ready();window.Telegram?.WebApp?.expand()}catch(_){}
+window.addEventListener('resize',viewport);
+window.visualViewport?.addEventListener('resize',viewport);
+try{
+ const tg=window.Telegram?.WebApp;
+ if(tg){tg.ready();tg.expand();tg.onEvent?.('viewportChanged',viewport);
+ tg.onEvent?.('fullscreenChanged',viewport);tg.onEvent?.('safeAreaChanged',viewport);
+ tg.onEvent?.('contentSafeAreaChanged',viewport);
+ if(tg.isVersionAtLeast?.('8.0'))tg.requestFullscreen?.();tg.disableVerticalSwipes?.()}
+}catch(_){}
+viewport();
 render();
 </script>
 </body></html>
