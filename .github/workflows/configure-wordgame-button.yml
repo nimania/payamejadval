@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/configure-wordgame-button.yml'
+  workflow_run:
+    workflows: ['Deploy Payame Jadval to GitHub Pages']
+    types: [completed]
 
 permissions:
   contents: read
@@ -16,8 +19,9 @@ concurrency:
 
 jobs:
   configure:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 5
     env:
       TELEGRAM_CROSSWORD_BOT_TOKEN: ${{ secrets.TELEGRAM_CROSSWORD_BOT_TOKEN }}
     steps:
@@ -28,13 +32,27 @@ jobs:
           token = os.environ.get("TELEGRAM_CROSSWORD_BOT_TOKEN", "").strip()
           if not token:
               raise SystemExit("Dedicated bot secret is missing; no Telegram settings were changed.")
-          game = "https://nimania.github.io/payamejadval/kalamechin.html"
-          try:
-              with urllib.request.urlopen(game, timeout=12) as response:
-                  if response.status != 200 or b'kalamechin' not in response.read().lower():
-                      raise RuntimeError("Word game deployment is not verified")
-          except Exception as err:
-              raise SystemExit("Word game page did not pass preflight; no menu changes were made.") from None
+          game = "https://nimania.github.io/payamejadval/kalamechin-pro.html"
+          levels = "https://nimania.github.io/payamejadval/data/kalamechin-pro.json"
+          # Wait for the corresponding Pages deployment instead of pointing Telegram at a 404.
+          import time
+          ready = False
+          for attempt in range(12):
+              try:
+                  with urllib.request.urlopen(game, timeout=12) as response:
+                      webpage = response.read()
+                      if response.status != 200 or b'kalamechin-pro.json' not in webpage:
+                          raise RuntimeError("Professional game HTML is not published")
+                  with urllib.request.urlopen(levels, timeout=12) as response:
+                      data = json.load(response)
+                      if response.status != 200 or data.get("schema") != 1 or len(data.get("levels", [])) < 20:
+                          raise RuntimeError("Professional level data is not published")
+                  ready = True
+                  break
+              except Exception:
+                  time.sleep(10)
+          if not ready:
+              raise SystemExit("Professional game deployment did not pass verification. Telegram settings unchanged.")
 
           def api(method, body):
               request = urllib.request.Request(
