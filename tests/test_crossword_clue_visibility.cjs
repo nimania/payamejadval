@@ -26,6 +26,9 @@ for(const entry of [
  const blocks=[...s.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
  for(const [_,js] of blocks){if(js.trim().startsWith("{"))continue;new vm.Script(js,{filename:file})}
 }
+const demo=read("telegram-7x7-demo.html");
+for(const id of ["clueNoTop","clueTop","clueNo","clue"])assert.ok(demo.includes('id="'+id+'"'),"Demo clue missing "+id);
+assert.ok(demo.includes("clueTop').textContent=x[5]"),"Demo must synchronize the two question labels");
 const player=read("player.js"),index=read("index.html");
 assert.ok(player.includes("boardPane.append(selectedHint,board,selectedHintBottom,message)"),"Main player must surround crossword grid with clue");
 assert.ok(player.includes("selectedHintBottom.textContent=selectedHint.textContent"),"Main player clue synchronization missing");
