@@ -53,6 +53,11 @@ assert.ok(proHtml.includes("className='number horizontal'"),"Horizontal start nu
 assert.ok(proHtml.includes("right:2px"),"Horizontal numbers must be right-aligned");
 assert.ok(proHtml.includes("tg.requestFullscreen?.()"),"Mini App should request fullscreen on supported Telegram clients");
 assert.ok(proHtml.includes('visualViewport'),"Grid must adapt to mobile native keyboard height");
+for(const id of ["questionTopRef","questionTopText","questionBottomRef","questionBottomText"]){
+ assert.ok(proHtml.includes('id="'+id+'"'),"Advanced clue banner missing: "+id);
+}
+assert.ok(proHtml.includes("questionBottomText').textContent=clue"),"Active clue must synchronize above and below");
+
 
 assert.ok(html.includes('href="./kalamechin-pro.html"'),"Classic mode must link advanced mode");
 assert.ok(proHtml.includes('href="./kalamechin.html"'),"Advanced mode must link classic mode");
@@ -65,6 +70,11 @@ for(const [ix,stage] of proData.levels.entries()){
  assert.equal(stage.id,ix+1,"Pro stage IDs are sequential");
  assert.ok(stage.words.length>=4,"Each pro stage must have 4+ solutions");
  assert.equal(stage.words.length,stage.placements.length,"Every solution must have a placement");
+ assert.ok(stage.clues&&typeof stage.clues==="object","Advanced stage must have authored clues");
+ for(const answer of stage.words){
+  assert.ok(typeof stage.clues[answer]==="string"&&stage.clues[answer].trim().length>=8,"Missing or vague question for "+answer);
+ }
+
  assert.ok(stage.rows>=2&&stage.cols>=2&&stage.rows<=16&&stage.cols<=16,"Board must fit a phone");
  assert.ok(new Set(stage.words).size===stage.words.length,"Duplicate pro solutions");
  assert.ok(stage.words.includes(stage.letters),"Each stage seed word must be a solution");
