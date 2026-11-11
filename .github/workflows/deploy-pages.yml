@@ -65,6 +65,7 @@ jobs:
         run: |
           node scripts/verify-daily-games.cjs
           node tests/test_kalamechin.cjs
+          node tests/test_crossword_clue_visibility.cjs
           node tests/test_mini.cjs
           node tests/test_share_7x7.cjs
           node tests/test_telegram_widget.cjs
