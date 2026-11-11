@@ -33,6 +33,8 @@ jobs:
           cp assets/payamejadval-logo.webp assets/favicon.svg public/assets/
           cp index.html public/index.html
           cp kalamechin.html public/kalamechin.html
+          cp kalamechin-pro.html public/kalamechin-pro.html
+          cp data/kalamechin-pro.json public/data/kalamechin-pro.json
           cp telegram-7x7-demo.html public/telegram-7x7-demo.html
           cp share-7x7-20261110.html public/share-7x7-20261110.html
           cp share-mini-2026-11-03-01.html public/share-mini-2026-11-03-01.html
