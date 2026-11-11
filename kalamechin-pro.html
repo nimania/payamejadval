@@ -119,6 +119,7 @@ button,a{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transpar
  body.typing .letter-bank{font-size:9px}
 }
 @media(max-height:550px) and (min-width:801px){.under,.footer{display:none}}
+.mast-actions{display:flex;gap:6px;align-items:center}.mast-actions button{background:#1c404c;color:#f4eee0;padding:9px 10px;border:1px solid #3b626f;border-radius:12px;font-size:12px}.mast-actions a{white-space:nowrap}@media(max-width:800px){.mast-actions button{padding:6px 7px;font-size:10px}}
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -126,7 +127,7 @@ button,a{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transpar
 <div class="shell">
 <header class="mast">
 <div class="brand"><div class="logo" aria-hidden="true">چ</div><div><b>کلمه‌چین حرفه‌ای</b><small>پیام جدول · اتصال واژه‌ها در جدول</small></div></div>
-<a href="./kalamechin.html">حالت ساده ↗</a>
+<div class="mast-actions"><button id="closeApp" type="button" aria-label="بستن بازی و بازگشت به بات">✕ خروج</button><a href="./kalamechin.html">حالت ساده ↗</a></div>
 </header>
 <div class="topnav" role="navigation" aria-label="حالت‌های بازی">
 <button class="navbtn active" id="campaign" type="button">🧩 مراحل</button>
@@ -395,6 +396,7 @@ $('daily').addEventListener('click',()=>switchMode('daily'));
 $('levels').addEventListener('click',chooseStages);
 $('next').addEventListener('click',()=>{if(profile.level<profile.unlocked&&profile.level<puzzles.length){profile.level++;render()}});
 $('prev').addEventListener('click',()=>{if(profile.level>1){profile.level--;render()}});
+$('closeApp').addEventListener('click',()=>{try{if(window.Telegram?.WebApp?.close){window.Telegram.WebApp.close();return}}catch(_){}window.location.href='./'});
 $('share').addEventListener('click',share);
 $('modalClose').addEventListener('click',closeDialog);
 document.addEventListener('keydown',e=>{
