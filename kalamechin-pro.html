@@ -67,6 +67,58 @@ button,a{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transpar
 .message-error{background:#fbe7d3;border:1px solid #d2ae77;border-radius:11px;color:#77502d;padding:16px;font-size:13px}
 @media(max-width:390px){.shell{padding-inline:9px}.paper{padding:12px 7px}.board{gap:2px}.stage{font-size:19px}.tile{border-radius:4px}.letter{font-size:19px}.control{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* RTL crossword and native phone keyboard: no app-rendered letter keyboard */
+.board{direction:rtl;grid-auto-flow:row}
+.tile{font-size:calc(var(--unit,28px) * .56)}
+.tile .number{position:absolute;top:1px;right:2px;font:800 max(7px,calc(var(--unit,28px) * .23))/1 Vazirmatn,Tahoma,sans-serif;color:#786044;direction:rtl;pointer-events:none}
+.tile .number.vertical{right:auto;left:2px;color:#607e86}
+.inputzone{padding:9px 0 2px}
+.entrylabel{display:block;text-align:right;font-size:11px;font-weight:700;color:#c8d8d9;margin:0 5px 4px}
+.entryrow{display:flex;gap:8px}
+#wordInput{font-family:Vazirmatn,Tahoma,sans-serif;flex:1;min-width:0;font-size:17px;font-weight:800;color:#193f4e;border:2px solid #d4b477;border-radius:12px;background:#fffdf4;padding:9px 12px;outline-offset:2px;text-align:center;height:43px;direction:rtl}
+#wordInput:focus{border-color:#78c6ce;outline:2px solid #458a95}
+.keyboard-dismiss{border:1px solid #527684;background:#204955;color:#e7d49b;border-radius:10px;width:42px;font-size:26px}
+.letter-bank{font-size:11px;text-align:center;line-height:1.8;color:#a7c9ce;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px;min-height:18px}
+@media(max-width:800px){
+ html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+ .shell{height:var(--app-h,100dvh);min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:calc(5px + var(--tg-safe-top,0px)) 8px calc(4px + var(--tg-safe-bottom,0px))}
+ .mast{flex:0 0 auto;padding:0 0 5px}
+ .brand small{display:none}.logo{height:31px;width:31px;font-size:19px;border-radius:9px}
+ .brand b{font-size:15px}.mast a{padding:6px 9px;font-size:10px}
+ .topnav{flex:0 0 auto;gap:5px;margin:0 0 5px}
+ .navbtn{padding:6px 3px;font-size:11px;border-radius:8px}
+ .headcard{flex:0 0 auto;padding:7px 10px;margin-bottom:5px;border-radius:11px}
+ .stage{font-size:16px;margin:0}.small{font-size:9px}.chips{gap:4px}.chip{font-size:10px;padding:4px 6px}
+ .xp{flex:0 0 auto;margin:0 0 5px;height:4px}
+ .paper{flex:1 1 0;min-height:0;display:flex;flex-direction:column;padding:10px 7px 6px;border-radius:12px}
+ .intro{flex:0 0 auto;padding:2px 5px 6px}.intro b{font-size:12px}.intro small{font-size:10px}
+ .board-wrap{flex:1 1 0;min-height:0;padding:2px 0 3px;overflow:hidden}
+ .board{gap:2px}
+ .tile{border-radius:3px}
+ .guide{flex:0 0 auto;padding:5px 7px;border-radius:7px;font-size:10px}
+ .guide b{font-size:10px}
+ .inputzone{flex:0 0 auto;padding:6px 0 0}
+ .entrylabel{font-size:10px;margin-bottom:2px}
+ #wordInput{height:38px;font-size:16px;padding:5px 8px}
+ .keyboard-dismiss{width:38px}
+ .letter-bank{font-size:10px;margin-top:2px;min-height:15px}
+ .feedback{flex:0 0 auto;min-height:24px;font-size:11px}
+ .controls{flex:0 0 auto;gap:5px}
+ .controls .control{padding:8px 3px;font-size:11px}
+ .subnav{flex:0 0 auto;gap:5px;margin:5px 0 0}
+ .subnav .control{padding:5px 4px;font-size:10px}
+ .under,.footer{display:none}
+ body.typing .mast,body.typing .topnav,body.typing .subnav,body.typing .guide{display:none}
+ body.typing .headcard{padding:5px 10px;margin-bottom:3px}
+ body.typing .headcard .small{display:none}
+ body.typing .intro{padding:2px}
+ body.typing .paper{padding:9px 5px 4px}
+ body.typing .entrylabel{display:none}
+ body.typing .inputzone{padding:3px 0 0}
+ body.typing .letter-bank{font-size:9px}
+}
+@media(max-height:550px) and (min-width:801px){.under,.footer{display:none}}
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -88,15 +140,18 @@ button,a{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transpar
 <div class="xp"><span id="bar" style="width:0"></span></div>
 <section class="paper">
 <div class="intro"><b>خانه‌ها را با واژه‌ها کامل کن</b><small id="gridSize">جدول واژه‌ها</small></div>
-<div class="board-wrap"><div class="board" id="board" aria-label="جدول کلمات متقاطع حرفه‌ای"></div></div>
-<div class="guide"><span id="selectedClue">واژه‌ای را بساز یا روی خانه‌های جدول بزن</span><b id="bonusCount">✦ ۰ اضافه</b></div>
+<div class="board-wrap"><div class="board" id="board" dir="rtl" aria-label="جدول کلمات متقاطع حرفه‌ای"></div></div>
+<div class="guide"><span id="selectedClue">روی خانه‌ای بزن و با کیبورد گوشی واژه را بنویس</span><b id="bonusCount">✦ ۰ اضافه</b></div>
 </section>
 <div class="inputzone">
-<div class="assembled" id="assembled"><small>با کشیدن انگشت یا لمس حروف، واژه بساز</small></div>
-<div class="wheel" id="wheel" aria-label="حروف قابل اتصال">
-<div class="wheelring"></div><svg id="lines" class="lines" viewBox="0 0 320 320" aria-hidden="true"></svg>
-<button class="shuffler" type="button" id="shuffle" aria-label="به‌هم‌زدن حروف" title="به‌هم‌زدن حروف">⤨</button>
+<label class="entrylabel" for="wordInput">واژه را با صفحه‌کلید گوشی وارد کن</label>
+<div class="entryrow">
+<input id="wordInput" type="text" dir="rtl" lang="fa" inputmode="text" enterkeyhint="done"
+ autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+ maxlength="12" placeholder="اینجا بنویس..." aria-label="نوشتن واژه فارسی">
+<button id="hideKeyboard" class="keyboard-dismiss" type="button" aria-label="بستن صفحه‌کلید گوشی">⌄</button>
 </div>
+<div class="letter-bank" id="letterBank" aria-label="حروف مجاز مرحله"></div>
 </div>
 <div class="feedback" id="status" role="status" aria-live="polite">در حال آماده‌سازی جدول...</div>
 <div class="controls">
@@ -135,7 +190,7 @@ const dateTehran=()=>{
 };
 const dayNumber=s=>Math.floor(Date.parse(s+'T12:00:00Z')/86400000);
 const today=dateTehran();
-let puzzles=[],profile,mode='campaign',selected=[],wheelChars=[],dragging=false,dragMoved=false,focusWord='',boardCells=new Map(),currentPuzzle=null;
+let puzzles=[],profile,mode='campaign',focusWord='',boardCells=new Map(),boardNumbers=new Map(),currentPuzzle=null;
 function startState(){
  let d={};try{d=JSON.parse(localStorage.getItem(STORE)||'{}')||{}}catch(_){}
  return {coins:Number.isFinite(d.coins)?Math.max(0,Math.min(100000,Math.trunc(d.coins))):75,
@@ -158,59 +213,79 @@ function revealed(){return list('revealed').filter(s=>/^\d+,\d+$/.test(s))}
 function note(text){$('status').textContent=text}
 function fail(text){note(text);try{window.Telegram?.WebApp?.HapticFeedback?.notificationOccurred('error')}catch(_){}}
 function vibrate(){try{window.Telegram?.WebApp?.HapticFeedback?.notificationOccurred('success')}catch(_){}}
-function shuffle(){
- wheelChars=[...puzzle().letters];
- for(let i=wheelChars.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[wheelChars[i],wheelChars[j]]=[wheelChars[j],wheelChars[i]]}
- selected=[];drawWheel();
+function word(){return norm($('wordInput').value)}
+function availableFromWheel(w,chars){
+ const pool=[...chars];
+ for(const ch of w){const i=pool.indexOf(ch);if(i<0)return false;pool.splice(i,1)}
+ return true;
 }
-function word(){return selected.map(i=>wheelChars[i]).join('')}
-function redrawSelection(){
- $('assembled').replaceChildren();
- const w=word(); if(w){$('assembled').textContent=w}else{const small=document.createElement('small');small.textContent='حروف را به هم وصل کن';$('assembled').append(small)}
- for(const b of $('wheel').querySelectorAll('.letter'))b.classList.toggle('chosen',selected.includes(Number(b.dataset.i)));
- const svg=$('lines');svg.replaceChildren();
- if(selected.length){const pos=positions();const poly=document.createElementNS('http://www.w3.org/2000/svg','polyline');
- poly.setAttribute('points',selected.map(i=>pos[i].x+','+pos[i].y).join(' '));poly.setAttribute('fill','none');
- poly.setAttribute('stroke','#deb56c');poly.setAttribute('stroke-width','9');poly.setAttribute('stroke-linejoin','round');poly.setAttribute('stroke-linecap','round');svg.append(poly)}
+function clearInput(){$('wordInput').value=''}
+function focusInput(){const input=$('wordInput');input.focus({preventScroll:true})}
+function drawLetterBank(){
+ const a=[...puzzle().letters],n=a.length;
+ for(let i=n-1;i>0;i--){const j=(i*7+stage()*3)%(i+1);[a[i],a[j]]=[a[j],a[i]]}
+ $('letterBank').textContent='حروف قابل استفاده: '+a.join(' · ');
 }
-function positions(){const n=wheelChars.length;return wheelChars.map((_,i)=>{const a=-Math.PI/2+(Math.PI*2*i/n);return{x:160+124*Math.cos(a),y:160+124*Math.sin(a)}})}
-function addLetter(i){if(!Number.isInteger(i)||i<0||i>=wheelChars.length||selected.includes(i))return;selected.push(i);redrawSelection()}
-function drawWheel(){
- $('wheel').querySelectorAll('.letter').forEach(x=>x.remove());
- const xy=positions();
- wheelChars.forEach((v,i)=>{const b=document.createElement('button');b.className='letter';b.type='button';b.dataset.i=i;b.textContent=v;b.setAttribute('aria-label','حرف '+v);
- b.style.left=(xy[i].x/320*100)+'%';b.style.top=(xy[i].y/320*100)+'%';$('wheel').append(b)});
- redrawSelection();
+function updateViewport(){
+ const web=window.Telegram?.WebApp;
+ const vv=window.visualViewport;
+ const h=vv?.height||web?.viewportHeight||window.innerHeight;
+ document.documentElement.style.setProperty('--app-h',Math.max(260,Math.floor(h))+'px');
+ const safeTop=web?.isFullscreen?(web.contentSafeAreaInset?.top??web.safeAreaInset?.top??0):0;
+ const safeBottom=web?.isFullscreen?(web.contentSafeAreaInset?.bottom??web.safeAreaInset?.bottom??0):0;
+ document.documentElement.style.setProperty('--tg-safe-top',Math.max(0,safeTop)+'px');
+ document.documentElement.style.setProperty('--tg-safe-bottom',Math.max(0,safeBottom)+'px');
+ if(puzzles.length)requestAnimationFrame(renderBoard);
 }
 function buildCells(p){
- boardCells=new Map();
- for(const place of p.placements){for(let i=0;i<place.w.length;i++){
-  const r=place.r+(place.d==='v'?i:0),c=place.c-(place.d==='h'?i:0);
-  const k=r+','+c,x=boardCells.get(k)||{letter:place.w[i],words:[]};
-  if(x.letter!==place.w[i])throw Error('جدول نامعتبر');
-  x.words.push(place.w);boardCells.set(k,x);
- }}
+ boardCells=new Map();boardNumbers=new Map();
+ let hNumber=0,vNumber=0;
+ for(const place of p.placements){
+  const start=place.r+','+place.c;
+  const nums=boardNumbers.get(start)||{};
+  if(place.d==='h')nums.h=++hNumber;else nums.v=++vNumber;
+  boardNumbers.set(start,nums);
+  for(let i=0;i<place.w.length;i++){
+   const r=place.r+(place.d==='v'?i:0),c=place.c-(place.d==='h'?i:0);
+   const k=r+','+c,x=boardCells.get(k)||{letter:place.w[i],words:[]};
+   if(x.letter!==place.w[i])throw Error('جدول نامعتبر');
+   x.words.push(place.w);boardCells.set(k,x);
+  }
+ }
 }
 function renderBoard(){
+ if(!puzzles.length)return;
  const p=puzzle(),wins=solved(),known=new Set(revealed());
- const unit=Math.max(21,Math.min(42,Math.floor((Math.min(window.innerWidth-46,620)-(p.cols-1)*3)/p.cols)));
+ const wrap=document.querySelector('.board-wrap');
+ const gap=window.innerWidth<=800?2:3;
+ const availWidth=Math.max(0,wrap.clientWidth-6);
+ const availHeight=Math.max(0,wrap.clientHeight-7);
+ // Layout is constrained by BOTH the mobile viewport and the native keyboard.
+ const unit=Math.max(11,Math.min(42,Math.floor((availWidth-(p.cols-1)*gap)/p.cols),Math.floor((availHeight-(p.rows-1)*gap)/p.rows)));
  const box=$('board');box.replaceChildren();
- box.style.setProperty('--unit',unit+'px');box.style.gridTemplateColumns='repeat('+p.cols+','+unit+'px)';
- for(let r=0;r<p.rows;r++)for(let c=0;c<p.cols;c++){
+ box.style.setProperty('--unit',unit+'px');
+ box.style.gridTemplateColumns='repeat('+p.cols+','+unit+'px)';
+ // CSS direction:rtl and descending logical columns place the FIRST Persian
+ // letter on the RIGHT. Horizontal words advance toward the LEFT.
+ for(let r=0;r<p.rows;r++)for(let c=p.cols-1;c>=0;c--){
   const k=r+','+c,x=boardCells.get(k),el=document.createElement('button');
   el.type='button';el.className='tile'+(x?' valid':' blank');
-  if(x){const show=x.words.some(w=>wins.includes(w)),hint=known.has(k);
-   if(show||hint){el.classList.add(hint&&!show?'hinted':'shown');el.textContent=x.letter}
+  if(x){
+   const show=x.words.some(w=>wins.includes(w)),hint=known.has(k);
+   if(show||hint){el.classList.add(hint&&!show?'hinted':'shown');el.append(document.createTextNode(x.letter))}
    if(focusWord&&x.words.includes(focusWord))el.classList.add('active');
+   const numbers=boardNumbers.get(k);
+   if(numbers?.h){const mark=document.createElement('span');mark.className='number horizontal';mark.textContent=FA(numbers.h);mark.setAttribute('aria-hidden','true');el.append(mark)}
+   if(numbers?.v){const mark=document.createElement('span');mark.className='number vertical';mark.textContent=FA(numbers.v);mark.setAttribute('aria-hidden','true');el.append(mark)}
    el.setAttribute('aria-label',show?'خانه '+x.letter:hint?'حرف راهنمایی '+x.letter:'خانه خالی در جدول');
-   el.addEventListener('click',()=>{focusWord=x.words.find(w=>!wins.includes(w))||x.words[0];renderBoard();focusLabel()});
+   el.addEventListener('click',()=>{focusWord=x.words.find(w=>!wins.includes(w))||x.words[0];renderBoard();focusLabel();focusInput()});
   }
   box.append(el);
  }
 }
 function focusLabel(){
  const w=focusWord;
- $('selectedClue').textContent=w?'واژه انتخاب‌شده: '+FA(w.length)+' حرفی'+' · '+(solved().includes(w)?'تکمیل‌شده':'هنوز پیدا نشده'):'یک خانه از جدول را لمس کن تا راهنمایی دقیق بگیری';
+ $('selectedClue').textContent=w?'واژه انتخاب‌شده: '+FA(w.length)+' حرفی'+' · '+(solved().includes(w)?'تکمیل‌شده':'هنوز پیدا نشده') :'برای نوشتن واژه روی کادر یا یکی از خانه‌ها بزن';
 }
 function render(){
  if(!puzzles.length)return;
@@ -231,7 +306,7 @@ function render(){
  $('prev').disabled=mode==='daily'||stage()<=1;
  $('next').disabled=mode==='daily'||stage()>=profile.unlocked||stage()>=puzzles.length;
  $('meta').textContent=FA(p.words.length)+' پاسخ اصلی · '+FA(p.bonus.length)+' واژه پاداش';
- focusWord='';renderBoard();shuffle();focusLabel();save();
+ focusWord='';clearInput();renderBoard();drawLetterBank();focusLabel();save();requestAnimationFrame(renderBoard);
 }
 function updatePanels(){
  const p=puzzle(),found=solved();
@@ -273,8 +348,9 @@ function reward(){
  showDialog('🏆 جدول کامل شد!', 'همه واژه‌ها را کشف کردی و ۲۰ سکه جایزه گرفتی.'+(mode==='daily'?' روند روزانه: '+FA(profile.streak)+' روز.':''),'win');
 }
 function submit(){
- const w=norm(word());selected=[];redrawSelection();
- if(w.length<2){note('حداقل دو حرف انتخاب کن.');return}
+ const w=norm(word());clearInput();
+ if(w.length<2){note('حداقل دو حرف فارسی بنویس.');return}
+ if(!ALLOWED.test(w)||!availableFromWheel(w,puzzle().letters)){fail('این واژه با حروف مرحله ساخته نمی‌شود.');return}
  const p=puzzle(),found=solved(),extras=bonus(),k=key();
  if(found.includes(w)||extras.includes(w)){note('«'+w+'» را قبلاً پیدا کرده‌ای.');return}
  if(p.words.includes(w)){
@@ -304,29 +380,15 @@ function share(){
  try{if(window.Telegram?.WebApp?.openTelegramLink){window.Telegram.WebApp.openTelegramLink(link);return}}catch(_){}
  window.open(link,'_blank','noopener,noreferrer');
 }
-function wheelIndex(e){
- const el=document.elementFromPoint(e.clientX,e.clientY)?.closest('.letter');
- return el&&$('wheel').contains(el)?Number(el.dataset.i):null;
-}
-$('wheel').addEventListener('pointerdown',e=>{
- if(e.button!==0&&e.pointerType==='mouse')return;
- const el=e.target.closest('.letter');if(!el)return;
- e.preventDefault();dragging=true;dragMoved=false;
- try{$('wheel').setPointerCapture(e.pointerId)}catch(_){}addLetter(Number(el.dataset.i));
+$('wordInput').addEventListener('keydown',e=>{
+ if(e.key==='Enter'&&!e.isComposing){e.preventDefault();submit();$('wordInput').blur()}
 });
-$('wheel').addEventListener('pointermove',e=>{
- if(!dragging)return;const n=wheelIndex(e);
- if(n!==null&&!selected.includes(n)){addLetter(n);dragMoved=true}
-});
-$('wheel').addEventListener('pointerup',e=>{
- if(!dragging)return;
- const n=wheelIndex(e);if(n!==null&&!selected.includes(n)){addLetter(n);dragMoved=true}
- dragging=false;if(dragMoved&&selected.length>=2)submit();
-});
-$('wheel').addEventListener('pointercancel',()=>{dragging=false;selected=[];redrawSelection()});
-$('shuffle').addEventListener('click',()=>{shuffle();note('حروف جابه‌جا شدند.')});
+$('wordInput').addEventListener('input',()=>{if($('wordInput').value.length>12)$('wordInput').value=$('wordInput').value.slice(0,12)});
+$('wordInput').addEventListener('focus',()=>{document.body.classList.add('typing');updateViewport()});
+$('wordInput').addEventListener('blur',()=>{document.body.classList.remove('typing');updateViewport()});
+$('hideKeyboard').addEventListener('click',()=>{$('wordInput').blur()});
 $('enter').addEventListener('click',submit);
-$('clear').addEventListener('click',()=>{selected=[];redrawSelection();note('انتخاب پاک شد.')});
+$('clear').addEventListener('click',()=>{clearInput();note('واژه پاک شد.');focusInput()});
 $('hint').addEventListener('click',hint);
 $('campaign').addEventListener('click',()=>switchMode('campaign'));
 $('daily').addEventListener('click',()=>switchMode('daily'));
@@ -337,11 +399,11 @@ $('share').addEventListener('click',share);
 $('modalClose').addEventListener('click',closeDialog);
 document.addEventListener('keydown',e=>{
  if(e.target instanceof HTMLElement&&/INPUT|TEXTAREA/.test(e.target.tagName))return;
- if(e.key==='Enter'&&$('overlay').hidden)submit();
- if(e.key==='Backspace'){selected.pop();redrawSelection()}
- if(e.key==='Escape'){if(!$('overlay').hidden)closeDialog();else{selected=[];redrawSelection()}}
+ if(e.key==='Escape'){if(!$('overlay').hidden)closeDialog();else{$('wordInput').blur()}}
 });
-window.addEventListener('resize',()=>{if(puzzles.length)renderBoard()});
+window.addEventListener('resize',updateViewport);
+window.visualViewport?.addEventListener('resize',updateViewport);
+window.visualViewport?.addEventListener('scroll',updateViewport);
 async function boot(){
  try{
   const response=await fetch('./data/kalamechin-pro.json',{cache:'no-store'});
@@ -354,8 +416,20 @@ async function boot(){
    for(const item of p.placements)if(!p.words.includes(item.w))throw Error('واژه بدون خانه در جدول.');
   }
   profile=startState();render();
-  note('در این حالت، واژه‌های متقاطع یکدیگر را آشکار می‌کنند.');
-  try{window.Telegram?.WebApp?.ready();window.Telegram?.WebApp?.expand()}catch(_){}
+  note('واژه را با کیبورد گوشی بنویس؛ برای انتخاب خانه روی جدول بزن.');
+  try{
+   const tg=window.Telegram?.WebApp;
+   if(tg){
+    tg.ready();tg.expand();
+    tg.onEvent?.('viewportChanged',updateViewport);
+    tg.onEvent?.('fullscreenChanged',updateViewport);
+    tg.onEvent?.('safeAreaChanged',updateViewport);
+    tg.onEvent?.('contentSafeAreaChanged',updateViewport);
+    if(tg.isVersionAtLeast?.('8.0'))tg.requestFullscreen?.();
+    tg.disableVerticalSwipes?.();
+   }
+  }catch(_){}
+  updateViewport();
  }catch(e){
   $('status').textContent='بازی بارگذاری نشد: '+(e.message||'خطای نامشخص')+' — صفحه را دوباره باز کن.';
   $('stageTitle').textContent='خطا در دریافت مراحل';
