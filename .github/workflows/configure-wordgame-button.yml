@@ -1,0 +1,62 @@
+name: Configure PayameJadval word game menu button
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/configure-wordgame-button.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: payamejadval-configure-wordgame-button
+  cancel-in-progress: false
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      TELEGRAM_CROSSWORD_BOT_TOKEN: ${{ secrets.TELEGRAM_CROSSWORD_BOT_TOKEN }}
+    steps:
+      - name: Verify official word game and configure menu button for PayameJadvalBot only
+        shell: python
+        run: |
+          import os, json, urllib.request
+          token = os.environ.get("TELEGRAM_CROSSWORD_BOT_TOKEN", "").strip()
+          if not token:
+              raise SystemExit("Dedicated bot secret is missing; no Telegram settings were changed.")
+          game = "https://nimania.github.io/payamejadval/kalamechin.html"
+          try:
+              with urllib.request.urlopen(game, timeout=12) as response:
+                  if response.status != 200 or b'kalamechin' not in response.read().lower():
+                      raise RuntimeError("Word game deployment is not verified")
+          except Exception as err:
+              raise SystemExit("Word game page did not pass preflight; no menu changes were made.") from None
+
+          def api(method, body):
+              request = urllib.request.Request(
+                  "https://api.telegram.org/bot" + token + "/" + method,
+                  data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
+                  headers={"Content-Type": "application/json"},
+                  method="POST")
+              try:
+                  with urllib.request.urlopen(request, timeout=15) as response:
+                      payload = json.load(response)
+              except Exception:
+                  raise SystemExit("Telegram request failed; no private credentials were printed.") from None
+              if not payload.get("ok"):
+                  raise SystemExit("Telegram rejected " + method + ": " + str(payload.get("error_code", "unknown")))
+              return payload["result"]
+
+          bot = api("getMe", {})
+          if str(bot.get("username", "")).lower() != "payamejadvalbot":
+              raise SystemExit("Token identity mismatch. Refusing to change another bot.")
+          button = {"type": "web_app", "text": "🔤 کلمه‌چین", "web_app": {"url": game}}
+          api("setChatMenuButton", {"menu_button": button})
+          current = api("getChatMenuButton", {})
+          if current.get("type") != "web_app" or current.get("web_app", {}).get("url") != game:
+              raise SystemExit("Telegram did not confirm menu button URL")
+          print("SUCCESS: PayameJadvalBot default private-chat menu button launches Kalamechin.")
+          print("Existing reply-keyboard games and Google Apps Script polling were not modified.")
