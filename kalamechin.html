@@ -90,6 +90,7 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}a{col
  body.typing .nativebox label{display:none}
  body.typing .target{padding:3px 2px}
 }
+.header-actions{display:flex;align-items:center;gap:5px}.header-actions button{font:inherit;border:1px solid #cbd7d4;border-radius:12px;padding:8px 10px;background:#eaf1ef;color:#234f59;font-size:12px}@media(max-width:800px){.header-actions button{padding:5px 7px;font-size:10px}}
 </style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -97,7 +98,7 @@ button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}a{col
 <div class="app">
 <header class="top">
 <div class="brand"><div class="emblem" aria-hidden="true">چ</div><div><h1>کلمه‌چین</h1><small>یکی از بازی‌های پیام جدول</small></div></div>
-<a class="home" href="./" aria-label="بازگشت به پیام جدول">⌂ صفحه اصلی</a>
+<div class="header-actions"><button id="closeApp" type="button" aria-label="بستن بازی و بازگشت به بات">✕ خروج</button><a class="home" href="./" aria-label="بازگشت به پیام جدول">⌂ صفحه اصلی</a></div>
 </header>
 <a class="pro-upgrade" href="./kalamechin-pro.html" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#153e4d;color:#f4d997;border-radius:14px;padding:13px 16px;margin:0 0 12px;font-size:14px;font-weight:900;text-decoration:none;border:1px solid #55717a">🏆 ورود به حالت حرفه‌ای · جدول متقاطع و چالش روزانه <span aria-hidden="true">←</span></a>
 <main class="panel">
@@ -271,6 +272,7 @@ $('prev').addEventListener('click',()=>stage(state.stage-1));
 $('next').addEventListener('click',()=>stage(state.stage+1));
 $('stay').addEventListener('click',()=>{$('win').hidden=true});
 $('continue').addEventListener('click',()=>stage(state.stage===TOTAL?1:state.stage+1));
+$('closeApp').addEventListener('click',()=>{try{if(window.Telegram?.WebApp?.close){window.Telegram.WebApp.close();return}}catch(_){}window.location.href='./'});
 $('share').addEventListener('click',()=>{
  const txt='من در بازی کلمه‌چین پیام جدول به مرحله '+FA(state.unlocked)+' رسیده‌ام. تو هم امتحان کن!';
  const url='https://t.me/share/url?url='+encodeURIComponent(location.origin+location.pathname)+'&text='+encodeURIComponent(txt);
