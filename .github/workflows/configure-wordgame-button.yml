@@ -32,7 +32,7 @@ jobs:
           token = os.environ.get("TELEGRAM_CROSSWORD_BOT_TOKEN", "").strip()
           if not token:
               raise SystemExit("Dedicated bot secret is missing; no Telegram settings were changed.")
-          game = "https://nimania.github.io/payamejadval/kalamechin-pro.html"
+          game = "https://nimania.github.io/payamejadval/kalamechin-pro.html?v=20261111-rtl-mobile2"
           levels = "https://nimania.github.io/payamejadval/data/kalamechin-pro.json"
           # Wait for the corresponding Pages deployment instead of pointing Telegram at a 404.
           import time
