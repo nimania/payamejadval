@@ -9,7 +9,7 @@
  */
 var PJ = {
   username: 'PayameJadvalBot',
-  wordGameUrl: 'https://nimania.github.io/payamejadval/kalamechin.html',
+  wordGameUrl: 'https://nimania.github.io/payamejadval/kalamechin-pro.html',
   repoBase: 'https://raw.githubusercontent.com/nimania/payamejadval/main/telegram/',
   offsetKey: 'PJ_NEXT_UPDATE_OFFSET',
   cacheSeconds: 300,
