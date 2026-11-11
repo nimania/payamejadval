@@ -231,7 +231,7 @@ function updateViewport(){
  const web=window.Telegram?.WebApp;
  const vv=window.visualViewport;
  const h=vv?.height||web?.viewportHeight||window.innerHeight;
- document.documentElement.style.setProperty('--app-h',Math.max(260,Math.floor(h))+'px');
+ document.documentElement.style.setProperty('--app-h',Math.max(120,Math.floor(h))+'px');
  const safeTop=web?.isFullscreen?(web.contentSafeAreaInset?.top??web.safeAreaInset?.top??0):0;
  const safeBottom=web?.isFullscreen?(web.contentSafeAreaInset?.bottom??web.safeAreaInset?.bottom??0):0;
  document.documentElement.style.setProperty('--tg-safe-top',Math.max(0,safeTop)+'px');
@@ -336,7 +336,7 @@ function chooseStages(){
  }
  showDialog('انتخاب مرحله','مرحله‌های سبز تکمیل شده‌اند. با حل هر جدول، مرحله بعد باز می‌شود.','stages');
 }
-function switchMode(next){mode=next;render();note(next==='daily'?'این چالش برای همه بازیکنان در یک روز یکسان است.':'حروف را به هم وصل کن و جدول را پر کن.')}
+function switchMode(next){mode=next;render();note(next==='daily'?'این چالش برای همه بازیکنان در یک روز یکسان است.':'واژه‌ها را با کیبورد گوشی بنویس و جدول را پر کن.')}
 function reward(){
  const k=key();if(profile.completed[k])return;
  profile.completed[k]=true;profile.coins+=20;
