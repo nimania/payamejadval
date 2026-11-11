@@ -40,13 +40,14 @@ details{margin-top:15px;border:1px solid #e0e5e9;border-radius:13px;overflow:hid
 .panels{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:2px 14px 15px}.panels h2{font-size:13px;margin:7px 0}.panels button{display:block;text-align:right;width:100%;font:12px Vazirmatn,Tahoma,sans-serif;border:0;padding:6px 4px;background:none;color:#344652;border-bottom:1px solid #eef0f3}.panels button:hover,.panels button.isactive{color:#bd0b1b;background:#fff5f5}
 footer{padding:13px 0;font-size:11px;line-height:1.9;color:#657783;text-align:center}
 @media(max-width:410px){main{padding:10px}.paper{padding:9px}.keys{gap:3px}.keys button{height:34px}.panels{grid-template-columns:1fr}h1{font-size:18px}.axis{font-size:10px}}
-</style></head><body>
+.cluebar{border:2px solid #9fb9c8;background:#eef5f9;border-right:5px solid #bd0b1b;min-height:0;padding:10px 12px;line-height:1.6}.cluebar strong{font-size:12px;font-weight:900}.cluebar p{font-size:clamp(13px,3.5vw,16px);font-weight:800;line-height:1.65;margin:3px 0 0;color:#23313e}.cluebar-top{margin:0 0 9px}.cluebar-bottom{margin:9px 0 0}@media(max-width:410px){.cluebar{padding:7px 9px}.cluebar p{font-size:13px}}</style></head><body>
 <main><header><div class="logo">🧩 پیام جدول</div><div class="stamp">نسخهٔ آزمایشی دوستانه</div></header>
 <h1>جدول کلمات متقاطع ۷×۷</h1>
 <p class="sub">۲۲ سرنخ افقی و عمودی • کامل و دارای تقاطع • قابل‌حل روی گوشی و داخل مرورگر تلگرام</p>
 <div class="paper"><div class="statusbar"><span id="progress">۰ از ۳۹ خانه</span><span id="elapsed">زمان: ۰۰:۰۰</span><span id="hints">راهنمایی: ۰</span></div><div class="meter"><div id="meter"></div></div>
+<div class="cluebar cluebar-top" role="status" aria-live="polite"><strong id="clueLabelTop"></strong><p id="clueTextTop"></p></div>
 <div class="board" id="board" role="grid" aria-label="جدول کلمات متقاطع هفت در هفت"></div>
-<div class="cluebar"><strong id="clueLabel"></strong><p id="clueText"></p></div>
+<div class="cluebar cluebar-bottom"><strong id="clueLabel"></strong><p id="clueText"></p></div>
 <div class="controls"><button id="previous">سؤال قبل</button><button id="next">سؤال بعد</button><button id="backspace">پاک‌کردن حرف</button></div>
 <div class="keys" id="keyboard" aria-label="صفحه کلید فارسی"></div>
 <div class="controls"><button id="hint">نمایش یک حرف</button><button id="check" class="primary">بررسی جواب‌ها</button><button id="reset">شروع دوباره</button></div>
@@ -100,8 +101,8 @@ function draw(){
    board.append(btn);
   }
  }
- const cur=entries[selected];$("clueLabel").textContent=title(cur)+" — "+cur.answer.length+" حرف";
- $("clueText").textContent=cur.clue;$("progress").textContent=count+" از "+white+" خانه";$("hints").textContent="راهنمایی: "+help;
+ const cur=entries[selected];const caption=title(cur)+" — "+cur.answer.length+" حرف";$("clueLabelTop").textContent=caption;$("clueLabel").textContent=caption;
+ $("clueTextTop").textContent=cur.clue;$("clueText").textContent=cur.clue;$("progress").textContent=count+" از "+white+" خانه";$("hints").textContent="راهنمایی: "+help;
  $("meter").style.width=(100*count/white).toFixed(2)+"%";
  if(count===white&&wrong===0){if(!completed){completed=Date.now();save()}$("feedback").textContent="آفرین! هر ۲۲ پاسخ درست است. 🎉"}
  else if(checked)$("feedback").textContent=wrong?wrong+" حرف نادرست پیدا شد؛ اصلاحش کن.":"تمام حرف‌هایی که وارد کردی درست‌اند.";
