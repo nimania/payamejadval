@@ -24,11 +24,11 @@ function tap(data){return {callback_query:{id:"callback-id",data,from:{id:11880}
   assert.equal((await deliver(message("/start"))).code,200);
   assert.equal(calls[0].method,"sendMessage");
   assert.equal(calls[0].payload.reply_markup.keyboard.flat().length,5);
-  assert.equal(calls[0].payload.reply_markup.keyboard[1][0].web_app.url,"https://nimania.github.io/payamejadval/kalamechin.html");
+  assert.equal(calls[0].payload.reply_markup.keyboard[1][0].web_app.url,"https://nimania.github.io/payamejadval/kalamechin-pro.html");
   calls=[];
   assert.equal((await deliver(message("/kalamechin"))).code,200);
   assert.equal(calls[0].method,"sendMessage");
-  assert.equal(calls[0].payload.reply_markup.inline_keyboard[0][0].web_app.url,"https://nimania.github.io/payamejadval/kalamechin.html");
+  assert.equal(calls[0].payload.reply_markup.inline_keyboard[0][0].web_app.url,"https://nimania.github.io/payamejadval/kalamechin-pro.html");
   calls=[];
   assert.equal((await deliver(message("🧩 جدول امروز"))).code,200);
   assert.equal(calls[0].method,"sendWidget");
