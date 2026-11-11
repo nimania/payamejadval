@@ -55,7 +55,7 @@ ctx.setupBot();assert.equal(triggers.length,1);
 assert.equal(calls.filter(x=>x.method==="getMe").length,1);
 updates.push({update_id:101,message:{date:now,chat:{id:456,type:"private"},from:{id:456},text:"/start"}});
 ctx.pollUpdates();assert.equal(store.get("PJ_NEXT_UPDATE_OFFSET"),"102");
-assert.ok(calls.some(x=>x.method==="sendMessage" && x.body.reply_markup.keyboard.flat().length===9));
+assert.ok(calls.some(x=>x.method==="sendMessage" && x.body.reply_markup.keyboard.flat().length===8));
 assert.ok(calls.some(x=>x.method==="sendMessage" && x.body.reply_markup.keyboard.some(row=>row.some(button=>button.web_app && button.web_app.url.endsWith("/kalamechin.html")))), "Menu must contain clickable word game");
 updates.push({update_id:102,message:{date:now,chat:{id:456,type:"private"},from:{id:456},text:"🧩 جدول امروز"}});
 ctx.pollUpdates();assert.equal(store.get("PJ_NEXT_UPDATE_OFFSET"),"103");
